@@ -1,0 +1,20 @@
+@media (max-width: 767px){
+    .hero-content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #afd1d4;
+        padding: 1.5em;
+        }
+    .hero-title {
+        font-size: 2em;
+        color: #ffffff;
+        font-weight: bold;
+        margin: 0;
+    }
+
+
+
+    
+}

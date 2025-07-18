@@ -1,0 +1,60 @@
+
+
+
+/* For Mobile view. 480 for the larger mobile screen*/
+@media (max-width: 767px) {
+    .body {
+  display: flex;
+  justify-content: center;
+  background-color: #007682;
+  height: 100vh;
+  width: 10vw;
+  position: sticky;
+  top: 0;
+}
+.symbol {
+  padding-top: 10px;
+  width: inherit;
+  height: 5vh;
+}
+ 
+}
+
+
+/* For Tablet View*/
+@media(min-width: 768px) and (max-width: 991px) {
+    .body {
+  display: flex;
+  justify-content: center;
+  background-color: #007682;
+  height: 100vh;
+  width: 10vw;
+  position: fixed;
+}
+.symbol {
+  padding-top: 10px;
+  width: 70%;
+  height: 12vh;
+}
+
+}
+
+
+/* For desktop view */
+@media (min-width: 992px) {
+    .body {
+  display: flex;
+  justify-content: center;
+  background-color: #007682;
+  height: 100vh;
+  width: 10vw;
+  position: fixed;
+}
+.symbol {
+  padding-top: 10px;
+  width: 70%;
+  height: 12vh;
+}
+
+
+}

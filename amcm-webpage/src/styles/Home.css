@@ -1,0 +1,40 @@
+.home-body {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+  grid-template-rows: repeat(6, 1fr);
+}
+.home-content {
+  width: 89.5vw;
+}
+
+.footer {
+  background-color: #142c2e;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+@media (min-width: 1025px) {
+
+
+
+}
+
+
+/* Extra small devices (phones)
+@media (max-width: 575px) { ... }
+
+/* Small devices (larger phones, small tablets) 
+@media (min-width: 576px) and (max-width: 767px) { ... }
+
+/* Medium devices (tablets) 
+@media (min-width: 768px) and (max-width: 991px) { ... }
+
+/* Large devices (desktops)
+@media (min-width: 992px) and (max-width: 1199px) { ... }
+
+/* Extra large devices (large desktops, 4K) 
+@media (min-width: 1200px) { ... } */
+

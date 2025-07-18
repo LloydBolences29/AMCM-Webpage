@@ -1,0 +1,53 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid black
+  }
+  
+  .amcm-logo-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  .amcm-logo {
+    height: 100%;
+    width: 45vw;
+  }
+
+  .header-menu {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5em;
+  }
+  
+  .btn-name {
+    font-family: "Noto Sans", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+  .search-button,
+  .menu-button {
+    border: none;
+    background-color: transparent;
+  }
+
+
+  @media (min-width: 1025px) {
+    .header {
+      padding-bottom: 1em;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .amcm-logo-wrapper {
+      width: 20vw;
+    }
+    .amcm-logo {
+      width: 100%;
+      height: auto;
+    }
+    .header-menu {
+      flex-direction: row;
+      gap: 1em;
+    }
+  }
