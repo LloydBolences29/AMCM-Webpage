@@ -1,6 +1,7 @@
 import React from "react";
 import Navigation from "../components/Navigation";
 import SeventhGrid from "../components/SeventhGrid";
+import Footer from "../components/Footer";
 import "../styles/Home.css"; // Importing the CSS file for styling
 import Hero from "../components/Hero";
 import Information from "../components/Information";
@@ -25,6 +26,9 @@ const Home = () => {
 
           {/* Information Section */}
           <Information />
+
+          {/* Footer section */}
+          <Footer />
 
         </div>
 
