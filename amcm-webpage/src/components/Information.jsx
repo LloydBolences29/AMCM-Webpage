@@ -130,6 +130,55 @@ const Information = () => {
               </p>
             </div>
           </div>
+
+          <div className="preident-message">
+            <div className="information-subContent" id="information-president">
+              <h2>Message from the President</h2>
+            </div>
+            <div
+              className="information-subContent"
+              id="information-president-content"
+            >
+              <p className="president-message">
+                It is with great delight that I welcome you all to our
+                hospital's website. At the heart of our mission lies the
+                profound belief in the healing power of Jesus Christ's ministry,
+                a guiding light that illuminates every corner of our
+                institution. Our hospital is more than just a medical facility;
+                it is a sanctuary of Hope, Health and Happiness. Inspired by the
+                teachings of Jesus, we are committed to sharing His healing
+                touch to each and every individual who walks through our doors.
+                Our dedicated medical professionals and staff not only provide
+                exceptional healthcare but also offer a supportive and nurturing
+                environment that acknowledges the importance of spiritual
+                well-being alongside physical healing. We understand that true
+                healing encompasses the body, mind, and soul, and it is our
+                privilege to serve you holistically. Through this portal, we aim
+                to provide you with seamless experience, offering access to
+                important information about our services, medical expertise,
+                facilities and more. Whether you are seeking for medical
+                assistance, exploring career opportunities, or simply learning
+                about our contributions to the community, this online flatform
+                is designed with your needs in mind. Happy browsing and we hope
+                to hear your feedback too.
+              </p>
+            </div>
+
+            <div className="president-signature">
+              <img
+                className="signature"
+                src="/president-signature.png"
+                alt="President Signature" 
+              />
+              <p className="president-">
+                <p>Elias Y. Apacible Jr.</p>
+              </p>
+              <p className="president-position">
+                President, Adventist Medical Center Manila  
+              </p>
+            </div>
+
+          </div>
         </div>
       </div>
     </>

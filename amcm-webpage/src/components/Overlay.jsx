@@ -81,7 +81,9 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
 
         <br />
         <div className="motto">
-          <p className="motto-content" id="mission">Sharing Jesus Christ's Healing Ministry</p>
+          <p className="motto-content" id="mission">
+            Sharing Jesus Christ's Healing Ministry
+          </p>
           <p className="motto-content" id="vision">
             The Center of Excellence in Faith-based Healthcare, Education and
             Lifestyle
@@ -91,14 +93,23 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
         <br />
 
         <div className="learn-more-section">
-
-
-
+          <h5>Learn more:</h5>
+          <div className="learn-more-content">
+            <a href="">Adventist.org</a>
+            <a href="">ADRA</a>
+            <a href="">Adventist World Radio</a>
+            <a href="">Hope Channel</a>
+            <a href=""></a>
+            <a href=""></a>
+            <a href=""></a>
+            <a href=""></a>
+            <a href=""></a>
+            <a href=""></a>
+            <a href=""></a>
+            <a href=""></a>
+            <a href=""></a>
+          </div>
         </div>
-
-
-
-
       </div>
     </div>
   );
