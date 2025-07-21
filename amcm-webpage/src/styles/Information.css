@@ -24,7 +24,11 @@
     
   }
 
-  .information-subContent {
+  .information-subContent{
+    width: 50%;
+  }
+
+  .information-subContent-title {
     align-content: center;
     border-right: 1px solid black;
     height: inherit;
@@ -50,6 +54,14 @@
     flex: 1;
     text-align: center;
     padding: 0 1.5em;
+  }
+
+  #information-mission h2, 
+  #information-values h2,
+  #information-services h2,
+  #information-achievements h2,
+  #information-news h2 {
+    font-size: 3em;
   }
 
   .information-mission-content {
@@ -98,6 +110,14 @@
     display: flex;
     flex-direction: column;
 
+  }
+
+  .president-message{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 2em;
   }
 
 }

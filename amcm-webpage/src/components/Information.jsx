@@ -8,7 +8,7 @@ const Information = () => {
       <div className="information-container">
         <div className="information-content">
           <div id="information-wrapper-1">
-            <div className="information-subContent" id="information-mission">
+            <div className="information-subContent-title" id="information-mission">
               <h2>Our Mission</h2>
             </div>
 
@@ -21,15 +21,14 @@ const Information = () => {
           </div>
 
           <div id="information-wrapper-2">
-            <div className="information-subContent" id="information-values">
+            <div id="information-values">
               <h2> Values </h2>
             </div>
 
             <div
-              className="information-subContent"
               id="information-values-content"
             >
-              <Row>
+              <Row id="values-row">
                 <Col>
                   <p className="value">Compassion</p>
                 </Col>
@@ -47,14 +46,14 @@ const Information = () => {
           </div>
 
           <div id="information-wrapper-3">
-            <div className="information-subContent" id="information-services">
+            <div className="information-subContent-title" id="information-services">
               <h2>What you can find here</h2>
             </div>
             <div
               className="information-subContent"
               id="information-services-content"
             >
-              <Row>
+              <Row id="services-row"> 
                 <Col>
                   <p className="service">Our Services</p>
                 </Col>
@@ -73,7 +72,6 @@ const Information = () => {
 
           <div id="information-wrapper-4">
             <div
-              className="information-subContent"
               id="information-achievements"
             >
               <h2>Achievements and Accreditations</h2>
@@ -117,8 +115,8 @@ const Information = () => {
             </div>
           </div>
 
-          <div className="information-wrapper-5">
-            <div className="information-subContent" id="information-news">
+          <div id="information-wrapper-5">
+            <div className="information-subContent-title" id="information-news">
               <h2>Hospital News</h2>
             </div>
             <div
@@ -132,7 +130,7 @@ const Information = () => {
             </div>
           </div>
 
-          <div className="preident-message">
+          <div className="president-message">
             <div className="information-subContent" id="information-president">
               <h2>Message from the President</h2>
             </div>

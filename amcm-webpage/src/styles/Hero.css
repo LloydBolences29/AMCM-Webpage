@@ -13,8 +13,22 @@
         font-weight: bold;
         margin: 0;
     }
+}
 
-
-
-    
+@media (min-width: 992px){
+    .hero-content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #afd1d4;
+        padding: 2em 10rem;
+        margin-bottom: 2em;
+    }
+    .hero-title {
+        font-size: 3em;
+        color: #ffffff;
+        font-weight: bold;
+        margin: 0;
+    }
 }
