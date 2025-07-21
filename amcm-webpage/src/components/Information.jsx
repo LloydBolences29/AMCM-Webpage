@@ -121,7 +121,8 @@ const Information = () => {
             </div>
             <div
               className="information-subContent"
-              id="information-news-content"
+              id="information-n
+              ews-content"
             >
               <p className="news">
                 Stay updated with the latest news and events at Adventist
