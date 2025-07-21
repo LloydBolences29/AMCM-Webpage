@@ -1,27 +1,22 @@
 .home-body {
-  height: 100vh;
+  height: 100%;
   display: grid;
   grid-template-columns: 6fr 1fr;
   grid-template-rows: repeat(6, 1fr);
 }
 .home-content {
+  display: flex;
+  flex-direction: column;
   width: 89.5vw;
+  min-height: 100vh;
 }
 
-.footer {
-  background-color: #142c2e;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  position: relative;
+.home-content .main {
+  flex: 1;
 }
 
 @media (min-width: 1025px) {
-
-
-
 }
-
 
 /* Extra small devices (phones)
 @media (max-width: 575px) { ... }
@@ -37,4 +32,3 @@
 
 /* Extra large devices (large desktops, 4K) 
 @media (min-width: 1200px) { ... } */
-

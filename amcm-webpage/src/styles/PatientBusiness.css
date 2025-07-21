@@ -1,0 +1,12 @@
+@media (min-width: 992px) {
+    .accordion-wrapper{
+        margin: 2em 5em;
+    }
+
+}
+
+@media (max-width: 767px){
+    .accordion-wrapper{
+        margin: 1em;
+    }
+}

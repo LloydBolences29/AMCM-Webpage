@@ -12,31 +12,29 @@ const Home = () => {
     { label: "Our Services", path: "/services" },
     { label: "Schedule and Appointment", path: "/appointment" },
     { label: "Find Doctors", path: "/doctors" },
-    { label: "Patient Guide", path: "/guide" },
+    { label: "Patient Guide", path: "/patient-business" },
   ];
   return (
-   
-      <div className="home-body">
-        <div className="home-content">
-            {/* navigation  */}
-          <Navigation menuLinks={menuLinks} />
-
+    <div className="home-body">
+      <div className="home-content">
+        {/* navigation  */}
+        <Navigation menuLinks={menuLinks} />
+        <div className="main">
           {/* Hero Section */}
           <Hero />
 
           {/* Information Section */}
           <Information />
-
-          {/* Footer section */}
-          <Footer />
-
         </div>
 
-        <div className="seventh-grid">
-          <SeventhGrid />
-        </div>
+        {/* Footer section */}
+        <Footer />
       </div>
-  
+
+      <div className="seventh-grid">
+        <SeventhGrid />
+      </div>
+    </div>
   );
 };
 

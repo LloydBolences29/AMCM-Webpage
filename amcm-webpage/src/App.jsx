@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom";
 //imports
 import { AuthProvider } from "./utils/AuthContext";
 import Home from "./pages/Home";
+import PatientBusiness from "./components/PatientBusiness";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +19,7 @@ function App() {
             <Routes>
               {/* Routes for public pages */}
               <Route path="/" element={<Home />} />
+              <Route path="patient-business" element={<PatientBusiness />} />
               {/* <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} /> */}
       
