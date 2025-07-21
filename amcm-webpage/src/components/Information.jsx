@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/Information.css"
 import { Row, Col, Card } from "react-bootstrap";
 
 const Information = () => {

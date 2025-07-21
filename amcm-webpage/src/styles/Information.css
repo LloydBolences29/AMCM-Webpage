@@ -1,0 +1,103 @@
+/*For Desktop view*/
+@media (min-width: 992px) {
+  .information-content {
+    margin: 1em 10rem;
+  }
+
+  #information-wrapper-1,
+  #information-wrapper-3,
+  #information-wrapper-5 {
+    height: 40vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;;
+    margin-bottom: 2em;
+  }
+
+  #information-wrapper-2 {
+    margin-bottom: 1.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+
+  .information-subContent {
+    align-content: center;
+    border-right: 1px solid black;
+    height: inherit;
+    width: 50%;
+    margin-right: 2em;
+  }
+
+  #information-values{
+    border: 1px solid black;
+    width: 100%;
+    text-align: center;
+    border-radius: 12px;
+    padding: 1em;
+    margin-bottom: 2em;
+  }
+
+  #values-row{
+    display: flex;
+    flex-direction: row;
+  }
+
+  #values-row .col {
+    flex: 1;
+    text-align: center;
+    padding: 0 1.5em;
+  }
+
+  .information-mission-content {
+    width: inherit;
+  }
+
+  #information-services{
+    justify-content: start;
+
+}
+
+  #services-row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #services-row .col{
+    flex: 1;
+    text-align: center;
+    padding: 1em 0;
+  }
+
+  #information-wrapper-4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  #information-achievements{
+    margin-bottom: 2em;
+  }
+
+  #information-achievements-content{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0.5em; 
+    grid-row-gap: 0.5em;
+    width: 100vw;
+    max-width: 90vw;
+    box-sizing: border-box;
+  }
+
+  #information-achievements-content .card{
+    display: flex;
+    flex-direction: column;
+
+  }
+
+}
