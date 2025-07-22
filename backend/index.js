@@ -6,7 +6,7 @@ const app = express();
 const path = require("path");
 
 const authRoutes = require("./routes/authRoutes.js"); // Adjust the path as necessary
-const pageRoutes = require("./routes/pageRoutes.js"); // Adjust the path as necessary
+const doctorRoutes = require("./routes/doctorRoutes.js"); // Adjust the path as necessary
 
 
 app.use(
@@ -23,7 +23,7 @@ app.use(cookieParser());
 
 //routes
 app.use("/auth", authRoutes); //for logging and registering of users
-app.use("/page", pageRoutes)
+app.use("/doctor", doctorRoutes);
 
 //for getting the path of the uploaded image
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));

@@ -20,7 +20,7 @@ const PatientBusiness = () => {
   const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
-    { label: "Schedule and Appointment", path: "/appointment" },
+    { label: "Schedule and Appointment", path: "/appointment-schedule" },
     { label: "Find Doctors", path: "/doctors" },
     { label: "Patient Guide", path: "/patient-business" },
   ];
@@ -108,7 +108,6 @@ const PatientBusiness = () => {
         <div className="main container">
           <Container>
             <Card
-              className="content-column analytics-card shadow-sm p-3 bg-white rounded text-center"
               sx={{
                 mb: 3,
                 textAlign: "center",

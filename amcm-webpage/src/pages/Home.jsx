@@ -10,7 +10,7 @@ const Home = () => {
   const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
-    { label: "Schedule and Appointment", path: "/appointment" },
+    { label: "Schedule and Appointment", path: "/appointment-schedule" },
     { label: "Find Doctors", path: "/doctors" },
     { label: "Patient Guide", path: "/patient-business" },
   ];
