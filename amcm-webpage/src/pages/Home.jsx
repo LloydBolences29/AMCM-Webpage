@@ -1,6 +1,5 @@
 import React from "react";
 import Navigation from "../components/Navigation";
-import SeventhGrid from "../components/SeventhGrid";
 import Footer from "../components/Footer";
 import "../styles/Home.css"; // Importing the CSS file for styling
 import Hero from "../components/Hero";
@@ -32,7 +31,13 @@ const Home = () => {
       </div>
 
       <div className="seventh-grid">
-        <SeventhGrid />
+        <div id="seventh-grid-body">
+          <img
+            id="symbol"
+            src="/adventist-symbol--white.png"
+            alt="Seventh Grid"
+          />
+        </div>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import "../styles/SeventhGrid.css"; // Importing the CSS file for styling
 
 const SeventhGrid = () => {
   return (
-    <div className="body">
+    <div className="seventh-grid-body">
       <img className="symbol" src="/adventist-symbol--white.png" alt="Seventh Grid" />
     </div>
   );

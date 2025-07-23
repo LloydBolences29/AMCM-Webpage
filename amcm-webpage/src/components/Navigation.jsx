@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import '../styles/Navigation.css';
-import { BsSearch, BsList } from 'react-icons/bs';
-import Overlay from './Overlay';
+import React, { useState } from "react";
+import "../styles/Navigation.css";
+import { BsSearch, BsList } from "react-icons/bs";
+import Overlay from "./Overlay";
 
 const Navigation = ({ menuLinks }) => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
@@ -10,7 +10,7 @@ const Navigation = ({ menuLinks }) => {
   const handleCloseDrawer = () => setIsOverlayOpen(false);
 
   return (
-    <div className='header'>
+    <div className="header">
       <div className="logo-container">
         <div className="amcm-logo-wrapper">
           <img
@@ -22,17 +22,26 @@ const Navigation = ({ menuLinks }) => {
       </div>
 
       <div className="header-menu">
-        <div className="search">
-          <button className="search-button" onClick={handleOpenDrawer}>
-            <BsSearch />
-            <span className="btn-name">Search</span>
-          </button>
+        <div id="main-menu-wrapper">
+          <div className="search">
+            <button className="search-button" onClick={handleOpenDrawer}>
+              <BsSearch />
+              <span className="btn-name">Search</span>
+            </button>
+          </div>
+          <div className="menu">
+            <button className="menu-button" onClick={handleOpenDrawer}>
+              <BsList />
+              <span className="btn-name">Menu</span>
+            </button>
+          </div>
         </div>
-        <div className="menu">
-          <button className="menu-button" onClick={handleOpenDrawer}>
-            <BsList />
-            <span className="btn-name">Menu</span>
-          </button>
+        <div id="page-menu">
+          <div id="our-services">
+            <a href="/our-services" className="page-link">
+              Our Services
+            </a>
+          </div>
         </div>
       </div>
 

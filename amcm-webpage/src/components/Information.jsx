@@ -1,14 +1,18 @@
 import React from "react";
-import "../styles/Information.css"
+import "../styles/Information.css";
 import { Row, Col, Card } from "react-bootstrap";
-
+import { BsChevronRight } from "react-icons/bs";
+import { BsChevronDown } from "react-icons/bs";
 const Information = () => {
   return (
     <>
       <div className="information-container">
         <div className="information-content">
           <div id="information-wrapper-1">
-            <div className="information-subContent-title" id="information-mission">
+            <div
+              className="information-subContent-title"
+              id="information-mission"
+            >
               <h2>Our Mission</h2>
             </div>
 
@@ -25,46 +29,103 @@ const Information = () => {
               <h2> Values </h2>
             </div>
 
-            <div
-              id="information-values-content"
-            >
+            <div id="information-values-content">
               <Row id="values-row">
                 <Col>
-                  <p className="value">Compassion</p>
+                  <div className="value">
+                    <img
+                      className="values-img"
+                      src="/compassion.png"
+                      alt="Compassion"
+                    />
+                    <p>Compassion</p>
+                  </div>
                 </Col>
                 <Col>
-                  <p className="value">Integrity</p>
+                  <div className="value">
+                    <img
+                      className="values-img"
+                      src="/Integrity.png"
+                      alt="Integrity"
+                    />
+                    <p>Integrity</p>
+                  </div>
                 </Col>
                 <Col>
-                  <p className="value">Excellence</p>
+                  <div className="value">
+                    <img
+                      className="values-img"
+                      src="/Excellence.png"
+                      alt="Excellence"
+                    />
+                    <p>Excellence</p>
+                  </div>
                 </Col>
                 <Col>
-                  <p className="value">Stewardship</p>
+                  <div className="value">
+                    <img
+                      className="values-img"
+                      src="/Stewardship.png"
+                      alt="Stewardship"
+                    />
+                    <p>Stewardship</p>
+                  </div>
                 </Col>
               </Row>
             </div>
           </div>
 
           <div id="information-wrapper-3">
-            <div className="information-subContent-title" id="information-services">
+            <div
+              className="information-subContent-title"
+              id="information-services"
+            >
               <h2>What you can find here</h2>
             </div>
             <div
               className="information-subContent"
               id="information-services-content"
             >
-              <Row id="services-row"> 
+              <Row id="services-row">
                 <Col>
-                  <p className="service">Our Services</p>
+                  <p className="service">
+                    Our Services <br />
+                    <span>
+                      <a href="">
+                        <BsChevronDown size={12} color="black" />
+                      </a>
+                    </span>
+                  </p>
                 </Col>
                 <Col>
-                  <p className="service">Find Doctors</p>
+                  <p className="service">
+                    Find Doctors <br />
+                    <span>
+                      <a href="">
+                        <BsChevronDown size={12} color="black" />
+                      </a>
+                    </span>
+                  </p>
                 </Col>
                 <Col>
-                  <p className="service">Schedule an Appointment</p>
+                  <p className="service">
+                    Schedule an Appointment <br />
+                    <span>
+                      <a href="">
+                        <BsChevronDown size={12} color="black" />
+                      </a>
+                    </span>
+                  </p>
                 </Col>
                 <Col>
-                  <p className="service">Online Patient Survey</p>
+                  <p className="service">
+                    Online Patient Survey <br />
+                    <span>
+                      <a href="">
+                        <BsChevronDown size={12} color="black" />
+                      </a>
+                    </span>
+                  </p>
                 </Col>
               </Row>
             </div>
@@ -72,6 +133,7 @@ const Information = () => {
 
           <div id="information-wrapper-4">
             <div
+              className="information-subContent-title"
               id="information-achievements"
             >
               <h2>Achievements and Accreditations</h2>
@@ -132,14 +194,14 @@ const Information = () => {
           </div>
 
           <div className="president-message">
-            <div className="information-subContent" id="information-president">
+            <div className="information-subContent" id="message-heading">
               <h2>Message from the President</h2>
             </div>
             <div
               className="information-subContent"
               id="information-president-content"
             >
-              <p className="president-message">
+              <p id="message">
                 It is with great delight that I welcome you all to our
                 hospital's website. At the heart of our mission lies the
                 profound belief in the healing power of Jesus Christ's ministry,
@@ -165,19 +227,22 @@ const Information = () => {
             </div>
 
             <div className="president-signature">
+              <div id="president-profile-wrapper">
               <img
                 className="signature"
-                src="/president-signature.png"
-                alt="President Signature" 
+                src="/Apacible.png"
+                alt="President Signature"
               />
-              <p className="president-">
-                <p>Elias Y. Apacible Jr.</p>
-              </p>
-              <p className="president-position">
-                President, Adventist Medical Center Manila  
-              </p>
+              </div>
+              <div className="president-info">
+                <p className="president-name">
+                  Elias Y. Apacible Jr.
+                </p>
+                <p className="president-position">
+                  President, Adventist Medical Center Manila
+                </p>
+              </div>
             </div>
-
           </div>
         </div>
       </div>

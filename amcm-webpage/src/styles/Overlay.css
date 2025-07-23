@@ -1,4 +1,154 @@
-@media (max-width: 767px) {
+@media (max-width: 768px) {
+.overlay-container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  .overlay-container.show {
+    pointer-events: all;
+  }
+
+  .overlay-background {
+    background: rgba(0, 0, 0, 0.5);
+    flex: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .overlay-container.show .overlay-background {
+    opacity: 1;
+  }
+
+  .overlay-panel {
+    background: #142c2e;
+    width: 85%;
+    max-width: 100%;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    padding-left: 1rem;
+  }
+
+  .overlay-container.show .overlay-panel {
+    transform: translateX(0);
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    float: left;
+    color: rgb(252, 252, 252);
+    cursor: pointer;
+    z-index: 1001; /* Ensure close button is above the overlay */
+    position: absolute;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+  }
+  .ul-menu-links {
+    padding: 0;
+    list-style: none;
+    z-index: 1001; /* Ensure menu links are above the overlay */
+  }
+
+  .sidebar-link {
+    color: gray; /* Default color for menu links */
+    text-decoration: none; /* Remove underline */
+    font-size: 1rem; /* Adjust font size */
+    padding: 0.5rem; /* Add spacing */
+    display: block; /* Ensure links are block-level for better spacing */
+    transition: color 0.3s ease; /* Smooth color transition */
+  }
+
+  .sidebar-link:hover {
+    color: white; /* Change color on hover */
+  }
+
+  .sidebar-link.active {
+    color: white; /* Highlight active link */
+  }
+
+  .logout-button {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+  }
+
+  .logout-btn {
+    border-radius: 50px;
+    border: none;
+    background-color: transparent;
+    padding: 0 1em;
+    opacity: 0.7;
+    box-shadow: 1px 5px 12px rgb(0, 0, 0);
+  }
+
+  .logout-btn:hover {
+    opacity: 1;
+    box-shadow: 1px 5px 12px rgb(0, 0, 0);
+  }
+  .logout-btn:active {
+    background-color: transparent;
+    box-shadow: 0 5px #6e6c6c9f;
+    transform: translateY(4px);
+  }
+  .search-container {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  .search-input {
+    width: 65vw;
+    padding: 0.5rem 2rem 0.5rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    border: transparent;
+    background-color: transparent;
+    border-bottom: 1px solid #ccccccab;
+    caret-color: white;
+  }
+
+  .search-input::placeholder {
+    color: #aaa;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: white;
+  }
+
+  .sda-logo-container {
+    display: inline-block;
+  }
+
+  .sda-logo {
+    width: 80px; /* Adjust size as needed */
+    height: auto;
+  }
+
+  .motto {
+    width: 40%;
+  }
+
+  .motto-content {
+    color: rgba(255, 255, 255, 0.877);
+    font-size: 16px;
+    margin-top: 0.5rem;
+    font-weight: 100;
+  }
+
+  #mission{
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
   .overlay-container {
     position: fixed;
     inset: 0;
