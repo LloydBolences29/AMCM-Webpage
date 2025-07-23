@@ -18,6 +18,13 @@
     text-align: center;
     margin-bottom: 1em;
   }
+
+  #information-values h2 {
+    border-radius: 12px;
+    padding: 1em;
+    color: white;
+    background-color: #007682;
+  }
   #information-values-content #values-row .col {
     margin-top: 1.5em;
     display: flex;
@@ -36,6 +43,13 @@
   }
   #information-values-content #values-row .values-img {
     margin-top: 0.5em;
+  }
+
+  #information-services {
+    text-align: center;
+    margin-bottom: 1.5em;
+    color: #007682;
+    border-bottom: 3px solid #f5b73c;
   }
 
   #information-services-content #services-row {
@@ -92,7 +106,7 @@
     box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
   }
 
-  .president-message p#message{
+  .president-message p#message {
     text-align: justify;
   }
 
@@ -130,14 +144,13 @@
   }
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
   .information-content {
-    margin: 1em 10rem;
+    margin-top: 2em;
+    padding: 1em 2em 0 2em;
   }
 
-  #information-wrapper-1,
-  #information-wrapper-3,
-  #information-wrapper-5 {
+  #information-wrapper-1 {
     height: 40vh;
     display: flex;
     flex-direction: row;
@@ -146,108 +159,126 @@
     text-align: center;
     margin-bottom: 2em;
   }
-
-  #information-wrapper-2 {
-    margin-bottom: 1.5em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .information-subContent {
-    width: 50%;
-  }
-
-  .information-subContent-title {
+  #information-wrapper-1 #information-mission {
     align-content: center;
-    border-right: 1px solid black;
+    border-right: 3px solid #007682;
     height: inherit;
     width: 50%;
     margin-right: 2em;
   }
+  #information-wrapper-1 #information-mission h2 {
+    font-size: 2.5em;
+    margin-bottom: 1em;
+    color: #007682;
+  }
+  #information-wrapper-1 #information-mission-content {
+    width: 50%;
+  }
+  #information-wrapper-1 #information-mission-content .mission {
+    font-size: 2em;
+    text-align: center;
+    font-weight: bold;
+  }
 
   #information-values {
-    border: 1px solid black;
-    width: 100%;
     text-align: center;
     border-radius: 12px;
-    padding: 1em;
-    margin-bottom: 2em;
+    color: #142c2e;
+    margin: 4em 0 1em 0;
+    border-bottom: 3px solid #007682;
   }
 
-  #values-row {
+  #information-values-content #values-row {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
   }
 
-  #values-row .col {
-    flex: 1;
-    text-align: center;
-    padding: 0 1.5em;
-  }
-
-  #information-mission h2,
-  #information-values h2,
-  #information-services h2,
-  #information-achievements h2,
-  #information-news h2 {
-    font-size: 3em;
-  }
-
-  .information-mission-content {
-    width: inherit;
+  #information-values-content #values-row .col .value {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 4em 0;
+    box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
   }
 
   #information-services {
-    justify-content: start;
-  }
-
-  #services-row {
-    display: flex;
-    flex-direction: column;
-  }
-
-  #services-row .col {
-    flex: 1;
+    margin: 3em 0;
     text-align: center;
-    padding: 1em 0;
+    border-radius: 12px;
+    padding: 1em;
+    color: white;
+    background-color: #007682;
   }
 
-  #information-wrapper-4 {
+  #information-services-content #services-row {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  #information-services-content #services-row .col {
+    display: flex;
     align-items: center;
-    text-align: center;
+    justify-content: center;
+    margin: 1em 0;
   }
+
+  #information-services-content #services-row .col .service {
+    width: 260px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  #information-wrapper-4{
+    margin: 2em 0;
+  }
+
   #information-achievements {
     margin-bottom: 2em;
+    text-align: center;
+    border-bottom: 3px solid #007682;
   }
 
   #information-achievements-content {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 0.5em;
-    grid-row-gap: 0.5em;
-    width: 100vw;
-    max-width: 90vw;
-    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
   }
 
   #information-achievements-content .card {
-    display: flex;
-    flex-direction: column;
+    width: 260px;
+    height: auto;
+    margin: 1em;
+    box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
   }
 
-  .president-message {
+  #information-achievements-content .card .card-body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
-    margin-bottom: 2em;
+    padding: 1em;
   }
 
+  #information-achievements-content .card .card-body .card-title {
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  #information-achievements-content .card .card-body .card-text img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    padding: 0.5em;
+  }
 }
 
 /*For Desktop view*/
