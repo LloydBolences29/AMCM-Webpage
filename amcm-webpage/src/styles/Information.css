@@ -1,5 +1,5 @@
 /*for mobile view*/
-@media (max-width: 640px) {
+@media (max-width: 640px) and (max-width: 767px) {
   .information-content {
     margin-top: 2em;
     padding: 1em 1em 0 1em;
@@ -144,7 +144,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 991px) {
   .information-content {
     margin-top: 2em;
     padding: 1em 2em 0 2em;
@@ -187,6 +187,11 @@
     margin: 4em 0 1em 0;
     border-bottom: 3px solid #007682;
   }
+  #information-values h2 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    color: #007682;
+  }
 
   #information-values-content #values-row {
     display: flex;
@@ -213,6 +218,9 @@
     color: white;
     background-color: #007682;
   }
+  #information-services h2 {
+    font-size: 2.5em;
+  }
 
   #information-services-content #services-row {
     display: flex;
@@ -236,7 +244,7 @@
     box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
   }
 
-  #information-wrapper-4{
+  #information-wrapper-4 {
     margin: 2em 0;
   }
 
@@ -245,9 +253,15 @@
     text-align: center;
     border-bottom: 3px solid #007682;
   }
+  #information-achievements h2 {
+    font-size: 2.5em;
+    margin-bottom: 1em;
+    color: #007682;
+  }
 
   #information-achievements-content {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     width: 100%;
   }
@@ -259,7 +273,7 @@
     box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
   }
 
-  #information-achievements-content .card .card-body{
+  #information-achievements-content .card .card-body {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -279,117 +293,27 @@
     border-radius: 12px;
     padding: 0.5em;
   }
-}
 
-/*For Desktop view*/
-@media (min-width: 992px) {
-  .information-content {
-    margin: 1em 10rem;
-  }
-
-  #information-wrapper-1,
-  #information-wrapper-3,
   #information-wrapper-5 {
-    height: 40vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 2em;
-  }
-
-  #information-wrapper-2 {
-    margin-bottom: 1.5em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .information-subContent {
-    width: 50%;
-  }
-
-  .information-subContent-title {
-    align-content: center;
-    border-right: 1px solid black;
-    height: inherit;
-    width: 50%;
-    margin-right: 2em;
-  }
-
-  #information-values {
-    border: 1px solid black;
-    width: 100%;
+    margin: 2em 0;
     text-align: center;
     border-radius: 12px;
     padding: 1em;
+    color: white;
+    background-color: #007682;
+  }
+
+  #information-news {
     margin-bottom: 2em;
-  }
-
-  #values-row {
-    display: flex;
-    flex-direction: row;
-  }
-
-  #values-row .col {
-    flex: 1;
     text-align: center;
-    padding: 0 1.5em;
+    border-bottom: 3px solid #f5b73c;
   }
-
-  #information-mission h2,
-  #information-values h2,
-  #information-services h2,
-  #information-achievements h2,
   #information-news h2 {
-    font-size: 3em;
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
   }
-
-  .information-mission-content {
-    width: inherit;
-  }
-
-  #information-services {
-    justify-content: start;
-  }
-
-  #services-row {
-    display: flex;
-    flex-direction: column;
-  }
-
-  #services-row .col {
-    flex: 1;
-    text-align: center;
-    padding: 1em 0;
-  }
-
-  #information-wrapper-4 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  #information-achievements {
-    margin-bottom: 2em;
-  }
-
-  #information-achievements-content {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 0.5em;
-    grid-row-gap: 0.5em;
-    width: 100vw;
-    max-width: 90vw;
-    box-sizing: border-box;
-  }
-
-  #information-achievements-content .card {
-    display: flex;
-    flex-direction: column;
+  #information-news-content p.news {
+    font-size: 24px;
   }
 
   .president-message {
@@ -398,5 +322,202 @@
     align-items: center;
     text-align: center;
     margin-bottom: 2em;
+  }
+  .president-message #message-heading {
+    font-size: 2.5em;
+    margin-bottom: 1.5em;
+    text-align: center;
+    border-radius: 12px;
+    padding: 0.5em;
+    color: #007682;
+    box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
+  }
+  .president-signature {
+    display: flex;
+    justify-content: space-evenly;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+  }
+  .president-signature #president-profile-wrapper {
+    width: 20%;
+  }
+
+  .president-signature img.signature {
+    width: 100%;
+    height: auto;
+    margin: 1em 0;
+  }
+
+  .president-signature .president-info p {
+    margin-bottom: 0;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .president-signature .president-info p.president-name {
+    font-weight: bold;
+    font-size: 26px;
+    text-decoration: underline;
+  }
+  .president-signature .president-info p.president-position {
+    font-style: italic;
+    font-size: 14px;
+  }
+}
+
+/*For Desktop view*/
+@media (min-width: 992px) {
+  .information-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2em 0;
+    padding: 1em 0;
+  }
+
+  #information-wrapper-1 {
+    margin: 3em 0;
+    width: inherit;
+    height: 40vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #information-wrapper-1 #information-mission {
+    align-content: center;
+    height: inherit;
+    width: 40vw;
+    margin-right: 0.5em;
+    border-left: 3px solid #007682;
+    /* box-shadow: 77px 78px 5px -68px rgba(0, 0, 0, 0.2) inset; */
+  }
+
+  #information-wrapper-1 #information-mission h2 {
+    font-size: 2.5em;
+    margin-bottom: 1em;
+    color: #142c2e;
+  }
+  #information-wrapper-1 #information-mission-content {
+    border-radius: 0px 18px 20px 0px;
+
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #007682;
+    box-shadow: -5px 8px 5px -1px rgba(0, 0, 0, 0.75);
+  }
+  #information-wrapper-1 #information-mission-content .mission {
+    font-size: 2em;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    width: 70%;
+  }
+
+  #information-wrapper-2 {
+    width: inherit;
+    margin: 3em 0;
+    margin-bottom: 4em;
+    text-align: center;
+  }
+
+  #information-values {
+    background-color: #007682;
+    width: 60vw;
+    text-align: center;
+    border-radius: 12px;
+    color: white;
+    margin: 4em 0 2em 0;
+    padding: 1em 0;
+  }
+
+  #information-values-content #values-row .col {
+    border: #f5b73c;
+    border-radius: 25px;
+    margin: 0 2em;
+    padding: 1em;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  #information-values-content #values-row .col .value img {
+    width: 100%;
+    height: auto;
+    padding: 0.5em;
+  }
+
+  #information-values-content #values-row .col .value p {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  #information-wrapper-3 {
+    background-color: #007682;
+    width: 100%;
+    height: 35vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #information-wrapper-3 #information-services {
+    width: 40%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-right: 3px solid #f5b73c;
+    padding: 0 3em;
+  }
+  #information-wrapper-3 #information-services h2 {
+    font-size: 2.5em;
+    color: white;
+  }
+
+  #information-services-content{
+    margin-left: 3em;
+    width: 100%;
+  }
+  #information-services-content #services-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  #information-services-content #services-row a  {
+    text-decoration: none;
+    font-size: 18px;
+    display: flex;
+    align-items: end;
+    margin: 1em 0;
+    width:22%;
+    margin-left: 1em;
+    color: white;
+    box-shadow: 0px 10px 1px -3px rgba(0,0,0,0.1);
+  }
+
+  #information-services-content #services-row a:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0px 26px 15px -3px rgba(0,0,0,0.1);
+  }
+  #information-services-content #services-row a .col .service span svg path {
+    color: white;
+  }
+
+  #information-wrapper-4{
+    width: inherit;
+    margin: 3em 0;
+    text-align: center;
+    margin: 5% 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

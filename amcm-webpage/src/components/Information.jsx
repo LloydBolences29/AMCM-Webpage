@@ -87,57 +87,51 @@ const Information = () => {
               id="information-services-content"
             >
               <Row id="services-row">
-                <Col>
-                  <p className="service">
-                    Our Services <br />
-                    <span>
-                      <a href="">
+                <a href="">
+                  <Col>
+                    <p className="service">
+                      Our Services <br />
+                      <span>
                         <BsChevronDown size={12} color="black" />
-                      </a>
-                    </span>
-                  </p>
-                </Col>
-                <Col>
-                  <p className="service">
-                    Find Doctors <br />
-                    <span>
-                      <a href="">
+                      </span>
+                    </p>
+                  </Col>
+                </a>
+                <a href="">
+                  <Col>
+                    <p className="service">
+                      Find Doctors <br />
+                      <span>
                         <BsChevronDown size={12} color="black" />
-                      </a>
-                    </span>
-                  </p>
-                </Col>
-                <Col>
-                  <p className="service">
-                    Schedule an Appointment <br />
-                    <span>
-                      <a href="">
+                      </span>
+                    </p>
+                  </Col>
+                </a>
+                <a href="">
+                  <Col>
+                    <p className="service">
+                      Schedule an Appointment <br />
+                      <span>
                         <BsChevronDown size={12} color="black" />
-                      </a>
-                    </span>
-                  </p>
-                </Col>
-                <Col>
-                  <p className="service">
-                    Online Patient Survey <br />
-                    <span>
-                      <a href="">
+                      </span>
+                    </p>
+                  </Col>
+                </a>
+                <a href="">
+                  <Col>
+                    <p className="service">
+                      Online Patient Survey <br />
+                      <span>
                         <BsChevronDown size={12} color="black" />
-                      </a>
-                    </span>
-                  </p>
-                </Col>
+                      </span>
+                    </p>
+                  </Col>
+                </a>
               </Row>
             </div>
           </div>
 
           <div id="information-wrapper-4">
-            <div
-              className="information-subContent-title"
-              id="information-achievements"
-            >
-              <h2>Achievements and Accreditations</h2>
-            </div>
             <div
               className="information-subContent"
               id="information-achievements-content"
@@ -175,6 +169,12 @@ const Information = () => {
                 </Card.Body>
               </Card>
             </div>
+            <div
+              className="information-subContent-title"
+              id="information-achievements"
+            >
+              <h2>Achievements and Accreditations</h2>
+            </div>
           </div>
 
           <div id="information-wrapper-5">
@@ -183,8 +183,7 @@ const Information = () => {
             </div>
             <div
               className="information-subContent"
-              id="information-n
-              ews-content"
+              id="information-news-content"
             >
               <p className="news">
                 Stay updated with the latest news and events at Adventist
@@ -228,16 +227,14 @@ const Information = () => {
 
             <div className="president-signature">
               <div id="president-profile-wrapper">
-              <img
-                className="signature"
-                src="/Apacible.png"
-                alt="President Signature"
-              />
+                <img
+                  className="signature"
+                  src="/Apacible.png"
+                  alt="President Signature"
+                />
               </div>
               <div className="president-info">
-                <p className="president-name">
-                  Elias Y. Apacible Jr.
-                </p>
+                <p className="president-name">Elias Y. Apacible Jr.</p>
                 <p className="president-position">
                   President, Adventist Medical Center Manila
                 </p>

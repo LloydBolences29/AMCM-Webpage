@@ -1,10 +1,20 @@
-@media (max-width: 640px){
+@media (max-width: 767px){
   .footer{
     background-color: #142c2e;
     color: white;
     padding: 20px;
     text-align: center;
   }
+}
+@media(min-width:768px){
+  .footer {
+  background-color: #142c2e;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  
+}
+
 }
 
 @media (min-width: 992px){
