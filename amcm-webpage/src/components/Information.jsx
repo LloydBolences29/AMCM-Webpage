@@ -1,9 +1,21 @@
 import React from "react";
 import "../styles/Information.css";
-import { Row, Col, Card } from "react-bootstrap";
-import { BsChevronRight } from "react-icons/bs";
+import { Row, Col, Card, Button } from "react-bootstrap";
 import { BsChevronDown } from "react-icons/bs";
+import EmblaCarousel from "../components/EmblaCarousel";
+import "../styles/embla.css";
+import "../styles/base.css";
+
 const Information = () => {
+  const OPTIONS = { loop: true };
+  const SLIDES = [
+    "/2023DOHAward.png",
+    "/Daisyaward.png",
+    "/healthyPilipinasaward.png",
+    "/ISO.png",
+  ];
+  // const SLIDES = Array.from(Array(SLIDE_IMG).keys())
+
   return (
     <>
       <div className="information-container">
@@ -87,87 +99,82 @@ const Information = () => {
               id="information-services-content"
             >
               <Row id="services-row">
-                <a href="">
-                  <Col>
-                    <p className="service">
-                      Our Services <br />
+                <Col>
+                  <p className="service">
+                    Our Services <br />
+                    <a href="">
                       <span>
-                        <BsChevronDown size={12} color="black" />
+                        <Button
+                          variant="outline-warning"
+                          size="sm"
+                          className="mt-3"
+                        >
+                          Learn More!
+                        </Button>
                       </span>
-                    </p>
-                  </Col>
-                </a>
-                <a href="">
-                  <Col>
-                    <p className="service">
-                      Find Doctors <br />
+                    </a>
+                  </p>
+                </Col>
+                <Col>
+                  <p className="service">
+                    Find Doctors <br />
+                    <a href="">
                       <span>
-                        <BsChevronDown size={12} color="black" />
+                        <Button
+                          variant="outline-warning"
+                          size="sm"
+                          className="mt-3"
+                        >
+                          Find Now!
+                        </Button>
                       </span>
-                    </p>
-                  </Col>
-                </a>
-                <a href="">
-                  <Col>
-                    <p className="service">
-                      Schedule an Appointment <br />
+                    </a>
+                  </p>
+                </Col>
+
+                <Col>
+                  <p className="service">
+                    Schedule an Appointment <br />
+                    <span>
+                      <a href="">
+                        <Button
+                          variant="outline-warning"
+                          size="sm"
+                          className="mt-3"
+                        >
+                          Schdedule Now!
+                        </Button>
+                      </a>
+                    </span>
+                  </p>
+                </Col>
+
+                <Col>
+                  <p className="service">
+                    Online Patient Survey <br />
+                    <a href="">
                       <span>
-                        <BsChevronDown size={12} color="black" />
+                        <Button
+                          variant="outline-warning"
+                          size="sm"
+                          className="mt-3"
+                        >
+                          See More!
+                        </Button>
                       </span>
-                    </p>
-                  </Col>
-                </a>
-                <a href="">
-                  <Col>
-                    <p className="service">
-                      Online Patient Survey <br />
-                      <span>
-                        <BsChevronDown size={12} color="black" />
-                      </span>
-                    </p>
-                  </Col>
-                </a>
+                    </a>
+                  </p>
+                </Col>
               </Row>
             </div>
           </div>
 
           <div id="information-wrapper-4">
             <div
-              className="information-subContent"
+              className="information-subContent theme-light"
               id="information-achievements-content"
             >
-              <Card>
-                <Card.Body>
-                  <Card.Title>ISO Award</Card.Title>
-                  <Card.Text>
-                    <img src="/ISO.png" alt="" />
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-              <Card>
-                <Card.Body>
-                  <Card.Title>DOH Awardee Healthy Piipinas</Card.Title>
-                  <Card.Text>
-                    <img src="/healthyPilipinasaward.png" alt="" />
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-              <Card>
-                <Card.Body>
-                  <Card.Title>Daisy award</Card.Title>
-                  <Card.Text>
-                    <img src="/Daisyaward.png" alt="" />
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-              <Card>
-                <Card.Body>
-                  <Card.Title>2023 DOH Award</Card.Title>
-                  <Card.Text>
-                    <img src="/2023DOHAward.png" alt="" />
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+              <EmblaCarousel slides={SLIDES} options={OPTIONS} />
             </div>
             <div
               className="information-subContent-title"
@@ -193,6 +200,25 @@ const Information = () => {
           </div>
 
           <div className="president-message">
+
+            <div className="president-signature">
+              <div id="president-profile-wrapper">
+                <img
+                  className="signature"
+                  src="/Apacible.png"
+                  alt="President Signature"
+                />
+              </div>
+              <div className="president-info">
+                <p className="president-name">Elias Y. Apacible Jr.</p>
+                <p className="president-position">
+                  President, Adventist Medical Center Manila
+                </p>
+              </div>
+            </div>
+
+            <div className="president-message-content">
+
             <div className="information-subContent" id="message-heading">
               <h2>Message from the President</h2>
             </div>
@@ -200,7 +226,7 @@ const Information = () => {
               className="information-subContent"
               id="information-president-content"
             >
-              <p id="message">
+              <blockquote id="message">
                 It is with great delight that I welcome you all to our
                 hospital's website. At the heart of our mission lies the
                 profound belief in the healing power of Jesus Christ's ministry,
@@ -222,23 +248,8 @@ const Information = () => {
                 about our contributions to the community, this online flatform
                 is designed with your needs in mind. Happy browsing and we hope
                 to hear your feedback too.
-              </p>
+              </blockquote>
             </div>
-
-            <div className="president-signature">
-              <div id="president-profile-wrapper">
-                <img
-                  className="signature"
-                  src="/Apacible.png"
-                  alt="President Signature"
-                />
-              </div>
-              <div className="president-info">
-                <p className="president-name">Elias Y. Apacible Jr.</p>
-                <p className="president-position">
-                  President, Adventist Medical Center Manila
-                </p>
-              </div>
             </div>
           </div>
         </div>
