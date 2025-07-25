@@ -86,7 +86,7 @@ const Services = () => {
               <div id="services-card-wrapper">
                 <br />
                 <div id="patient-services-wrapper">
-                  <Divider>
+                  <Divider className="divider">
                     <Chip label="Patient Services" size="large" />
                   </Divider>
 

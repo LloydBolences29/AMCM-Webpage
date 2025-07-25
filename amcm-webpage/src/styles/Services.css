@@ -1,13 +1,49 @@
 @media (max-width: 767px) {
+  #services-container {
+    margin: 2em 2em;
+  }
+  #patient-services-wrapper .divider {
+    margin: 2em 0;
+  }
+
+  #services-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #services-card-wrapper .services-card .services-card-content {
+    margin: 2em 0;
+    width: 60vw;
+  }
 }
 @media (min-width: 768px) and (max-width: 991px) {
+   #services-container {
+    margin: 2em 2em;
+  }
+  #patient-services-wrapper .divider {
+    margin: 2em 0;
+  }
+
+  #services-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  #services-card-wrapper .services-card .services-card-content {
+    margin: 2em 0;
+    width: 30vw;
+  }
 }
+
 @media (min-width: 992px) and (max-width: 1199px) {
   #services-container {
     margin: 3em 4em;
   }
-  
-  .services-card{
+
+  .services-card {
     margin: 2em;
   }
 }
@@ -18,18 +54,18 @@
     margin: 3em 4em 3em 2em;
   }
 
-  #services-card-wrapper{
+  #services-card-wrapper {
     grid-column: 2;
   }
 
-  #anchor-wrapper{
+  #anchor-wrapper {
     height: 100vh;
     position: fixed;
     display: flex;
     align-items: start;
   }
 
-  .services-card{
+  .services-card {
     margin: 2em;
     display: flex;
     justify-content: center;
@@ -40,6 +76,5 @@
     width: 100%;
     max-width: 445px;
     height: 100%;
-    
   }
 }
