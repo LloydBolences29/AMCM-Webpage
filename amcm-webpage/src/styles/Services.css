@@ -18,20 +18,25 @@
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
-   #services-container {
+  #services-container {
     margin: 2em 2em;
   }
   #patient-services-wrapper .divider {
     margin: 2em 0;
   }
 
-  #services-card-wrapper {
+  #patient-services-wrapper .services-card,
+  #non-patient-services .services-card,
+  #government-collaborative-services .services-card,
+  #education-services .services-card {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2em;
     align-items: center;
     justify-content: center;
-    
   }
+
   #services-card-wrapper .services-card .services-card-content {
     margin: 2em 0;
     width: 30vw;

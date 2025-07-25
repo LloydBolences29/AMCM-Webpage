@@ -143,7 +143,7 @@ const Services = () => {
                           <CardContent>
                             <Typography
                               gutterBottom
-                              variant="h6"
+                              variant="h5"
                               component="div"
                             >
                               Diagnostic Imaging Services
