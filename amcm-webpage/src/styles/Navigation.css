@@ -32,7 +32,7 @@
   }
 
 
-  @media (min-width: 1025px) {
+  @media (min-width: 992px) {
     .header {
       padding-bottom: 1em;
       flex-direction: row;
@@ -46,8 +46,19 @@
       width: 100%;
       height: auto;
     }
-    .header-menu {
+
+    #main-menu-wrapper{
+      display: flex;
       flex-direction: row;
+      align-items: center;
+    }
+
+
+    .header-menu {
+      height: 100%;
+      justify-content: space-between;
+      flex-direction: column;
       gap: 1em;
     }
+
   }

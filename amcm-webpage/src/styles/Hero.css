@@ -1,5 +1,5 @@
-@media (max-width: 767px){
-      .hero-container {
+@media (max-width: 767px) {
+  .hero-container {
     position: relative;
     background-image: url("/AMCM.jpg");
     background-size: 840px 845px;
@@ -13,35 +13,34 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    background-color: rgba(0, 0, 0, 0.4);
+    background: #2a7b9b;
+    background: linear-gradient(176deg, rgba(42, 123, 155, 0) 0%, #ffffff 86%);
   }
 
   .hero-content {
+    position: absolute;
+    bottom: 15%;
+    text-align: center;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: end;
+    height: 50vh;
     background-size: cover;
     background-position: center;
     padding: 2em 1.5em;
     margin-bottom: 2em;
-  ;
   }
 
   .hero-title {
     z-index: 3;
-    font-size: 3em;
-    color: #ffffff;
+    color: #007682;
     font-weight: bold;
     margin: 0;
   }
-
 }
-
 
 /*For tablet view*/
 @media (min-width: 768px) {
-   .hero-container {
+  .hero-container {
     position: relative;
     background-image: url("/AMCM.jpg");
     background-size: 1024px 1024px;
@@ -55,25 +54,25 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    background-color: rgba(0, 0, 0, 0.4);
+    background: #2a7b9b;
+    background: linear-gradient(176deg, rgba(42, 123, 155, 0) 0%, #ffffff 90%);
   }
 
   .hero-content {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    justify-content: start;
+    align-items: end;
+    height: 90vh;
     background-size: cover;
     background-position: center;
     padding: 2em 1.5em;
     margin-bottom: 2em;
-  ;
   }
 
   .hero-title {
     z-index: 3;
     font-size: 3em;
-    color: #ffffff;
+    color: #007682;
     font-weight: bold;
     margin: 0;
   }
@@ -93,25 +92,26 @@
     position: absolute;
     inset: 0;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.4);
+    background: #2a7b9b;
+    background: linear-gradient(176deg, rgba(42, 123, 155, 0) 0%, #ffffff 90%);
   }
 
   .hero-content {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    justify-content: start;
+    align-items: end;
+    height: 90vh;
     background-size: cover;
     background-position: center;
     padding: 2em 10rem;
     margin-bottom: 2em;
-  ;
   }
 
   .hero-title {
+    width: 40vw;
     z-index: 3;
-    font-size: 3em;
-    color: #ffffff;
+    font-size: 5em;
+    color: #007682;
     font-weight: bold;
     margin: 0;
   }

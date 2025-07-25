@@ -1,0 +1,45 @@
+@media (max-width: 767px) {
+}
+@media (min-width: 768px) and (max-width: 991px) {
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  #services-container {
+    margin: 3em 4em;
+  }
+  
+  .services-card{
+    margin: 2em;
+  }
+}
+@media (min-width: 1200px) {
+  #services-container {
+    display: grid;
+    grid-template-columns: 13.5vw 1fr;
+    margin: 3em 4em 3em 2em;
+  }
+
+  #services-card-wrapper{
+    grid-column: 2;
+  }
+
+  #anchor-wrapper{
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    align-items: start;
+  }
+
+  .services-card{
+    margin: 2em;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2em;
+  }
+  .services-card-content {
+    width: 100%;
+    max-width: 445px;
+    height: 100%;
+    
+  }
+}

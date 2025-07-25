@@ -38,7 +38,7 @@ const Navigation = ({ menuLinks }) => {
         </div>
         <div id="page-menu">
           <div id="our-services">
-            <a href="/our-services" className="page-link">
+            <a href="/services" className="page-link">
               Our Services
             </a>
           </div>

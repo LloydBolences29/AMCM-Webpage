@@ -1,46 +1,118 @@
-/* For Mobile view. 480 for the larger mobile screen*/
-/* @media (max-width: 767px) {
-  .body {
+@media(max-width: 767px) {
+
+  .seventh-grid {
+    grid-column: 7 / 8;
+    width: 100%;
+    height: 100%;
+    background-color: #007682;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 10px; */
+    z-index: 2;
+  }
+  #seventh-grid-body {
     display: flex;
     justify-content: center;
     background-color: #007682;
-    position: fixed;
+    width: 100%;
+    position: relative;
   }
-  .symbol {
+
+  #symbol {
+    /* padding-top: 10px; */
+    width: auto;
+    height: 6vh;
+  }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+
+  .seventh-grid {
+    grid-column: 7 / 8;
+    width: 100%;
+    height: 100%;
+    background-color: #007682;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 10px; */
+    z-index: 2;
+  }
+  #seventh-grid-body {
+    display: flex;
+    justify-content: center;
+    background-color: #007682;
+    width: 100%;
+    position: relative;
+  }
+
+  #symbol {
     padding-top: 10px;
-    width: 100vw;
-    height: 5vh;
+    width: auto;
+    height: 9.5vh;
+  
   }
 }
 
-/* For Tablet View*/
-/* @media (min-width: 768px) and (max-width: 991px) {
-  .body {
+@media (min-width: 992px) and (max-width: 1199px){
+
+  .seventh-grid {
+    grid-column: 7 / 8;
+    width: 100%;
+    height: 100%;
+    background-color: #007682;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 10px; */
+    z-index: 2;
+  }
+  #seventh-grid-body {
     display: flex;
     justify-content: center;
     background-color: #007682;
-    height: 100vh;
-    width: auto;
-    position: fixed;
+    width: 100%;
+    position: relative;
   }
-  .symbol {
-    padding-top: 10px;
-    width: 70%;
-    height: 12vh;
-  }
-}  */
 
-/* For desktop view */
-/* @media (min-width: 992px) {
+  #symbol {
+    padding-top: 10px;
+    width: auto;
+    height: 15vh;
+  }
+}
+
+@media (min-width: 1200px){
+
+  .seventh-grid {
+    grid-column: 7 / 8;
+    width: 100%;
+    height: 100%;
+    background-color: #007682;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* padding: 10px; */
+    z-index: 2;
+  }
   #seventh-grid-body {
+    display: flex;
+    justify-content: center;
     background-color: #007682;
     width: 100%;
-    max-width: 300px;
-    position: fixed;
+    position: relative;
   }
-  .symbol {
+
+  #symbol {
     padding-top: 10px;
-    width: 70%;
-    height: 12vh;
+    width: auto;
+    height: 15vh;
   }
-} */
+}

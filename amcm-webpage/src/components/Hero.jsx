@@ -6,7 +6,7 @@ const Hero = () => {
       <div className="hero-container">
         <div className="hero-content">
           <div className="hero-title">
-            <h1>The center of Excellence in faith-based Education, Healthcare and Lifestyle</h1>
+            <h1>The center of Excellence in Faith-based Education, Healthcare and Lifestyle</h1>
           </div>
         </div>
       </div>

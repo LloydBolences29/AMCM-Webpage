@@ -14,8 +14,6 @@ const Information = () => {
     "/healthyPilipinasaward.png",
     "/ISO.png",
   ];
-  // const SLIDES = Array.from(Array(SLIDE_IMG).keys())
-
   return (
     <>
       <div className="information-container">
@@ -102,7 +100,7 @@ const Information = () => {
                 <Col>
                   <p className="service">
                     Our Services <br />
-                    <a href="">
+                    <a href="/services">
                       <span>
                         <Button
                           variant="outline-warning"
