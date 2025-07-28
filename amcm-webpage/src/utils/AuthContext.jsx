@@ -7,6 +7,8 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
 const [loading, setLoading] = useState(true);
 
+const VITE_API_URL = import.meta.env.VITE_API_URL;
+
 setTimeout(() => {
     setLoading(false);
   }, 3000); 
@@ -14,7 +16,7 @@ setTimeout(() => {
 
   useEffect(() => {
     // Call backend to check auth status using cookie
-    axios.get('http://195.68.4.254:2000/auth/auth', { withCredentials: true })
+    axios.get(`${VITE_API_URL}/auth/auth`, { withCredentials: true })
       .then((res) => {
         console.log("Role Check response:", res.data.role);
         setAuth({ loading: false, isAuthenticated: true, user: res.data.user});

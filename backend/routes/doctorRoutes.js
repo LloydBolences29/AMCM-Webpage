@@ -10,9 +10,9 @@ router.get("/get-doctors/:departments", async (req, res) => {
     // Fetch doctors based on the provided department
     const [doctors] = await db.query(
       `SELECT 
-      doctors.name, 
-      doctors.roomNo, 
-      doctors.localPhone 
+      doctors.name AS Name, 
+      doctors.roomNo AS Room Number, 
+      doctors.localPhone AS "Local Phone" 
       FROM doctors 
       JOIN doctor_departments ON doctors.id = doctor_departments.doctor_id
       JOIN departments ON doctor_departments.department_id = departments.id
@@ -25,5 +25,25 @@ router.get("/get-doctors/:departments", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+
+router.get("/get-all-doctors", async (req, res) =>{
+  try {
+    const db = await connectToDatabase();
+
+    // Fetch all doctors
+    const [doctors] = await db.query(
+      `SELECT 
+      doctors.name AS "Name", 
+      doctors.roomNo AS "Room Number", 
+      doctors.localPhone AS "Local Phone" 
+      FROM doctors`
+    );
+    res.status(200).json(doctors);
+  } catch (error) {
+    console.error("Error fetching all doctors:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+})
 
 module.exports = router;

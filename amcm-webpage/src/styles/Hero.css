@@ -108,11 +108,12 @@
   }
 
   .hero-title {
-    width: 40vw;
+    width: 30vw;
     z-index: 3;
     font-size: 5em;
     color: #007682;
     font-weight: bold;
     margin: 0;
+    word-wrap: break-word;
   }
 }

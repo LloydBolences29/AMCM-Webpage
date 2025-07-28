@@ -1,4 +1,4 @@
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 .overlay-container {
     position: fixed;
     inset: 0;
@@ -148,7 +148,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 991px) {
   .overlay-container {
     position: fixed;
     inset: 0;
@@ -198,7 +198,9 @@
 
   .links {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50vw;
   }
   .ul-menu-links {
     padding: 0;
@@ -233,12 +235,13 @@
     border-radius: 50px;
     border: none;
     background-color: transparent;
-    padding: 0 1em;
+    padding: 0.2em 1.5em;
     opacity: 0.7;
     box-shadow: 1px 5px 12px rgb(0, 0, 0);
   }
 
   .logout-btn:hover {
+    color: white; /* Change color on hover */
     opacity: 1;
     box-shadow: 1px 5px 12px rgb(0, 0, 0);
   }
@@ -253,7 +256,7 @@
   }
 
   .search-input {
-    width: 65vw;
+    width: 80vw;
     padding: 0.5rem 2rem 0.5rem 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -296,6 +299,25 @@
   #mission{
     margin-bottom: 1rem;
   }
+
+  #second-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+
+  #learn-more-section h5 {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    
+  }
+  #learn-more-content{
+    display: flex;
+    flex-direction: column;
+  }
+
 }
 
 @media (min-width: 992px) {

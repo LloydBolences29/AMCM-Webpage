@@ -42,6 +42,26 @@ const Navigation = ({ menuLinks }) => {
               Our Services
             </a>
           </div>
+          <div id="find-doctors">
+            <a href="/" className="page-link">
+              Find Doctors
+            </a>
+          </div>
+          <div id="schedule-appointment">
+            <a href="/appointment-schedule" className="page-link">
+              Schedule Appointment
+            </a>
+          </div>
+          <div id="billing-and-admitting">
+            <a href="/" className="page-link">
+              Billing and Admitting
+            </a>
+          </div>
+          <div id="online-patient-survey">
+            <a href="/appointment-schedule" className="page-link">
+              Online Patient Survey
+            </a>
+          </div>
         </div>
       </div>
 

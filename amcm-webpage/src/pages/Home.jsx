@@ -11,8 +11,11 @@ const Home = () => {
     { label: "Our Services", path: "/services" },
     { label: "Schedule and Appointment", path: "/appointment-schedule" },
     { label: "Find Doctors", path: "/doctors" },
-    { label: "Patient Guide", path: "/patient-business" },
+    { label: "Billing and Admition", path: "/billing-admition" },
+    { label: "Patient Business", path: "/patient-business" },
+    { label: "Online Patient Survey", path: "/online-patient-survey" },
   ];
+
   return (
     <div className="home-body">
       <div className="home-content">

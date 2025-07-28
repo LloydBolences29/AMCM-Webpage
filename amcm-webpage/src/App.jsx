@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Routes, Route } from "react-router-dom";
+import ProtectedRoutes from "./utils/ProtectedRoutes";
 
 
 //imports
@@ -11,9 +12,11 @@ import Home from "./pages/Home";
 import PatientBusiness from "./components/PatientBusiness";
 import AppointmentScheduling from './components/AppointmentScheduling';
 import Services from "./pages/Services";
+import Login from "./pages/Login"
+import Editor from "./pages/Editor"
+import Admin from "./pages/Admin"
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -24,20 +27,20 @@ function App() {
               <Route path="patient-business" element={<PatientBusiness />} />
               <Route path="/services" element={<Services />} />
               <Route path='/appointment-schedule' element={<AppointmentScheduling />} />
-              {/* <Route path="/about" element={<About />} />
-              <Route path="/login" element={<Login />} /> */}
-      
-              {/* Route for editors
+              <Route path="/login" element={<Login />} />
+              {/* <Route path="/about" element={<About />} /> */}
+  
+              {/* Route for editors*/}
               <Route element={<ProtectedRoutes allowedRoles={["editor"]} />}>
                 <Route path="/editor" element={<Editor />} />
               </Route>
       
-              Route for admin 
+              {/* Route for admin  */}
               <Route element={<ProtectedRoutes allowedRoles={["admin"]} />}>
                 <Route path="/admin" element={<Admin />} />
       
-                <Route path="/users" element={<UserManagement />} />
-              </Route> */}
+                {/* <Route path="/users" element={<UserManagement />} /> */}
+              </Route> 
             </Routes>
           </AuthProvider>
     </>
