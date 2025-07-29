@@ -5,13 +5,15 @@ import "../styles/Home.css"; // Importing the CSS file for styling
 import Hero from "../components/Hero";
 import Information from "../components/Information";
 
+
 const Home = () => {
+  
   const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
     { label: "Schedule and Appointment", path: "/appointment-schedule" },
     { label: "Find Doctors", path: "/doctors" },
-    { label: "Billing and Admition", path: "/billing-admition" },
+    { label: "Billing and Admission", path: "/billing-admission" },
     { label: "Patient Business", path: "/patient-business" },
     { label: "Online Patient Survey", path: "/online-patient-survey" },
   ];

@@ -383,7 +383,7 @@
   #information-wrapper-1 {
     margin: 3em 0;
     width: inherit;
-    height: 40vh;
+    height: 25vh;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -393,7 +393,7 @@
   #information-wrapper-1 #information-mission {
     align-content: center;
     height: inherit;
-    width: 40vw;
+    width: 25vw;
     margin-right: 0.5em;
     border-left: 3px solid #007682;
     /* box-shadow: 77px 78px 5px -68px rgba(0, 0, 0, 0.2) inset; */

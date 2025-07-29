@@ -369,16 +369,16 @@
   }
   .links {
     display: flex;
-    margin-bottom: 2rem;
   }
   .ul-menu-links {
     list-style: none; /* Remove bullet points */
+    line-height: 25px;
   }
 
   .sidebar-link {
     color: gray; /* Default color for menu links */
     text-decoration: none; /* Remove underline */
-    font-size: 22px; /* Adjust font size */
+    font-size: 18px; /* Adjust font size */
     padding: 0.5rem; /* Add spacing */
     display: block; /* Ensure links are block-level for better spacing */
     transition: color 0.3s ease; /* Smooth color transition */
@@ -389,8 +389,8 @@
   }
 
   .sda-logo {
-    width: 110px; /* Adjust size as needed */
-    height: auto;
+    width: 3px; /* Adjust size as needed */
+    height: 5px;
     margin-left: 1.5rem;
   }
 
@@ -411,7 +411,7 @@
     font-weight: bold; /* Make active link bold */
   }
 
-  .logout-button {
+    .logout-button {
     position: absolute;
     bottom: 1rem;
     left: 1rem;
@@ -421,12 +421,13 @@
     border-radius: 50px;
     border: none;
     background-color: transparent;
-    padding: 0 1em;
+    padding: 0.2em 1.5em;
     opacity: 0.7;
     box-shadow: 1px 5px 12px rgb(0, 0, 0);
   }
 
   .logout-btn:hover {
+    color: white; /* Change color on hover */
     opacity: 1;
     box-shadow: 1px 5px 12px rgb(0, 0, 0);
   }
@@ -441,8 +442,8 @@
   }
 
   .search-input {
-    width: 90vw;
-    padding: 0.5rem 2rem 0.5rem 1rem;
+    width: 80vw;
+    padding: 0.5rem 2rem 0.5rem 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
@@ -459,5 +460,55 @@
   .search-input:focus {
     outline: none;
     border-color: white;
+  }
+
+  .sda-logo-container {
+    display: inline-block;
+  }
+
+  .sda-logo {
+    width: 80px; /* Adjust size as needed */
+    height: auto;
+  }
+
+  .motto {
+    width: 40%;
+  }
+
+  .motto-content {
+    color: rgba(255, 255, 255, 0.877);
+    font-size: 16px;
+    margin-top: 0.5rem;
+    font-weight: 100;
+  }
+
+  #mission{
+    margin-bottom: 1rem;
+  }
+
+  #second-section{
+    display: flex;
+    flex-direction: row;
+gap: 2em;
+    padding: 1rem;
+  }
+
+  #learn-more-section h5 {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    
+  }
+  #learn-more-content{
+    display: flex;
+    flex-direction: column;
+        font-weight: 100;
+
+  }
+
+  #learn-more-content a {
+    color: white;
+    text-decoration: none;
+  
   }
 }

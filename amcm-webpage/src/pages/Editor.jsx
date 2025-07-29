@@ -1,83 +1,139 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import ListItemText from "@mui/material/ListItemText";
-import Select from "@mui/material/Select";
-import Checkbox from "@mui/material/Checkbox";
+import { Suspense, lazy } from "react";
+import Skeleton from "react-loading-skeleton";
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
+import Container from "@mui/material/Container";
+import Card from "@mui/material/Card";
+import Typography from "@mui/material/Typography";
+import CardContent from "@mui/material/CardContent";
+import SeventhGrid from "../../../../amcm-website/src/components/SeventhGrid";
+import { Row, Col, Button } from "react-bootstrap";
+
+const AddDepartment = lazy(() => import("../components/AddDepartment"));
+const AddDoctor = lazy(() => import("../components/AddDoctor"));
+const AddKeyword = lazy(() => import("../components/AddKeyword"));
 
 const Editor = () => {
-  const VITE_API_URL = import.meta.env.VITE_API_URL;
-  const [doctors, setDoctors] = useState([]);
-  const [doctorName, setDoctorName] = useState([]);
+  const menuLinks = [
+    { label: "Home", path: "/" },
+    { label: "Our Services", path: "/services" },
+    { label: "Schedule and Appointment", path: "/appointment-schedule" },
+    { label: "Find Doctors", path: "/doctors" },
+    { label: "Billing and Admission", path: "/billing-admission" },
+    { label: "Patient Business", path: "/patient-business" },
+    { label: "Online Patient Survey", path: "/online-patient-survey" },
+  ];
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setDoctorName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+  const [active, setActive] = useState("department");
+
+  const handleClick = (name) => {
+    setActive(name);
   };
 
-  const fetchAllDoctors = async () => {
-    try {
-      const response = await fetch(`${VITE_API_URL}/doctor/get-all-doctors`, {
-        method: "GET",
-        credentials: "include",
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-      console.log("Doctors fetched successfully:", data);
-      setDoctors(data);
-    } catch (error) {
-      console.error("Error fetching doctors:", error);
+  const renderPage = () => {
+    switch (active) {
+      case "doctor":
+        return <AddDoctor />;
+      case "keyword":
+        return <AddKeyword />;
+      default:
+        return <AddDepartment />;
     }
   };
-  useEffect(() => {
-    fetchAllDoctors();
-  }, []);
 
-  console.log("Doctors state:", doctors);
   return (
-    <FormControl sx={{ m: 1, width: 300 }}>
-      <InputLabel id="doctor-select-label">Doctors</InputLabel>
-      <Select
-        labelId="doctor-select-label"
-        id="doctor-multiple-checkbox"
-        multiple
-        value={doctorName}
-        onChange={handleChange}
-        input={<OutlinedInput label="Doctors" />}
-        renderValue={(selected) => selected.join(", ")}
-        MenuProps={MenuProps}
-      >
-        {doctors.map((doctor) => (
-          <MenuItem key={doctor.Name} value={doctor.Name}>
-            <Checkbox checked={doctorName.includes(doctor.Name)} />
-            <ListItemText primary={doctor.Name} />
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <div className="home-body">
+      <div className="home-content">
+        <Navigation menuLinks={menuLinks} />
+
+        <div className="main">
+          <Container>
+            <Card
+              sx={{
+                mb: 3,
+                textAlign: "center",
+                marginTop: "2em",
+                backgroundColor: "#163235ff",
+                borderRadius: "10px",
+              }}
+            >
+              <CardContent>
+                <Typography
+                  variant="h4"
+                  component="h1"
+                  className="page-title fw-bold"
+                  sx={{ color: "#ffffffff" }}
+                >
+                  Editor's Page
+                </Typography>
+              </CardContent>
+            </Card>
+          </Container>
+
+          {/* Buttons for selection */}
+          <div id="button-selection">
+            <div
+              id="button-selection-wrapper"
+              className="g-1 d-flex justify-content-center"
+            >
+              <Row md={3} className="g-3" style={{ width: "100%" }}>
+                <Col>
+                  <Button
+                    variant={
+                      active === "department" ? "warning" : "outline-warning"
+                    }
+                    className="w-100"
+                    onClick={() => handleClick("department")}
+                  >
+                    Add Department
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    variant={
+                      active === "doctor" ? "warning" : "outline-warning"
+                    }
+                    className="w-100"
+                    onClick={() => handleClick("doctor")}
+                  >
+                    Add Doctor
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    variant={
+                      active === "keyword" ? "warning" : "outline-warning"
+                    }
+                    className="w-100"
+                    onClick={() => handleClick("keyword")}
+                  >
+                    Add Keyword
+                  </Button>
+                </Col>
+              </Row>
+            </div>
+          </div>
+
+          {/* Rendering each component */}
+
+          <Suspense fallback={<Skeleton height={200} />}>
+            {renderPage()}
+          </Suspense>
+        </div>
+
+        {/* Footer */}
+        <Footer />
+      </div>
+
+      <div className="seventh-grid">
+        <SeventhGrid />
+      </div>
+
+      
+    </div>
   );
 };
 

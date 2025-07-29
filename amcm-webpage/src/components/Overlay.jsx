@@ -3,12 +3,24 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/AuthContext";
 import Modal from "react-bootstrap/Modal";
 
-
 import "../styles/Overlay.css";
 
 export const Overlay = ({ menuLinks, visible, onClose }) => {
   const [showModal, setShowModal] = useState(false);
   const [modalTimer, setModalTimer] = useState(3);
+
+  const additionalLinks = [
+    {
+      role: "admin",
+      label: "Admin Dashboard",
+      link: "/admin",
+    },
+    {
+      role: "editor",
+      label: "Editor Dashboard",
+      link: "/editor",
+    }
+  ];
 
   const handleLogout = async () => {
     try {
@@ -31,7 +43,7 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
     }
   };
 
-    useEffect(() => {
+  useEffect(() => {
     let timer;
     if (showModal && modalTimer > 0) {
       timer = setTimeout(() => {
@@ -43,7 +55,6 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
     }
     return () => clearTimeout(timer);
   }, [showModal, modalTimer]);
-
 
   const navigate = useNavigate(); // ✅ make sure this is included
   const { auth, setAuth } = useAuth();
@@ -105,6 +116,22 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
                   Contact
                 </NavLink>
               </li>
+              {auth.isAuthenticated && (
+                <>
+                  {additionalLinks.map((item) => {
+                    if (auth.user.role === item.role) {
+                      return (
+                        <li key={item.link}>
+                          <NavLink className="sidebar-link" to={item.link}>
+                            {item.label}
+                          </NavLink>
+                        </li>
+                      );
+                    }
+                    return null; // return nothing if roles don't match
+                  })}
+                </>
+              )}
               {auth.isAuthenticated ? (
                 <li>
                   <button className="logout-btn" onClick={handleLogout}>
@@ -113,7 +140,7 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
                 </li>
               ) : (
                 <li>
-                  <NavLink className="sidebar-link" to="/login" >
+                  <NavLink className="sidebar-link" to="/login">
                     Login
                   </NavLink>
                 </li>
@@ -122,15 +149,13 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
           </div>
         </div>
 
-         {/* ✅ Logout success modal */}
-            <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-              <Modal.Body className="text-center">
-                <h4 className="mt-3">Logout Successful!</h4>
-                <p>Closing in {modalTimer} seconds...</p>
-              </Modal.Body>
-            </Modal>
-
-        <br />
+        {/* ✅ Logout success modal */}
+        <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+          <Modal.Body className="text-center">
+            <h4 className="mt-3">Logout Successful!</h4>
+            <p>Closing in {modalTimer} seconds...</p>
+          </Modal.Body>
+        </Modal>
 
         <div className="sda-logo-container">
           <img
@@ -140,7 +165,6 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
           />
         </div>
 
-        <br />
         <div id="second-section">
           <div className="motto">
             <p className="motto-content" id="mission">
