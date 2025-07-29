@@ -1,0 +1,35 @@
+@media(max-width: 767px){
+      #department-wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    #department-wrapper #department-card {
+        
+        margin: 2%;
+    
+       
+    }
+}
+@media(min-width: 768px) and (max-width: 991px){
+    #department-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #department-wrapper #department-card {
+        margin: 0 1%;
+    }
+
+
+}
+@media(min-width: 992px){
+        #department-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+}

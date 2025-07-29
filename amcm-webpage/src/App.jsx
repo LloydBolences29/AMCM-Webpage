@@ -15,6 +15,7 @@ import Services from "./pages/Services";
 import Login from "./pages/Login"
 import Editor from "./pages/Editor"
 import Admin from "./pages/Admin"
+import FindDoctors  from "./pages/FindDoctors"
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
               <Route path="/services" element={<Services />} />
               <Route path='/appointment-schedule' element={<AppointmentScheduling />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/find-doctors" element = {<FindDoctors />} />
               {/* <Route path="/about" element={<About />} /> */}
   
               {/* Route for editors*/}

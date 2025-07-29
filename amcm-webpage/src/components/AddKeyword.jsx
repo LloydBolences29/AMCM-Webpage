@@ -55,6 +55,8 @@ const AddKeyword = () => {
 
   return (
     <div>
+
+      <input type="text" />
       {/* Doctor select */}
       <FormControl sx={{ m: 1, width: 600 }}>
         <InputLabel id="doctor-select-label">Doctors</InputLabel>

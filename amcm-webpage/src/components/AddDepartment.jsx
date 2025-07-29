@@ -86,7 +86,7 @@ const AddDepartment = () => {
   return (
     <Container className="py-5">
       <Row className="justify-content-center">
-        <Col lg={6} md={8} sm={10}>
+        <Col lg={8} md={10} sm={10}>
           <Card className="shadow-lg border-0">
             <Card.Header className="text-white text-center py-3"  style={{ backgroundColor: "#007682" }}>
               <h2 className="mb-0">
