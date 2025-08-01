@@ -5,8 +5,8 @@ import CardContent from "@mui/material/CardContent";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import "../styles/Services.css";
-import { Anchor } from "antd";
 import Skeleton from "react-loading-skeleton";
+import Button from "react-bootstrap/Button";
 
 import { lazy, Suspense, useState } from "react";
 
@@ -21,7 +21,7 @@ const GovernmentCollabServices = lazy(() =>
 const EducationServices = lazy(() => import("../components/Education"));
 
 const Services = () => {
-      const menuLinks = [
+  const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
     { label: "Schedule and Appointment", path: "/appointment-schedule" },
@@ -32,7 +32,6 @@ const Services = () => {
   ];
 
   const [activeComponent, setActiveComponent] = useState("one");
-
 
   return (
     <div className="home-body">
@@ -66,63 +65,58 @@ const Services = () => {
 
             <div id="services-container">
               <div id="anchor-wrapper">
-                <Anchor
-                  affix={false}
-                  onClick={(e, link) => {
-                    switch (link.href) {
-                      case "#patient-services-wrapper":
-                        setActiveComponent("one");
-                        break;
-                      case "#non-patient-services":
-                        setActiveComponent("two");
-                        break;
-                      case "#government-collaborative-services":
-                        setActiveComponent("three");
-                        break;
-                      case "#education-services":
-                        setActiveComponent("four");
-                        break;
-                    }
-                  }}
-                  items={[
-                    {
-                      key: "1",
-                      href: "#patient-services-wrapper",
-                      title: "Patient Services",
-                    },
-                    {
-                      key: "2",
-                      href: "#non-patient-services",
-                      title: "Non-patient Services",
-                    },
-                    {
-                      key: "3",
-                      href: "#government-collaborative-services",
-                      title: "Government Collaborative Services",
-                    },
-                    {
-                      key: "4",
-                      href: "#education-services",
-                      title: "Education",
-                    },
-                  ]}
-                />
+                <Button
+                  variant="outline-primary"
+                  className={`anchor-button ${
+                    activeComponent === "one" ? "active" : ""
+                  }`}
+                  onClick={() => setActiveComponent("one")}
+                >
+                  Patient Services
+                </Button>
+                <Button
+                  variant="outline-primary"
+                  className={`anchor-button ${
+                    activeComponent === "two" ? "active" : ""
+                  }`}
+                  onClick={() => setActiveComponent("two")}
+                >
+                  Non-Patient Services
+                </Button>
+                <Button
+                  variant="outline-primary"
+                  className={`anchor-button ${
+                    activeComponent === "three" ? "active" : ""
+                  }`}
+                  onClick={() => setActiveComponent("three")}
+                >
+                  Government Collaboration Services
+                </Button>
+                <Button
+                  variant="outline-primary"
+                  className={`anchor-button ${
+                    activeComponent === "four" ? "active" : ""
+                  }`}
+                  onClick={() => setActiveComponent("four")}
+                >
+                  Education Services
+                </Button>
               </div>
               <div id="services-card-wrapper">
-                <br />
+             
                 {activeComponent === "one" && (
                   <Suspense fallback={<Skeleton height={125} count={5} />}>
                     <PatientServices />
                   </Suspense>
                 )}
-                <br />
+             
 
                 {activeComponent === "two" && (
                   <Suspense fallback={<Skeleton height={125} count={5} />}>
                     <NonPatientServices />
                   </Suspense>
                 )}
-                <br />
+
 
                 {activeComponent === "three" && (
                   <Suspense fallback={<Skeleton height={125} count={5} />}>

@@ -92,7 +92,7 @@ const FindDoctors = () => {
                   <Button
                     variant={
                       activeDepartment === department.Name
-                        ? "primary"
+                        ? "primary active"
                         : "outline-primary"
                     }
                     onClick={() => setActiveDepartment(department.Name)}

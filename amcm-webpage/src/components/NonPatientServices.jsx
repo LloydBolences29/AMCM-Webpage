@@ -61,39 +61,44 @@ const NonPatientServices = () => {
     },
   ];
   return (
-    <div id="non-patient-services">
-      <Divider>
-        <Chip label="Non-Patient Services" size="medium" />
-      </Divider>
-      <div className="services-card">
-        {services.map((service) => (
-          <div key={service.id} id={service.id}>
-            <Card className="services-card-content" sx={{ maxWidth: 345 }}>
-              <CardActionArea>
-                <CardMedia
-                  loading="lazy"
-                  component="img"
-                  height="140"
-                  image={service.image}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {service.title}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                    {service.description}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary" href={service.link}>
-                  Learn More
-                </Button>
-              </CardActions>
-            </Card>
-          </div>
-        ))}
+    <div id="services-card-wrapper" className="service-content">
+      <div id="non-patient-services">
+        <Divider className="divider">
+          <Chip id="chip" label="Non-Patient Services" size="medium" />
+        </Divider>
+        <div className="services-card">
+          {services.map((service) => (
+            <div key={service.id} id={service.id}>
+              <Card className="services-card-content" sx={{ maxWidth: 345 }}>
+                <CardActionArea>
+                  <CardMedia
+                    loading="lazy"
+                    component="img"
+                    height="140"
+                    image={service.image}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {service.title}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "text.secondary" }}
+                    >
+                      {service.description}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Button size="small" color="primary" href={service.link}>
+                    Learn More
+                  </Button>
+                </CardActions>
+              </Card>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

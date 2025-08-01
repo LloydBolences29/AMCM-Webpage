@@ -102,7 +102,7 @@ const [loading, setLoading] = useState(true);
       <br />
 
       <Divider>
-        <Chip label={`Doctors for ${activeDept}`} size="medium"/>
+        <Chip id="chip" label={`Doctors for ${activeDept}`} size="medium"/>
       </Divider>
 
       <br />

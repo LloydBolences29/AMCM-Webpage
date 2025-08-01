@@ -29,9 +29,9 @@ const Education = () => {
     },
   ];
   return (
-    <div id="education-services">
-      <Divider>
-        <Chip label="Education Services" size="medium" />
+    <div id="education-services" className="service-content" >
+      <Divider className="divider">
+        <Chip id="chip" label="Education Services" size="medium" />
       </Divider>
 
       <div className="services-card">

@@ -2,8 +2,39 @@
   #services-container {
     margin: 2em 2em;
   }
-  #patient-services-wrapper .divider {
+  #services-card-wrapper .divider {
     margin: 2em 0;
+  }
+
+  .service-content .divider #chip {
+    background-color: #163235;
+    color: #ffffff;
+    font-size: 1rem;
+    padding: 1.2em;
+  }
+  #anchor-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+  .anchor-button {
+    width: 60vw;
+    font-size: small;
+    padding: 0.7em 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-color: #142c2e !important;
+    color: #142c2e !important;
+  }
+
+  .anchor-button:hover {
+    background-color: #142c2e !important;
+    color: #ffffff !important;
+  }
+
+  .anchor-button.active {
+    background-color: #142c2e !important;
+    color: #ffffff !important;
   }
 
   #services-card-wrapper {
@@ -21,7 +52,38 @@
   #services-container {
     margin: 2em 2em;
   }
-  #patient-services-wrapper .divider {
+
+   .service-content .divider #chip {
+    background-color: #163235;
+    color: #ffffff;
+    font-size: 1.2rem;
+    padding: 1.2em;
+  }
+
+  #anchor-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+  .anchor-button {
+    width: 37vw;
+    padding: 0.7em 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-color: #142c2e !important;
+    color: #142c2e !important;
+  }
+
+  .anchor-button:hover {
+    background-color: #142c2e !important;
+    color: #ffffff !important;
+  }
+
+  .anchor-button.active {
+    background-color: #142c2e !important;
+    color: #ffffff !important;
+  }
+  .service-content .divider {
     margin: 2em 0;
   }
 
@@ -51,23 +113,82 @@
   .services-card {
     margin: 2em;
   }
+  #services-card-wrapper .divider {
+    margin: 2em 0;
+  }
+
+   .service-content .divider #chip {
+    background-color: #163235;
+    color: #ffffff;
+    font-size: 1.4rem;
+    padding: 1.2em;
+  }
 }
 @media (min-width: 1200px) {
   #services-container {
-    display: grid;
-    grid-template-columns: 13.5vw 1fr;
-    margin: 3em 4em 3em 2em;
-  }
-
-  #services-card-wrapper {
-    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em;
   }
 
   #anchor-wrapper {
-    height: 100vh;
-    position: fixed;
     display: flex;
-    align-items: start;
+    justify-content: center;
+    gap: 1em;
+  }
+
+  .anchor-button {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-color: #142c2e !important;
+    color: #142c2e !important;
+  }
+
+  .anchor-button:hover {
+    background-color: #142c2e !important;
+    color: #ffffff !important;
+  }
+
+  .anchor-button.active {
+    background-color: #142c2e !important;
+    color: #ffffff !important;
+  }
+
+  #services-card-wrapper .divider {
+    margin: 2em 0;
+  }
+
+   .service-content .divider #chip {
+    background-color: #163235;
+    color: #ffffff;
+    font-size: 1.3rem;
+    padding: 1.2em;
+  }
+
+  #services-card-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2em;
+  }
+
+  #services-card-wrapper .services-card .services-card-content {
+    margin: 2em 0;
+    width: 30vw;
+  }
+
+  #patient-services-wrapper .services-card,
+  #non-patient-services .services-card,
+  #government-collaborative-services .services-card,
+  #education-services .services-card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2em;
+    align-items: center;
+    justify-content: center;
   }
 
   .services-card {
