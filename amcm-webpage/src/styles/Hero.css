@@ -1,12 +1,15 @@
 @media (max-width: 767px) {
   .hero-container {
     position: relative;
-    background-image: url("/AMCM.jpg");
     background-size: 840px 845px;
     background-repeat: no-repeat;
     background-position: center;
     height: 100vh;
     z-index: 1;
+    transition: background-image 0.5s ease-in-out;
+  }
+  .hero-container.lazy-loaded {
+    background-image: url("/AMCM.jpg");
   }
   .hero-container::after {
     content: "";
@@ -26,11 +29,13 @@
     height: 50vh;
     background-size: cover;
     background-position: center;
-    padding: 2em 1.5em;
+    padding: 2em 0;
     margin-bottom: 2em;
   }
 
   .hero-title {
+    padding:0.5em;
+    width: auto;
     z-index: 3;
     color: #007682;
     font-weight: bold;
@@ -108,7 +113,8 @@
   }
 
   .hero-title {
-    width: 30vw;
+    width: 45vw;
+    height: auto;
     z-index: 3;
     font-size: 5em;
     color: #007682;

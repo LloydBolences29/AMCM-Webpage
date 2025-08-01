@@ -2,9 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Navigation from "../components/Navigation";
 import Typography from "@mui/material/Typography";
-
 import CardContent from "@mui/material/CardContent";
-
 import Footer from "../components/Footer";
 import SeventhGrid from "../components/SeventhGrid";
 import {
@@ -17,15 +15,16 @@ import {
   Container,
 } from "react-bootstrap";
 import PatientDetails from "./PatientDetails";
+import UnderConstruction from "./UnderConstruction";
 
 const AppointmentScheduling = () => {
-  const menuLinks = [
+      const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
     { label: "Schedule and Appointment", path: "/appointment-schedule" },
-    { label: "Find Doctors", path: "/doctors" },
+    { label: "Find Doctors", path: "/find-doctors" },
     { label: "Billing and Admission", path: "/billing-admission" },
-    { label: "Patient Business", path: "/patient-business" },
+    { label: "Patient Rights", path: "/patient-rights" },
     { label: "Online Patient Survey", path: "/online-patient-survey" },
   ];
 
@@ -114,7 +113,7 @@ const AppointmentScheduling = () => {
       <div className="home-content">
         <Navigation menuLinks={menuLinks} />
         <div className="main container">
-          <Container>
+          {/* <Container>
             <Card
               className="content-column analytics-card shadow-sm p-3 mb-5 rounded text-center"
               style={{ backgroundColor: "#142C2E" }}
@@ -280,7 +279,9 @@ const AppointmentScheduling = () => {
                 </Button>
               )}
             </Container>
-          )}
+          )} */}
+
+          <UnderConstruction page={"Appointment Scheduling"} />
         </div>
         <Footer />
       </div>

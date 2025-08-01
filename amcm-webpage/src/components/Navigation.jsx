@@ -2,22 +2,59 @@ import React, { useState } from "react";
 import "../styles/Navigation.css";
 import { BsSearch, BsList } from "react-icons/bs";
 import Overlay from "./Overlay";
+import { useLocation } from "react-router-dom";
 
 const Navigation = ({ menuLinks }) => {
+const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
+
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
   const handleOpenDrawer = () => setIsOverlayOpen(true);
   const handleCloseDrawer = () => setIsOverlayOpen(false);
 
+  const pageMenus = [
+    {
+      id: "our-services",
+      label: "Our Services",
+      link: "/services",
+    },
+    {
+      id: "find-doctors",
+      label: "Find Doctors",
+      link: "/find-doctors",
+    },
+ 
+    {
+      id: "schedule-appointment",
+      label: "Schedule Appointment",
+      link: "/appointment-schedule",
+    },
+    {
+      id: "billing-and-admitting",
+      label: "Billing and Admitting",
+      link: "/billing-admission",
+    },
+    {
+      id: "online-patient-survey",
+      label: "Online Patient Survey",
+      link: "/online-patient-survey",
+    },
+  ];
+
   return (
     <div className="header">
       <div className="logo-container">
         <div className="amcm-logo-wrapper">
+          <a href="/">
           <img
             className="amcm-logo"
+            loading="lazy"
             src="https://adventisthealth-mnl.com/wp-content/uploads/2024/06/AMCM-Logo-small2-1.webp"
             alt="AMCM Logo"
           />
+          </a>
         </div>
       </div>
 
@@ -37,31 +74,15 @@ const Navigation = ({ menuLinks }) => {
           </div>
         </div>
         <div id="page-menu">
-          <div id="our-services">
-            <a href="/services" className="page-link">
-              Our Services
-            </a>
-          </div>
-          <div id="find-doctors">
-            <a href="/" className="page-link">
-              Find Doctors
-            </a>
-          </div>
-          <div id="schedule-appointment">
-            <a href="/appointment-schedule" className="page-link">
-              Schedule Appointment
-            </a>
-          </div>
-          <div id="billing-and-admitting">
-            <a href="/" className="page-link">
-              Billing and Admitting
-            </a>
-          </div>
-          <div id="online-patient-survey">
-            <a href="/appointment-schedule" className="page-link">
-              Online Patient Survey
-            </a>
-          </div>
+          {pageMenus.map((menu) => {
+            return (
+            <div key={menu.id} id={menu.id}>
+              <a href={menu.link} className={`page-link ${isActive(menu.link) ? 'active' : ''}`}>
+                {menu.label}
+              </a>
+            </div>
+            );
+          })}
         </div>
       </div>
 

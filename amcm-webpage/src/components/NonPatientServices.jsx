@@ -63,7 +63,7 @@ const NonPatientServices = () => {
   return (
     <div id="non-patient-services">
       <Divider>
-        <Chip label="Non-Patient Services" size="large" />
+        <Chip label="Non-Patient Services" size="medium" />
       </Divider>
       <div className="services-card">
         {services.map((service) => (
@@ -71,6 +71,7 @@ const NonPatientServices = () => {
             <Card className="services-card-content" sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
+                  loading="lazy"
                   component="img"
                   height="140"
                   image={service.image}

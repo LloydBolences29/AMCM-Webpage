@@ -1,30 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { connectToDatabase } = require("../lib/db");
+const multer = require("multer");
+const path = require("path");
 
-router.get("/get-doctors/:departments", async (req, res) => {
-  try {
-    const db = await connectToDatabase();
-    const { departments } = req.params;
-
-    // Fetch doctors based on the provided department
-    const [doctors] = await db.query(
-      `SELECT 
-      doctors.name AS Name, 
-      doctors.roomNo AS Room Number, 
-      doctors.localPhone AS "Local Phone" 
-      FROM doctors 
-      JOIN doctor_departments ON doctors.id = doctor_departments.doctor_id
-      JOIN departments ON doctor_departments.department_id = departments.id
-       WHERE departments.name = ?`,
-      [departments]
-    );
-    res.status(200).json(doctors);
-  } catch (error) {
-    console.error("Error fetching doctors:", error);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-});
 
 router.get("/get-all-doctors", async (req, res) => {
   try {
@@ -48,7 +27,7 @@ router.get("/get-all-doctors", async (req, res) => {
 router.post("/add-doctor", async (req, res) => {
   try {
     const db = await connectToDatabase();
-    const { name, roomNo, localPhone, departmentId } = req.body;
+    const { name, roomNo, localPhone, departmentId, doctor_schedule } = req.body;
 
     // Insert the new doctor into the database
     const [result] = await db.query(
@@ -63,22 +42,25 @@ router.post("/add-doctor", async (req, res) => {
        VALUES (?, ?)`,
       [doctorId, departmentId]
     );
-    res.status(201).json({ message: "Doctor added" });
 
+    await db.execute(
+      `INSERT INTO availability (doctor_id, department_id, doctor_schedule) 
+       VALUES (?, ?, ?)`,
+      [doctorId, departmentId, doctor_schedule]
+    );
+    res.status(201).json({ message: "Doctor added" });
   } catch (error) {
     console.error("Error adding doctor:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
-
-router.get("/get-doctors-departments", async (req, res)=>{
-try {
-  const db = await connectToDatabase();
-  // Fetch all doctors and their departments
-  const [doctors] = await db.query(
-
-    `SELECT 
+router.get("/get-doctors-departments", async (req, res) => {
+  try {
+    const db = await connectToDatabase();
+    // Fetch all doctors and their departments
+    const [doctors] = await db.query(
+      `SELECT 
       doctors.name AS "Name", 
       doctors.roomNo AS "Room Number", 
       doctors.localPhone AS "Local Phone", 
@@ -86,15 +68,70 @@ try {
       FROM doctors 
       JOIN doctor_department ON doctors.id = doctor_department.doctor_id
       JOIN departments ON departments.id = doctor_department.department_id;`
-  );
+    );
 
-  res.status(200).json(doctors);
-} catch (error) {
+    res.status(200).json(doctors);
+  } catch (error) {
     console.error("Error fetching doctors and its departments:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
-  
-})
+});
+
+
+router.get ("/get-doctors-by-department/:department", async (req, res) => {
+  try {
+    const db = await connectToDatabase();
+    const { department } = req.params;
+
+    // Fetch doctors by department
+    const [doctors] = await db.query(
+      `SELECT 
+      doctors.name AS "Name", 
+      doctors.roomNo AS "Room Number", 
+      doctors.localPhone AS "Local Phone",
+      availability.doctor_schedule AS "Schedule"
+      FROM doctors 
+      JOIN doctor_department ON doctors.id = doctor_department.doctor_id
+      JOIN departments ON departments.id = doctor_department.department_id
+      JOIN availability on doctors.id = availability.doctor_id
+      WHERE departments.name = ?;`,
+      [department]
+    );
+
+    res.status(200).json(doctors);
+  } catch (error) {
+    console.error("Error fetching doctors by department:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    const uniqueName = file.originalname;
+    cb(null, uniqueName);
+  },
+});
+
+const upload = multer({ storage });
+
+router.post("/upload-image", upload.single("file"), (req, res) => {
+  try {
+      const { file } = req;
+      if (!file) {
+        return res.status(400).json({ error: "No file uploaded" });
+      }
+
+      // Here you can save the file information to the database if needed
+      const fileUrl = `${file.filename}`;
+      res.status(200).json({ message: "Image uploaded successfully", success: true, file: fileUrl });
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
 
 
 

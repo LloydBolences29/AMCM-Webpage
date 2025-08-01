@@ -124,7 +124,7 @@ const PatientServices = () => {
       <br />
       <div id="patient-services-wrapper">
         <Divider className="divider">
-          <Chip label="Patient Services" size="large" />
+          <Chip label="Patient Services" size="medium" />
         </Divider>
 
         <div className="services-card">
@@ -133,6 +133,7 @@ const PatientServices = () => {
               <Card className="services-card-content" sx={{ maxWidth: 345 }}>
                 <CardActionArea>
                   <CardMedia
+                    loading="lazy"
                     component="img"
                     height="140"
                     image={service.image}
@@ -144,7 +145,7 @@ const PatientServices = () => {
                     </Typography>
                     <Typography
                       variant="body2"
-                      sx={{ color: "text.secondary" }}
+                      sx={{ color: "textSecondary" }}
                     >
                       {service.description}
                     </Typography>

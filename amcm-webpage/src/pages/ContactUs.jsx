@@ -1,13 +1,9 @@
 import React from "react";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
-import "../styles/Home.css"; // Importing the CSS file for styling
-import Hero from "../components/Hero";
-import Information from "../components/Information";
+import UnderConstruction from "../components/UnderConstruction";
 
-
-const Home = () => {
-  
+const ContactUs = () => {
       const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
@@ -17,7 +13,6 @@ const Home = () => {
     { label: "Patient Rights", path: "/patient-rights" },
     { label: "Online Patient Survey", path: "/online-patient-survey" },
   ];
-
   return (
     <div className="home-body">
       <div className="home-content">
@@ -25,10 +20,7 @@ const Home = () => {
         <Navigation menuLinks={menuLinks} />
         <div className="main">
           {/* Hero Section */}
-          <Hero />
-
-          {/* Information Section */}
-          <Information />
+          <UnderConstruction page={"Contact Us"} />
         </div>
 
         {/* Footer section */}
@@ -48,4 +40,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default ContactUs;

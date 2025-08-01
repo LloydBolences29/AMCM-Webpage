@@ -123,4 +123,9 @@
     align-items: center;
     gap: 1em;
   }
+  .page-link.active {
+  color: #007682;
+  font-weight: bold;
+  border-bottom: 2px solid #007682;
+}
 }

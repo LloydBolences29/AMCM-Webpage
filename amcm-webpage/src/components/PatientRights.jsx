@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Navigation from "../components/Navigation";
-import Footer from "../components/Footer";
-import SeventhGrid from "../components/SeventhGrid";
-import "../styles/PatientBusiness.css";
+import Navigation from "./Navigation";
+import Footer from "./Footer";
+import SeventhGrid from "./SeventhGrid";
+import "../styles/PatientRights.css";
 import Accordion, { accordionClasses } from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails, {
@@ -16,14 +16,14 @@ import CardContent from "@mui/material/CardContent";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-const PatientBusiness = () => {
-  const menuLinks = [
+const PatientRights = () => {
+      const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
     { label: "Schedule and Appointment", path: "/appointment-schedule" },
-    { label: "Find Doctors", path: "/doctors" },
+    { label: "Find Doctors", path: "/find-doctors" },
     { label: "Billing and Admission", path: "/billing-admission" },
-    { label: "Patient Business", path: "/patient-business" },
+    { label: "Patient Rights", path: "/patient-rights" },
     { label: "Online Patient Survey", path: "/online-patient-survey" },
   ];
 
@@ -225,4 +225,4 @@ const PatientBusiness = () => {
   );
 };
 
-export default PatientBusiness;
+export default PatientRights;

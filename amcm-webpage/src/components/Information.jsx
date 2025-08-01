@@ -18,73 +18,6 @@ const Information = () => {
     <>
       <div className="information-container">
         <div className="information-content">
-          <div id="information-wrapper-1">
-            <div
-              className="information-subContent-title"
-              id="information-mission"
-            >
-              <h2>Our Mission</h2>
-            </div>
-
-            <div
-              className="information-subContent"
-              id="information-mission-content"
-            >
-              <p className="mission">Sharing Jesus Christ Healing Ministry</p>
-            </div>
-          </div>
-
-          <div id="information-wrapper-2">
-            <div id="information-values">
-              <h2> Values </h2>
-            </div>
-
-            <div id="information-values-content">
-              <Row id="values-row">
-                <Col>
-                  <div className="value">
-                    <img
-                      className="values-img"
-                      src="/compassion.png"
-                      alt="Compassion"
-                    />
-                    <p>Compassion</p>
-                  </div>
-                </Col>
-                <Col>
-                  <div className="value">
-                    <img
-                      className="values-img"
-                      src="/Integrity.png"
-                      alt="Integrity"
-                    />
-                    <p>Integrity</p>
-                  </div>
-                </Col>
-                <Col>
-                  <div className="value">
-                    <img
-                      className="values-img"
-                      src="/Excellence.png"
-                      alt="Excellence"
-                    />
-                    <p>Excellence</p>
-                  </div>
-                </Col>
-                <Col>
-                  <div className="value">
-                    <img
-                      className="values-img"
-                      src="/Stewardship.png"
-                      alt="Stewardship"
-                    />
-                    <p>Stewardship</p>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-          </div>
-
           <div id="information-wrapper-3">
             <div
               className="information-subContent-title"
@@ -116,7 +49,7 @@ const Information = () => {
                 <Col>
                   <p className="service">
                     Find Doctors <br />
-                    <a href="">
+                    <a href="/find-doctors">
                       <span>
                         <Button
                           variant="outline-warning"
@@ -134,7 +67,7 @@ const Information = () => {
                   <p className="service">
                     Schedule an Appointment <br />
                     <span>
-                      <a href="">
+                      <a href="/appointment-schedule">
                         <Button
                           variant="outline-warning"
                           size="sm"
@@ -150,7 +83,7 @@ const Information = () => {
                 <Col>
                   <p className="service">
                     Online Patient Survey <br />
-                    <a href="">
+                    <a href="/online-patient-survey">
                       <span>
                         <Button
                           variant="outline-warning"
@@ -162,6 +95,77 @@ const Information = () => {
                       </span>
                     </a>
                   </p>
+                </Col>
+              </Row>
+            </div>
+          </div>
+
+          <div id="information-wrapper-1">
+            <div
+              className="information-subContent-title"
+              id="information-mission"
+            >
+              <h2>Our Mission</h2>
+            </div>
+
+            <div
+              className="information-subContent"
+              id="information-mission-content"
+            >
+              <p className="mission">Sharing Jesus Christ Healing Ministry</p>
+            </div>
+          </div>
+
+          <div id="information-wrapper-2">
+            <div id="information-values">
+              <h2> Values </h2>
+            </div>
+
+            <div id="information-values-content">
+              <Row id="values-row">
+                <Col>
+                  <div className="value">
+                    <img
+                      loading="lazy"
+                      className="values-img"
+                      src="/compassion.png"
+                      alt="Compassion"
+                    />
+                    <p>Compassion</p>
+                  </div>
+                </Col>
+                <Col>
+                  <div className="value">
+                    <img
+                      loading="lazy"
+                      className="values-img"
+                      src="/Integrity.png"
+                      alt="Integrity"
+                    />
+                    <p>Integrity</p>
+                  </div>
+                </Col>
+                <Col>
+                  <div className="value">
+                    <img
+                      loading="lazy"
+                      className="values-img"
+                      src="/Excellence.png"
+                      alt="Excellence"
+                    />
+                    <p>Excellence</p>
+                  </div>
+                </Col>
+                <Col>
+                  <div className="value">
+                    <img
+                      loading="lazy"
+                      className="values-img"
+                      src="/Stewardship.png"
+                      alt="Stewardship"
+                    />
+                    <p>Stewardship</p>
+                  </div>
                 </Col>
               </Row>
             </div>
@@ -198,10 +202,10 @@ const Information = () => {
           </div>
 
           <div className="president-message">
-
             <div className="president-signature">
               <div id="president-profile-wrapper">
                 <img
+                  loading="lazy"
                   className="signature"
                   src="/Apacible.png"
                   alt="President Signature"
@@ -216,38 +220,38 @@ const Information = () => {
             </div>
 
             <div className="president-message-content">
-
-            <div className="information-subContent" id="message-heading">
-              <h2>Message from the President</h2>
-            </div>
-            <div
-              className="information-subContent"
-              id="information-president-content"
-            >
-              <blockquote id="message">
-                It is with great delight that I welcome you all to our
-                hospital's website. At the heart of our mission lies the
-                profound belief in the healing power of Jesus Christ's ministry,
-                a guiding light that illuminates every corner of our
-                institution. Our hospital is more than just a medical facility;
-                it is a sanctuary of Hope, Health and Happiness. Inspired by the
-                teachings of Jesus, we are committed to sharing His healing
-                touch to each and every individual who walks through our doors.
-                Our dedicated medical professionals and staff not only provide
-                exceptional healthcare but also offer a supportive and nurturing
-                environment that acknowledges the importance of spiritual
-                well-being alongside physical healing. We understand that true
-                healing encompasses the body, mind, and soul, and it is our
-                privilege to serve you holistically. Through this portal, we aim
-                to provide you with seamless experience, offering access to
-                important information about our services, medical expertise,
-                facilities and more. Whether you are seeking for medical
-                assistance, exploring career opportunities, or simply learning
-                about our contributions to the community, this online flatform
-                is designed with your needs in mind. Happy browsing and we hope
-                to hear your feedback too.
-              </blockquote>
-            </div>
+              <div className="information-subContent" id="message-heading">
+                <h2>Message from the President</h2>
+              </div>
+              <div
+                className="information-subContent"
+                id="information-president-content"
+              >
+                <blockquote id="message">
+                  It is with great delight that I welcome you all to our
+                  hospital's website. At the heart of our mission lies the
+                  profound belief in the healing power of Jesus Christ's
+                  ministry, a guiding light that illuminates every corner of our
+                  institution. Our hospital is more than just a medical
+                  facility; it is a sanctuary of Hope, Health and Happiness.
+                  Inspired by the teachings of Jesus, we are committed to
+                  sharing His healing touch to each and every individual who
+                  walks through our doors. Our dedicated medical professionals
+                  and staff not only provide exceptional healthcare but also
+                  offer a supportive and nurturing environment that acknowledges
+                  the importance of spiritual well-being alongside physical
+                  healing. We understand that true healing encompasses the body,
+                  mind, and soul, and it is our privilege to serve you
+                  holistically. Through this portal, we aim to provide you with
+                  seamless experience, offering access to important information
+                  about our services, medical expertise, facilities and more.
+                  Whether you are seeking for medical assistance, exploring
+                  career opportunities, or simply learning about our
+                  contributions to the community, this online flatform is
+                  designed with your needs in mind. Happy browsing and we hope
+                  to hear your feedback too.
+                </blockquote>
+              </div>
             </div>
           </div>
         </div>

@@ -36,6 +36,7 @@ const EmblaCarousel = (props) => {
             <div className="embla__slide" key={index}>
               <div className="embla__slide__number">
                 <img
+                  loading="lazy"
                   src={src}
                   alt={`Slide ${index + 1}`}
                   className="embla__slide__img"

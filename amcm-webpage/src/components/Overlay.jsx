@@ -107,12 +107,12 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
           <div className="menu-links-wrapper information-links">
             <ul className="ul-menu-links">
               <li>
-                <NavLink className="sidebar-link" to="/about">
+                <NavLink className="sidebar-link" to="/about-us">
                   About Us
                 </NavLink>
               </li>
               <li>
-                <NavLink className="sidebar-link" to="/contact">
+                <NavLink className="sidebar-link" to="/contact-us">
                   Contact
                 </NavLink>
               </li>

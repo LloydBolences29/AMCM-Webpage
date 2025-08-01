@@ -17,13 +17,13 @@ const AddDoctor = lazy(() => import("../components/AddDoctor"));
 const AddKeyword = lazy(() => import("../components/AddKeyword"));
 
 const Editor = () => {
-  const menuLinks = [
+      const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
     { label: "Schedule and Appointment", path: "/appointment-schedule" },
     { label: "Find Doctors", path: "/find-doctors" },
     { label: "Billing and Admission", path: "/billing-admission" },
-    { label: "Patient Business", path: "/patient-business" },
+    { label: "Patient Rights", path: "/patient-rights" },
     { label: "Online Patient Survey", path: "/online-patient-survey" },
   ];
 
@@ -119,7 +119,7 @@ const Editor = () => {
 
           {/* Rendering each component */}
 
-          <Suspense fallback={<Skeleton height={200} />}>
+          <Suspense fallback={<Skeleton height={50} count={4} />}>
             {renderPage()}
           </Suspense>
         </div>

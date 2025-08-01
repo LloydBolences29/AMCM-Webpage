@@ -10,15 +10,14 @@ import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 
 const Login = () => {
-  const menuLinks = [
+      const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
     { label: "Schedule and Appointment", path: "/appointment-schedule" },
     { label: "Find Doctors", path: "/find-doctors" },
     { label: "Billing and Admission", path: "/billing-admission" },
-    { label: "Patient Business", path: "/patient-business" },
+    { label: "Patient Rights", path: "/patient-rights" },
     { label: "Online Patient Survey", path: "/online-patient-survey" },
-    { label: "Login", path: "/login" },
   ];
   const [loginData, setLoginData] = useState({
     email: "",

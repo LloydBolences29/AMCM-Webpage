@@ -1,13 +1,9 @@
-import React from "react";
+import React from 'react'
+import UnderConstruction from '../components/UnderConstruction';
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
-import "../styles/Home.css"; // Importing the CSS file for styling
-import Hero from "../components/Hero";
-import Information from "../components/Information";
 
-
-const Home = () => {
-  
+const OnlinePatientSurvey = () => {
       const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
@@ -19,16 +15,12 @@ const Home = () => {
   ];
 
   return (
-    <div className="home-body">
+<div className="home-body">
       <div className="home-content">
         {/* navigation  */}
         <Navigation menuLinks={menuLinks} />
         <div className="main">
-          {/* Hero Section */}
-          <Hero />
-
-          {/* Information Section */}
-          <Information />
+          <UnderConstruction page={"Online Patient Survey"} />
         </div>
 
         {/* Footer section */}
@@ -45,7 +37,7 @@ const Home = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default OnlinePatientSurvey
