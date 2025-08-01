@@ -38,8 +38,8 @@ const AdmissionGuide = () => {
       <div id="admission-guide-container">
         <div id="admission-guide-description">
           <Typography
-            variant="h6"
-            sx={{ color: "#000000", fontFamily: "Advent Sans, sans-serif", width: "50%", textAlign: "center", margin: "0 auto" }}
+          className="admission-guide-text"
+            
           >
             AMCM strives to make your admission process smooth and hassle-free.
             Below is a step-by-step guide to ensure a seamless hospital

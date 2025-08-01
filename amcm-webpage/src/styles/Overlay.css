@@ -60,6 +60,10 @@
     z-index: 1001; /* Ensure menu links are above the overlay */
   }
 
+  .ul-menu-links li {
+    font-family: "Advent Sans, sans-serif";
+  }
+
   .sidebar-link {
     color: gray; /* Default color for menu links */
     text-decoration: none; /* Remove underline */
@@ -138,6 +142,7 @@
 
   .motto {
     width: 40%;
+    font-family: "Advent Sans, sans-serif";
   }
 
   .motto-content {
@@ -148,21 +153,26 @@
   }
 
   #mission {
+    font-family: "Advent Sans, sans-serif";
     margin-bottom: 1rem;
   }
   #learn-more-section h5 {
+    font-family: "Advent Sans, sans-serif";
+
     color: white;
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
   }
 
-  #learn-more-content{
+  #learn-more-content {
+    font-family: "Advent Sans, sans-serif";
+
     display: flex;
     flex-direction: column;
     gap: 0.5em;
     padding: 1em 0;
   }
-  #learn-more-content a{
+  #learn-more-content a {
     color: white;
     text-decoration: none;
   }
@@ -226,6 +236,9 @@
     padding: 0;
     list-style: none;
     z-index: 1001; /* Ensure menu links are above the overlay */
+  }
+  .ul-menu-links li {
+    font-family: "Advent Sans, sans-serif";
   }
 
   .sidebar-link {
@@ -397,6 +410,10 @@
   .ul-menu-links {
     list-style: none; /* Remove bullet points */
     line-height: 25px;
+  }
+
+  .ul-menu-links li {
+    font-family: "Advent Sans, sans-serif";
   }
 
   .sidebar-link {

@@ -20,6 +20,7 @@ import AdmissionAndBilling from "./pages/AdmissionAndBilling";
 import OnlinePatientSurvey from "./pages/OnlinePatientSurvey";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
+import ServiceDetailRenderer from "./components/ServiceDetailRenderer";
 
 function App() {
 
@@ -39,6 +40,9 @@ function App() {
               <Route path='/about-us' element={<AboutUs />} />
               <Route path='/contact-us' element={<ContactUs />} />
               {/* <Route path="/about" element={<About />} /> */}
+
+              {/* Route for services detail */}
+              <Route path="/service/:id" element={<ServiceDetailRenderer />} />
   
               {/* Route for editors*/}
               <Route element={<ProtectedRoutes allowedRoles={["editor"]} />}>

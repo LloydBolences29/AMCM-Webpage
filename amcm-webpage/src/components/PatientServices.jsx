@@ -7,7 +7,6 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
@@ -20,7 +19,7 @@ const PatientServices = () => {
       title: "Dental",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/dental",
     },
     {
       id: "diagnostic-imaging-services-card",
@@ -28,7 +27,7 @@ const PatientServices = () => {
       title: " Diagnostic Imaging Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/diagnostic-imaging-service",
     },
     {
       id: "emergency-room-card",
@@ -36,7 +35,7 @@ const PatientServices = () => {
       title: "Emergency Room",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/emergency-room",
     },
     {
       id: "medical-services-card",
@@ -44,7 +43,7 @@ const PatientServices = () => {
       title: "Medical Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/medical-service",
     },
     {
       id: "opd-services-card",
@@ -52,7 +51,7 @@ const PatientServices = () => {
       title: "Outpatient Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/opd-service",
     },
     {
       id: "patientBusiness-services-card",
@@ -60,7 +59,7 @@ const PatientServices = () => {
       title: "Patient Business Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/patient-business-service",
     },
     {
       id: "pathAndLab-services-card",
@@ -68,7 +67,7 @@ const PatientServices = () => {
       title: "Pathology and Laboratory Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/pathology-laboratory-service",
     },
     {
       id: "pastoralCare-services-card",
@@ -76,7 +75,7 @@ const PatientServices = () => {
       title: "Pastoral Care Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/pastoral-care-service",
     },
     {
       id: "physicalMed-services-card",
@@ -84,7 +83,7 @@ const PatientServices = () => {
       title: "Physical Medicine and Rehabilitation Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/physical-medicine-rehabilitation-service",
     },
     {
       id: "pharmacy-services-card",
@@ -92,7 +91,7 @@ const PatientServices = () => {
       title: "Pharmacy Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/pharmacy-service",
     },
     {
       id: "medicalRecords-services-card",
@@ -100,7 +99,7 @@ const PatientServices = () => {
       title: "Medical Records Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/medical-records-service",
     },
     {
       id: "renal-services-card",
@@ -108,16 +107,8 @@ const PatientServices = () => {
       title: "Renal Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
-    },
-    {
-      id: "renal-services-card",
-      image: "/dental-profile.jpg",
-      title: "Renal Services",
-      description:
-        "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
-    },
+      link: "/service/renal-service",
+    }
   ];
   return (
     <div id="patient-services-wrapper" className="service-content">
@@ -138,16 +129,16 @@ const PatientServices = () => {
                   alt="green iguana"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                  <Typography gutterBottom variant="h5" component="div" >
                     {service.title}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: "textSecondary" }}>
+                  <Typography variant="body2" sx={{ color: "textSecondary"}}>
                     {service.description}
                   </Typography>
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button size="small" color="primary" href={service.link}>
+                <Button size="small" color="primary" href={service.link} >
                   Learn More
                 </Button>
               </CardActions>
