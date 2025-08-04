@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import "./Dental.css";
 
 const Dental = () => {
   return (
@@ -40,11 +41,10 @@ const Dental = () => {
             environment.
           </Typography>
         </div>
-
         <div id="dental-content-services">
-          <h5>
+          <h3>
             <strong>Our services</strong>
-          </h5>
+          </h3>
           <ol>
             <li>
               <strong>Temporomandibular Dysfunction (TMD) Management</strong>{" "}
@@ -135,38 +135,51 @@ const Dental = () => {
             </li>
           </ol>
         </div>
-
         <Divider sx={{ borderBottomWidth: 2, borderColor: "#142C2E" }} />
-
+        <br />
         <div id="dental-why-choose-us">
-            <h5>Why Choose Us for Your Dental Care?</h5>
+          <h4>
+            <strong>Why Choose Us for Your Dental Care?</strong>
+          </h4>
 
-            <ul>
-              <li>
-                <strong>Experienced Team:</strong> Our skilled dentists and
-                staff have years of experience in various dental specialties.
-              </li>
-              <li>
-                <strong>Comprehensive Services:</strong> We offer a wide range
-                of services, from routine check-ups to advanced procedures.
-              </li>
-              <li>
-                <strong>Patient-Centered Care:</strong> Your comfort and
-                satisfaction are our top priorities. We listen to your concerns
-                and involve you in your treatment planning.
-              </li>
-              <li>
-                <strong>State-of-the-Art Technology:</strong> We utilize the
-                latest dental technology to ensure accurate diagnoses and
-                effective treatments.
-              </li>
-              <li>
-                <strong>Flexible Financing Options:</strong> We provide various
-                payment options to make dental care accessible for everyone.
-              </li>
-            </ul>
-            </div>
-          </div>
+          <ul style={{ listStyleType: "none", paddingLeft: "20px" }}>
+            <li>✔ Experienced Dental Specialists</li>
+            <li>✔ State-of-the-Art Technology </li>
+            <li>✔ Patient-Centered Care</li>
+            <li>✔ Safe & Comfortable Treatments</li>
+            <li>📍 Location: G/F Outpatient Department</li>
+            <li>📞 Contact Us: 85259191 to 98 local 132, +63963 739 2366, +63961 683 6754</li>
+            <li>📧 Email: dental@adventisthealth-mnl.com</li>
+            <li>🔹 Book an Appointment Today! Let us help you achieve a healthier and brighter smile </li>
+          </ul>
+        </div>
+
+        
+
+        <br />
+        <div id="customer-feedback-survey">
+          <h4>Customer Feedback Survey</h4>
+
+          <p>
+            We value your feedback! Please take a moment to complete our
+            Customer Survey Form to help us improve our dental services.
+          </p>
+
+          <ul style={{ listStyleType: "none" }}>
+            <li>
+              <strong>📌 Click here to fill out the survey:</strong>{" "}
+              <a>Customer Survey Form</a>
+            </li>
+
+            <li>
+              <i>
+                📌 Your feedback helps us enhance our services. Thank you for
+                trusting us with your dental care!
+              </i>
+            </li>
+          </ul>
+        </div>
+      </div>
     </>
   );
 };
