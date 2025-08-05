@@ -7,7 +7,7 @@ const SearchPage = () => {
   const [searchResults, setSearchResults] = useState([]); 
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-  const searchTerm = query.get("term");
+const [searchInput, setSearchInput] = useState(query.get("term") || "");
 
   const VITE_API_URL = import.meta.env.VITE_API_URL;
 
@@ -24,7 +24,7 @@ const SearchPage = () => {
   const fetchSearchTerm = async () => {
     try {
       const response = await fetch(
-        `${VITE_API_URL}/keyword/get-keywords/${searchTerm}`
+        `${VITE_API_URL}/keyword/get-keywords/${searchInput}`
       );
 
       if (response.ok) {
@@ -39,7 +39,7 @@ const SearchPage = () => {
   };
 
   const handleSearchOnClick = () => {
-    if (searchTerm) {
+    if (searchInput) {
       fetchSearchTerm();
     } else {
       setSearchResults([]); // Clear results if no search term
@@ -47,9 +47,10 @@ const SearchPage = () => {
   };
 
   useEffect(() => {
-    console.log("Search results:", searchResults);
-
-  }, [searchResults]);
+if(searchInput) {
+      fetchSearchTerm();
+    }
+  }, [searchInput]);
 
   return (
     <div className="home-body">
@@ -62,7 +63,8 @@ const SearchPage = () => {
                 type="text"
                 id="search-input"
                 placeholder="Search for services, doctors, or information..."
-                value={searchTerm}
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
               />
               <button
                 type="button"
