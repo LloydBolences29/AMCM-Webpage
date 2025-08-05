@@ -21,7 +21,7 @@ import OnlinePatientSurvey from "./pages/OnlinePatientSurvey";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import ServiceDetailRenderer from "./components/ServiceDetailRenderer";
-
+import SearchPage from "./components/SearchPage";
 function App() {
 
   return (
@@ -39,6 +39,7 @@ function App() {
               <Route path="/online-patient-survey" element={<OnlinePatientSurvey />} />
               <Route path='/about-us' element={<AboutUs />} />
               <Route path='/contact-us' element={<ContactUs />} />
+              <Route path="/search" element={<SearchPage />} />
               {/* <Route path="/about" element={<About />} /> */}
 
               {/* Route for services detail */}

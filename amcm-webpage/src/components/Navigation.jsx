@@ -51,7 +51,7 @@ const location = useLocation();
           <img
             className="amcm-logo"
             loading="lazy"
-            src="https://adventisthealth-mnl.com/wp-content/uploads/2024/06/AMCM-Logo-small2-1.webp"
+            src="/AdventistMed.png"
             alt="AMCM Logo"
           />
           </a>

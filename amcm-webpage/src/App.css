@@ -1,9 +1,27 @@
 @font-face {
-  font-family: 'Advent Sans';
-  src: url('/fonts/AdventSans-Logo.otf') format('opentype');
+  font-family: "Advent Sans";
+  src: url("/fonts/AdventSans-Logo.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
-body{
-    font-family: 'Advent Sans', sans-serif;
+
+@media(max-width: 767px) {
+  body {
+    font-family: "Advent Sans", sans-serif;
+  }
+
+}
+
+@media(min-width: 768px) and (max-width: 991px) {
+  body {
+    font-family: "Advent Sans", sans-serif;
+   
+  }
+
+}
+
+@media(min-width: 992px) {
+  body {
+    font-family: "Advent Sans", sans-serif;
+  }
 }

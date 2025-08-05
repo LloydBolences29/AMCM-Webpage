@@ -23,7 +23,7 @@ const Dental = () => {
               variant="h4"
               component="h1"
               className="page-title fw-bold"
-              sx={{ color: "#ffffffff" }}
+              sx={{ color: "#ffffffff" }} 
             >
               Dental
             </Typography>
@@ -154,7 +154,7 @@ const Dental = () => {
           </ul>
         </div>
 
-        
+
 
         <br />
         <div id="customer-feedback-survey">

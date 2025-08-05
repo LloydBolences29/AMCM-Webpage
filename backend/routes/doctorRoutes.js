@@ -61,6 +61,7 @@ router.get("/get-doctors-departments", async (req, res) => {
     // Fetch all doctors and their departments
     const [doctors] = await db.query(
       `SELECT 
+      doctor_department.id AS "ID",
       doctors.name AS "Name", 
       doctors.roomNo AS "Room Number", 
       doctors.localPhone AS "Local Phone", 
