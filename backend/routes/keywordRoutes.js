@@ -38,20 +38,26 @@ router.get("/get-keywords/:searchTerm", async (req, res) => {
     const [rows] = await db.query(
       `SELECT
       keywords.id AS ID,
-        tags.tags AS Tag,
-        dpt.name AS Department,
-        doctors.name AS Name
-      FROM doctors
-      JOIN doctor_department dd ON dd.doctor_id = doctors.id
-      JOIN departments dpt ON dd.department_id = dpt.id
-      JOIN keywords ON keywords.doctorDepartment_id = dd.id
-      JOIN tags ON keywords.keyword = tags.id
+  tags.tags AS Tag,
+  dpt.name AS Department,
+  doctors.name AS Name,
+  doctors.roomNo AS Room,
+  doctors.localPhone AS Local,
+  availability.doctor_schedule as Schedule
+FROM doctors
+JOIN doctor_department dd ON dd.doctor_id = doctors.id
+JOIN departments dpt ON dd.department_id = dpt.id
+JOIN keywords ON keywords.doctorDepartment_id = dd.id
+JOIN tags ON keywords.keyword = tags.id
+JOIN availability on doctors.id = availability.doctor_id
       WHERE tags.tags LIKE ?`,
       [`%${searchTerm}%`]
     );
 
     if (!rows.length) {
-      return res.status(404).json({ message: "No keywords found." });
+      return res.status(404).json({
+        message: "Unfortunately, we're still looking for a doctor for that",
+      });
     }
 
     res.status(200).json(rows);
@@ -60,6 +66,5 @@ router.get("/get-keywords/:searchTerm", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
 
 module.exports = router;

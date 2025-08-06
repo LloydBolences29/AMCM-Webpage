@@ -8,7 +8,15 @@ import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { Button } from "react-bootstrap";
+import {
+  Card,
+  Row,
+  Container,
+  Col,
+  Form,
+  Button,
+  Badge,
+} from "react-bootstrap";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -84,7 +92,7 @@ const AddKeyword = () => {
         setKeyword(""); // Clear the keyword input
         setDoctorName([]); // Clear the selected doctors
         console.log("Keyword added successfully:", data);
-      } 
+      }
     } catch (error) {
       setPageStatus("error");
       setFailedSnackBarState(true);
@@ -101,81 +109,222 @@ const AddKeyword = () => {
   }, [doctorName]);
 
   return (
-    <div>
-      <input
-        type="text"
-        value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
-      />
-      {/* Doctor select */}
-      <FormControl sx={{ m: 1, width: 600 }}>
-        <InputLabel id="doctor-select-label">Doctors</InputLabel>
-        <Select
-          labelId="doctor-select-label"
-          id="doctor-multiple-checkbox"
-          multiple
-          value={doctorName}
-          onChange={handleChange}
-          input={<OutlinedInput label="Doctors" />}
-          renderValue={
-            (selected) =>
-              doctors
-                .filter((doctor) => selected.includes(doctor.ID))
-                .map((doctor) => doctor.Name)
-                .join(", ") // Display names in the selected value
-          }
-          MenuProps={MenuProps}
-        >
-          {doctors.map((doctor) => (
-            <MenuItem key={doctor.ID} value={doctor.ID}>
-              <Checkbox checked={doctorName.includes(doctor.ID)} />
-              <ListItemText primary={`${doctor.Name} - ${doctor.Department}`} />
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>{" "}
+    <Container className="py-5">
+      <Row className="justify-content-center">
+        <Col md={8} lg={6}>
+          <Card className="shadow-lg border-0">
+            <Card.Header
+              className="text-white text-center py-3"
+              style={{ backgroundColor: "#007682" }}
+            >
+                            <h2 className="mb-0">
+                <i className="fas fa-user-md me-2"></i>
+                Add New KeyWord
+              </h2>
+            </Card.Header>
 
-      <Button onClick={handleAddKeyword}>Add Keyword</Button>
-      {pageStatus === "success" ? (
-        <Snackbar
-          open={successSnackBarState}
-          autoHideDuration={5000}
-          onClose={handleClose}
-        >
-          <Alert
-            onClose={handleClose}
-            severity="success"
-            variant="filled"
-            sx={{
-              width: "100%",
-              margin: "1em",
-              fontSize: "1em",
-            }}
-          >
-            Department saved successfully!
-          </Alert>
-        </Snackbar>
-      ) : (
-        <Snackbar
-          open={failedSnackBarState}
-          autoHideDuration={5000}
-          onClose={handleClose}
-        >
-          <Alert
-            onClose={handleClose}
-            severity="error"
-            variant="filled"
-            sx={{
-              width: "100%",
-              margin: "1em",
-              fontSize: "1em",
-            }}
-          >
-            Failed on saving the Department!
-          </Alert>
-        </Snackbar>
-      )}
-    </div>
+            <Card.Body className="p-4">
+              <div className="mb-4">
+                <Badge className="mb-2" style={{ backgroundColor: "#163235" }}>
+                  Instruction
+                </Badge>
+                <p>
+                  Please select the doctors and enter a keyword to add it to the
+                  system.
+                </p>
+              </div>
+
+              {pageStatus === "success" ? (
+                <Snackbar
+                  open={successSnackBarState}
+                  autoHideDuration={5000}
+                  onClose={handleClose}
+                >
+                  <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    variant="filled"
+                    sx={{
+                      width: "100%",
+                      margin: "1em",
+                      fontSize: "1em",
+                    }}
+                  >
+                    Department saved successfully!
+                  </Alert>
+                </Snackbar>
+              ) : (
+                <Snackbar
+                  open={failedSnackBarState}
+                  autoHideDuration={5000}
+                  onClose={handleClose}
+                >
+                  <Alert
+                    onClose={handleClose}
+                    severity="error"
+                    variant="filled"
+                    sx={{
+                      width: "100%",
+                      margin: "1em",
+                      fontSize: "1em",
+                    }}
+                  >
+                    Failed on saving the Department!
+                  </Alert>
+                </Snackbar>
+              )}
+
+              <Form onSubmit={handleAddKeyword}>
+                <Row>
+                  <Col md={12}>
+                    <Form.Group className="mb-3">
+                      <Form.Label className="fw-bold">
+                        <i className="fas fa-key me-2"></i>Keyword
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter keyword"
+                        value={keyword}
+                        onChange={(e) => setKeyword(e.target.value)}
+                        required
+                        className="form-control-lg"
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col md={12}>
+                    <Form.Group className="mb-3">
+                      <FormControl fullWidth sx={{ mt: 1}}>
+                        <InputLabel id="doctor-select-label">
+                          Doctors
+                        </InputLabel>
+                        <Select
+                          labelId="doctor-select-label"
+                          id="doctor-multiple-checkbox"
+                          multiple
+                          value={doctorName}
+                          onChange={handleChange}
+                          input={<OutlinedInput label="Doctors" />}
+                          renderValue={
+                            (selected) =>
+                              doctors
+                                .filter((doctor) =>
+                                  selected.includes(doctor.ID)
+                                )
+                                .map((doctor) => doctor.Name)
+                                .join(", ") // Display names in the selected value
+                          }
+                          MenuProps={MenuProps}
+                        >
+                          {doctors.map((doctor) => (
+                            <MenuItem key={doctor.ID} value={doctor.ID}>
+                              <Checkbox
+                                checked={doctorName.includes(doctor.ID)}
+                              />
+                              <ListItemText
+                                primary={`${doctor.Name} - ${doctor.Department}`}
+                              />
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </Form.Group>
+                  </Col>
+                </Row>
+
+                <div className="d-grid">
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    className="btn-lg"
+                  >
+                    Add Keyword
+                  </Button>
+                </div>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
+
+    // <div>
+    //   <input
+    //     type="text"
+    //     value={keyword}
+    //     onChange={(e) => setKeyword(e.target.value)}
+    //   />
+    //   {/* Doctor select */}
+    //   <FormControl sx={{ m: 1, width: 600 }}>
+    //     <InputLabel id="doctor-select-label">Doctors</InputLabel>
+    //     <Select
+    //       labelId="doctor-select-label"
+    //       id="doctor-multiple-checkbox"
+    //       multiple
+    //       value={doctorName}
+    //       onChange={handleChange}
+    //       input={<OutlinedInput label="Doctors" />}
+    //       renderValue={
+    //         (selected) =>
+    //           doctors
+    //             .filter((doctor) => selected.includes(doctor.ID))
+    //             .map((doctor) => doctor.Name)
+    //             .join(", ") // Display names in the selected value
+    //       }
+    //       MenuProps={MenuProps}
+    //     >
+    //       {doctors.map((doctor) => (
+    //         <MenuItem key={doctor.ID} value={doctor.ID}>
+    //           <Checkbox checked={doctorName.includes(doctor.ID)} />
+    //           <ListItemText primary={`${doctor.Name} - ${doctor.Department}`} />
+    //         </MenuItem>
+    //       ))}
+    //     </Select>
+    //   </FormControl>{" "}
+
+    //   <Button onClick={handleAddKeyword}>Add Keyword</Button>
+    //   {pageStatus === "success" ? (
+    //     <Snackbar
+    //       open={successSnackBarState}
+    //       autoHideDuration={5000}
+    //       onClose={handleClose}
+    //     >
+    //       <Alert
+    //         onClose={handleClose}
+    //         severity="success"
+    //         variant="filled"
+    //         sx={{
+    //           width: "100%",
+    //           margin: "1em",
+    //           fontSize: "1em",
+    //         }}
+    //       >
+    //         Department saved successfully!
+    //       </Alert>
+    //     </Snackbar>
+    //   ) : (
+    //     <Snackbar
+    //       open={failedSnackBarState}
+    //       autoHideDuration={5000}
+    //       onClose={handleClose}
+    //     >
+    //       <Alert
+    //         onClose={handleClose}
+    //         severity="error"
+    //         variant="filled"
+    //         sx={{
+    //           width: "100%",
+    //           margin: "1em",
+    //           fontSize: "1em",
+    //         }}
+    //       >
+    //         Failed on saving the Department!
+    //       </Alert>
+    //     </Snackbar>
+    //   )}
+    // </div>
   );
 };
 

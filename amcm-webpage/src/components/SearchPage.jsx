@@ -1,13 +1,25 @@
-import React, { useEffect, useState } from 'react'; // ✅ You forgot useState
+import React, { useEffect, useState } from "react"; // ✅ You forgot useState
 import { useLocation } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
+import FormControl from "@mui/material/FormControl";
+import Input from "@mui/material/Input";
+import InputLabel from "@mui/material/InputLabel";
+import FormHelperText from "@mui/material/FormHelperText";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import CardActionArea from "@mui/material/CardActionArea";
+import Avatar from "@mui/material/Avatar";
+import "../styles/SearchPage.css";
 
 const SearchPage = () => {
-  const [searchResults, setSearchResults] = useState([]); 
+  const [searchResults, setSearchResults] = useState([]);
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-const [searchInput, setSearchInput] = useState(query.get("term") || "");
+  const [searchInput, setSearchInput] = useState(query.get("term") || "");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const VITE_API_URL = import.meta.env.VITE_API_URL;
 
@@ -30,11 +42,19 @@ const [searchInput, setSearchInput] = useState(query.get("term") || "");
       if (response.ok) {
         const data = await response.json();
         setSearchResults(data);
+        setError(null); // Clear any previous errors
       } else {
+        const errorMsg = await response.json();
+        setError(errorMsg.message || "Failed to fetch search results.");
         console.error("Failed to fetch search results.");
+        setLoading(false);
       }
     } catch (error) {
       console.error("Error fetching search term:", error);
+      setError("An error occurred while fetching search results.");
+      setSearchResults([]); // Clear results on error
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -47,9 +67,21 @@ const [searchInput, setSearchInput] = useState(query.get("term") || "");
   };
 
   useEffect(() => {
-if(searchInput) {
-      fetchSearchTerm();
+    if (searchInput.trim()) {
+      setLoading(true);
     }
+
+    const handler = setTimeout(() => {
+      if (searchInput.trim()) {
+        fetchSearchTerm();
+        console.log("Fetching search results for:", searchResults);
+      } else {
+        setSearchResults([]);
+        setLoading(false);
+      }
+    }, 2000);
+
+    return () => clearTimeout(handler);
   }, [searchInput]);
 
   return (
@@ -59,27 +91,139 @@ if(searchInput) {
         <div className="main">
           <div id="search-page-containers">
             <div id="search-section">
-              <input
-                type="text"
-                id="search-input"
-                placeholder="Search for services, doctors, or information..."
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-              />
-              <button
-                type="button"
-                id="search-button"
-                onClick={handleSearchOnClick}
-              >
-                Search
-              </button>
+              <FormControl id="search-form" >
+                <InputLabel htmlFor="search-input">Search</InputLabel>
+                <Input
+                  id="search-input"
+                  type="text"
+                  placeholder="Search for illness or doctor"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
+                <FormHelperText id="search-helper-text">
+                  Enter keywords to find relevant services or doctors.
+                </FormHelperText>
+              </FormControl>
 
-              <div id="search-results">
-                {searchResults.length > 0 ? (
-                  searchResults.map((result) => (
-                    <div key={result.ID} className="search-result-item">
-                      <h3>{result.Name}</h3>
+
+              <div id="search-results" className="g-2">
+                {loading ? (
+                  <div className="loading-spinner">
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden">Loading...</span>
                     </div>
+                  </div>
+                ) : error ? (
+                  <p className="error-message">{error}</p>
+                ) : searchResults.length > 0 ? (
+                  searchResults.map((result) => (
+                    <Card key={result.ID} className="search-result-card">
+                      <div
+                        style={{
+                          backgroundColor: "#007682",
+                          color: "white",
+                          padding: "8px 16px",
+                          borderRadius: "8px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "1em",
+                          }}
+                        >
+                          <Avatar
+                            sx={{
+                              bgcolor: "#142C2E",
+                              width: 56,
+                              height: 56,
+                              border: "2px solid white",
+                              fontSize: "1.5rem",
+                              fontWeight: 500,
+                            }}
+                          >
+                            {result.Name.split(" ")[0][0]}
+                          </Avatar>
+                          <Typography
+                            variant="h5"
+                            component="div"
+                            sx={{
+                              fontWeight: 600,
+                              fontFamily: "Advent Sans, sans-serif",
+                            }}
+                          >
+                            Dr. {result.Name}
+                          </Typography>
+                        </div>
+                      </div>
+                      <CardActionArea>
+                        <CardContent>
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              mb: 1,
+                              color: "#142C2E",
+                            }}
+                          >
+                            <i
+                              className="fas fa-door-open"
+                              style={{ marginRight: "8px", color: "#007682" }}
+                            >
+                              Deparment: {result["Department"]}
+                            </i>
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              mb: 1,
+                              color: "#142C2E",
+                            }}
+                          >
+                            <i
+                              className="fas fa-door-open"
+                              style={{ marginRight: "8px", color: "#007682" }}
+                            >
+                              Room Number: {result["Room"]}
+                            </i>
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              color: "#142C2E",
+                            }}
+                          >
+                            <i
+                              className="fas fa-phone"
+                              style={{ marginRight: "8px", color: "#007682" }}
+                            >
+                            Local Phone: {result["Local"]}</i>
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              color: "#142C2E",
+                              wordWrap: "break-word",
+                              overflowWrap: "break-word",
+                            }}
+                          >
+                            <i
+                              className="fas fa-phone"
+                              style={{ marginRight: "8px", color: "#007682" }}
+                            >
+                            Schedule: {result["Schedule"]}</i>
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
                   ))
                 ) : (
                   <p>No results found.</p>
