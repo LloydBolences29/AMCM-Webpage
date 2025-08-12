@@ -180,8 +180,11 @@
 
 @media (min-width: 768px) and (max-width: 991px) {
   .information-content {
-    margin-top: 2em;
-    padding: 1em 2em 0 2em;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 4em;
+
   }
 
   #information-wrapper-1 {
@@ -191,7 +194,6 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-bottom: 2em;
   }
   #information-wrapper-1 #information-mission {
     align-content: center;
@@ -216,15 +218,18 @@
 
   #information-values {
     text-align: center;
-    border-radius: 12px;
     color: #142c2e;
-    margin: 4em 0 1em 0;
     border-bottom: 3px solid #007682;
   }
   #information-values h2 {
     font-size: 2.5em;
     margin-bottom: 0.5em;
     color: #007682;
+  }
+
+  #information-values-content{
+    display: flex;
+    justify-content: center;
   }
 
   #information-values-content #values-row {
@@ -240,12 +245,11 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    margin: 4em 0;
+    margin: 1em 0;
     box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
   }
 
   #information-services {
-    margin: 3em 0;
     text-align: center;
     border-radius: 12px;
     padding: 1em;
@@ -254,6 +258,11 @@
   }
   #information-services h2 {
     font-size: 2.5em;
+  }
+
+  #information-services-content{
+    display: flex;
+    justify-content: center;
   }
 
   #information-services-content #services-row {
@@ -265,7 +274,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 1em 0;
+    margin: 0.5em 0;
   }
 
   #information-services-content #services-row .col .service {
@@ -280,7 +289,8 @@
   }
 
   #information-wrapper-4 {
-    margin: 2em 0;
+    display: flex;
+    flex-direction: column-reverse;
   }
 
   #information-achievements {
@@ -300,6 +310,8 @@
     flex-wrap: wrap;
     width: 100%;
   }
+
+
 
   #information-achievements-content .card {
     width: 260px;
@@ -330,7 +342,6 @@
   }
 
   #information-wrapper-5 {
-    margin: 2em 0;
     text-align: center;
     border-radius: 12px;
     padding: 1em;
@@ -356,8 +367,8 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-bottom: 2em;
   }
+
   .president-message #message-heading {
     font-size: 2.5em;
     margin-bottom: 1.5em;
