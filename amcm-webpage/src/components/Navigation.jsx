@@ -38,7 +38,7 @@ const location = useLocation();
     },
     {
       id: "news-updates",
-      label: "News, Updates and Events",
+      label: "News and Updates",
       link: "/news-updates",
     },
     {

@@ -65,15 +65,15 @@ const Information = () => {
 
                 <Col>
                   <p className="service">
-                    Schedule an Appointment <br />
+                    News and Updates <br />
                     <span>
-                      <a href="/appointment-schedule">
+                      <a href="/news-updates">
                         <Button
                           variant="outline-warning"
                           size="sm"
                           className="mt-3"
                         >
-                          Schdedule Now!
+                          Read Now!
                         </Button>
                       </a>
                     </span>
