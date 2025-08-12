@@ -178,7 +178,7 @@
     padding: 1em;
     width: 40rem;
     margin: auto;
-    box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1); */
     --slide-height: 19rem;
     --slide-spacing: 1rem;
     --slide-size: 70%;

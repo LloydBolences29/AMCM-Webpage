@@ -10,6 +10,8 @@ import Typography from "@mui/material/Typography";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import Input from "@mui/material/Input";
+import FormHelperText from "@mui/material/FormHelperText";
 import Select from "@mui/material/Select";
 
 import "../styles/FIndDoctors.css";
@@ -28,9 +30,11 @@ const FindDoctors = () => {
     { label: "Online Patient Survey", path: "/online-patient-survey" },
   ];
   const [activeDepartment, setActiveDepartment] = useState(null);
-
+  const [searchInput, setSearchInput] = useState("");
+  const [searchValue , setSearchValue] = useState("");
   const [departments, setDepartments] = useState([]);
   const [doctors, setDoctors] = useState([]);
+  const [showResult, setShowResult] = useState(false);
 
   const VITE_API_URL = import.meta.env.VITE_API_URL;
 
@@ -50,6 +54,13 @@ const FindDoctors = () => {
       console.error("Error fetching departments:", error);
     }
   };
+
+
+
+  const handleSearch = () =>{
+    setSearchValue(searchInput);
+    setShowResult(true);
+  }
 
   useEffect(() => {
     fetchAllDepartments();
@@ -105,7 +116,7 @@ const FindDoctors = () => {
                   </Button>
                 </div>
               ))} */}
-              <FormControl sx={{ m: 1, minWidth: 300, maxWidth: "100%" }}>
+              {/* <FormControl sx={{ m: 1, minWidth: 300, maxWidth: "100%" }}>
                 <InputLabel
                   id="department-select-label"
                   sx={{ color: "#142C2E" }}
@@ -163,15 +174,42 @@ const FindDoctors = () => {
                     </MenuItem>
                   ))}
                 </Select>
-              </FormControl>
+              </FormControl> */}
+              <div id="search-bar-container">
+                <FormControl id="search-form">
+                  <InputLabel htmlFor="search-input">Search</InputLabel>
+                  <Input
+                    id="search-input"
+                    type="text"
+                    placeholder="Search for doctors or department"
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                  />
+                  <FormHelperText id="search-helper-text">
+                    Enter keywords to find relevant doctors or department.
+                  </FormHelperText>
+                </FormControl>
+              </div>
+
+              <div id="search-button-container">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSearch}
+                >
+                  Search
+                </Button>
+              </div>
             </div>
 
             <div id="doctor-card-wrapper">
-              <Suspense fallback={<Skeleton count={10} height={65} />}>
-                {activeDepartment && (
-                  <DoctorByDepartment activeDept={activeDepartment} />
-                )}
-              </Suspense>
+              {showResult && (
+                <Suspense fallback={<Skeleton count={10} height={65} />}>
+                  {searchValue && (
+                    <DoctorByDepartment searchValue={searchValue} />
+                  )}
+                </Suspense>
+              )}
             </div>
           </div>
         </div>

@@ -73,6 +73,7 @@ const AddKeyword = () => {
   };
 
   const handleAddKeyword = async () => {
+    
     try {
       const response = await fetch(`${VITE_API_URL}/keyword/add-keyword`, {
         method: "POST",
@@ -174,7 +175,7 @@ const AddKeyword = () => {
                 </Snackbar>
               )}
 
-              <Form onSubmit={handleAddKeyword}>
+              <Form >
                 <Row>
                   <Col md={12}>
                     <Form.Group className="mb-3">
@@ -239,6 +240,7 @@ const AddKeyword = () => {
                     type="submit"
                     variant="primary"
                     className="btn-lg"
+                    onClick={() => handleAddKeyword()}
                   >
                     Add Keyword
                   </Button>

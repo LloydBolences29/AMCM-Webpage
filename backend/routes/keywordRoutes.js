@@ -57,7 +57,7 @@ GROUP BY doctors.id`,
 
     if (!rows.length) {
       return res.status(404).json({
-        message: "Unfortunately, we're still looking for a doctor for that",
+        message: "Unfortunately, we're still looking for a doctor for that. :(",
       });
     }
 

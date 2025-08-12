@@ -37,6 +37,11 @@ const location = useLocation();
       link: "/billing-admission",
     },
     {
+      id: "news-updates",
+      label: "News, Updates and Events",
+      link: "/news-updates",
+    },
+    {
       id: "online-patient-survey",
       label: "Online Patient Survey",
       link: "/online-patient-survey",

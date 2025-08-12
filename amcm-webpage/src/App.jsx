@@ -22,6 +22,7 @@ import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import ServiceDetailRenderer from "./components/ServiceDetailRenderer";
 import SearchPage from "./components/SearchPage";
+import NewsAndUpdate from './pages/NewsAndUpdate';
 function App() {
 
   return (
@@ -40,6 +41,7 @@ function App() {
               <Route path='/about-us' element={<AboutUs />} />
               <Route path='/contact-us' element={<ContactUs />} />
               <Route path="/search" element={<SearchPage />} />
+              <Route path="/news-updates" element={<NewsAndUpdate />} />
               {/* <Route path="/about" element={<About />} /> */}
 
               {/* Route for services detail */}
