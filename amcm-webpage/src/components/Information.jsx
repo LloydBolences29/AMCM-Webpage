@@ -38,7 +38,7 @@ const Information = () => {
                         <Button
                           variant="outline-warning"
                           size="sm"
-                          className="mt-3"
+                          className="mt-3 services-button"
                         >
                           Learn More!
                         </Button>
@@ -54,7 +54,7 @@ const Information = () => {
                         <Button
                           variant="outline-warning"
                           size="sm"
-                          className="mt-3"
+                          className="mt-3 services-button"
                         >
                           Find Now!
                         </Button>
@@ -71,7 +71,7 @@ const Information = () => {
                         <Button
                           variant="outline-warning"
                           size="sm"
-                          className="mt-3"
+                          className="mt-3 services-button"
                         >
                           Read Now!
                         </Button>
@@ -88,7 +88,7 @@ const Information = () => {
                         <Button
                           variant="outline-warning"
                           size="sm"
-                          className="mt-3"
+                          className="mt-3 services-button"
                         >
                           See More!
                         </Button>

@@ -5,13 +5,28 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    gap: 0.5em;
+  }
+
+  #search-bar-container #search-input{
+    border: #D8D8D8 2px solid;
+     padding: 0.3em 1em;
+    border-radius: 10px;
+    width: 50vw;
+    font-size: 18px;
+  }
+
+  #search-bar-container #search-input:focus {
+    outline: none;
+    border: #142c2e65 2px solid;
   }
 
   #department-wrapper .btn {
     transition: background-color 0.3s ease, color 0.3s ease;
   }
   #department-wrapper .btn {
-    width: 50vw;
+    width: 20vw;
+    border-radius: 10px;
     background-color: #ffffff !important;
     color: #142c2e !important;
     border-color: #142c2e !important;
@@ -27,9 +42,6 @@
     color: #ffffff !important;
   }
 
-  #department-wrapper #department-card {
-    margin: 2%;
-  }
 
   #doctor-card-wrapper {
     margin: 0.5em 2em;
@@ -111,13 +123,23 @@
     margin: 0 2em;
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
-    gap: 1em;
+    gap: 0.5em;
   }
-  #department-wrapper #department-card {
-    margin: 0 0.5em;
+  #search-bar-container #search-input{
+    border: #D8D8D8 2px solid;
+    padding: 0.4em 1em;
+    border-radius: 20px;
+    width: 20vw;
+    font-size: 15px;
   }
+
+  #search-bar-container #search-input:focus {
+    outline: none;
+    border: #142c2e65 2px solid;
+  }
+
   #department-wrapper .btn {
     transition: background-color 0.3s ease, color 0.3s ease;
   }
@@ -125,6 +147,7 @@
     background-color: #ffffff !important;
     color: #142c2e !important;
     border-color: #142c2e !important;
+    border-radius: 20px;
   }
 
   #department-wrapper .btn:hover {
@@ -163,8 +186,9 @@
     justify-content: center;
   }
   #doctor-card-wrapper #doctor-cards .doctor-card {
-    padding: 24px;
+    padding: 15px;
     box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
+    min-width: 40%;
   }
 
   #doctor-card-wrapper {

@@ -91,7 +91,7 @@ const SearchPage = () => {
         <div className="main">
           <div id="search-page-containers">
             <div id="search-section">
-              <FormControl id="search-form" >
+              {/* <FormControl id="search-form" >
                 <InputLabel htmlFor="search-input">Search</InputLabel>
                 <Input
                   id="search-input"
@@ -103,8 +103,15 @@ const SearchPage = () => {
                 <FormHelperText id="search-helper-text">
                   Enter keywords to find relevant services or doctors.
                 </FormHelperText>
-              </FormControl>
+              </FormControl> */}
 
+              <input
+                id="search-input"
+                type="text"
+                placeholder="Search for illness or doctor"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+              />
 
               <div id="search-results" className="g-2">
                 {loading ? (
@@ -150,7 +157,7 @@ const SearchPage = () => {
                             component="div"
                             sx={{
                               fontWeight: 600,
-                              fontFamily: "Advent Sans, sans-serif",
+                              fontFamily: "Montserrat, sans-serif",
                             }}
                           >
                             Dr. {result.Name}
@@ -203,7 +210,8 @@ const SearchPage = () => {
                               className="fas fa-phone"
                               style={{ marginRight: "8px", color: "#007682" }}
                             >
-                            Local Phone: {result["Local"]}</i>
+                              Local Phone: {result["Local"]}
+                            </i>
                           </Typography>
                           <Typography
                             variant="body1"
@@ -219,7 +227,8 @@ const SearchPage = () => {
                               className="fas fa-phone"
                               style={{ marginRight: "8px", color: "#007682" }}
                             >
-                            Schedule: {result["Schedule"]}</i>
+                              Schedule: {result["Schedule"]}
+                            </i>
                           </Typography>
                         </CardContent>
                       </CardActionArea>

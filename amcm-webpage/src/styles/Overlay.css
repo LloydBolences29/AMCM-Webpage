@@ -61,7 +61,7 @@
   }
 
   .ul-menu-links li {
-    font-family: "Advent Sans, sans-serif";
+    font-family: 'Montserrat', sans-serif;
   }
 
   .sidebar-link {
@@ -142,7 +142,7 @@
 
   .motto {
     width: 40%;
-    font-family: "Advent Sans, sans-serif";
+    font-family: 'Montserrat', sans-serif;
   }
 
   .motto-content {
@@ -153,11 +153,11 @@
   }
 
   #mission {
-    font-family: "Advent Sans, sans-serif";
+    font-family: 'Montserrat', sans-serif;
     margin-bottom: 1rem;
   }
   #learn-more-section h5 {
-    font-family: "Advent Sans, sans-serif";
+    font-family: 'Montserrat', sans-serif;
 
     color: white;
     font-size: 1.2rem;
@@ -165,7 +165,7 @@
   }
 
   #learn-more-content {
-    font-family: "Advent Sans, sans-serif";
+    font-family: 'Montserrat', sans-serif;
 
     display: flex;
     flex-direction: column;
@@ -238,7 +238,7 @@
     z-index: 1001; /* Ensure menu links are above the overlay */
   }
   .ul-menu-links li {
-    font-family: "Advent Sans, sans-serif";
+    font-family: 'Montserrat', sans-serif;
   }
 
   .sidebar-link {
@@ -413,7 +413,7 @@
   }
 
   .ul-menu-links li {
-    font-family: "Advent Sans, sans-serif";
+    font-family: 'Montserrat', sans-serif;
   }
 
   .sidebar-link {

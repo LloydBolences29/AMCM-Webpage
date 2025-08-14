@@ -90,7 +90,7 @@ const [loading, setLoading] = useState(true);
       <br />
 
       <Divider>
-        <Chip id="chip" label={`Results for Dr.  ${searchValue}`} size="medium"/>
+        <Chip id="chip" label="Results" size="medium"/>
       </Divider>
 
       <br />
@@ -100,7 +100,7 @@ const [loading, setLoading] = useState(true);
         {doctors.map((doctors, index) => {
           return (
             <Card key={index} className="doctor-card" >
-              <div style={{backgroundColor: '#007682', color: 'white', padding: '8px 16px', borderRadius: '8px' }}>
+              <div className="cards" style={{backgroundColor: '#007682', color: 'white', padding: '8px 16px', borderRadius: '8px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
                   <Avatar
                     sx={{

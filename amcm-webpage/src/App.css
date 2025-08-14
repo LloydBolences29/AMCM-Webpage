@@ -1,26 +1,32 @@
+/* Load the font */
 @font-face {
-  font-family: "Advent Sans";
-  src: url("/fonts/AdventSans-Logo.otf") format("opentype");
-
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
-@media(max-width: 767px) {
+/* Apply font globally */
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px; /* default font size */
+}
+
+/* Optional: responsive font sizes */
+@media (max-width: 767px) {
   body {
-    font-family: "Advent Sans", sans-serif;
+    font-size: 14px;
   }
-
 }
 
-@media(min-width: 768px) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 991px) {
   body {
-    font-family: "Advent Sans", sans-serif;
-   
+    font-size: 15px;
   }
-
 }
 
-@media(min-width: 992px) {
+@media (min-width: 992px) {
   body {
-    font-family: "Advent Sans", sans-serif;
+    font-size: 16px;
   }
 }

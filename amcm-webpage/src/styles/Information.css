@@ -4,7 +4,7 @@
     padding: 1em;
     display: flex;
     flex-direction: column;
-    gap: 3.5em;
+    gap: 1.5em;
   }
 
   .information-subContent-title h2,
@@ -88,7 +88,10 @@
     height: auto;
     text-align: center;
   }
-
+  .services-button{
+    border-radius: 20px; 
+    padding:  0.5em 1em;
+  }
   #information-wrapper-4 {
     display: flex;
     flex-direction: column-reverse;
@@ -183,7 +186,7 @@
     padding: 2em;
     display: flex;
     flex-direction: column;
-    gap: 4em;
+    gap: 1.5em;
 
   }
 
@@ -223,7 +226,7 @@
   }
   #information-values h2 {
     font-size: 2.5em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.3em;
     color: #007682;
   }
 
@@ -269,12 +272,13 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    margin-top: 1em;
   }
   #information-services-content #services-row .col {
     display: flex;
     align-items: center;
+    padding: 0;
     justify-content: center;
-    margin: 0.5em 0;
   }
 
   #information-services-content #services-row .col .service {
@@ -286,6 +290,11 @@
     justify-content: center;
     box-sizing: border-box;
     box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
+  }
+
+    .services-button{
+    border-radius: 20px; 
+    padding:  0.5em 1em;
   }
 
   #information-wrapper-4 {
@@ -300,7 +309,7 @@
   }
   #information-achievements h2 {
     font-size: 2.5em;
-    margin-bottom: 1em;
+    margin-bottom: 0.3em;
     color: #007682;
   }
 
@@ -347,13 +356,13 @@
   }
 
   #information-news {
-    margin-bottom: 2em;
+    margin-bottom: 1.5em;
     text-align: center;
     border-bottom: 3px solid #ffa92d;
   }
   #information-news h2 {
     font-size: 2.5em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.3em;
   }
   #information-news-content p.news {
     font-size: 24px;
@@ -390,7 +399,6 @@
   .president-signature img.signature {
     width: 100%;
     height: auto;
-    margin: 1em 0;
   }
 
   .president-signature .president-info p {
@@ -419,7 +427,7 @@
   }
 
   #information-wrapper-1 {
-    margin: 3em 0;
+    margin-top: 1em;
     width: inherit;
     height: 25vh;
     text-align: center;
@@ -546,6 +554,10 @@
     transform: scale(1.05);
     transition: transform 0.3s ease-in-out;
     box-shadow: 0px 26px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+    .services-button{
+    border-radius: 20px; 
+    padding:  0.5em 1em;
   }
 
   #information-wrapper-4 {
@@ -661,11 +673,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 4em;
-    
+                     
   }
 
   #information-wrapper-1 {
+    margin-top: 1em;
     width: inherit;
     height: 25vh;
     text-align: center;
@@ -710,6 +722,7 @@
   #information-wrapper-2 {
     width: inherit;
     text-align: center;
+    margin: 2em 0;
   }
 
   #information-values {
@@ -718,7 +731,7 @@
     text-align: center;
     border-radius: 12px;
     color: white;
-    margin: 4em 0 2em 0;
+    margin-bottom: 2em;
     padding: 1em 0;
   }
 
@@ -794,9 +807,14 @@
     box-shadow: 0px 26px 15px -3px rgba(0, 0, 0, 0.1);
   }
 
+  .services-button{
+    border-radius: 20px; 
+    padding:  0.5em 1em;
+  }
+
   #information-wrapper-4 {
     border-right: #ffa92d 3px solid;
-    height: 50vh;
+    height: 40vh;
     width: inherit;
     text-align: center;
     display: flex;
@@ -810,10 +828,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5em 0;
-    padding: 3em;
-    margin-left: 2em;
     height: 80%;
+    margin: 0 2em;
   }
 
   #information-wrapper-5 {

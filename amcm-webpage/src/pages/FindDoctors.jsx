@@ -31,7 +31,7 @@ const FindDoctors = () => {
   ];
   const [activeDepartment, setActiveDepartment] = useState(null);
   const [searchInput, setSearchInput] = useState("");
-  const [searchValue , setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
   const [departments, setDepartments] = useState([]);
   const [doctors, setDoctors] = useState([]);
   const [showResult, setShowResult] = useState(false);
@@ -55,12 +55,10 @@ const FindDoctors = () => {
     }
   };
 
-
-
-  const handleSearch = () =>{
+  const handleSearch = () => {
     setSearchValue(searchInput);
     setShowResult(true);
-  }
+  };
 
   useEffect(() => {
     fetchAllDepartments();
@@ -176,7 +174,7 @@ const FindDoctors = () => {
                 </Select>
               </FormControl> */}
               <div id="search-bar-container">
-                <FormControl id="search-form">
+                {/* <FormControl id="search-form">
                   <InputLabel htmlFor="search-input">Search</InputLabel>
                   <Input
                     id="search-input"
@@ -188,7 +186,15 @@ const FindDoctors = () => {
                   <FormHelperText id="search-helper-text">
                     Enter keywords to find relevant doctors or department.
                   </FormHelperText>
-                </FormControl>
+                </FormControl> */}
+
+                <input
+                  type="text"
+                  id="search-input"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  placeholder="Search for doctor or department"
+                />
               </div>
 
               <div id="search-button-container">

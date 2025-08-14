@@ -1,6 +1,4 @@
-.main{
-    font-family: 'Advent Sans, sans-serif';
-}
+
 @media (max-width: 767px) {
   #admission-guide-description .admission-guide-text {
     font-size: 1.3em;
