@@ -11,6 +11,19 @@
   #search-page-containers #search-section #search-form {
     margin: 1.5em 2em;
   }
+
+  #search-input {
+    padding: 0.4em 1em;
+    border: #D8D8D8 2px solid;
+    border-radius: 20px;
+    width: 50vw;
+  }
+
+  #search-input:focus {
+    outline: none;
+    border: #142c2e65 2px solid;
+  }
+
   #search-results {
     display: flex;
     flex-direction: column;
@@ -32,6 +45,22 @@
   #search-page-containers #search-section #search-form {
     width: 55vw;
     margin: 1.5em 2em;
+  }
+
+  #search-input{
+    padding: 0.4em 1em;
+    border: #D8D8D8 2px solid;
+    border-radius: 20px;
+    width: 40vw;
+  }
+
+  #search-input:focus{
+    outline: none;
+    border: #142c2e65 2px solid;
+  }
+  #search-input:focus {
+    outline: none;
+    border: #142c2e65 2px solid;
   }
   #search-results {
     font-size: x-large;

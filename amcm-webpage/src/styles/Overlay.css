@@ -60,9 +60,11 @@
     z-index: 1001; /* Ensure menu links are above the overlay */
   }
 
-  .ul-menu-links li {
+  .ul-menu-links li a {
     font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
   }
+
 
   .sidebar-link {
     color: gray; /* Default color for menu links */

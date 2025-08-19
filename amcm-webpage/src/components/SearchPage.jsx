@@ -125,7 +125,7 @@ const SearchPage = () => {
                 ) : searchResults.length > 0 ? (
                   searchResults.map((result) => (
                     <Card key={result.ID} className="search-result-card">
-                      <div
+                      <div id
                         style={{
                           backgroundColor: "#007682",
                           color: "white",
@@ -158,6 +158,7 @@ const SearchPage = () => {
                             sx={{
                               fontWeight: 600,
                               fontFamily: "Montserrat, sans-serif",
+                              fontSize: "1.2rem"
                             }}
                           >
                             Dr. {result.Name}

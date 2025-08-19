@@ -25,12 +25,6 @@ const location = useLocation();
       label: "Find Doctors",
       link: "/find-doctors",
     },
- 
-    {
-      id: "schedule-appointment",
-      label: "Schedule Appointment",
-      link: "/appointment-schedule",
-    },
     {
       id: "billing-and-admitting",
       label: "Billing and Admitting",
@@ -45,6 +39,11 @@ const location = useLocation();
       id: "online-patient-survey",
       label: "Online Patient Survey",
       link: "/online-patient-survey",
+    },
+    {
+      id: "about-us",
+      label: "About Us",
+      link: "/about-us",
     },
   ];
 

@@ -8,10 +8,10 @@
     gap: 0.5em;
   }
 
-  #search-bar-container #search-input{
-    border: #D8D8D8 2px solid;
-     padding: 0.3em 1em;
-    border-radius: 10px;
+  #search-bar-container #search-input {
+    border: #d8d8d8 2px solid;
+    padding: 0.3em 0.6em;
+    border-radius: 20px;
     width: 50vw;
     font-size: 18px;
   }
@@ -23,10 +23,8 @@
 
   #department-wrapper .btn {
     transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  #department-wrapper .btn {
     width: 20vw;
-    border-radius: 10px;
+    border-radius: 20px;
     background-color: #ffffff !important;
     color: #142c2e !important;
     border-color: #142c2e !important;
@@ -36,12 +34,6 @@
     background-color: #142c2e !important;
     color: #ffffff !important; /* Optional: Change text color on hover */
   }
-
-  #department-wrapper .btn.active {
-    background-color: #142c2e !important;
-    color: #ffffff !important;
-  }
-
 
   #doctor-card-wrapper {
     margin: 0.5em 2em;
@@ -60,15 +52,12 @@
 }
 @media (min-width: 768px) and (max-width: 991px) {
   #department-wrapper {
-
     display: flex;
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
     gap: 0.8em;
   }
-
-
 
   #department-wrapper .btn {
     padding: 0.7em 1em;
@@ -96,7 +85,6 @@
     justify-content: center;
     margin: 0 1%;
   }
-
 
   #doctor-cards {
     display: flex;
@@ -127,8 +115,8 @@
     align-items: center;
     gap: 0.5em;
   }
-  #search-bar-container #search-input{
-    border: #D8D8D8 2px solid;
+  #search-bar-container #search-input {
+    border: #d8d8d8 2px solid;
     padding: 0.4em 1em;
     border-radius: 20px;
     width: 20vw;

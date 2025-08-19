@@ -1,0 +1,17 @@
+@media(min-width: 992px){
+    #admin-content{
+        display: grid;
+        grid-template-columns: 0.7fr 1vw 3fr;
+        gap: 2em;
+        margin: 2em;
+        margin-bottom: 0;
+        padding: 1em 1em 0 1em;
+        height: 90%;
+    }
+
+    #menu-list{
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+}

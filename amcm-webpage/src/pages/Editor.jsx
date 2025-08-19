@@ -20,13 +20,12 @@ const Editor = () => {
       const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
-    { label: "Schedule and Appointment", path: "/appointment-schedule" },
     { label: "Find Doctors", path: "/find-doctors" },
     { label: "Billing and Admission", path: "/billing-admission" },
     { label: "Patient Rights", path: "/patient-rights" },
     { label: "Online Patient Survey", path: "/online-patient-survey" },
-  ];
 
+  ];
   const [active, setActive] = useState("department");
 
   const handleClick = (name) => {

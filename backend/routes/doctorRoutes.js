@@ -67,7 +67,7 @@ router.post("/add-doctor", async (req, res) => {
   }
 });
 
-
+//get all doctors with their department
 router.get("/get-doctors-departments", async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -91,6 +91,7 @@ router.get("/get-doctors-departments", async (req, res) => {
   }
 });
 
+//get all the doctors with the department according to the request department
 router.get("/get-doctors-by-department/:department", async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -118,6 +119,8 @@ router.get("/get-doctors-by-department/:department", async (req, res) => {
   }
 });
 
+
+//get all the doctors with their department assigned, schedule according to the request doctor name
 router.get("/get-doctors/:doctor", async (req, res) => {
   try {
     const db = await connectToDatabase();
