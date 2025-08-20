@@ -15,7 +15,7 @@ import { Row, Col, Button } from "react-bootstrap";
 const AddDepartment = lazy(() => import("../components/AddDepartment"));
 const AddDoctor = lazy(() => import("../components/AddDoctor"));
 const AddKeyword = lazy(() => import("../components/AddKeyword"));
-
+const AddSchedule =lazy(() =>import("../components/AddSchedule"))
 const Editor = () => {
       const menuLinks = [
     { label: "Home", path: "/" },
@@ -38,6 +38,8 @@ const Editor = () => {
         return <AddDoctor />;
       case "keyword":
         return <AddKeyword />;
+      case "schedule":
+        return <AddSchedule />;
       default:
         return <AddDepartment />;
     }
@@ -78,8 +80,8 @@ const Editor = () => {
               id="button-selection-wrapper"
               className="g-1 d-flex justify-content-center"
             >
-              <Row md={3} className="g-3" style={{ width: "100%" }}>
-                <Col>
+              <Row  className="g-3 d-flex justify-content-center" style={{ width: "100%" }}>
+                <Col xs>
                   <Button
                     variant={
                       active === "department" ? "warning" : "outline-warning"
@@ -90,7 +92,7 @@ const Editor = () => {
                     Add Department
                   </Button>
                 </Col>
-                <Col>
+                <Col xs>
                   <Button
                     variant={
                       active === "doctor" ? "warning" : "outline-warning"
@@ -101,7 +103,18 @@ const Editor = () => {
                     Add Doctor
                   </Button>
                 </Col>
-                <Col>
+                <Col xs>
+                  <Button
+                    variant={
+                      active === "schedule" ? "warning" : "outline-warning"
+                    }
+                    className="w-100"
+                    onClick={() => handleClick("schedule")}
+                  >
+                    Add Schedule
+                  </Button>
+                </Col>
+                <Col xs>
                   <Button
                     variant={
                       active === "keyword" ? "warning" : "outline-warning"

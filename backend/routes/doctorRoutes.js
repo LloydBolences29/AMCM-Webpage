@@ -91,6 +91,42 @@ router.get("/get-doctors-departments", async (req, res) => {
   }
 });
 
+
+//get all the doctors with their department as the user searches for the name of the doctor
+router.get("/get-doctors-departments/:doctor", async (req, res) =>{
+try {
+  const db = await connectToDatabase();
+  const { doctor } = req.params;
+
+  const [doctors] = await db.query(
+    `SELECT 
+      doctor_department.id AS "ID",
+      doctors.name AS "name", 
+      doctors.roomNo AS "room", 
+      doctors.localPhone AS "phone", 
+      departments.name AS "department" 
+      FROM doctors 
+      JOIN doctor_department ON doctors.id = doctor_department.doctor_id
+      JOIN departments ON departments.id = doctor_department.department_id
+      WHERE doctors.name LIKE ?;`,
+    [`%${doctor}%`]
+  );
+
+  if (!doctors.length) {
+    return res
+      .status(404)
+      .json({ message: "Unfortunately, there's no such doctor. :(" });
+  }
+
+  res.status(200).json(doctors);
+} catch (error) {
+  console.log("Error fetching doctors by name:", error);
+  res.status(500).json({ message: "Internal Server Error" });
+}
+
+
+})
+
 //get all the doctors with the department according to the request department
 router.get("/get-doctors-by-department/:department", async (req, res) => {
   try {
