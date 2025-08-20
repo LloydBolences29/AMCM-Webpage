@@ -4,6 +4,7 @@ const AddSchedule = () => {
   const [form, setForm] = useState({
     name: "",
     schedule: "",
+    department: "",
     day_of_the_week: "",
     start_time: "",
     end_time: "",
@@ -26,6 +27,19 @@ const AddSchedule = () => {
     } catch (error) {
       console.error("Error fetching doctor data:", error);
     }
+  }
+
+  const handleDoctorSelect = (doctor) =>{
+        setForm({
+      ...form,
+      name: doctor.name,
+      department: doctor.department,
+    });
+    // Also update the input field to show the selected name
+    setSearchDoctorValue(doctor.name);
+    // Clear the dropdown list
+    setDoctorsData([]);
+
   }
 
 
@@ -57,7 +71,7 @@ const AddSchedule = () => {
         style={{maxHeight: "50px", overflowY: "scroll", cursor: "pointer"}}
         >
           {doctorsData.map((doctor) => (
-            <li key={doctor.id}>{doctor.name} - {doctor.department}</li>
+            <li key={doctor.id} onClick={() => handleDoctorSelect(doctor)}>{doctor.name} - {doctor.department}</li>
           ))}
 
         </ul>
@@ -67,6 +81,8 @@ const AddSchedule = () => {
       <input
       type="text"
       name="Department"
+      value={form.department}
+      readOnly
       disabled
       />
 
