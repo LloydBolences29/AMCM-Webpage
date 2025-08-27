@@ -13,52 +13,44 @@ const NonPatientServices = () => {
   const services = [
     {
       id: "automo-washko-card",
-      image: "/dental-profile.jpg",
+      image: "/auto-mo-wash-ko.png",
       title: "Auto Mo, Wash Ko",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/auto-mo-wash-ko",
     },
     {
       id: "healthyBites-card",
-      image: "/dental-profile.jpg",
+      image: "/healthy-bites.png",
       title: "Healthy Bites",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/healthy-bites",
     },
     {
       id: "guest-rooms-card",
-      image: "/dental-profile.jpg",
+      image: "/guest-room.png",
       title: "Guest Rooms",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/guest-rooms",
     },
-    {
-      id: "parking-card",
-      image: "/dental-profile.jpg",
-      title: "Parking",
-      description:
-        "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
-    },
-    {
+      {
       id: "gymnasium-card",
-      image: "/dental-profile.jpg",
+      image: "/gymnasium.png",
       title: "Gymnasium",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/gymnasium",
     },
     {
-      id: "charity-card",
-      image: "/dental-profile.jpg",
-      title: "Charity",
+      id: "parking-card",
+      image: "/parking.png",
+      title: "Parking",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
-    },
+      link: "/service/parking",
+    }
   ];
   return (
     <div id="services-card-wrapper" className="service-content">
@@ -72,29 +64,27 @@ const NonPatientServices = () => {
               <Card className="services-card-content" sx={{ maxWidth: 345 }}>
                 <CardActionArea>
                   <CardMedia
+                  href={service.link}
                     loading="lazy"
                     component="img"
                     height="140"
                     image={service.image}
                     alt="green iguana"
                   />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {service.title}
-                    </Typography>
+                  {/* <CardContent>
                     <Typography
                       variant="body2"
                       sx={{ color: "text.secondary" }}
                     >
                       {service.description}
                     </Typography>
-                  </CardContent>
+                  </CardContent> */}
                 </CardActionArea>
-                <CardActions>
+                {/* <CardActions>
                   <Button size="small" color="primary" href={service.link}>
                     Learn More
                   </Button>
-                </CardActions>
+                </CardActions> */}
               </Card>
             </div>
           ))}

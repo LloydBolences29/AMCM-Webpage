@@ -38,7 +38,7 @@ const AddDoctor = () => {
   const fetchAllDepartments = async () => {
     try {
       const response = await fetch(
-        `${VITE_API_URL}/department/get-all-departments`
+        `${VITE_API_URL}/department/get-departments`
       );
       const data = await response.json();
       setDepartments(data);
@@ -75,7 +75,6 @@ const AddDoctor = () => {
           roomNo: "",
           localPhone: "",
           departmentId: "",
-          doctor_schedule: "",
         });
       } else {
         setFailedSnackBarState(true);
@@ -87,7 +86,7 @@ const AddDoctor = () => {
     }
   };
 
-  console.log("department id", departments.ID);
+  console.log("department id", form);
   return (
     <Container className="py-5">
       <Row className="justify-content-center">
@@ -200,22 +199,7 @@ const AddDoctor = () => {
                       />
                     </Form.Group>
                   </Col>
-                  <Col md={12}>
-                    <Form.Group className="mb-3">
-                      <Form.Label className="fw-bold">
-                        <i className="fas fa-phone me-2">Schedule</i>
-                      </Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="e.g., Monday to Friday, 9 AM - 5 PM"
-                        value={form.doctor_schedule}
-                        onChange={(e) =>
-                          setForm({ ...form, doctor_schedule: e.target.value })
-                        }
-                        required
-                      />
-                    </Form.Group>
-                  </Col>
+                 
                 </Row>
 
                 {/* <Row>

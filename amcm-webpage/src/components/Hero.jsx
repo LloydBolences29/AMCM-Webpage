@@ -44,7 +44,7 @@ const navigate = useNavigate();
         <div className="hero-content">
           <div className="hero-title">
             <h1>
-              The Center of Excellence in Faith-based Education, Healthcare and
+              The Center of Excellence in Faith-based Healthcare, Education, and
               Lifestyle
             </h1>
 

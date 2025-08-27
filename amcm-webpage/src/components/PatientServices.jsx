@@ -14,29 +14,54 @@ import Chip from "@mui/material/Chip";
 const PatientServices = () => {
   const services = [
     {
-      id: "dental-card",
-      image: "/dental-profile.jpg",
-      title: "Dental",
+      id: "emergency-room-card",
+      image: "/Emergency-Room.png",
+      title: "Emergency Room",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/service/dental",
+      link: "/service/emergency-room",
+    },
+    {
+      id: "opd-services-card",
+      image: "/opd.png",
+      title: "Outpatient Services",
+      description:
+        "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
+      link: "/service/opd-service",
+    },
+    {
+      id: "admission-services-card",
+      image: "/admission.png",
+      title: "Admission Services",
+      description:
+        "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
+      link: "/service/admission-service",
     },
     {
       id: "diagnostic-imaging-services-card",
-      image: "/dental-profile.jpg",
+      image: "/imaging.png",
       title: " Diagnostic Imaging Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
       link: "/service/diagnostic-imaging-service",
     },
     {
-      id: "emergency-room-card",
-      image: "/dental-profile.jpg",
-      title: "Emergency Room",
+      id: "pharmacy-services-card",
+      image: "/pharmacy.png",
+      title: "Pharmacy Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/service/emergency-room",
+      link: "/service/pharmacy-service",
     },
+    {
+      id: "dental-card",
+      image: "/dental.png",
+      title: "Dental",
+      description:
+        "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
+      link: "/service/dental",
+    },
+
     {
       id: "medical-services-card",
       image: "/dental-profile.jpg",
@@ -46,24 +71,8 @@ const PatientServices = () => {
       link: "/service/medical-service",
     },
     {
-      id: "opd-services-card",
-      image: "/dental-profile.jpg",
-      title: "Outpatient Services",
-      description:
-        "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/service/opd-service",
-    },
-    {
-      id: "patientBusiness-services-card",
-      image: "/dental-profile.jpg",
-      title: "Patient Business Services",
-      description:
-        "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/service/patient-business-service",
-    },
-    {
       id: "pathAndLab-services-card",
-      image: "/dental-profile.jpg",
+      image: "/pathAndLab.png",
       title: "Pathology and Laboratory Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -71,7 +80,7 @@ const PatientServices = () => {
     },
     {
       id: "pastoralCare-services-card",
-      image: "/dental-profile.jpg",
+      image: "/pastoral-care.png",
       title: "Pastoral Care Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -79,23 +88,15 @@ const PatientServices = () => {
     },
     {
       id: "physicalMed-services-card",
-      image: "/dental-profile.jpg",
+      image: "/physicalmed-and-rehab.png",
       title: "Physical Medicine and Rehabilitation Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
       link: "/service/physical-medicine-rehabilitation-service",
     },
     {
-      id: "pharmacy-services-card",
-      image: "/dental-profile.jpg",
-      title: "Pharmacy Services",
-      description:
-        "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/service/pharmacy-service",
-    },
-    {
       id: "medicalRecords-services-card",
-      image: "/dental-profile.jpg",
+      image: "/med-records.png",
       title: "Medical Records Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -103,12 +104,12 @@ const PatientServices = () => {
     },
     {
       id: "renal-services-card",
-      image: "/dental-profile.jpg",
+      image: "/renal.png",
       title: "Renal Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
       link: "/service/renal-service",
-    }
+    },
   ];
   return (
     <div id="patient-services-wrapper" className="service-content">
@@ -129,16 +130,13 @@ const PatientServices = () => {
                   alt="green iguana"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div" >
-                    {service.title}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: "textSecondary"}}>
+                  <Typography variant="body2" sx={{ color: "textSecondary" }}>
                     {service.description}
                   </Typography>
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button size="small" color="primary" href={service.link} >
+                <Button size="small" color="primary" href={service.link}>
                   Learn More
                 </Button>
               </CardActions>

@@ -1,0 +1,12 @@
+#search-nav{
+    display: flex;
+    gap: 1em;
+}
+
+
+#department-search-btn{   
+    width: 10dvw;
+    border-radius: 10em; 
+    font-size: 1em;
+    align-content: end;
+}

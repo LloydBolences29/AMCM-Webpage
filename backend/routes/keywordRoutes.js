@@ -42,16 +42,94 @@ router.get("/get-keywords/:searchTerm", async (req, res) => {
   doctors.roomNo AS Room,
   doctors.localPhone AS Local,
   dpt.name AS Department,
-  availability.doctor_schedule as Schedule,
-  GROUP_CONCAT(DISTINCT tags.tags SEPARATOR ', ') AS Tags
+  -- Column 1: Gathers schedules for ALL non-OB GYN doctors.
+    GROUP_CONCAT(
+        CASE 
+            WHEN dpt.name NOT IN (
+                "OB GYNE / PERINATOLOGIST / SONOLOGIST", 
+                "OB GYNE / SONOLOGIST"
+            ) THEN 
+                CONCAT(
+                    doctor_schedules.day_of_the_week, ' ', 
+                    TIME_FORMAT(doctor_schedules.start_time, '%l:%i %p'), ' - ', 
+                    TIME_FORMAT(doctor_schedules.end_time, '%l:%i %p')
+                )
+            ELSE NULL 
+        END
+                ORDER BY
+            CASE doctor_schedules.day_of_the_week
+                            WHEN 'Sun' THEN 7
+                WHEN 'Mon' THEN 1
+                WHEN 'Tue' THEN 2
+                WHEN 'Wed' THEN 3
+                WHEN 'Thur' THEN 4
+                WHEN 'Fri' THEN 5
+                WHEN 'Sat' THEN 6
+            END, doctor_schedules.start_time
+        SEPARATOR '\n'
+    ) AS "General Schedule",
+
+    GROUP_CONCAT(
+        CASE 
+            WHEN dpt.name IN (
+                "OB GYNE / PERINATOLOGIST / SONOLOGIST", 
+                "OB GYNE / SONOLOGIST"
+            ) AND doctor_schedules.schedule_type = 'clinic' THEN 
+                CONCAT(
+                    doctor_schedules.day_of_the_week, ' ', 
+                    TIME_FORMAT(doctor_schedules.start_time, '%l:%i %p'), ' - ', 
+                    TIME_FORMAT(doctor_schedules.end_time, '%l:%i %p')
+                )
+            ELSE NULL 
+        END
+                ORDER BY
+            CASE doctor_schedules.day_of_the_week
+                            WHEN 'Sun' THEN 7
+                WHEN 'Mon' THEN 1
+                WHEN 'Tue' THEN 2
+                WHEN 'Wed' THEN 3
+                WHEN 'Thur' THEN 4
+                WHEN 'Fri' THEN 5
+                WHEN 'Sat' THEN 6
+            END, doctor_schedules.start_time
+        SEPARATOR '\n'
+    ) AS "Clinic Schedule",
+
+    GROUP_CONCAT(
+        CASE 
+            WHEN dpt.name IN (
+                "OB GYNE / PERINATOLOGIST / SONOLOGIST", 
+                "OB GYNE / SONOLOGIST"
+            ) AND doctor_schedules.schedule_type = 'ultrasound' THEN 
+                CONCAT(
+                    doctor_schedules.day_of_the_week, ' ', 
+                    TIME_FORMAT(doctor_schedules.start_time, '%l:%i %p'), ' - ', 
+                    TIME_FORMAT(doctor_schedules.end_time, '%l:%i %p')
+                )
+            ELSE NULL 
+        END
+                ORDER BY
+            CASE doctor_schedules.day_of_the_week
+                WHEN 'Sun' THEN 7
+                WHEN 'Mon' THEN 1
+                WHEN 'Tue' THEN 2
+                WHEN 'Wed' THEN 3
+                WHEN 'Thur' THEN 4
+                WHEN 'Fri' THEN 5
+                WHEN 'Sat' THEN 6
+            END, doctor_schedules.start_time
+        SEPARATOR '\n'
+    ) AS "Ultrasound Schedule"
+
 FROM doctors
 JOIN doctor_department dd ON dd.doctor_id = doctors.id
 JOIN departments dpt ON dd.department_id = dpt.id
 JOIN keywords ON keywords.doctorDepartment_id = dd.id
 JOIN tags ON keywords.keyword = tags.id
-JOIN availability ON doctors.id = availability.doctor_id
+JOIN doctor_schedules ON dd.id = doctor_schedules.doctor_department_id
 WHERE tags.tags LIKE ? OR doctors.name LIKE ?
-GROUP BY doctors.id`,
+GROUP BY 
+    doctors.id, doctors.name, doctors.localPhone, doctors.roomNo, dpt.name;`,
       [`%${searchTerm}%`, `%${searchTerm}%`]
     );
 

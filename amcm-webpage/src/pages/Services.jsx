@@ -82,7 +82,7 @@ const Services = () => {
                 >
                   Non-Patient Services
                 </Button>
-                <Button
+                {/* <Button
                   variant="outline-primary"
                   className={`anchor-button ${
                     activeComponent === "three" ? "active" : ""
@@ -90,7 +90,7 @@ const Services = () => {
                   onClick={() => setActiveComponent("three")}
                 >
                   Government Collaboration Services
-                </Button>
+                </Button> */}
                 <Button
                   variant="outline-primary"
                   className={`anchor-button ${
@@ -98,7 +98,7 @@ const Services = () => {
                   }`}
                   onClick={() => setActiveComponent("four")}
                 >
-                  Education Services
+                  Medical Education and Others
                 </Button>
               </div>
               <div id="services-card-wrapper">

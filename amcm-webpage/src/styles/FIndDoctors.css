@@ -173,6 +173,7 @@
     flex-wrap: wrap;
     gap: 1em;
     justify-content: center;
+    padding: 15px;
   }
   #doctor-card-wrapper #doctor-cards .doctor-card {
     padding: 15px;

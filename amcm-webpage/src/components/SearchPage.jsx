@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import Avatar from "@mui/material/Avatar";
 import "../styles/SearchPage.css";
+import EKGSpinner from "../components/EKGSpinner";
 
 const SearchPage = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -26,7 +27,6 @@ const SearchPage = () => {
   const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
-    { label: "Schedule and Appointment", path: "/appointment-schedule" },
     { label: "Find Doctors", path: "/find-doctors" },
     { label: "Billing and Admission", path: "/billing-admission" },
     { label: "Patient Rights", path: "/patient-rights" },
@@ -113,19 +113,25 @@ const SearchPage = () => {
                 onChange={(e) => setSearchInput(e.target.value)}
               />
 
-              <div id="search-results" className="g-2">
-                {loading ? (
-                  <div className="loading-spinner">
-                    <div className="spinner-border" role="status">
-                      <span className="visually-hidden">Loading...</span>
-                    </div>
-                  </div>
-                ) : error ? (
-                  <p className="error-message">{error}</p>
-                ) : searchResults.length > 0 ? (
-                  searchResults.map((result) => (
+              {loading ? (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "50vh",
+                  }}
+                >
+                  <EKGSpinner />
+                </div>
+              ) : error ? (
+                <p className="error-message">{error}</p>
+              ) : searchResults.length > 0 ? (
+                <div id="search-results" className="g-2">
+                  {searchResults.map((result) => (
                     <Card key={result.ID} className="search-result-card">
-                      <div id
+                      <div
+                        id
                         style={{
                           backgroundColor: "#007682",
                           color: "white",
@@ -158,7 +164,7 @@ const SearchPage = () => {
                             sx={{
                               fontWeight: 600,
                               fontFamily: "Montserrat, sans-serif",
-                              fontSize: "1.2rem"
+                              fontSize: "1.2rem",
                             }}
                           >
                             Dr. {result.Name}
@@ -178,9 +184,9 @@ const SearchPage = () => {
                           >
                             <i
                               className="fas fa-door-open"
-                              style={{ marginRight: "8px", color: "#007682" }}
+                              style={{ marginRight: "8px", color: "#142C2E" }}
                             >
-                              Deparment: {result["Department"]}
+                              Department: {result["Department"]}
                             </i>
                           </Typography>
                           <Typography
@@ -194,7 +200,7 @@ const SearchPage = () => {
                           >
                             <i
                               className="fas fa-door-open"
-                              style={{ marginRight: "8px", color: "#007682" }}
+                              style={{ marginRight: "8px", color: "#142C2E" }}
                             >
                               Room Number: {result["Room"]}
                             </i>
@@ -209,7 +215,7 @@ const SearchPage = () => {
                           >
                             <i
                               className="fas fa-phone"
-                              style={{ marginRight: "8px", color: "#007682" }}
+                              style={{ marginRight: "8px", color: "#142C2E" }}
                             >
                               Local Phone: {result["Local"]}
                             </i>
@@ -226,19 +232,69 @@ const SearchPage = () => {
                           >
                             <i
                               className="fas fa-phone"
-                              style={{ marginRight: "8px", color: "#007682" }}
+                              style={{ marginRight: "8px", color: "#142C2E" }}
                             >
-                              Schedule: {result["Schedule"]}
+                              {[
+                                "OB GYNE / PERINATOLOGIST / SONOLOGIST",
+                                "OB GYNE / SONOLOGIST",
+                              ].includes(result["Department"]) ? (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "start",
+                                    flexDirection: "column",
+                                    textAlign: "left",
+                                  }}
+                                >
+                                  <span>Schedule:</span>
+                                  {result["Clinic Schedule"] && (
+                                    <div
+                                      style={{
+                                        marginBottom: "10px",
+                                        whiteSpace: "pre-line",
+                                      }}
+                                    >
+                                      <strong>Clinic:</strong>
+                                      <br />
+                                      {result["Clinic Schedule"]}
+                                    </div>
+                                  )}
+                                  {result["Ultrasound Schedule"] && (
+                                    <div style={{ whiteSpace: "pre-line" }}>
+                                      <strong>Ultrasound:</strong>
+                                      <br />
+                                      {result["Ultrasound Schedule"]}
+                                    </div>
+                                  )}
+                                </div>
+                              ) : (
+                                <>
+                                  {result["General Schedule"] && (
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "start",
+                                        flexDirection: "column",
+                                        textAlign: "left",
+                                        whiteSpace: "pre-line",
+                                      }}
+                                    >
+                                      <strong>Schedule:</strong>
+                                      {result["General Schedule"]}
+                                    </div>
+                                  )}
+                                </>
+                              )}
                             </i>
                           </Typography>
                         </CardContent>
                       </CardActionArea>
                     </Card>
-                  ))
-                ) : (
-                  <p>No results found.</p>
-                )}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                <p>No results found.</p>
+              )}
             </div>
           </div>
         </div>

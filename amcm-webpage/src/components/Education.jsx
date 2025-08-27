@@ -12,20 +12,44 @@ import Chip from "@mui/material/Chip";
 const Education = () => {
   const services = [
     {
-      id: "education-service",
-      image: "/dental-profile.jpg",
-      title: "Education Service",
+      id: "lifestyle-service",
+      image: "/lifestyle.png",
+      title: "Lifestyle Is Medicine",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/lifestyle",
+    },
+    {
+      id: "mac-service",
+      image: "/mac.png",
+      title: "Manila Adventist College",
+      description:
+        "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
+      link: "/service/mac",
+    },
+    {
+      id: "clinical-pastoral-service",
+      image: "/clinical-pastoral-education.png",
+      title: "Clinical Pastoral Education",
+      description:
+        "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
+      link: "/service/clinical-pastoral-education",
     },
     {
       id: "internship-service",
-      image: "/dental-profile.jpg",
-      title: "Internship Service",
+      image: "/internship.png",
+      title: "Internship",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/",
+      link: "/service/internship",
+    },
+    {
+      id: "residency-service",
+      image: "/residency.png",
+      title: "Residency",
+      description:
+        "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
+      link: "/service/residency",
     },
   ];
   return (
@@ -47,9 +71,6 @@ const Education = () => {
                   alt={service.title}
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {service.title}
-                  </Typography>
                   <Typography variant="body2" sx={{ color: "text.secondary" }}>
                     {service.description}
                   </Typography>

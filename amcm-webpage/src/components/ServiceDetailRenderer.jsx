@@ -20,6 +20,7 @@ const components = {
 const serviceNames = {
   dental: "Dental",
   "diagnostic-imaging-service": "Diagnostic Imaging Services",
+    "admission-service": "Admission Services",
     "emergency-room": "Emergency Room",
     "medical-service": "Medical Services",
     "opd-service": "Outpatient Services",
@@ -30,6 +31,16 @@ const serviceNames = {
     "pharmacy-service": "Pharmacy Services",
     "medical-records-service": "Medical Records Services",
     "renal-service": "Renal Services",
+    "auto-mo-wash-ko": "Auto Mo, Wash Ko",
+    "healthy-bites": "Healthy Bites",
+    "guest-rooms": "Guest Rooms",
+    "gymnasium": "Gymnasium",
+    "parking": "Parking",
+    "lifestyle": "Lifestyle Is Medicine",
+    "mac": "Manila Adventist College",
+    "clinical-pastoral-education": "Clinical Pastoral Education",
+    "internship": "Internship",
+    "residency": "Residency Program"
 };
 const ServiceDetailRenderer = () => {
   const menuLinks = [

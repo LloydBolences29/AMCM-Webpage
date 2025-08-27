@@ -26,7 +26,7 @@ const AddDepartment = () => {
   const fetchDepartments = async () => {
     try {
       const response = await fetch(
-        `${VITE_API_URL}/department/get-all-departments`
+        `${VITE_API_URL}/department/get-departments`
       );
       const data = await response.json();
       setDepartments(data);
@@ -205,7 +205,7 @@ const AddDepartment = () => {
                           className="list-group-flush"
                           style={{ maxHeight: "300px", overflowY: "auto" }}
                         >
-                          {departments.map((dept, index) => (
+                          {departments.map((dept) => (
                             <ListGroup.Item
                               key={dept.ID}
                               className="d-flex justify-content-between align-items-center"
