@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import "../styles/Services.css";
 import Skeleton from "react-loading-skeleton";
 import Button from "react-bootstrap/Button";
+import EKGSpinner from "../components/EKGSpinner";
 
 import { lazy, Suspense, useState } from "react";
 
@@ -25,10 +26,9 @@ const Services = () => {
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
     { label: "Find Doctors", path: "/find-doctors" },
-    { label: "Billing and Admission", path: "/billing-admission" },
+    { label: "News and Update", path: "/news-updates" },
     { label: "Patient Rights", path: "/patient-rights" },
     { label: "Online Patient Survey", path: "/online-patient-survey" },
-
   ];
   const [activeComponent, setActiveComponent] = useState("one");
 
@@ -102,28 +102,81 @@ const Services = () => {
                 </Button>
               </div>
               <div id="services-card-wrapper">
-             
                 {activeComponent === "one" && (
-                  <Suspense fallback={<Skeleton height={125} count={5} />}>
+                  <Suspense
+                    fallback={
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          // alignItems: "center",
+                          height: "100vh",
+                          width: "100vw",
+                        }}
+                      >
+                        <EKGSpinner />
+                      </div>
+                    }
+                  >
                     <PatientServices />
                   </Suspense>
                 )}
-             
 
                 {activeComponent === "two" && (
-                  <Suspense fallback={<Skeleton height={125} count={5} />}>
+                  <Suspense
+                    fallback={
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          // alignItems: "center",
+                          height: "100vh",
+                          width: "100vw",
+                        }}
+                      >
+                        <EKGSpinner />
+                      </div>
+                    }
+                  >
                     <NonPatientServices />
                   </Suspense>
                 )}
 
-
                 {activeComponent === "three" && (
-                  <Suspense fallback={<Skeleton height={125} count={5} />}>
+                  <Suspense
+                    fallback={
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          // alignItems: "center",
+                          height: "100vh",
+                          width: "100vw",
+                        }}
+                      >
+                        <EKGSpinner />
+                      </div>
+                    }
+                  >
                     <GovernmentCollabServices />
                   </Suspense>
                 )}
                 {activeComponent === "four" && (
-                  <Suspense fallback={<Skeleton height={125} count={5} />}>
+                  <Suspense
+                    fallback={
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          // alignItems: "center",
+                          height: "100vh",
+                          width: "100vw",
+                        }}
+                      >
+                        <EKGSpinner />
+                      </div>
+                    }
+                  >
                     <EducationServices />
                   </Suspense>
                 )}

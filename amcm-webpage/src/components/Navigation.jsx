@@ -25,11 +25,11 @@ const location = useLocation();
       label: "Find Doctors",
       link: "/find-doctors",
     },
-    {
-      id: "billing-and-admitting",
-      label: "Billing and Admitting",
-      link: "/billing-admission",
-    },
+    // {
+    //   id: "billing-and-admitting",
+    //   label: "Billing and Admitting",
+    //   link: "/billing-admission",
+    // },
     {
       id: "news-updates",
       label: "News and Updates",

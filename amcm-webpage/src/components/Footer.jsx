@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <>
     <div className="footer">
-        <p>© 2023 Sharing Jesus Christ Healing Ministry. All rights reserved.</p>
+        <p>© 2025 Sharing Jesus Christ Healing Ministry. All rights reserved.</p>
         
     </div>
       

@@ -10,14 +10,16 @@ import EKGSpinner from "../components/EKGSpinner";
 
 const AccountManagement = lazy(() => import("../components/AccountManagement"));
 const DepartmentManagement = lazy (() => import ("../components/DepartmentManagement"))
+const DoctorManagement = lazy (() => import ("../components/DoctorManagement"))
 const Admin = () => {
-  const menuLinks = [
+      const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
     { label: "Find Doctors", path: "/find-doctors" },
-    { label: "Billing and Admission", path: "/billing-admission" },
+    { label: "News and Update", path: "/news-updates" },
     { label: "Patient Rights", path: "/patient-rights" },
     { label: "Online Patient Survey", path: "/online-patient-survey" },
+
   ];
 
   const [active, setActive] = useState("account-management");
@@ -102,7 +104,7 @@ const Admin = () => {
                           width: "100vw",
                         }}
                       >
-                        <CircularProgress size={30} />
+                        <EKGSpinner />
                       </div>
                     }
                   >
@@ -112,7 +114,23 @@ const Admin = () => {
               )}
 
               {active === "doctor-management" && (
-                <h1>this is the doctor management</h1>
+                <Suspense
+                  fallback={
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: "100vh",
+                        width: "100vw",
+                      }}
+                    >
+                      <EKGSpinner />
+                    </div>
+                  }
+                >
+                  <DoctorManagement />
+                </Suspense>
               )}
             </div>
           </div>

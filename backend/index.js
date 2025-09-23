@@ -9,6 +9,7 @@ const authRoutes = require("./routes/authRoutes.js"); // Adjust the path as nece
 const doctorRoutes = require("./routes/doctorRoutes.js"); // Adjust the path as necessary
 const departmentRoutes = require("./routes/department.js"); // Adjust the path as necessary
 const keywordRoutes = require ("./routes/keywordRoutes.js")
+const userRoutes = require ("./routes/userRoutes.js")
 
 app.use(
   cors({
@@ -27,7 +28,7 @@ app.use("/auth", authRoutes); //for logging and registering of users
 app.use("/doctor", doctorRoutes);
 app.use("/department", departmentRoutes);
 app.use("/keyword", keywordRoutes); //for adding keywords
-
+app.use("/user", userRoutes);
 //for getting the path of the uploaded image
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 

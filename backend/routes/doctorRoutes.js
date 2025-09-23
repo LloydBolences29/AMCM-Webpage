@@ -1,28 +1,47 @@
 const express = require("express");
 const router = express.Router();
 const { connectToDatabase } = require("../lib/db");
-const multer = require("multer");
-const path = require("path");
+
 
 router.get("/get-all-doctors", async (req, res) => {
   try {
     const db = await connectToDatabase();
 
+        const page = parseInt(req.query.page || "1", 10);
+    const limit = parseInt(req.query.limit || "10", 10);
+
+     const offset = (page - 1) * limit;
+
+     const [countRows] = await db.query(`SELECT COUNT(*) as total FROM doctors`);
+
+     const totalRows = countRows[0].total;
+     const totalPages = Math.ceil(totalRows / limit);
+
+
     // Fetch all doctors
     const [doctors] = await db.query(
       `SELECT 
-      doctors.name AS "Name", 
-      doctors.roomNo AS "Room Number", 
-      doctors.localPhone AS "Local Phone" 
-      FROM doctors`
+      doctors.id,
+      doctors.name, 
+      doctors.roomNo, 
+      doctors.localPhone
+      FROM doctors
+      ORDER BY id LIMIT ? OFFSET ?`, [limit, offset]
     );
-    res.status(200).json(doctors);
+    res.status(200).json({doctors, pagination: {
+      totalRows,
+      totalPages,
+      currentPage: page,
+      itemsPerPage:limit
+    }});
   } catch (error) {
     console.error("Error fetching all doctors:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
+//Add doctors to the database
+//endpoint for AddDoctor component
 router.post("/add-doctor", async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -73,6 +92,7 @@ router.post("/add-doctor", async (req, res) => {
 });
 
 //add the schedule of the doctor
+//endpoint for AddSchedule component
 router.post("/add-schedule", async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -121,6 +141,7 @@ router.post("/add-schedule", async (req, res) => {
 });
 
 //get all doctors with their department
+//endpoint for AddKeyword component
 router.get("/get-doctors-departments", async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -145,6 +166,7 @@ router.get("/get-doctors-departments", async (req, res) => {
 });
 
 //get all the doctors with their department as the user searches for the name of the doctor
+//endpoint for Add Schedule component
 router.get("/get-doctors-departments/:doctor", async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -152,56 +174,28 @@ router.get("/get-doctors-departments/:doctor", async (req, res) => {
 
     const [doctors] = await db.query(
       `SELECT 
-      doctor_department.id AS "ID",
+      doctor_department.id,
       doctors.name AS "name", 
-      doctors.roomNo AS "room", 
-      doctors.localPhone AS "phone", 
+      doctors.roomNo, 
+      doctors.localPhone, 
       departments.name AS "department" 
       FROM doctors 
-      JOIN doctor_department ON doctors.id = doctor_department.doctor_id
-      JOIN departments ON departments.id = doctor_department.department_id
+      LEFT JOIN doctor_department ON doctors.id = doctor_department.doctor_id
+      LEFT JOIN departments ON departments.id = doctor_department.department_id
       WHERE doctors.name LIKE ?;`,
       [`%${doctor}%`]
     );
 
-    if (!doctors.length) {
+    if (doctors.length === 0) {
       return res
         .status(404)
-        .json({ message: "Unfortunately, there's no such doctor. :(" });
+        .json({ message: "Unfortunately, there's no such doctor or department. :(" });
     }
 
     res.status(200).json(doctors);
   } catch (error) {
     console.log("Error fetching doctors by name:", error);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-});
-
-//get all the doctors with the department according to the request department
-router.get("/get-doctors-by-department/:department", async (req, res) => {
-  try {
-    const db = await connectToDatabase();
-    const { department } = req.params;
-
-    // Fetch doctors by department
-    const [doctors] = await db.query(
-      `SELECT 
-      doctors.name AS "Name", 
-      doctors.roomNo AS "Room Number", 
-      doctors.localPhone AS "Local Phone",
-      availability.doctor_schedule AS "Schedule"
-      FROM doctors 
-      JOIN doctor_department ON doctors.id = doctor_department.doctor_id
-      JOIN departments ON departments.id = doctor_department.department_id
-      JOIN availability on doctors.id = availability.doctor_id
-      WHERE departments.name = ?;`,
-      [department]
-    );
-
-    res.status(200).json(doctors);
-  } catch (error) {
-    console.error("Error fetching doctors by department:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+   return res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
@@ -218,6 +212,8 @@ const formatTime = (timeValue) => {
   return `${formattedHours}:${m} ${ampm}`;
 };
 
+//get all the doctors with their formatted schedules
+//endpoint for fetchDoctor component
 router.get("/get-doctors/:doctor", async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -254,7 +250,7 @@ router.get("/get-doctors/:doctor", async (req, res) => {
     const [rows] = await db.query(sql, [`%${doctor}%`, `%${doctor}%`]);
 
     if (!rows.length) {
-      return res.status(404).json({ message: "Unfortunately, there's no such doctor. :(" });
+      return res.status(404).json({ message: "Unfortunately, there's no such doctor or department available. :(" });
     }
 
     // Step 2: Process the raw data into a clean JSON structure
@@ -301,36 +297,120 @@ router.get("/get-doctors/:doctor", async (req, res) => {
   }
 });
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename: function (req, file, cb) {
-    const uniqueName = file.originalname;
-    cb(null, uniqueName);
-  },
-});
 
-const upload = multer({ storage });
+//fetch all doctors with their department and formatted schedules
+//endpoint for DoctorManagement component
+router.get("/get-doctors-by-id/:id", async (req, res)=>{
+try {
+  const db = await connectToDatabase();
+  const { id } = req.params;
 
-router.post("/upload-image", upload.single("file"), (req, res) => {
+  const sql = `
+    SELECT 
+      d.id,
+      d.name, 
+      d.localPhone, 
+      d.roomNo,
+      dep.id AS dep_id,
+      dep.name AS department,
+      ds.schedule_type,
+      ds.day_of_the_week,
+      ds.start_time,
+      ds.end_time
+    FROM 
+      doctors d
+    JOIN 
+      doctor_department dd ON d.id = dd.doctor_id
+    LEFT JOIN 
+      departments dep ON dep.id = dd.department_id
+    LEFT JOIN 
+      doctor_schedules ds ON dd.id = ds.doctor_department_id
+    WHERE 
+      d.id = ?
+  `;
+
+  const [rows] = await db.query(sql, [id]);
+
+  if (!rows.length) {
+    return res.status(404).json({ message: "Doctor not found" });
+  }
+
+  const doctor = rows[0];
+  const formattedDoctor = {
+    id: doctor.id,
+    name: doctor.name,
+    localPhone: doctor.localPhone,
+    roomNumber: doctor.roomNo,
+    departmentId: doctor.dep_id,
+    department: doctor.department,
+    schedules: {
+      Clinic: [],
+      Ultrasound: []
+    }
+  };
+
+  rows.forEach(row => {
+    const scheduleObject = {
+      day: row.day_of_the_week,
+      time: `${formatTime(row.start_time)} - ${formatTime(row.end_time)}`
+    };
+
+    if (row.schedule_type === 'ultrasound') {
+      formattedDoctor.schedules.Ultrasound.push(scheduleObject);
+    } else {
+      formattedDoctor.schedules.Clinic.push(scheduleObject);
+    }
+  });
+
+  res.status(200).json(formattedDoctor);
+
+} catch (error) {
+  console.log("Error fetching doctor by id:", error);
+  res.status(500).json({ message: "Internal Server Error" });
+}
+})
+
+//update doctors information
+//endpoint for DoctorManagement
+router.put("/doctor-update-information/:id", async (req, res) =>{
   try {
-    const { file } = req;
-    if (!file) {
-      return res.status(400).json({ error: "No file uploaded" });
+    const db = await connectToDatabase();
+    const { id } = req.params;
+    const { name, roomNo, localPhone, departmentId } = req.body;
+
+    //check if that ID is present or not
+    const [doctorIdCheck] =  await db.query(`SELECT * FROM doctors WHERE id = ?`, [id])
+
+    if(doctorIdCheck.length === 0){
+      return res.status(404).json({ message: "Doctor not found."})
     }
 
-    // Here you can save the file information to the database if needed
-    const fileUrl = `${file.filename}`;
-    res.status(200).json({
-      message: "Image uploaded successfully",
-      success: true,
-      file: fileUrl,
-    });
+    await db.query(`
+      UPDATE doctors
+      SET name = ?, roomNo = ?, localPhone = ?
+      WHERE id = ?
+      `, [name, roomNo, localPhone, id])
+
+      
+ const departmentValue = departmentId || null
+       await db.query(`
+        UPDATE doctor_department
+        SET department_id = ?
+
+        WHERE doctor_id = ?
+      `, [departmentValue, id])
+
+      return res.status(200).json({ message: "Doctor's information successfully updated."})
   } catch (error) {
-    console.error("Error uploading image:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.log("Error updating doctor's information", error);
+    return res.status(500).json({message: "Error Updating your doctor's information. Please check you server's console. "})
   }
-});
+})
+
+
+
+
+
+
 
 module.exports = router;

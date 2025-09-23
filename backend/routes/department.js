@@ -61,6 +61,15 @@ router.get("/search-department/:searchTerm", async (req, res) => {
     const db = await connectToDatabase();
     const { searchTerm } = req.params;
 
+    const [checkDepartment] = await db.query(
+      `SELECT * FROM departments WHERE name LIKE ?`,
+      [`%${searchTerm}%`]
+    );
+
+    if (checkDepartment.length === 0){
+      return res.status(404).json({ message: "Department not found." });
+    }
+
     const [department] = await db.query(
       `SELECT * FROM departments WHERE name LIKE ?`,
       [`%${searchTerm}%`]

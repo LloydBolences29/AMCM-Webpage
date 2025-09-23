@@ -28,7 +28,8 @@ const DepartmentManagement = () => {
     name: "",
   });
   const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage]= useState("")
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [successSnackBarState, setSuccessSnackBarState] = useState(false);
   const [failedSnackBarState, setFailedSnackBarState] = useState(false);
   const [pageStatus, setPageStatus] = useState("idle");
@@ -51,6 +52,7 @@ const DepartmentManagement = () => {
       }
     } catch (error) {
       console.error("Error fetching departments:", error);
+      setErrorMessage("Error Fetching department.");
     } finally {
       setLoading(false);
     }
@@ -95,7 +97,11 @@ const DepartmentManagement = () => {
         const data = await response.json();
         setDepartments(data.department);
         setTotalPages(1);
+        setErrorMessage("");
+
         console.log("Search result:", data.department);
+      } else if (response.status === 404) {
+        setErrorMessage("Department not Found!!");
       }
     } catch (error) {
       console.error("Error searching department:", error);
@@ -156,30 +162,33 @@ const DepartmentManagement = () => {
     }
   };
 
-//functionality for the delete function of the department management page
-const handleDeleteDepartment = async () =>{
-  try {
-    const response = await fetch (`${VITE_API_URL}/department/delete-department/${selectedDepartment.id}`, {
-      method: "DELETE",
-    });
+  //functionality for the delete function of the department management page
+  const handleDeleteDepartment = async () => {
+    try {
+      const response = await fetch(
+        `${VITE_API_URL}/department/delete-department/${selectedDepartment.id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
-    if (response.ok) {
-      const result = await response.json();
-      setPageStatus("success");
-      setSuccessMessage(result.message);
-      setSuccessSnackBarState(true);
-      setShowDeleteModal(false);
-      fetchAllDepartments();
-    } else {
+      if (response.ok) {
+        const result = await response.json();
+        setPageStatus("success");
+        setSuccessMessage(result.message);
+        setSuccessSnackBarState(true);
+        setShowDeleteModal(false);
+        fetchAllDepartments();
+      } else {
+        setPageStatus("error");
+        setFailedSnackBarState(true);
+      }
+    } catch (error) {
+      console.log("Error Deleting the department", error);
       setPageStatus("error");
       setFailedSnackBarState(true);
     }
-  } catch (error) {
-    console.log("Error Deleting the department", error)
-    setPageStatus("error");
-    setFailedSnackBarState(true)
-  }
-}
+  };
 
   return (
     <div>
@@ -255,6 +264,8 @@ const handleDeleteDepartment = async () =>{
             <EKGSpinner />
           </div>
         </>
+      ) : errorMessage ? (
+        <p style={{ color: "red", margin: "1em" }}>{errorMessage}</p>
       ) : (
         <>
           <Table
@@ -289,9 +300,9 @@ const handleDeleteDepartment = async () =>{
                       >
                         Edit
                       </Button>
-                      <Button variant="outline-danger" size="sm" onClick={() => handleOpenDeleteModal(department)}>
+                      {/* <Button variant="outline-danger" size="sm" onClick={() => handleOpenDeleteModal(department)}>
                         Delete
-                      </Button>
+                      </Button> */}
                     </div>
                   </td>
                 </tr>
@@ -375,7 +386,10 @@ const handleDeleteDepartment = async () =>{
             <strong>{selectedDepartment.name}</strong>?
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+            <Button
+              variant="secondary"
+              onClick={() => setShowDeleteModal(false)}
+            >
               Cancel
             </Button>
             <Button variant="danger" onClick={() => handleDeleteDepartment()}>

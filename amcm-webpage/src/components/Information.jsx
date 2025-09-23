@@ -19,84 +19,86 @@ const Information = () => {
       <div className="information-container">
         <div className="information-content">
           <div id="information-wrapper-3">
-            <div
-              className="information-subContent-title"
-              id="information-services"
-            >
-              <h2>What you can find here</h2>
-            </div>
-            <div
-              className="information-subContent"
-              id="information-services-content"
-            >
-              <Row id="services-row">
-                <Col>
-                  <p className="service">
-                    Our Services <br />
-                    <a href="/services">
-                      <span>
-                        <Button
-                          variant="outline-warning"
-                          size="sm"
-                          className="mt-3 services-button"
-                        >
-                          Learn More!
-                        </Button>
-                      </span>
-                    </a>
-                  </p>
-                </Col>
-                <Col>
-                  <p className="service">
-                    Find Doctors <br />
-                    <a href="/find-doctors">
-                      <span>
-                        <Button
-                          variant="outline-warning"
-                          size="sm"
-                          className="mt-3 services-button"
-                        >
-                          Find Now!
-                        </Button>
-                      </span>
-                    </a>
-                  </p>
-                </Col>
-
-                <Col>
-                  <p className="service">
-                    News and Updates <br />
-                    <span>
-                      <a href="/news-updates">
-                        <Button
-                          variant="outline-warning"
-                          size="sm"
-                          className="mt-3 services-button"
-                        >
-                          Read Now!
-                        </Button>
+            <div id="information-wrapper-3-container">
+              <div
+                className="information-subContent-title"
+                id="information-services"
+              >
+                <h2>What you can find here</h2>
+              </div>
+              <div
+                className="information-subContent"
+                id="information-services-content"
+              >
+                <Row id="services-row">
+                  <Col>
+                    <p className="service">
+                      Our Services <br />
+                      <a href="/services">
+                        <span>
+                          <Button
+                            variant="outline-warning"
+                            size="sm"
+                            className="mt-3 services-button"
+                          >
+                            Learn More!
+                          </Button>
+                        </span>
                       </a>
-                    </span>
-                  </p>
-                </Col>
+                    </p>
+                  </Col>
+                  <Col>
+                    <p className="service">
+                      Find Doctors <br />
+                      <a href="/find-doctors">
+                        <span>
+                          <Button
+                            variant="outline-warning"
+                            size="sm"
+                            className="mt-3 services-button"
+                          >
+                            Find Now!
+                          </Button>
+                        </span>
+                      </a>
+                    </p>
+                  </Col>
 
-                <Col>
-                  <p className="service">
-                    Online Patient Survey <br />
-                    <a href="/online-patient-survey">
+                  <Col>
+                    <p className="service">
+                      News and Updates <br />
                       <span>
-                        <Button
-                          variant="outline-warning"
-                          size="sm"
-                          className="mt-3 services-button"
-                        >
-                          See More!
-                        </Button>
+                        <a href="/news-updates">
+                          <Button
+                            variant="outline-warning"
+                            size="sm"
+                            className="mt-3 services-button"
+                          >
+                            Read Now!
+                          </Button>
+                        </a>
                       </span>
-                    </a>
-                  </p>
-                </Col>
-              </Row>
+                    </p>
+                  </Col>
+
+                  <Col>
+                    <p className="service">
+                      Online Patient Survey <br />
+                      <a href="/online-patient-survey">
+                        <span>
+                          <Button
+                            variant="outline-warning"
+                            size="sm"
+                            className="mt-3 services-button"
+                          >
+                            See More!
+                          </Button>
+                        </span>
+                      </a>
+                    </p>
+                  </Col>
+                </Row>
+              </div>
             </div>
           </div>
 

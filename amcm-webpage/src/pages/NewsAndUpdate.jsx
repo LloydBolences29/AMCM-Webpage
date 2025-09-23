@@ -4,11 +4,11 @@ import Footer from "../components/Footer";
 import UnderConstruction from '../components/UnderConstruction';
 
 const NewsAndUpdate = () => {
-      const menuLinks = [
+       const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
     { label: "Find Doctors", path: "/find-doctors" },
-    { label: "Billing and Admission", path: "/billing-admission" },
+    { label: "News and Update", path: "/news-updates" },
     { label: "Patient Rights", path: "/patient-rights" },
     { label: "Online Patient Survey", path: "/online-patient-survey" },
 

@@ -1,3 +1,7 @@
+#admin-content{
+    margin: 1.5em;
+}
+
 @media(min-width: 992px){
     #admin-content{
         display: grid;

@@ -64,8 +64,6 @@
     height: auto;
   }
 
-
-
   #information-values-content #values-row .col .value p {
     font-size: 1.3rem;
   }
@@ -206,6 +204,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+        box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
+
   }
   #information-wrapper-1 #information-mission {
     align-content: center;
@@ -231,12 +231,13 @@
   #information-values {
     text-align: center;
     color: #142c2e;
-    border-bottom: 3px solid #007682;
+    background-color:#007682;
+    padding: 0.4rem 0;
+
   }
   #information-values h2 {
     font-size: 2.5em;
-    margin-bottom: 0.3em;
-    color: #007682;
+    color: #ffffff;
   }
 
   #information-values-content {
@@ -245,8 +246,8 @@
   }
 
   #information-values-content #values-row {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
   }
 
@@ -438,7 +439,7 @@
 
   #information-wrapper-1 {
     margin-top: 1em;
-    width: inherit;
+    width: 100%;
     height: 25vh;
     text-align: center;
     display: flex;
@@ -688,7 +689,7 @@
 
   #information-wrapper-1 {
     margin-top: 1em;
-    width: inherit;
+    width: 100%;
     height: 25vh;
     text-align: center;
     display: flex;
@@ -923,7 +924,7 @@
   }
 }
 
-@media(min-width: 1400px){
+@media (min-width: 1400px) {
   .information-content {
     display: flex;
     flex-direction: column;
@@ -934,7 +935,7 @@
 
   #information-wrapper-1 {
     margin-top: 1em;
-    width: inherit;
+    width: 65vw;
     height: 25vh;
     text-align: center;
     display: flex;
@@ -976,14 +977,15 @@
   }
 
   #information-wrapper-2 {
-    width: inherit;
+    width: 65vw;
     text-align: center;
     margin: 2em 0;
+    justify-content: center;
   }
 
   #information-values {
     background-color: #007682;
-    width: 60vw;
+    width: 65vw;
     text-align: center;
     border-radius: 12px;
     color: white;
@@ -1011,7 +1013,13 @@
 
   #information-wrapper-3 {
     background-color: #007682;
-    width: 100%;
+    align-self: stretch;
+    justify-items: center;
+    
+  }
+
+  #information-wrapper-3-container {
+    width: 65vw;
     height: 25vh;
     display: flex;
     flex-direction: row;
@@ -1068,10 +1076,10 @@
 
   #information-wrapper-4 {
     height: 40vh;
-    width: inherit;
+    width: 65vw;
     text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
   }
 
@@ -1087,7 +1095,7 @@
   }
 
   #information-wrapper-5 {
-    width: inherit;
+    width: 65vw;
     text-align: center;
     background-color: #007682;
     border-radius: 18px;
@@ -1096,7 +1104,7 @@
     padding: 1em 0;
     margin: 0 2em 1em 2em;
     color: #ffa92d;
-    width: inherit;
+    width: auto;
     border-bottom: 3px solid #ffa92d;
   }
 
@@ -1107,7 +1115,7 @@
     font-size: 20px;
   }
   .president-message {
-    width: 85%;
+    width: 65vw;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1164,5 +1172,3 @@
     color: #555;
   }
 }
-
-

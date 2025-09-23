@@ -62,7 +62,7 @@ const Education = () => {
         {services.map((service) => (
           <div key={service.id} id={service.id}>
             <Card className="services-card-content" sx={{ maxWidth: 345 }}>
-              <CardActionArea>
+              <CardActionArea component="a" href={service.link}>
                 <CardMedia
                   loading="lazy"
                   component="img"
@@ -70,17 +70,17 @@ const Education = () => {
                   image={service.image}
                   alt={service.title}
                 />
-                <CardContent>
+                {/* <CardContent>
                   <Typography variant="body2" sx={{ color: "text.secondary" }}>
                     {service.description}
                   </Typography>
-                </CardContent>
+                </CardContent> */}
               </CardActionArea>
-              <CardActions>
+              {/* <CardActions>
                 <Button size="small" color="primary" href={service.link}>
                   Learn More
                 </Button>
-              </CardActions>
+              </CardActions> */}
             </Card>
           </div>
         ))}

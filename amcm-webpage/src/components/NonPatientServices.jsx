@@ -62,9 +62,8 @@ const NonPatientServices = () => {
           {services.map((service) => (
             <div key={service.id} id={service.id}>
               <Card className="services-card-content" sx={{ maxWidth: 345 }}>
-                <CardActionArea>
+                <CardActionArea component="a" href={service.link}>
                   <CardMedia
-                  href={service.link}
                     loading="lazy"
                     component="img"
                     height="140"

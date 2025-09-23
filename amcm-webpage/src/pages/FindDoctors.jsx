@@ -24,49 +24,23 @@ const FindDoctors = () => {
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
     { label: "Find Doctors", path: "/find-doctors" },
-    { label: "Billing and Admission", path: "/billing-admission" },
+    { label: "News and Update", path: "/news-updates" },
     { label: "Patient Rights", path: "/patient-rights" },
     { label: "Online Patient Survey", path: "/online-patient-survey" },
 
   ];
-  const [activeDepartment, setActiveDepartment] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [searchValue, setSearchValue] = useState("");
-  const [departments, setDepartments] = useState([]);
-  const [doctors, setDoctors] = useState([]);
   const [showResult, setShowResult] = useState(false);
 
   const VITE_API_URL = import.meta.env.VITE_API_URL;
-
-  const fetchAllDepartments = async () => {
-    try {
-      const response = await fetch(
-        `${VITE_API_URL}/department/get-all-departments`,
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
-
-      const res = await response.json();
-      setDepartments(res);
-    } catch (error) {
-      console.error("Error fetching departments:", error);
-    }
-  };
 
   const handleSearch = () => {
     setSearchValue(searchInput);
     setShowResult(true);
   };
 
-  useEffect(() => {
-    fetchAllDepartments();
-  }, []);
 
-  console.log("Active Department:", activeDepartment);
-  console.log("Data fetched:", departments);
-  console.log("Doctors fetched:", doctors);
   return (
     <div className="home-body">
       <div className="home-content">
@@ -100,94 +74,7 @@ const FindDoctors = () => {
           </Container>
           <div id="find-doctors-wrapper">
             <div id="department-wrapper">
-              {/* {departments.map((department, index) => (
-                <div key={index} id="department-card">
-                  <Button
-                    variant={
-                      activeDepartment === department.Name
-                        ? "primary active"
-                        : "outline-primary"
-                    }
-                    onClick={() => setActiveDepartment(department.Name)}
-                  >
-                    {department.Name}
-                  </Button>
-                </div>
-              ))} */}
-              {/* <FormControl sx={{ m: 1, minWidth: 300, maxWidth: "100%" }}>
-                <InputLabel
-                  id="department-select-label"
-                  sx={{ color: "#142C2E" }}
-                >
-                  Departments
-                </InputLabel>
-                <Select
-                  labelId="department-select-label"
-                  id="department-select"
-                  value={activeDepartment}
-                  onChange={(e) => setActiveDepartment(e.target.value)}
-                  label="Departments"
-                  sx={{
-                    backgroundColor: "#fff", // or use a light version like "#f5f5f5"
-                    color: "#142C2E", // Text color
-                    ".MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#D3D3D3", // Border color (default)
-                    },
-                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#142C2E", // Border color (focused)
-                    },
-                    "&:hover .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#142C2E", // Border on hover
-                    },
-                    "& .MuiSelect-icon": {
-                      color: "#142C2E", // Down arrow color
-                    },
-                  }}
-                  MenuProps={{
-                    PaperProps: {
-                      sx: {
-                        width: "100%", // Let the dropdown match the input width
-                        maxWidth: "90%", // Ensure it doesn't exceed the input width
-                        maxHeight: 300,
-                        overflowX: "hidden", // Avoid horizontal scroll
-                        color: "#142C2E", // Text color in dropdown
-                      },
-                    },
-                  }}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  {departments.map((department) => (
-                    <MenuItem
-                      key={department.Name}
-                      value={department.Name}
-                      sx={{
-                        color: "#142C2E",
-                        whiteSpace: "normal", // Allow text wrapping
-                        wordBreak: "break-word", // Handle long department names
-                      }}
-                    >
-                      {department.Name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl> */}
               <div id="search-bar-container">
-                {/* <FormControl id="search-form">
-                  <InputLabel htmlFor="search-input">Search</InputLabel>
-                  <Input
-                    id="search-input"
-                    type="text"
-                    placeholder="Search for doctors or department"
-                    value={searchInput}
-                    onChange={(e) => setSearchInput(e.target.value)}
-                  />
-                  <FormHelperText id="search-helper-text">
-                    Enter keywords to find relevant doctors or department.
-                  </FormHelperText>
-                </FormControl> */}
-
                 <input
                   type="text"
                   id="search-input"
