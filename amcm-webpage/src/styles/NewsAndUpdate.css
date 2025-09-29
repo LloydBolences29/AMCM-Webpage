@@ -13,6 +13,22 @@
   gap: 24px;
 } */
 
+#label-filter{
+  margin-right: 1rem;
+}
+#news-and-update-card-details{
+  width: 100%;
+}
+#news-and-update-card-details #news-and-update-card-title {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #FFA92D;
+  border-bottom: #FFA92D 2px solid;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+
 /*for mobile design*/
 @media (max-width: 767px) {
   #date-filter-sections {
@@ -48,10 +64,9 @@
     margin: 2rem;
   }
   #news-and-update-card-wrapper {
-    background-color: #f0f0f0;
     padding: 1rem;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
 
   #news-and-update-card-details {
@@ -60,10 +75,10 @@
 
   #news-and-update-card-details a {
     text-decoration: none;
-    border: 1px solid #163235;
+    border: 1px solid #FFA92D;
     padding: 0.5rem 1rem;
     border-radius: 3rem;
-    color: #163235;
+    color: #FFA92D;
   }
 
   #thumbnail-images {
@@ -76,6 +91,7 @@
 
 /*for tablet views*/
 @media (min-width: 768px) and (max-width: 1024px) {
+  /* Ruless for the filtering button section.  */
   #date-filter-sections {
     display: flex;
     flex-direction: row;
@@ -96,6 +112,7 @@
     padding: 0.3rem 1rem;
     color: #163235;
   }
+  /* ruless for the news and update cards */
   #news-and-update-cards-container{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -110,16 +127,15 @@
   }
   #news-and-update-card-details a {
     text-decoration: none;
-    border: 1px solid #163235;
+    border: 1px solid #FFA92D;
     padding: 0.5rem 1rem;
     border-radius: 3rem;
-    color: #163235;
+    color: #FFA92D;
   }
   #news-and-update-card-wrapper{
-    background-color: #f0f0f0;
     padding: 1rem;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
     width: 100%;
   }
   #thumbnail-images {
@@ -129,3 +145,94 @@
     margin-bottom: 1rem;
   }
 }
+
+/*for desktop views*/
+@media (min-width: 1025px) {
+/*Rules for the filter option section*/
+  #date-filter-sections {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin: 0 2.5rem;
+  }
+
+  #filter-options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+    #add-news-button {
+    border-radius: 3rem;
+    background-color: transparent;
+    border: 1px solid #163235;
+    padding: 0.3rem 1rem;
+    color: #163235;
+  }
+/* Rules for news and update cards  */
+  #news-and-update-cards-container{
+    display: grid;
+    grid-template-rows: auto;
+    gap: 2rem;
+    padding: 2rem 4rem;
+  }
+  #news-and-update-card-wrapper{
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  #news-and-update-card-details{
+    /* border-left: #ffa72d93 0.15rem solid; */
+    padding-left: 0.9rem;
+  }
+  #news-and-update-card-details a {
+    text-decoration: none;
+    border: 1px solid #FFA92D;
+    padding: 0.3rem 0.8rem;
+    border-radius: 3rem;
+    color: #FFA92D;
+  }
+  #news-and-update-card-details a:hover{
+    background-color: #FFA92D;
+    border: 1px solid #FFA92D;
+    color: black;
+  }
+
+  #thumbnail-images{
+    width: 30%;
+    height: auto;
+    border-radius: 8px;
+  }
+}
+
+@media only screen and (min-width: 1400px){
+  #news-and-update-cards-container{
+    display: grid;
+    grid-template-rows: auto;
+    gap: 2rem;
+    padding: 2rem 2rem;
+    margin: 4em;
+    width: 90%;
+    /* border-left: #1632358c 0.5rem solid;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px; */
+    color: #163235;
+
+  }
+
+  #news-and-update-card-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  #thumbnail-images{
+    width: 25%;
+    height: auto;
+    border-radius: 8px;
+  }
+} 

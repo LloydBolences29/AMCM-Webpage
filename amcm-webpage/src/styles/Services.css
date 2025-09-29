@@ -111,12 +111,34 @@
 
 @media (min-width: 992px) and (max-width: 1199px) {
   #services-container {
-    margin: 3em 4em;
-  }
-
-  .services-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 2em;
   }
+
+  #anchor-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+  }
+
+  .anchor-button {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-color: #142c2e !important;
+    color: #142c2e !important;
+  }
+
+  .anchor-button:hover {
+    background-color: #142c2e !important;
+    color: #ffffff !important;
+  }
+
+  .anchor-button.active {
+    background-color: #142c2e !important;
+    color: #ffffff !important;
+  }
+
   #services-card-wrapper .divider {
     margin: 2em 0;
   }
@@ -124,8 +146,46 @@
   .service-content .divider #chip {
     background-color: #163235;
     color: #ffffff;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     padding: 1.2em;
+  }
+
+  #services-card-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2em;
+  }
+
+  #services-card-wrapper .services-card .services-card-content {
+    width: 30vw;
+  }
+
+  #patient-services-wrapper .services-card,
+  #non-patient-services .services-card,
+  #government-collaborative-services .services-card,
+  #education-services .services-card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2em;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .services-card {
+    margin: 2em;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2em;
+  }
+  .services-card-content {
+    width: 100%;
+    max-width: 445px;
+    height: 100%;
   }
 }
 @media (min-width: 1200px) {

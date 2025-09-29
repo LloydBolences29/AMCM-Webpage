@@ -147,13 +147,12 @@ const NewsAndUpdate = () => {
               <div id="date-filter-sections">
                 <div id="filter-options">
                   <div id="label-filter">
-                    <label htmlFor="">Filter by:</label>
+                    <label htmlFor="">Filter by year: </label>
                   </div>
 
                   <div id="options-filter">
                     {/* filter by year */}
                     <div className="filter-option">
-                      <label htmlFor="year">Year:</label>
                       <select name="year" id="year">
                         {fetchedYears.map((year) => (
                           <option key={year.id} value={year.issued_year}>
@@ -165,7 +164,7 @@ const NewsAndUpdate = () => {
                   </div>
                 </div>
 
-                {auth.isAuthenticated && auth.user.role === "editor" && (
+                {auth.isAuthenticated && auth.user.role === "editor" || auth.user.role === "admin" && (
                   <>
                     <div id="add-news-button-wrapper">
                       <button id="add-news-button" onClick={handleShow}>
@@ -284,28 +283,36 @@ const NewsAndUpdate = () => {
                 {fetchedNews.map((newsItem) => (
                   <div
                     className={`news-and-update-card`}
-                    id="news-and-update-card-container"
+                    id="news-and-update-card"
                     key={newsItem.id}
                   >
                     <div id="news-and-update-card-wrapper">
-                      <img
-                        id="thumbnail-images"
-                        src={`${VITE_API_URL}/uploads/thumbnail/${newsItem.thumbnail}`}
-                        loading="lazy"
-                        alt="News Thumbnail"
-                        className="news-thumbnail"
-                      />
+                      
+                        <img
+                          id="thumbnail-images"
+                          src={`${VITE_API_URL}/uploads/thumbnail/${newsItem.thumbnail}`}
+                          loading="lazy"
+                          alt="News Thumbnail"
+                          className="news-thumbnail"
+                        />
+                     
                       <div id="news-and-update-card-details">
-                        <h3>{newsItem.title}</h3>
-                        <p>{newsItem.news_description}</p>
-                        <p>Issued Date: {newsItem.issued_date}</p>
-                        <a
-                          href={`${VITE_API_URL}/uploads/pdfFile/${newsItem.unique_filename}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Read More
-                        </a>
+                        <div id="news-and-update-card-title">
+                          <h3>{newsItem.title}</h3>
+                        </div>
+                        <div id="news-and-update-card-content">
+                          <p>{newsItem.news_description}</p>
+                          <p>Issued Date: {newsItem.issued_date}</p>
+                        </div>
+                        <div id="read-more-button-wrapper">
+                          <a
+                            href={`${VITE_API_URL}/uploads/pdfFile/${newsItem.unique_filename}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Read More
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>

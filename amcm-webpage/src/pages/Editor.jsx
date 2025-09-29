@@ -9,7 +9,7 @@ import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
-import SeventhGrid from "../../../../amcm-website/src/components/SeventhGrid";
+import SeventhGrid from "../components/SeventhGrid";
 import { Row, Col, Button } from "react-bootstrap";
 
 const AddDepartment = lazy(() => import("../components/AddDepartment"));
