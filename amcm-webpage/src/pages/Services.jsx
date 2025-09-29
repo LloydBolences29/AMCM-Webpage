@@ -5,7 +5,6 @@ import CardContent from "@mui/material/CardContent";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import "../styles/Services.css";
-import Skeleton from "react-loading-skeleton";
 import Button from "react-bootstrap/Button";
 import EKGSpinner from "../components/EKGSpinner";
 

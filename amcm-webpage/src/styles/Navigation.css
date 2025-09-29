@@ -53,7 +53,7 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .header {
     padding-bottom: 1em;
     flex-direction: column;
@@ -88,8 +88,46 @@
 
 
 
-@media (min-width: 992px) {
+@media (min-width: 1025px) {
   .header {
+    padding-bottom: 1em;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .amcm-logo-wrapper {
+    width: 20vw;
+  }
+  .amcm-logo {
+    width: 100%;
+    height: auto;
+  }
+
+  #main-menu-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+  }
+
+  .header-menu {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  #page-menu {
+    display: none;
+  }
+  .page-link.active {
+  color: #007682;
+  font-weight: bold;
+  border-bottom: 2px solid #007682;
+}
+}
+@media (min-width: 1240px){
+    .header {
     padding-bottom: 1em;
     flex-direction: row;
     justify-content: space-between;

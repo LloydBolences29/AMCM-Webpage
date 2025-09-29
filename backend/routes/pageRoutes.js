@@ -1,134 +1,125 @@
+// /pageRoutes.js
 const express = require("express");
 const router = express.Router();
 const { connectToDatabase } = require("../lib/db");
 const multer = require("multer");
-// const upload = multer({ dest: "uploads/" }); // Set the destination for uploaded files
+const path = require("path");
+
+// Configure Multer storage
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/');
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
+  destination: (req, file, cb) => {
+    // Check the name of the form field (news-file or news-thumbnail)
+    if (file.fieldname === "news-file") {
+      // Store PDF files here
+      cb(null, path.join(__dirname, "..", "uploads", "pdfFile"));
+    } else if (file.fieldname === "news-thumbnail") {
+      // Store thumbnail files here
+      cb(null, path.join(__dirname, "..", "uploads", "thumbnail"));
+    } else {
+      // Fallback for any other unexpected file field
+      cb(new Error("Invalid file field name"), false);
     }
+  },
+  filename: (req, file, cb) => {
+    // Multer automatically ensures unique filenames
+    cb(null, file.originalname);
+  },
 });
 const upload = multer({ storage });
 
-//importing images using multer
 router.post(
   "/upload-image",
-  upload.single("backgroundImage"),
+  upload.fields([
+    { name: "news-thumbnail", maxCount: 1 },
+    { name: "news-file", maxCount: 1 },
+  ]),
   async (req, res) => {
     try {
-      const { file } = req;
-      if (!file) {
-        return res.status(400).json({ error: "No file uploaded" });
+      const { title, issued_date, news_description } = req.body;
+
+      const pdfFile = req.files["news-file"] ? req.files["news-file"][0] : null;
+      const thumbnailFile = req.files["news-thumbnail"]
+        ? req.files["news-thumbnail"][0]
+        : null;
+
+      // Check for required files first to prevent crashes
+      if (!pdfFile || !thumbnailFile) {
+        console.error("Missing files:", {
+          pdf: !!pdfFile,
+          thumbnail: !!thumbnailFile,
+        });
+
+        console.error("Data being sent", pdfFile, thumbnailFile, req.body);
+        return res
+          .status(400)
+          .json({ message: "PDF file and thumbnail image are required." });
       }
 
-      // Here you can save the file information to the database if needed
-      const fileUrl = `${file.filename}`;
-      res.status(200).json({ message: "Image uploaded successfully", success: true, file: fileUrl });
+      const originalPdfName = pdfFile.originalname;
+      const uniquePdfName = pdfFile.filename;
+      const uniqueThumbnailName = thumbnailFile.filename;
+
+      console.log("📩 Incoming body:", req.body);
+      console.log("📁 Uploaded files:", req.files);
+
+      const db = await connectToDatabase();
+
+      console.log("📦 Inserting into DB with values:", {
+        title,
+        issued_date,
+        originalPdfName,
+        uniquePdfName,
+        uniqueThumbnailName,
+        news_description,
+      });
+
+      const sql =`INSERT INTO upload_news (title, issued_date, original_filename, unique_filename, thumbnail, news_description) VALUES (?, ?, ?, ?, ?, ?)`;
+      const values =  [
+          title,
+          issued_date,
+          originalPdfName,
+          uniquePdfName,
+          uniqueThumbnailName,
+          news_description,
+        ]
+
+      const [result] = await db.query(sql, values);
+
+      res.status(200).json({ message: "Successfully added to the database.", result });
+      console.log("✅ Insert success:", result);
     } catch (error) {
-      console.error("Error uploading image:", error);
-      res.status(500).json({ error: "Internal server error" });
+      console.error("Unexpected error:", error);
+      res.status(500).json({ message: "Internal Server Error" });
     }
+
+    
+    console.log("📩 Incoming body after db query:", req.body);
+    console.log("📁 Uploaded files after db query:", req.files);
   }
 );
 
-//saving the page to the database
-router.post("/save-page", async (req, res) => {
-  const sections = req.body; // Array of sections (hero + information)
+router.get("/get-news", async (req, res) => {
+try {
+  const db = await connectToDatabase();
 
+  const [rows] = await db.query("SELECT title, DATE_FORMAT(issued_date, '%Y-%m-%d') AS issued_date, original_filename, unique_filename, thumbnail, news_description FROM upload_news");
+  res.status(200).json({message: "Successfully fetched from the database",rows});
+} catch (error) {
+  console.error ("Error fetching news:", error);
+  res.status(500).json({ message: "Internal Server Error" });
+}
+})
+
+router.get("/get-news-year", async (req, res) =>{
   try {
-    const connection = await connectToDatabase();
+    const db = await connectToDatabase();
 
-    for (const section of sections) {
-      const { id, section_type, content, backgroundColor, mediaPath, slug } = section;
-
-      // Check if the section_type already exists
-      const [rows] = await connection.query(
-        "SELECT * FROM pages WHERE section_type = ?",
-        [section_type]
-      );
-
-      if (rows.length > 0) {
-        // Update existing section
-        await connection.query(
-          "UPDATE pages SET content = ?, mediaPath = ?, backgroundColor = ?, slug = ? WHERE section_type = ?",
-          [content, mediaPath, backgroundColor, slug, section_type]
-        );
-      } else {
-        // Insert new section
-        await connection.query(
-          "INSERT INTO pages (id, section_type, content, mediaPath, backgroundColor, slug) VALUES (?, ?, ?, ?, ?, ?)",
-          [id, section_type, content, mediaPath, backgroundColor, slug]
-        );
-      }
-    }
-
-    console.log("Items to be posted:", sections);
-    res.status(200).json({ message: "Page saved successfully!" });
+    const [rows] = await db.query("SELECT DISTINCT DATE_FORMAT(issued_date, '%Y') AS issued_year FROM upload_news ORDER BY issued_year DESC");
+    res.status(200).json({message: "Successfully fetched the year", rows});
   } catch (error) {
-    console.error("Error saving page:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.log("Error Fetching the year.", error)
+    res.status(500).json({ message: "Internal Server Error" });
   }
-});
+})
 
-//get the page from the database
-router.get("/get-all-sections", async (req, res) => {
-  try {
-    const connection = await connectToDatabase();
-    const [rows] = await connection.query("SELECT * FROM pages");
-
-    if (rows.length === 0) {
-      return res.status(404).json({ error: "No sections found" });
-    }
-
-    res.status(200).json(rows);
-  } catch (error) {
-    console.error("Error fetching sections:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-// Update the page in the database
-router.put("/update-page/:slug", async (req, res) => {
-  const { slug } = req.params;
-  const { title, content } = req.body;
-  if (!title || !content) {
-    return res.status(400).json({ error: "Title and content are required" });
-  }
-  try {
-    const connection = await connectToDatabase();
-    const [result] = await connection.query(
-      "UPDATE pages SET title = ?, content = ? WHERE slug = ?",
-      [title, content, slug]
-    );
-
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ error: "Page not found" });
-    }
-
-    res.status(200).json({ message: "Page updated successfully" });
-  } catch (error) {
-    console.error("Error updating page:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-//for deletion of the page
-router.delete("/delete-page/:id", async (req, res) => {
-  const { id } = req.params;
-
-  console.log("Deleting page with ID:", id);
-
-  try {
-    const connection = await connectToDatabase();
-    const [rows] = await connection.query("DELETE FROM pages WHERE id = ?", [
-      id,
-    ]);
-    res.status(200).json({ message: "Page deleted successfully" });
-  } catch (error) {
-    console.error("Error deleting page:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
 module.exports = router;

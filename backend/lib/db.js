@@ -6,7 +6,7 @@ let connection;
 
 const connectToDatabase = async () => {
   if (!connection) {
-    connection = await mysql.createConnection({
+    connection = await mysql.createPool({
       host: process.env.DB_HOST,
       port: process.env.DB_PORT,
       user: process.env.DB_USER,
