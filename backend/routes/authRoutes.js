@@ -4,7 +4,11 @@ const bcrypt = require('bcrypt');
 const { connectToDatabase } = require('../lib/db');
 const jwt = require('jsonwebtoken');
 
-router.post('/register', async (req, res) => {
+//importing middlewares
+const authMiddleware = require('../middleware/auth');
+const checkRole = require('../middleware/checkRole');
+
+router.post('/register', authMiddleware, checkRole(['admin']), async (req, res) => {
   const { username, email, password, role } = req.body;
 
   if (!email || !password) {

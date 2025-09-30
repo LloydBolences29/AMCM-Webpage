@@ -48,7 +48,7 @@ function App() {
               <Route path="/service/:id" element={<ServiceDetailRenderer />} />
   
               {/* Route for editors*/}
-              <Route element={<ProtectedRoutes allowedRoles={["editor"]} />}>
+              <Route element={<ProtectedRoutes allowedRoles={["editor", "admin"]} />}>
                 <Route path="/editor" element={<Editor />} />
               </Route>
       

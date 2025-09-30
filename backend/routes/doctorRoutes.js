@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const { connectToDatabase } = require("../lib/db");
 
+//import all the middlewares
+const authMiddleware = require("../middleware/auth");
+const checkRole = require("../middleware/checkRole");
+
 
 router.get("/get-all-doctors", async (req, res) => {
   try {
@@ -42,7 +46,7 @@ router.get("/get-all-doctors", async (req, res) => {
 
 //Add doctors to the database
 //endpoint for AddDoctor component
-router.post("/add-doctor", async (req, res) => {
+router.post("/add-doctor", authMiddleware, checkRole(["editor", "admin"]), async (req, res) => {
   try {
     const db = await connectToDatabase();
     const {
@@ -93,7 +97,7 @@ router.post("/add-doctor", async (req, res) => {
 
 //add the schedule of the doctor
 //endpoint for AddSchedule component
-router.post("/add-schedule", async (req, res) => {
+router.post("/add-schedule", authMiddleware, checkRole(["editor", "admin"]), async (req, res) => {
   try {
     const db = await connectToDatabase();
     const {
@@ -142,7 +146,7 @@ router.post("/add-schedule", async (req, res) => {
 
 //get all doctors with their department
 //endpoint for AddKeyword component
-router.get("/get-doctors-departments", async (req, res) => {
+router.get("/get-doctors-departments",  async (req, res) => {
   try {
     const db = await connectToDatabase();
     // Fetch all doctors and their departments
@@ -372,7 +376,7 @@ try {
 
 //update doctors information
 //endpoint for DoctorManagement
-router.put("/doctor-update-information/:id", async (req, res) =>{
+router.put("/doctor-update-information/:id", authMiddleware, checkRole(["admin"]), async (req, res) =>{
   try {
     const db = await connectToDatabase();
     const { id } = req.params;

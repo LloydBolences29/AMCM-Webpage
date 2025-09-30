@@ -5,6 +5,10 @@ const { connectToDatabase } = require("../lib/db");
 const multer = require("multer");
 const path = require("path");
 
+//import all the middlewares
+const authMiddleware = require("../middleware/auth");
+const checkRole = require("../middleware/checkRole");
+
 // Configure Multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -32,7 +36,7 @@ router.post(
   upload.fields([
     { name: "news-thumbnail", maxCount: 1 },
     { name: "news-file", maxCount: 1 },
-  ]),
+  ]), authMiddleware, checkRole(["editor", "admin"]),
   async (req, res) => {
     try {
       const { title, issued_date, news_description } = req.body;
@@ -119,6 +123,22 @@ router.get("/get-news-year", async (req, res) =>{
   } catch (error) {
     console.log("Error Fetching the year.", error)
     res.status(500).json({ message: "Internal Server Error" });
+  }
+})
+
+//filter by date
+router.get("/filter-date", async (req, res) =>{
+  try {
+    const { year } = req.query;
+    const db = await connectToDatabase();
+
+    const [rows] = await db.query("SELECT id, title, DATE_FORMAT(issued_date, '%Y-%m-%d') AS issued_date, original_filename, unique_filename, thumbnail, news_description FROM upload_news WHERE YEAR(issued_date) = ?", [year]);
+
+    res.status(200).json({message: "Successfully filtered the date", rows});
+    
+  } catch (error) {
+    console.log("Error filtering date", error)
+    res.status(500).json({ message: "Internal Server Error." })
   }
 })
 

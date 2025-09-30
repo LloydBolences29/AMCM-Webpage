@@ -29,7 +29,7 @@ const NewsAndUpdate = () => {
   const { auth } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [payload, setPayload] = useState(initialStateValue);
-
+  const [year, setYear] = useState("All");
   const [fetchedNews, setFetchedNews] = useState([]);
   const [fetchedYears, setFetchedYears] = useState([]);
   const handleClose = () => setShowModal(false);
@@ -80,6 +80,27 @@ const NewsAndUpdate = () => {
       console.error("Error submitting news:", error);
     }
   };
+
+  const handleOnChange = async (e) =>{
+    const selectedYear = e.target.value;
+    setYear(selectedYear);
+
+    try {
+          const url =
+      selectedYear === "All"
+        ? `${VITE_API_URL}/page/get-news`
+        : `${VITE_API_URL}/page/filter-date?year=${selectedYear}`;
+
+      const response = await fetch(url);
+
+      if (response.ok) {
+        const data = await response.json();
+        setFetchedNews(data.rows);
+      }
+    } catch (error) {
+      console.error("Error filtering news by date:", error);
+    }
+  }
 
   //fetch the updated news and updates
   const fetchNewsAndUpdates = async () => {
@@ -153,9 +174,10 @@ const NewsAndUpdate = () => {
                   <div id="options-filter">
                     {/* filter by year */}
                     <div className="filter-option">
-                      <select name="year" id="year">
+                      <select name="year" id="year" value={year} onChange={handleOnChange}>
+                        <option value="All" defaultValue>All</option>
                         {fetchedYears.map((year) => (
-                          <option key={year.id} value={year.issued_year}>
+                          <option key={year.id} value={`${year.issued_year}`} >
                             {year.issued_year}
                           </option>
                         ))}
@@ -164,7 +186,7 @@ const NewsAndUpdate = () => {
                   </div>
                 </div>
 
-                {auth.isAuthenticated && auth.user.role === "editor" || auth.user.role === "admin" && (
+                {auth.isAuthenticated && (auth.user.role === "editor" || auth.user.role === "admin") && (
                   <>
                     <div id="add-news-button-wrapper">
                       <button id="add-news-button" onClick={handleShow}>
@@ -280,6 +302,7 @@ const NewsAndUpdate = () => {
               {/* news and update cards here */}
               {/* thumbnail for the card */}
               <div id="news-and-update-cards-container">
+              
                 {fetchedNews.map((newsItem) => (
                   <div
                     className={`news-and-update-card`}
@@ -317,6 +340,7 @@ const NewsAndUpdate = () => {
                     </div>
                   </div>
                 ))}
+                
               </div>
             </div>
           </div>
@@ -340,3 +364,7 @@ const NewsAndUpdate = () => {
 };
 
 export default NewsAndUpdate;
+
+
+// to do: Protect the backend API endpoints by
+// implementing a middleware that will check the user role

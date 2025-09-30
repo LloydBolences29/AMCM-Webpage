@@ -16,7 +16,7 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
       link: "/admin",
     },
     {
-      role: "editor",
+      role: ["editor", "admin"],
       label: "Editor Dashboard",
       link: "/editor",
     }
@@ -119,7 +119,12 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
               {auth.isAuthenticated && (
                 <>
                   {additionalLinks.map((item) => {
-                    if (auth.user.role === item.role) {
+                    const allowed =
+                      Array.isArray(item.role)
+                        ? item.role.includes(auth.user.role) // check if user's role is in the allowed roles
+                        : auth.user.role === item.role;       // fallback for single role
+
+                    if (allowed) {
                       return (
                         <li key={item.link}>
                           <NavLink className="sidebar-link" to={item.link}>
@@ -128,10 +133,12 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
                         </li>
                       );
                     }
-                    return null; // return nothing if roles don't match
+
+                    return null;
                   })}
                 </>
               )}
+
               {auth.isAuthenticated ? (
                 <li>
                   <button className="logout-btn" onClick={handleLogout}>

@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { connectToDatabase } = require("../lib/db");
+
+//import all the middlewares
+const authMiddleware = require("../middleware/auth");
+const checkRole = require("../middleware/checkRole");
 //get all the department with pagination
 router.get("/get-all-departments", async (req, res) => {
   try {
@@ -39,7 +43,7 @@ router.get("/get-all-departments", async (req, res) => {
 });
 
 //get all the department WITHOUT pagination
-router.get("/get-departments", async (req, res) => {
+router.get("/get-departments",  async (req, res) => {
   try {
     const db = await connectToDatabase();
     // Fetch all departments
@@ -83,7 +87,7 @@ router.get("/search-department/:searchTerm", async (req, res) => {
   }
 });
 
-router.post("/add-department", async (req, res) => {
+router.post("/add-department", authMiddleware, checkRole(["editor", "admin"]), async (req, res) => {
   const { name } = req.body;
 
   if (!name) {
@@ -110,7 +114,7 @@ router.post("/add-department", async (req, res) => {
 });
 
 //Update an entry in the departments table in the database
-router.put("/update-department/:id", async(req, res) =>{
+router.put("/update-department/:id", authMiddleware, checkRole(["editor", "admin"]), async(req, res) =>{
 
   try {
     const db = await connectToDatabase();
@@ -139,7 +143,7 @@ router.put("/update-department/:id", async(req, res) =>{
 })
 
 //deletion of the department in the database
-router.delete("/delete-department/:id", async (req, res) =>{
+router.delete("/delete-department/:id", authMiddleware, checkRole(["admin"]), async (req, res) =>{
 try {
   const db = await connectToDatabase();
 

@@ -2,7 +2,11 @@ const express = require("express");
 const router = express.Router();
 const { connectToDatabase } = require("../lib/db");
 
-router.post("/add-keyword", async (req, res) => {
+//import all the middlewares
+const authMiddleware = require("../middleware/auth");
+const checkRole = require("../middleware/checkRole");
+
+router.post("/add-keyword", authMiddleware, checkRole(["editor", "admin"]), async (req, res) => {
   try {
     const db = await connectToDatabase();
     const { doctorDepartment_id, keyword } = req.body;
