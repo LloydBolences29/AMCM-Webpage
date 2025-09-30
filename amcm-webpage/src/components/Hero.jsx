@@ -79,7 +79,7 @@ const navigate = useNavigate();
                   id="search-input"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Search for doctors, departments, or services..."
+                  placeholder="Search for doctors, or illnesses..."
                 />
                 <button
                   type="submit"

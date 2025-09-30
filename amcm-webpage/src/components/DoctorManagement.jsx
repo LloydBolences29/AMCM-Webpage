@@ -87,7 +87,10 @@ const DoctorManagement = () => {
   const fetchAllDepartment = async () => {
     try {
       const response = await fetch(
-        `${VITE_API_URL}/department/get-departments`
+        `${VITE_API_URL}/department/get-departments`, 
+        {
+          credentials: "include",
+        }
       );
       const data = await response.json();
       setDepartments(data);
@@ -113,6 +116,7 @@ const DoctorManagement = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(doctorDataToSend),
+          credentials: "include",
         }
       );
 

@@ -78,9 +78,10 @@ router.post("/add-doctor", authMiddleware, checkRole(["editor", "admin"]), async
     );
 
     const doctorId = result.insertId;
+    console.log(doctorId)
 
     // 3. Link doctor with department
-    const [deptlinkResult] = await db.execute(
+    await db.execute(
       `INSERT INTO doctor_department (doctor_id, department_id) VALUES (?, ?)`,
       [doctorId, departmentId]
     );
@@ -137,7 +138,9 @@ router.post("/add-schedule", authMiddleware, checkRole(["editor", "admin"]), asy
       ]
     );
 
-    res.status(201).json({ message: "Schedule added successfully.", result });
+    console.log("To be sent: ", result)
+
+    res.status(201).json({ message: "Schedule added successfully.", result});
   } catch (error) {
     console.error("Error Adding a new Schedule. ", error);
     res.status(500).json({ message: "Internal Server Error" });

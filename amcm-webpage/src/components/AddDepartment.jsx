@@ -26,7 +26,10 @@ const AddDepartment = () => {
   const fetchDepartments = async () => {
     try {
       const response = await fetch(
-        `${VITE_API_URL}/department/get-departments`
+        `${VITE_API_URL}/department/get-departments`,
+        {
+          credentials: "include" // Include cookies if needed
+        }
       );
       const data = await response.json();
       setDepartments(data);
@@ -59,6 +62,7 @@ const AddDepartment = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ name: newDepartment }),
+          credentials: "include", // Include cookies if needed
         }
       );
 

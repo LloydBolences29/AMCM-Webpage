@@ -48,7 +48,10 @@ const AddSchedule = () => {
   const fetchAllDoctorData = async () => {
     try {
       const response = await fetch(
-        `${VITE_API_URL}/doctor/get-doctors-departments/${searchDoctorValue}`
+        `${VITE_API_URL}/doctor/get-doctors-departments/${searchDoctorValue}`,
+        {
+          credentials: "include",
+        }
       );
       if (response.ok) {
         const data = await response.json();
@@ -71,7 +74,10 @@ const AddSchedule = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(form),
+        credentials: "include",
       });
+
+      console.log("To be sent: ", form)
 
       if (response.ok) {
         const data = await response.json();
@@ -100,7 +106,7 @@ const AddSchedule = () => {
   const handleDoctorSelect = (doctor) => {
     setForm({
       ...form,
-      doctor_department_id: doctor.ID,
+      doctor_department_id: doctor.id,
       name: doctor.name,
       department: doctor.department,
     });

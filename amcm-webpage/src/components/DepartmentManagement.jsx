@@ -90,7 +90,10 @@ const DepartmentManagement = () => {
   const handleSearch = async () => {
     try {
       const response = await fetch(
-        `${VITE_API_URL}/department/search-department/${searchTerm}`
+        `${VITE_API_URL}/department/search-department/${searchTerm}`,
+        {
+          credentials: "include",
+        }
       );
 
       if (response.ok) {
@@ -138,6 +141,7 @@ const DepartmentManagement = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ name: selectedDepartment.name }),
+          credentials: "include",
         }
       );
 

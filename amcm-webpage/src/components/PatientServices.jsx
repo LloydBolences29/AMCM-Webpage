@@ -62,14 +62,14 @@ const PatientServices = () => {
       link: "/service/dental",
     },
 
-    {
-      id: "medical-services-card",
-      image: "/dental-profile.jpg",
-      title: "Medical Services",
-      description:
-        "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
-      link: "/service/medical-service",
-    },
+    // {
+    //   id: "medical-services-card",
+    //   image: "/dental-profile.jpg",
+    //   title: "Medical Services",
+    //   description:
+    //     "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
+    //   link: "/service/medical-service",
+    // },
     {
       id: "pathAndLab-services-card",
       image: "/pathAndLab.png",
@@ -123,7 +123,7 @@ const PatientServices = () => {
             <Card className="services-card-content" sx={{ maxWidth: 345 }}>
               <CardActionArea component="a" href={service.link}>
                 <CardMedia
-                  loading="lazy"
+                  
                   component="img"
                   height="140"
                   image={service.image}

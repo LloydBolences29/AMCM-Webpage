@@ -58,8 +58,7 @@ const NewsAndUpdate = () => {
       const response = await fetch(`${VITE_API_URL}/page/upload-image`, {
         method: "POST",
         body: formData, // Send the FormData object directly
-        // Do NOT set the 'Content-Type' header here.
-        // The browser will automatically set it to 'multipart/form-data'
+        credentials: "include", // Include cookies if needed
       });
 
       console.log("data being sent", formData);
@@ -81,15 +80,15 @@ const NewsAndUpdate = () => {
     }
   };
 
-  const handleOnChange = async (e) =>{
+  const handleOnChange = async (e) => {
     const selectedYear = e.target.value;
     setYear(selectedYear);
 
     try {
-          const url =
-      selectedYear === "All"
-        ? `${VITE_API_URL}/page/get-news`
-        : `${VITE_API_URL}/page/filter-date?year=${selectedYear}`;
+      const url =
+        selectedYear === "All"
+          ? `${VITE_API_URL}/page/get-news`
+          : `${VITE_API_URL}/page/filter-date?year=${selectedYear}`;
 
       const response = await fetch(url);
 
@@ -302,7 +301,7 @@ const NewsAndUpdate = () => {
               {/* news and update cards here */}
               {/* thumbnail for the card */}
               <div id="news-and-update-cards-container">
-              
+
                 {fetchedNews.map((newsItem) => (
                   <div
                     className={`news-and-update-card`}
@@ -310,15 +309,15 @@ const NewsAndUpdate = () => {
                     key={newsItem.id}
                   >
                     <div id="news-and-update-card-wrapper">
-                      
-                        <img
-                          id="thumbnail-images"
-                          src={`${VITE_API_URL}/uploads/thumbnail/${newsItem.thumbnail}`}
-                          loading="lazy"
-                          alt="News Thumbnail"
-                          className="news-thumbnail"
-                        />
-                     
+
+                      <img
+                        id="thumbnail-images"
+                        src={`${VITE_API_URL}/uploads/thumbnail/${newsItem.thumbnail}`}
+                        loading="lazy"
+                        alt="News Thumbnail"
+                        className="news-thumbnail"
+                      />
+
                       <div id="news-and-update-card-details">
                         <div id="news-and-update-card-title">
                           <h3>{newsItem.title}</h3>
@@ -340,7 +339,7 @@ const NewsAndUpdate = () => {
                     </div>
                   </div>
                 ))}
-                
+
               </div>
             </div>
           </div>

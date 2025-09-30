@@ -85,6 +85,7 @@ const AddKeyword = () => {
           doctorDepartment_id: doctorName,
           keyword: keyword,
         }),
+        credentials: "include",
       });
 
       if (response.ok) {
