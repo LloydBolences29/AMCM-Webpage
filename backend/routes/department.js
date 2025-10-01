@@ -95,6 +95,8 @@ router.post("/add-department", authMiddleware, checkRole(["editor", "admin"]), a
   }
 
   try {
+
+    
     const db = await connectToDatabase();
     // Insert new department
     const [result] = await db.query(

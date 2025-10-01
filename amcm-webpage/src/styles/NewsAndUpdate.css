@@ -35,13 +35,20 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: space-between;
-    margin: 0 1rem;
+    justify-content: center;
+    margin: 1rem;
   }
   #filter-options {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
+  }
+  #add-news-button-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 1rem;
+    padding-bottom: 1rem;
   }
 
   #add-news-button {
@@ -96,14 +103,20 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: space-between;
-    margin: 0 2.5rem;
+    justify-content: center;
+    margin: 1rem 2.5rem;
   }
 
   #filter-options {
     display: flex;
     flex-direction: row;
     align-items: center;
+  }
+  #add-news-button-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 2.5rem;
+    padding-bottom: 1rem;
   }
     #add-news-button {
     border-radius: 3rem;
@@ -153,14 +166,21 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: space-between;
-    margin: 0 2.5rem;
+    justify-content: center;
+    margin: 1rem 2.5rem;
   }
 
   #filter-options {
     display: flex;
     flex-direction: row;
     align-items: center;
+  }
+
+  #add-news-button-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 2.5rem;
+    padding-bottom: 1rem;
   }
     #add-news-button {
     border-radius: 3rem;

@@ -205,15 +205,13 @@
     align-items: center;
     text-align: center;
     box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
-  
-
   }
   #information-wrapper-1 #information-mission {
     align-content: center;
     border-right: 3px solid #007682;
     height: 90%;
     width: 50%;
-    margin-right: 2em;    
+    margin-right: 2em;
   }
   #information-wrapper-1 #information-mission h2 {
     font-size: 2.5em;
@@ -232,9 +230,8 @@
   #information-values {
     text-align: center;
     color: #142c2e;
-    background-color:#007682;
+    background-color: #007682;
     padding: 0.4rem 0;
-
   }
   #information-values h2 {
     font-size: 2.5em;
@@ -770,7 +767,11 @@
 
   #information-wrapper-3 {
     background-color: #007682;
-    width: 100%;
+    align-self: stretch;
+    justify-items: center;
+  }
+  #information-wrapper-3-container {
+    width: 95%;
     height: 25vh;
     display: flex;
     flex-direction: row;
@@ -1016,7 +1017,6 @@
     background-color: #007682;
     align-self: stretch;
     justify-items: center;
-    
   }
 
   #information-wrapper-3-container {

@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { Suspense, lazy } from "react";
-import Skeleton from "react-loading-skeleton";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import UnderConstruction from "../components/UnderConstruction";
@@ -19,6 +18,7 @@ const components = {
   "diagnostic-imaging-service": lazy(() =>
     import("../information/DiagnosticImaging.jsx")
   ),
+  "admission-service": lazy(() => import("../information/AdmissionServiceRenderer.jsx")), 
 
 
 };

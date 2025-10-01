@@ -164,26 +164,7 @@ const NewsAndUpdate = () => {
           {/* for the main content */}
           <div id="news-and-update-container">
             <div id="news-and-update-wrapper">
-              <div id="date-filter-sections">
-                <div id="filter-options">
-                  <div id="label-filter">
-                    <label htmlFor="">Filter by year: </label>
-                  </div>
 
-                  <div id="options-filter">
-                    {/* filter by year */}
-                    <div className="filter-option">
-                      <select name="year" id="year" value={year} onChange={handleOnChange}>
-                        <option value="All" defaultValue>All</option>
-                        {fetchedYears.map((year) => (
-                          <option key={year.id} value={`${year.issued_year}`} >
-                            {year.issued_year}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                </div>
 
                 {auth.isAuthenticated && (auth.user.role === "editor" || auth.user.role === "admin") && (
                   <>
@@ -297,7 +278,7 @@ const NewsAndUpdate = () => {
                     </Modal>
                   </>
                 )}
-              </div>
+             
               {/* news and update cards here */}
               {/* thumbnail for the card */}
               <div id="news-and-update-cards-container">
@@ -341,6 +322,28 @@ const NewsAndUpdate = () => {
                 ))}
 
               </div>
+
+                            <div id="date-filter-sections">
+                <div id="filter-options">
+                  <div id="label-filter">
+                    <label htmlFor="">Filter by year: </label>
+                  </div>
+
+                  <div id="options-filter">
+                    {/* filter by year */}
+                    <div className="filter-option">
+                      <select name="year" id="year" value={year} onChange={handleOnChange}>
+                        <option value="All" defaultValue>All</option>
+                        {fetchedYears.map((year) => (
+                          <option key={year.id} value={`${year.issued_year}`} >
+                            {year.issued_year}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                </div>
             </div>
           </div>
         </div>

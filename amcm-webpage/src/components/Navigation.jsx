@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { Component, lazy, Suspense, useState } from "react";
 import "../styles/Navigation.css";
 import { BsSearch, BsList } from "react-icons/bs";
 import Overlay from "./Overlay";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = ({ menuLinks }) => {
-const location = useLocation();
+  const navigate = useNavigate();
 
   const isActive = (path) => location.pathname === path;
 
@@ -19,11 +19,13 @@ const location = useLocation();
       id: "our-services",
       label: "Our Services",
       link: "/services",
+      component: lazy(() => import("../pages/Services")),
     },
     {
       id: "find-doctors",
       label: "Find Doctors",
       link: "/find-doctors",
+      component: lazy(() => import("../pages/FindDoctors")),
     },
     // {
     //   id: "billing-and-admitting",
@@ -34,30 +36,43 @@ const location = useLocation();
       id: "news-updates",
       label: "News and Updates",
       link: "/news-updates",
+      component: lazy(() => import("../pages/NewsAndUpdate")),
     },
     {
       id: "online-patient-survey",
       label: "Online Patient Survey",
       link: "/online-patient-survey",
+      component: lazy(() => import("../pages/OnlinePatientSurvey")),
     },
     {
       id: "about-us",
       label: "About Us",
       link: "/about-us",
+      component: lazy(() => import("../pages/AboutUs")),
     },
   ];
+  
 
+  const [activePageMenu, setActivePageMenu] = useState(null);
+
+  const handleMenuClick = (menu) => {
+    navigate(menu.link);
+    setActivePageMenu(menu);
+  };
+
+  const ActivePageComponent = activePageMenu?.component
+
+  console.log("Active Menu:", activePageMenu);
   return (
     <div className="header">
       <div className="logo-container">
         <div className="amcm-logo-wrapper">
           <a href="/">
-          <img
-            className="amcm-logo"
-            loading="lazy"
-            src="/AdventistMed.png"
-            alt="AMCM Logo"
-          />
+            <img
+              className="amcm-logo"
+              src="/AdventistMed.png"
+              alt="AMCM Logo"
+            />
           </a>
         </div>
       </div>
@@ -80,15 +95,21 @@ const location = useLocation();
         <div id="page-menu">
           {pageMenus.map((menu) => {
             return (
-            <div key={menu.id} id={menu.id}>
-              <a href={menu.link} className={`page-link ${isActive(menu.link) ? 'active' : ''}`}>
-                {menu.label}
-              </a>
-            </div>
+              <div key={menu.id} id={menu.id}>
+                <a onClick={() => handleMenuClick(menu)} className={`page-link ${isActive(menu.link) ? 'active' : ''}`}>
+                  {menu.label}
+                </a>
+              </div>
             );
           })}
         </div>
       </div>
+
+      {ActivePageComponent &&(
+        <Suspense>
+          <ActivePageComponent />
+        </Suspense>
+      )}
 
       <Overlay
         menuLinks={menuLinks}

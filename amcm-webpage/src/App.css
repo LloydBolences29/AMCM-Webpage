@@ -10,23 +10,7 @@
 body {
   font-family: 'Montserrat', sans-serif;
   font-size: 16px; /* default font size */
+  font-display: swap;
 }
 
-/* Optional: responsive font sizes */
-@media (max-width: 767px) {
-  body {
-    font-size: 14px;
-  }
-}
 
-@media (min-width: 768px) and (max-width: 991px) {
-  body {
-    font-size: 15px;
-  }
-}
-
-@media (min-width: 992px) {
-  body {
-    font-size: 16px;
-  }
-}
