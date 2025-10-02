@@ -3,10 +3,16 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import Box from '@mui/material/Box';
-import { BsList } from "react-icons/bs";
-import BurgerMenu from "../components/BurgerMenu";
+
 import EKGSpinner from "../components/EKGSpinner";
 import './AdmissionServiceRenderer.css'
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 
 const AdmissionServiceRenderer = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,32 +24,32 @@ const AdmissionServiceRenderer = () => {
 
     const handleMenuClick = (menu) => setActivePageMenu(menu);
 
-    const AccreditedPartnersComponent = lazy(() => import("../Admission/AccreditedPartners"));
-    const DoctorsClinicComponent = lazy(() => import("../Admission/DoctorsClinic"));
-    const HealthCheckUpPackagesComponent = lazy(() => import("../Admission/HealthCheckUpPackages"));
-    const ImmunizationComponent = lazy(() => import("../Admission/Immunization"));
-    const WomensHealthUltrasoundComponent = lazy(() => import("../Admission/WomenHealthUltrasound"));
+    const AdmissionProcessComponent = lazy(() => import("../Admission/AdmissionProcess"));
+    const PatientRightsComponent = lazy(() => import("../Admission/PatientRights"));
+    const PhilhealthClaimsComponent = lazy(() => import("../Admission/PhilhealthClaims"));
+    const CreditandCollectionComponent = lazy(() => import("../Admission/CreditandCollection"));
+    const SocialServicesComponent = lazy(() => import("../Admission/SocialServices"));
 
     const tabs = [
         {
             value: "1",
-            label: "Accredited Partners"
+            label: "Admission Process"
         },
         {
             value: "2",
-            label: "Doctor's Clinic"
+            label: "Patient Rights"
         },
         {
             value: "3",
-            label: "Health Check Up Packages"
+            label: "Philhealth Claims"
         },
         {
             value: "4",
-            label: "Immunization"
+            label: "Credit and Collection"
         },
         {
             value: "5",
-            label: "Women's Health Ultrasound"
+            label: "Social Services"
         },
     ]
 
@@ -51,17 +57,48 @@ const AdmissionServiceRenderer = () => {
     return (
         <div>
 
-            <button className="menu-button" onClick={() => setIsMenuOpen(true)}>
-                <BsList />
-                <span>Menu</span>
-            </button>
+            <Container>
+                <Card
+                    sx={{
+                        mb: 3,
+                        textAlign: "center",
+                        marginTop: "2em",
+                        backgroundColor: "#163235ff",
+                        borderRadius: "10px",
+                    }}
+                >
+                    <CardContent>
+                        <Typography
+                            variant="h4"
+                            component="h1"
+                            className="page-title fw-bold"
+                            sx={{
+                                color: "#ffffffff",
+                                fontFamily: "Advent Sans, sans-serif",
+                            }}
+                        >
+                            Admission Services
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </Container>
 
-            <BurgerMenu
-                isOpen={isMenuOpen}
-                onClose={() => setIsMenuOpen(false)}
-                pageMenus={tabs}
-                onMenuClick={handleMenuClick}
-            />
+            <div className="burger-menu-container">
+                <Navbar expand="lg" className="bg-body-primary">
+                    <Container>
+                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                        <Navbar.Collapse id="basic-navbar-nav">
+                            <Nav className="me-auto">
+                                {tabs.map((tab) => (
+                                    <Nav.Link key={tab.value} onClick={() => setValue(tab.value)}>{tab.label}</Nav.Link>
+                                ))}
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
+            </div>
+
+
 
             <div id="tabs">
                 <TabContext value={value}>
@@ -87,7 +124,7 @@ const AdmissionServiceRenderer = () => {
                 >
                     <EKGSpinner />
                 </div>}>
-                    <AccreditedPartnersComponent />
+                    <AdmissionProcessComponent />
                 </Suspense>)
                 : value === "2" ? (
                     <Suspense fallback={<div
@@ -101,7 +138,7 @@ const AdmissionServiceRenderer = () => {
                     >
                         <EKGSpinner />
                     </div>}>
-                        <DoctorsClinicComponent />
+                        <PatientRightsComponent />
                     </Suspense>)
                     : value === "3" ? (
                         <Suspense fallback={<div
@@ -115,7 +152,7 @@ const AdmissionServiceRenderer = () => {
                         >
                             <EKGSpinner />
                         </div>}>
-                            <HealthCheckUpPackagesComponent />
+                            <PhilhealthClaimsComponent />
                         </Suspense>)
 
                         : value === "4" ? (<Suspense fallback={<div
@@ -129,7 +166,7 @@ const AdmissionServiceRenderer = () => {
                         >
                             <EKGSpinner />
                         </div>}>
-                            <ImmunizationComponent />
+                            <CreditandCollectionComponent />
                         </Suspense>)
                             : value === "5" ? (<Suspense fallback={<div
                                 style={{
@@ -142,7 +179,7 @@ const AdmissionServiceRenderer = () => {
                             >
                                 <EKGSpinner />
                             </div>}>
-                                <WomensHealthUltrasoundComponent />
+                                <SocialServicesComponent />
                             </Suspense>)
                                 : <>
                                     <p>There is no page available.</p>

@@ -426,7 +426,7 @@
 }
 
 /*For Desktop view*/
-@media (min-width: 1025px) and (max-width: 1199px) {
+/* @media (min-width: 1025px) and (max-width: 1199px) {
   .information-content {
     display: flex;
     flex-direction: column;
@@ -674,7 +674,7 @@
     padding-left: 1em;
     color: #555;
   }
-}
+} */
 
 @media (min-width: 1025px) and (max-width: 1399px) {
   .information-content {

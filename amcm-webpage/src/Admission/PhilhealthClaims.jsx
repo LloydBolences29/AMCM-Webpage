@@ -1,6 +1,6 @@
 import React from 'react'
 
-const HealthCheckUpPackages = () => {
+const PhilhealthClaims = () => {
   return (
     <div>
       <p>This is for the HealthCheckUpPackages Component</p>
@@ -8,4 +8,4 @@ const HealthCheckUpPackages = () => {
   )
 }
 
-export default HealthCheckUpPackages
+export default PhilhealthClaims;

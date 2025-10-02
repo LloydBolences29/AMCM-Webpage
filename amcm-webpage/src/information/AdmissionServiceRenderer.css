@@ -1,11 +1,47 @@
-@media only screen and (max-width: 767px){
-    #tabs{
-        display: none;
-    }
+#accredited-partners-content-wrapper{
+    margin: 3em;
+    line-height: 1.5;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1024px){
-    #tabs{
-        display: none;
-    }
+@media only screen and (max-width: 767px) {
+  #tabs {
+    display: none;
+  }
+  .burger-menu-container {
+
+    margin: 1em 0;
+  }
+    #accredited-partners-wrapper #heading-title h2 {
+        font-size: 2em;
+        font-weight: bold;
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  #tabs {
+    display: none;
+  }
+
+  .burger-menu-container {
+
+    margin: 1em 0;
+  }
+
+  #accredited-partners-wrapper #heading-title h2 {
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1399px){
+
+  .burger-menu-container {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1400px){
+
+  .burger-menu-container {
+    display: none;
+  }
 }

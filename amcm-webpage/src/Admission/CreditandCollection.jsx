@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Immunization = () => {
+const CreditandCollection = () => {
   return (
     <div>
       <p>This is for the Immunization Component</p>
@@ -8,4 +8,4 @@ const Immunization = () => {
   )
 }
 
-export default Immunization
+export default CreditandCollection;

@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const { connectToDatabase } = require('../lib/db');
 const jwt = require('jsonwebtoken');
 
+
+
 //importing middlewares
 const authMiddleware = require('../middleware/auth');
 const checkRole = require('../middleware/checkRole');
@@ -11,7 +13,8 @@ const checkRole = require('../middleware/checkRole');
 router.post('/register', authMiddleware, checkRole(['admin']), async (req, res) => {
   const { username, email, password, role } = req.body;
 
-  if (!email || !password) {
+  try {
+    if (!email || !password) {
     return res.status(400).json({ error: 'Email and password are required' });
   }
 
@@ -29,6 +32,12 @@ router.post('/register', authMiddleware, checkRole(['admin']), async (req, res) 
   await connection.query('INSERT INTO userInfo (username, email, pass, role) VALUES (?, ?, ?, ?)', [username, email, hashedPassword, role]);
 
   res.status(201).json({ message: 'User registered successfully' });
+    
+  } catch (error) {
+    console.log("Internal Server Error", error)
+    return res.status(500).json({ error: "Error Saving user. Please check console." })
+  }
+  
 });
 
 //post routes for login

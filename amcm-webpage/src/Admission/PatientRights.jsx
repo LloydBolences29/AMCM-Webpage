@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DoctorsClinic = () => {
+const PatientRights = () => {
   return (
     <div>
       <p>This is for the DoctorsClinic Component</p>
@@ -8,4 +8,4 @@ const DoctorsClinic = () => {
   )
 }
 
-export default DoctorsClinic;
+export default PatientRights;

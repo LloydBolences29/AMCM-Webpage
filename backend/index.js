@@ -34,7 +34,7 @@ app.use(
 
 
 
-// app.disable("x-powered-by");
+app.disable("x-powered-by");
 
 app.use(
   cors({

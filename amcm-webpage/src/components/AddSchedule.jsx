@@ -27,7 +27,7 @@ const AddSchedule = () => {
   };
 
   const [form, setForm] = useState(initialStateOfForm);
-    const [pageStatus, setPageStatus] = useState("idle");
+  const [pageStatus, setPageStatus] = useState("idle");
   const [successSnackBarState, setSuccessSnackBarState] = useState(false);
   const [failedSnackBarState, setFailedSnackBarState] = useState(false);
   const [notification, setNotification] = useState("")
@@ -87,7 +87,7 @@ const AddSchedule = () => {
         setSearchDoctorValue("");
         setNotification(data.message);
         setSuccessSnackBarState(true);
-        
+
       } else {
         const data = await response.json();
         console.error("Error adding schedule:", response.statusText);
@@ -158,45 +158,45 @@ const AddSchedule = () => {
                 </div>
 
                 {pageStatus === "success" ? (
-                                <Snackbar
-                                  open={successSnackBarState}
-                                  autoHideDuration={5000}
-                                  onClose={handleClose}
-                                >
-                                  <Alert
-                                    onClose={handleClose}
-                                    severity="success"
-                                    variant="filled"
-                                    sx={{
-                                      width: "100%",
-                                      margin: "1em",
-                                      fontSize: "1em",
-                                    }}
-                                  >
-                                    {notification}
-                                  </Alert>
-                                </Snackbar>
-                              ) : (
-                                <Snackbar
-                                  open={failedSnackBarState}
-                                  autoHideDuration={5000}
-                                  onClose={handleClose}
-                                >
-                                  <Alert
-                                    onClose={handleClose}
-                                    severity="error"
-                                    variant="filled"
-                                    sx={{
-                                      width: "100%",
-                                      margin: "1em",
-                                      fontSize: "1em",
-                                    }}
-                                  >
-                                    {notification}
-                                  </Alert>
-                                </Snackbar>
-                              )}
-                
+                  <Snackbar
+                    open={successSnackBarState}
+                    autoHideDuration={5000}
+                    onClose={handleClose}
+                  >
+                    <Alert
+                      onClose={handleClose}
+                      severity="success"
+                      variant="filled"
+                      sx={{
+                        width: "100%",
+                        margin: "1em",
+                        fontSize: "1em",
+                      }}
+                    >
+                      {notification}
+                    </Alert>
+                  </Snackbar>
+                ) : (
+                  <Snackbar
+                    open={failedSnackBarState}
+                    autoHideDuration={5000}
+                    onClose={handleClose}
+                  >
+                    <Alert
+                      onClose={handleClose}
+                      severity="error"
+                      variant="filled"
+                      sx={{
+                        width: "100%",
+                        margin: "1em",
+                        fontSize: "1em",
+                      }}
+                    >
+                      {notification}
+                    </Alert>
+                  </Snackbar>
+                )}
+
                 <Form onSubmit={handleSubmitNewSchedule}>
                   {/* DOCTOR'S NAME INPUT AND SEARCH RESULTS */}
                   <Form.Group className="mb-3 position-relative">
@@ -249,21 +249,21 @@ const AddSchedule = () => {
                   {(form.department ===
                     "OB GYNE / PERINATOLOGIST / SONOLOGIST" ||
                     form.department === "OB GYNE / SONOLOGIST") && (
-                    <Form.Group className="mb-3">
-                      <Form.Label>Schedule Type</Form.Label>
-                      <Form.Control
-                        as="select"
-                        value={form.schedule_type}
-                        onChange={(e) =>
-                          setForm({ ...form, schedule_type: e.target.value })
-                        }
-                      >
-                        <option value="">Select a schedule type</option>
-                        <option value="clinic">Clinic</option>
-                        <option value="ultrasound">Ultrasound</option>
-                      </Form.Control>
-                    </Form.Group>
-                  )}
+                      <Form.Group className="mb-3">
+                        <Form.Label>Schedule Type</Form.Label>
+                        <Form.Control
+                          as="select"
+                          value={form.schedule_type}
+                          onChange={(e) =>
+                            setForm({ ...form, schedule_type: e.target.value })
+                          }
+                        >
+                          <option value="">Select a schedule type</option>
+                          <option value="clinic">Clinic</option>
+                          <option value="ultrasound">Ultrasound</option>
+                        </Form.Control>
+                      </Form.Group>
+                    )}
 
                   {/* DAY OF THE WEEK */}
                   <Form.Group className="mb-3">

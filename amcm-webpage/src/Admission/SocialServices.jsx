@@ -1,6 +1,6 @@
 import React from 'react'
 
-const WomenHealthUltrasound = () => {
+const SocialServices = () => {
   return (
     <div>
       <p>This is for the Women's Health ultrasound component</p>
@@ -8,4 +8,4 @@ const WomenHealthUltrasound = () => {
   )
 }
 
-export default WomenHealthUltrasound
+export default SocialServices;
