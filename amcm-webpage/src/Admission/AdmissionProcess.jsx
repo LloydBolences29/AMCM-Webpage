@@ -9,7 +9,7 @@ const AdmissionProcess = () => {
         <div id="admission-process-wrapper">
           {/* Title */}
           <div id="heading-title">
-            <h2>Hospital Admission Process</h2>
+            <h3>Hospital Admission Process</h3>
           </div>
 
           <div id="admission-process-content-wrapper">
