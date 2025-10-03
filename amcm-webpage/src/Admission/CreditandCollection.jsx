@@ -1,9 +1,10 @@
 import React from 'react'
+import UnderConstruction from '../components/UnderConstruction';
 
 const CreditandCollection = () => {
   return (
     <div>
-      <p>This is for the Immunization Component</p>
+      <UnderConstruction page={"Credit and Collection page"} />
     </div>
   )
 }

@@ -9,6 +9,10 @@ import "../styles/NewsAndUpdate.css";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Container from "@mui/material/Container";
+import NoContent from "../components/NoContent";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+
 
 const NewsAndUpdate = () => {
   const menuLinks = [
@@ -20,6 +24,24 @@ const NewsAndUpdate = () => {
     { label: "Online Patient Survey", path: "/online-patient-survey" },
   ];
 
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!payload.title.trim()) newErrors.title = "Title is required.";
+    if (!payload.issued_date) newErrors.issued_date = "Issued Date is required.";
+    if (!payload.news_description.trim()) newErrors.news_description = "Description is required.";
+
+    const thumbnailInput = document.getElementById("news-thumbnail");
+    if (!thumbnailInput || thumbnailInput.files.length === 0) newErrors.thumbnail = "Thumbnail image is required.";
+
+    const pdfFileInput = document.getElementById("news-file");
+    if (!pdfFileInput || pdfFileInput.files.length === 0) newErrors.pdfFile = "PDF file is required.";
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0; // returns true if no errors
+  };
+
   const initialStateValue = {
     title: "",
     issued_date: "",
@@ -27,6 +49,11 @@ const NewsAndUpdate = () => {
   };
 
   const { auth } = useAuth();
+  const [pageStatus, setPageStatus] = useState("idle");
+  const [successSnackBarState, setSuccessSnackBarState] = useState(false);
+  const [failedSnackBarState, setFailedSnackBarState] = useState(false);
+  const [notification, setNotification] = useState("")
+  const [errors, setErrors] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [payload, setPayload] = useState(initialStateValue);
   const [year, setYear] = useState("All");
@@ -38,6 +65,9 @@ const NewsAndUpdate = () => {
   const VITE_API_URL = import.meta.env.VITE_API_URL;
 
   const handleSubmit = async () => {
+    if (!validateForm()) {
+      return;
+    }
     try {
       const formData = new FormData();
       formData.append("title", payload.title);
@@ -66,6 +96,10 @@ const NewsAndUpdate = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("News submitted successfully:", data);
+        setPageStatus("success");
+        setNotification("News and Update added successfully.");
+        setSuccessSnackBarState(true);
+        // Reset form fields
         setPayload(initialStateValue);
         setShowModal(false);
         fetchNewsAndUpdates(); // Refresh the news list
@@ -73,9 +107,15 @@ const NewsAndUpdate = () => {
       } else {
         const errorData = await response.json();
         console.error("Server error:", errorData);
+        setPageStatus("error");
+        setNotification("Failed to add News and Update. Please try again.");
+        setFailedSnackBarState(true);
         // Handle the error gracefully, e.g., show an error message
       }
     } catch (error) {
+      setPageStatus("error");
+      setNotification("An unexpected error occurred. Please try again.");
+      setFailedSnackBarState(true);
       console.error("Error submitting news:", error);
     }
   };
@@ -132,6 +172,16 @@ const NewsAndUpdate = () => {
     fetchNewsAndUpdates();
     fetchYears();
   }, []);
+   //for the snackbar
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSuccessSnackBarState(false);
+    setFailedSnackBarState(false);
+  };
   return (
     <div className="home-body">
       <div className="home-content">
@@ -166,164 +216,222 @@ const NewsAndUpdate = () => {
             <div id="news-and-update-wrapper">
 
 
-                {auth.isAuthenticated && (auth.user.role === "editor" || auth.user.role === "admin") && (
-                  <>
-                    <div id="add-news-button-wrapper">
-                      <button id="add-news-button" onClick={handleShow}>
-                        Add News
-                      </button>
-                    </div>
-
-                    <Modal
-                      size="lg"
-                      aria-labelledby="contained-modal-title-vcenter"
-                      centered
-                      show={showModal}
-                      onHide={handleClose}
+              {auth.isAuthenticated && (auth.user.role === "editor" || auth.user.role === "admin") && (
+                <>
+                  <div id="add-news-button-wrapper">
+                    <button id="add-news-button" onClick={handleShow}>
+                      Add News
+                    </button>
+                  </div>
+                  {/* Snackbar notification */}
+                  {pageStatus === "success" ? (
+                    <Snackbar
+                      open={successSnackBarState}
+                      autoHideDuration={5000}
+                      onClose={handleSnackbarClose}
                     >
-                      <Modal.Header closeButton>
-                        <Modal.Title id="contained-modal-title-vcenter">
-                          Add News and Update
-                        </Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <form action="" method="post">
-                          <div className="form-group">
-                            <label htmlFor="news-title">Title:</label>
-                            <input
-                              type="text"
-                              id="news-title"
-                              name="news-title"
-                              className="form-control"
-                              onChange={(e) =>
-                                setPayload({
-                                  ...payload,
-                                  title: e.target.value,
-                                })
-                              }
-                            />
-                          </div>
+                      <Alert
+                        onClose={handleSnackbarClose}
+                        severity="success"
+                        variant="filled"
+                        sx={{
+                          width: "100%",
+                          margin: "1em",
+                          fontSize: "1em",
+                        }}
+                      >
+                        {notification}
+                      </Alert>
+                    </Snackbar>
+                  ) : (
+                    <Snackbar
+                      open={failedSnackBarState}
+                      autoHideDuration={5000}
+                      onClose={handleSnackbarClose}
+                    >
+                      <Alert
+                        onClose={handleSnackbarClose}
+                        severity="error"
+                        variant="filled"
+                        sx={{
+                          width: "100%",
+                          margin: "1em",
+                          fontSize: "1em",
+                        }}
+                      >
+                        {notification}
+                      </Alert>
+                    </Snackbar>
+                  )}
 
-                          <div className="form-group">
-                            <label htmlFor="news-content">Description:</label>
-                            <textarea
-                              id="news-content"
-                              name="news-content"
-                              className="form-control"
-                              rows="5"
-                              onChange={(e) =>
-                                setPayload({
-                                  ...payload,
-                                  news_description: e.target.value,
-                                })
-                              }
-                            ></textarea>
-                          </div>
+                  <Modal
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                    show={showModal}
+                    onHide={handleClose}
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title id="contained-modal-title-vcenter">
+                        Add News and Update
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <form action="" method="post">
+                        <div className="form-group">
+                          <label htmlFor="news-title">Title:</label>
+                          <input
+                            type="text"
+                            id="news-title"
+                            name="news-title"
+                            className="form-control"
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                title: e.target.value,
+                              })
+                            }
+                          />
+                          {errors.title && <small className="text-danger">{errors.title}</small>}
 
-                          <div className="form-group">
-                            <label htmlFor="news-date">Issued Date:</label>
-                            <input
-                              type="date"
-                              id="news-date"
-                              name="news-date"
-                              className="form-control"
-                              onChange={(e) =>
-                                setPayload({
-                                  ...payload,
-                                  issued_date: e.target.value,
-                                })
-                              }
-                            />
-                          </div>
+                        </div>
 
-                          <div className="form-group">
-                            <label htmlFor="news-thumbnail">Thumbnail:</label>
-                            <input
-                              type="file"
-                              id="news-thumbnail"
-                              name="news-thumbnail"
-                              className="form-control"
-                              onChange={(e) =>
-                                setPayload({
-                                  ...payload,
-                                  thumbnail: e.target.files[0].name,
-                                  pdfFile_originalName: e.target.files[0].name,
-                                })
-                              }
-                            />
-                          </div>
-                          <div className="form-group">
-                            <label htmlFor="news-thumbnail">PDF File:</label>
-                            <input
-                              type="file"
-                              id="news-file"
-                              name="news-file"
-                              className="form-control"
-                              onChange={(e) =>
-                                setPayload({
-                                  ...payload,
-                                  pdfFile_originalName: e.target.files[0].name,
-                                })
-                              }
-                            />
-                          </div>
-                        </form>
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button onClick={handleSubmit}>Submit</Button>
-                        <Button variant="danger" onClick={handleClose}>
-                          Close
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
-                  </>
-                )}
-             
+                        <div className="form-group">
+                          <label htmlFor="news-content">Description:</label>
+                          <textarea
+                            id="news-content"
+                            name="news-content"
+                            className="form-control"
+                            rows="5"
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                news_description: e.target.value,
+                              })
+                            }
+                          ></textarea>
+                          {errors.news_description && <small className="text-danger">{errors.news_description}</small>}
+                        </div>
+
+                        <div className="form-group">
+                          <label htmlFor="news-date">Issued Date:</label>
+                          <input
+                            type="date"
+                            id="news-date"
+                            name="news-date"
+                            className="form-control"
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                issued_date: e.target.value,
+                              })
+                            }
+                          />
+                          {errors.issued_date && <small className="text-danger">{errors.issued_date}</small>}
+                        </div>
+
+                        <div className="form-group">
+                          <label htmlFor="news-thumbnail">Thumbnail:</label>
+                          <input
+                            type="file"
+                            id="news-thumbnail"
+                            name="news-thumbnail"
+                            className="form-control"
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                thumbnail: e.target.files[0].name,
+                                pdfFile_originalName: e.target.files[0].name,
+                              })
+                            }
+                            accept="image/png, image/jpeg, image/svg+xml"
+                          />
+                          {errors.thumbnail && <small className="text-danger">{errors.thumbnail}</small>}
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="news-thumbnail">PDF File:</label>
+                          <input
+                            type="file"
+                            id="news-file"
+                            name="news-file"
+                            className="form-control"
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                pdfFile_originalName: e.target.files[0].name,
+                              })
+                            }
+                            accept="application/pdf"
+                          />
+                          {errors.pdfFile && <small className="text-danger">{errors.pdfFile}</small>}
+
+                        </div>
+                      </form>
+
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button onClick={handleSubmit}>Submit</Button>
+                      <Button variant="danger" onClick={handleClose}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                </>
+              )}
+
               {/* news and update cards here */}
               {/* thumbnail for the card */}
-              <div id="news-and-update-cards-container">
+              {fetchedNews && fetchedNews.length > 0 ? (
+                <div id="news-and-update-cards-container">
+                  {fetchedNews.map((newsItem) => (
+                    <div
+                      className={`news-and-update-card`}
+                      id="news-and-update-card"
+                      key={newsItem.id}
+                    >
+                      <div id="news-and-update-card-wrapper">
 
-                {fetchedNews.map((newsItem) => (
-                  <div
-                    className={`news-and-update-card`}
-                    id="news-and-update-card"
-                    key={newsItem.id}
-                  >
-                    <div id="news-and-update-card-wrapper">
+                        <img
+                          id="thumbnail-images"
+                          src={`${VITE_API_URL}/uploads/thumbnail/${newsItem.thumbnail}`}
+                          loading="lazy"
+                          alt="News Thumbnail"
+                          className="news-thumbnail"
+                        />
 
-                      <img
-                        id="thumbnail-images"
-                        src={`${VITE_API_URL}/uploads/thumbnail/${newsItem.thumbnail}`}
-                        loading="lazy"
-                        alt="News Thumbnail"
-                        className="news-thumbnail"
-                      />
-
-                      <div id="news-and-update-card-details">
-                        <div id="news-and-update-card-title">
-                          <h3>{newsItem.title}</h3>
-                        </div>
-                        <div id="news-and-update-card-content">
-                          <p>{newsItem.news_description}</p>
-                          <p>Issued Date: {newsItem.issued_date}</p>
-                        </div>
-                        <div id="read-more-button-wrapper">
-                          <a
-                            href={`${VITE_API_URL}/uploads/pdfFile/${newsItem.unique_filename}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Read More
-                          </a>
+                        <div id="news-and-update-card-details">
+                          <div id="news-and-update-card-title">
+                            <h3>{newsItem.title}</h3>
+                          </div>
+                          <div id="news-and-update-card-content">
+                            <p>{newsItem.news_description}</p>
+                            <p>Issued Date: {newsItem.issued_date}</p>
+                          </div>
+                          <div id="read-more-button-wrapper">
+                            <a
+                              href={`${VITE_API_URL}/uploads/pdfFile/${newsItem.unique_filename}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              Read More
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
 
-              </div>
+              ) : (
+                <div id="no-content-news-update">
+                  <NoContent />
+                </div>
+              )}
 
-                            <div id="date-filter-sections">
+
+
+              <div id="date-filter-sections">
                 <div id="filter-options">
                   <div id="label-filter">
                     <label htmlFor="">Filter by year: </label>
@@ -343,7 +451,7 @@ const NewsAndUpdate = () => {
                     </div>
                   </div>
                 </div>
-                </div>
+              </div>
             </div>
           </div>
         </div>

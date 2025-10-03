@@ -157,10 +157,15 @@
     border-radius: 8px;
     margin-bottom: 1rem;
   }
+  #no-content-news-update {
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
 }
 
 /*for desktop views*/
-@media (min-width: 1025px) {
+@media (min-width: 1025px) and (max-width: 1399px) {
 /*Rules for the filter option section*/
   #date-filter-sections {
     display: flex;
@@ -231,28 +236,72 @@
 }
 
 @media only screen and (min-width: 1400px){
+    /*Rules for the filter option section*/
+  #date-filter-sections {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 1rem 2.5rem;
+  }
+
+  #filter-options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #add-news-button-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 2.5rem;
+    padding-bottom: 1rem;
+  }
+    #add-news-button {
+    border-radius: 3rem;
+    background-color: transparent;
+    border: 1px solid #163235;
+    padding: 0.3rem 1rem;
+    color: #163235;
+  }
+/* Rules for news and update cards  */
   #news-and-update-cards-container{
     display: grid;
     grid-template-rows: auto;
     gap: 2rem;
-    padding: 2rem 2rem;
-    margin: 4em;
-    width: 90%;
-    /* border-left: #1632358c 0.5rem solid;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px; */
-    color: #163235;
-
+    padding: 2rem 4rem;
+  }
+  #news-and-update-card-wrapper{
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
   }
 
   #news-and-update-card-details{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    /* border-left: #ffa72d93 0.15rem solid; */
+    padding-left: 0.9rem;
   }
+  #news-and-update-card-details a {
+    text-decoration: none;
+    border: 1px solid #FFA92D;
+    padding: 0.3rem 0.8rem;
+    border-radius: 3rem;
+    color: #FFA92D;
+  }
+  #news-and-update-card-details a:hover{
+    background-color: #FFA92D;
+    border: 1px solid #FFA92D;
+    color: black;
+  }
+
   #thumbnail-images{
-    width: 25%;
+    width: 30%;
     height: auto;
     border-radius: 8px;
   }
+
 } 

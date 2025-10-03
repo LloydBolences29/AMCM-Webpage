@@ -1,0 +1,114 @@
+@media only screen and (max-width: 767px) {
+  #no-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    padding: 20px;
+  }
+
+  #no-content-image-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  #no-content-image {
+    width: 40%;
+    height: auto;
+    margin-bottom: 15px;
+    opacity: 0.5;
+  }
+
+  #no-content-text {
+    text-align: center;
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  #no-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    padding: 20px;
+    width: 100%;
+  }
+
+  #no-content-image-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+  }
+
+  #no-content-image {
+    width: 30%;
+    height: auto;
+    margin-right: 20px;
+    opacity: 0.5;
+  }
+
+  #no-content-text {
+    text-align: center;
+    font-size: 1.3rem;
+  }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1399px) {
+  #no-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    padding: 20px;
+    width: 100%;
+  }
+
+  #no-content-image-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+  }
+
+  #no-content-image {
+    width: 20%;
+    height: auto;
+    margin-right: 20px;
+    opacity: 0.5;
+  }
+
+  #no-content-text {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  #no-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    padding: 20px;
+    width: 100%;
+  }
+
+  #no-content-image-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+  }
+
+  #no-content-image {
+    width: 15%;
+    height: auto;
+    margin-right: 20px;
+    opacity: 0.5;
+  }
+
+  #no-content-text {
+    text-align: center;
+    font-size: 1.8rem;
+  }
+}

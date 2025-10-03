@@ -1,9 +1,11 @@
 import React from 'react'
+import '../components/UnderConstruction'
+import UnderConstruction from '../components/UnderConstruction';
 
 const PhilhealthClaims = () => {
   return (
     <div>
-      <p>This is for the HealthCheckUpPackages Component</p>
+      <UnderConstruction page={"Philhealth claim page"} />
     </div>
   )
 }
