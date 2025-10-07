@@ -1,13 +1,6 @@
-import React from "react";
-import Navigation from "../components/Navigation";
-import Footer from "../components/Footer";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
-import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
 
@@ -15,7 +8,7 @@ const PatientServices = () => {
   const services = [
     {
       id: "emergency-room-card",
-      image: "/Emergency-Room.png",
+      image: "/Emergency-Room.webp",
       title: "Emergency Room",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -23,7 +16,7 @@ const PatientServices = () => {
     },
     {
       id: "opd-services-card",
-      image: "/opd.png",
+      image: "/opd.webp",
       title: "Outpatient Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -31,7 +24,7 @@ const PatientServices = () => {
     },
     {
       id: "admission-services-card",
-      image: "/admission.png",
+      image: "/admission.webp",
       title: "Admission Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -39,7 +32,7 @@ const PatientServices = () => {
     },
     {
       id: "diagnostic-imaging-services-card",
-      image: "/imaging.png",
+      image: "/imaging.webp",
       title: " Diagnostic Imaging Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -47,7 +40,7 @@ const PatientServices = () => {
     },
     {
       id: "pharmacy-services-card",
-      image: "/pharmacy.png",
+      image: "/pharmacy.webp",
       title: "Pharmacy Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -55,7 +48,7 @@ const PatientServices = () => {
     },
     {
       id: "dental-card",
-      image: "/dental.png",
+      image: "/dental.webp",
       title: "Dental",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -72,7 +65,7 @@ const PatientServices = () => {
     // },
     {
       id: "pathAndLab-services-card",
-      image: "/pathAndLab.png",
+      image: "/pathAndLab.webp",
       title: "Pathology and Laboratory Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -80,7 +73,7 @@ const PatientServices = () => {
     },
     {
       id: "pastoralCare-services-card",
-      image: "/pastoral-care.png",
+      image: "/pastoral-care.webp",
       title: "Pastoral Care Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -88,7 +81,7 @@ const PatientServices = () => {
     },
     {
       id: "physicalMed-services-card",
-      image: "/physicalmed-and-rehab.png",
+      image: "/physicalmed-and-rehab.webp",
       title: "Physical Medicine and Rehabilitation Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -96,7 +89,7 @@ const PatientServices = () => {
     },
     {
       id: "medicalRecords-services-card",
-      image: "/med-records.png",
+      image: "/med-records.webp",
       title: "Medical Records Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -104,7 +97,7 @@ const PatientServices = () => {
     },
     {
       id: "renal-services-card",
-      image: "/renal.png",
+      image: "/renal.webp",
       title: "Renal Services",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",

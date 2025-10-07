@@ -27,7 +27,7 @@ router.get("/get-users", async (req, res) => {
 
 router.put("/edit-user", authMiddleware, checkRole(['admin']), async (req, res) =>{
   try {
-    const { id, username, email, role, password } = req.body;
+    const { id, username, email, role } = req.body;
 
     if(!id || !username || !email || !role){
       return res.status(400).json({ message: "Missing required fields" });
@@ -41,13 +41,12 @@ router.put("/edit-user", authMiddleware, checkRole(['admin']), async (req, res) 
       return res.status(404).json({ message: "User not found" });
     }
 
-     //hash the password
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-    const sql = `UPDATE userInfor SET username = ?, email = ?, role = ? WHERE id = ?`;
+    const sql = `UPDATE userInfo SET username = ?, email = ?, role = ? WHERE id = ?`;
     const values = [username, email, role, id];
     
     await db.query(sql, values);
+
+    
 
     res.status(200).json({ message: "User updated successfully" });
   } catch (error) {

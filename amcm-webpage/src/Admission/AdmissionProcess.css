@@ -39,9 +39,14 @@
     line-height: 2;
   }
 
+  #admission-process-content{
+    font-size: 1.2em;
+  }
+
   #admission-process-wrapper #heading-title h3 {
        font-size: 2em;
     font-weight: bold;
     text-align: center;
   }
+
 }

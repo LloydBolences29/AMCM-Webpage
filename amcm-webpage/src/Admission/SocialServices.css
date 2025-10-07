@@ -1,0 +1,124 @@
+@media only screen and (max-width: 767px){
+    #social-services-page-container {
+        margin: 1em;
+        line-height: 1.5;
+    }
+    #social-services-page-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        padding: 1em;
+    }
+
+    #TCIC-head-title #title h3,
+    #dswd-ncr-head-title h3,
+    #doh-maip-head-title h3,
+    #pcso-head-title h3{
+        font-size: 1.5em;
+        font-weight: bold;
+        text-align: center;
+    }
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+    #social-services-page-container {
+        margin: 2em;
+        line-height: 1.5;
+    }
+    #social-services-page-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        padding: 1em;
+    }
+
+    #TCIC-head-title #title h3,
+    #dswd-ncr-head-title h3,
+    #doh-maip-head-title h3,
+    #pcso-head-title h3{
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    #TCIC-content-container,
+    #dswd-ncr-content-container,
+    #doh-maip-content-container,
+    #pcso-content-container{
+        font-size: 1.2em;
+    }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1399px){
+    #social-services-page-container {
+        margin: 2.5em;
+        line-height: 2;
+    }
+    #social-services-page-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        padding: 1em;
+    }
+
+    #TCIC-head-title #title h3,
+    #dswd-ncr-head-title h3,
+    #doh-maip-head-title h3,
+    #pcso-head-title h3{
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+    }
+    #TCIC-head-title #title-description,
+    #dswd-ncr-container #title-description,
+    #doh-maip-container #title-description,
+    #pcso-container #title-description{
+        font-size: 1.6em;
+        text-align: center;
+    }
+
+    #TCIC-content-container,
+    #dswd-ncr-content-container,
+    #doh-maip-content-container,
+    #pcso-steps-container{
+        font-size: 1.4em;
+        
+    }
+}
+@media only screen and (min-width: 1400px){
+    #social-services-page-container {
+        margin: 3em;
+        line-height: 2;
+    }
+    #social-services-page-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        padding: 1em;
+    }
+
+    #TCIC-head-title #title h3,
+    #dswd-ncr-head-title h3,
+    #doh-maip-head-title h3,
+    #pcso-head-title h3{
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+    }
+
+        #TCIC-head-title #title-description,
+    #dswd-ncr-container #title-description,
+    #doh-maip-container #title-description,
+    #pcso-container #title-description{
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    #TCIC-content-container,
+    #dswd-ncr-content-container,
+    #doh-maip-content-container,
+    #pcso-steps-container{
+        font-size: 1.4em;
+    }
+}

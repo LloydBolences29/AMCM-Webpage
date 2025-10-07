@@ -116,7 +116,7 @@ router.get("/get-news", async (req, res) => {
 try {
   const db = await connectToDatabase();
 
-  const [rows] = await db.query("SELECT title, DATE_FORMAT(issued_date, '%Y-%m-%d') AS issued_date, original_filename, unique_filename, thumbnail, news_description FROM upload_news");
+  const [rows] = await db.query(`SELECT id, title, DATE_FORMAT(issued_date, '%Y-%m-%d') AS issued_date, original_filename, unique_filename, thumbnail, news_description, is_Active FROM upload_news`);
   res.status(200).json({message: "Successfully fetched from the database",rows});
 } catch (error) {
   console.error ("Error fetching news:", error);
@@ -128,7 +128,7 @@ router.get("/get-news-year", async (req, res) =>{
   try {
     const db = await connectToDatabase();
 
-    const [rows] = await db.query("SELECT DISTINCT DATE_FORMAT(issued_date, '%Y') AS issued_year FROM upload_news ORDER BY issued_year DESC");
+    const [rows] = await db.query("SELECT DISTINCT DATE_FORMAT(issued_date, '%Y') AS issued_year FROM upload_news WHERE is_Active = 'active' ORDER BY issued_year DESC");
     res.status(200).json({message: "Successfully fetched the year", rows});
   } catch (error) {
     console.log("Error Fetching the year.", error)
@@ -137,18 +137,58 @@ router.get("/get-news-year", async (req, res) =>{
 })
 
 //filter by date
-router.get("/filter-date", async (req, res) =>{
+router.get("/filter-date", async (req, res) => {
   try {
-    const { year } = req.query;
+    const { year, includeInactive } = req.query;
     const db = await connectToDatabase();
 
-    const [rows] = await db.query("SELECT id, title, DATE_FORMAT(issued_date, '%Y-%m-%d') AS issued_date, original_filename, unique_filename, thumbnail, news_description FROM upload_news WHERE YEAR(issued_date) = ?", [year]);
+    let query = `
+      SELECT id, title, DATE_FORMAT(issued_date, '%Y-%m-%d') AS issued_date,
+             original_filename, unique_filename, thumbnail, news_description, is_Active
+      FROM upload_news
+      WHERE YEAR(issued_date) = ?
+    `;
 
-    res.status(200).json({message: "Successfully filtered the date", rows});
+    if (!includeInactive) {
+      query += " AND is_Active = 'active'";
+    }
+
+    const [rows] = await db.query(query, [year]);
+    res.status(200).json({ message: "Successfully filtered the date", rows });
+  } catch (error) {
+    console.log("Error filtering date", error);
+    res.status(500).json({ message: "Internal Server Error." });
+  }
+});
+
+
+
+//updating the status of an entry in the news and update page.
+router.put("/update-status", authMiddleware, checkRole(['admin', 'editor']), async (req, res) =>{
+  try {
+    const { id, is_Active } = req.body;
+    
+    if(!id || !is_Active){
+      return res.status(400).json({ message: "Missing required fields" })
+    }
+
+    const db = await connectToDatabase();
+
+    // Check if the news item exists
+    const [existingNews] = await db.query("SELECT * FROM upload_news WHERE id = ?", [id]);
+    if (existingNews.length === 0) {
+      return res.status(404).json({ message: "News item not found" })
+    }
+    const sql = `UPDATE upload_news SET is_Active = ? WHERE id = ?`;
+    const values = [is_Active, id];
+
+    await db.query(sql, values);
+
+    res.status(200).json({ message: "Status updated successfully" })
     
   } catch (error) {
-    console.log("Error filtering date", error)
-    res.status(500).json({ message: "Internal Server Error." })
+    console.log("Error Updating status", error)
+    return res.status(500).json({ message: "Internal Server Error" })
   }
 })
 

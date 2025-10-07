@@ -12,7 +12,24 @@ import Container from "@mui/material/Container";
 import NoContent from "../components/NoContent";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import { styled } from '@mui/material/styles';
 
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2),
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(1),
+  },
+}));
 
 const NewsAndUpdate = () => {
   const menuLinks = [
@@ -59,6 +76,10 @@ const NewsAndUpdate = () => {
   const [year, setYear] = useState("All");
   const [fetchedNews, setFetchedNews] = useState([]);
   const [fetchedYears, setFetchedYears] = useState([]);
+  const [isActive, setIsActive] = useState("active")
+  const [switchStatus, setSwitchStatus] = useState(true)
+  const [showDialog, setShowDialog] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
@@ -125,10 +146,16 @@ const NewsAndUpdate = () => {
     setYear(selectedYear);
 
     try {
-      const url =
-        selectedYear === "All"
-          ? `${VITE_API_URL}/page/get-news`
-          : `${VITE_API_URL}/page/filter-date?year=${selectedYear}`;
+ let url;
+
+    if (selectedYear === "All") {
+      url = `${VITE_API_URL}/page/get-news`;
+    } else {
+      // If admin/editor, fetch all (active + inactive) for that year
+      url = auth.isAuthenticated && (auth.user.role === "editor" || auth.user.role === "admin")
+        ? `${VITE_API_URL}/page/filter-date?year=${selectedYear}&includeInactive=true`
+        : `${VITE_API_URL}/page/filter-date?year=${selectedYear}`;
+    }
 
       const response = await fetch(url);
 
@@ -155,6 +182,38 @@ const NewsAndUpdate = () => {
   };
 
 
+
+
+  const handleSaveDialog = async () => {
+    const newStatus = selectedCard.is_Active === "active" ? "inactive" : "active";
+
+    try {
+      const response = await fetch(`${VITE_API_URL}/page/update-status`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: selectedCard.id,
+          is_Active: newStatus,
+        }),
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        setNotification("Status updated successfully.");
+        setPageStatus("success");
+        setSuccessSnackBarState(true);
+        fetchNewsAndUpdates();
+        setShowDialog(false);
+      }
+    } catch (error) {
+      console.log("Error Updating the status of the card");
+      setFailedSnackBarState(true);
+      setNotification("An unexpected error occurred. Please try again.");
+    }
+  };
+
+
+
   //fetch years for the filtering functionality
   const fetchYears = async () => {
     try {
@@ -168,11 +227,19 @@ const NewsAndUpdate = () => {
     }
   };
 
+
+  const handleToggle = (news) => {
+    setSelectedCard(news);
+    setShowDialog(true);
+  };
+
+
+
   useEffect(() => {
     fetchNewsAndUpdates();
     fetchYears();
   }, []);
-   //for the snackbar
+  //for the snackbar
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -182,6 +249,12 @@ const NewsAndUpdate = () => {
     setSuccessSnackBarState(false);
     setFailedSnackBarState(false);
   };
+
+  const handleCloseDialog = () =>{
+    setShowDialog(false);
+  }
+
+  console.log("Selected Card: ", selectedCard?.id);
   return (
     <div className="home-body">
       <div className="home-content">
@@ -290,6 +363,7 @@ const NewsAndUpdate = () => {
                                 ...payload,
                                 title: e.target.value,
                               })
+
                             }
                           />
                           {errors.title && <small className="text-danger">{errors.title}</small>}
@@ -380,54 +454,149 @@ const NewsAndUpdate = () => {
                 </>
               )}
 
+
+              {auth.isAuthenticated && (auth.user.role === "editor" || auth.user.role === "admin") && (
+                <BootstrapDialog
+                  onClose={handleCloseDialog}
+                  aria-labelledby="customized-dialog-title"
+                  open={showDialog}
+                >
+                  <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+                    Set to: {selectedCard && selectedCard.is_Active === "active" ? "Inactive" : "Active"}
+                  </DialogTitle>
+                  <IconButton
+                    aria-label="close"
+                    onClick={handleCloseDialog}
+                    sx={(theme) => ({
+                      position: 'absolute',
+                      right: 8,
+                      top: 8,
+                      color: theme.palette.grey[500],
+                    })}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                  <DialogContent dividers>
+                    <Typography gutterBottom>
+                      Are you sure you want to change the status of this news and update?
+                    </Typography>
+                    <Typography gutterBottom>
+                      Current status: {selectedCard && selectedCard.is_Active === "active" ? "Active" : "Inactive"}
+                    </Typography>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button autoFocus onClick={handleSaveDialog}>
+                      Save changes
+                    </Button>
+                  </DialogActions>
+                </BootstrapDialog>
+              )}
+
               {/* news and update cards here */}
               {/* thumbnail for the card */}
-              {fetchedNews && fetchedNews.length > 0 ? (
-                <div id="news-and-update-cards-container">
-                  {fetchedNews.map((newsItem) => (
-                    <div
-                      className={`news-and-update-card`}
-                      id="news-and-update-card"
-                      key={newsItem.id}
-                    >
-                      <div id="news-and-update-card-wrapper">
 
-                        <img
-                          id="thumbnail-images"
-                          src={`${VITE_API_URL}/uploads/thumbnail/${newsItem.thumbnail}`}
-                          loading="lazy"
-                          alt="News Thumbnail"
-                          className="news-thumbnail"
-                        />
+              {auth.isAuthenticated && (auth.user.role === "editor" || auth.user.role === "admin") ? (
+                fetchedNews && fetchedNews.length > 0 ? (
+                  <div id="news-and-update-cards-container">
+                    {fetchedNews.map((newsItem) => (
+                      <div className="news-and-update-card" key={newsItem.id}>
+                        <div id="news-and-update-card-wrapper">
+                          <img
+                            id="thumbnail-images"
+                            src={`${VITE_API_URL}/uploads/thumbnail/${newsItem.thumbnail}`}
+                            loading="lazy"
+                            alt="News Thumbnail"
+                            className="news-thumbnail"
+                          />
 
-                        <div id="news-and-update-card-details">
-                          <div id="news-and-update-card-title">
-                            <h3>{newsItem.title}</h3>
-                          </div>
-                          <div id="news-and-update-card-content">
-                            <p>{newsItem.news_description}</p>
-                            <p>Issued Date: {newsItem.issued_date}</p>
-                          </div>
-                          <div id="read-more-button-wrapper">
-                            <a
-                              href={`${VITE_API_URL}/uploads/pdfFile/${newsItem.unique_filename}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              Read More
-                            </a>
+                          <div id="news-and-update-card-details">
+                            <div id="news-and-update-card-title">
+                              <h3>{newsItem.title}</h3>
+                            </div>
+                            <div id="news-and-update-card-content">
+                              <p>{newsItem.news_description}</p>
+                              <p>Issued Date: {newsItem.issued_date}</p>
+                            </div>
+                            <div id="read-more-button-wrapper">
+                              <a
+                                href={`${VITE_API_URL}/uploads/pdfFile/${newsItem.unique_filename}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                Read More
+                              </a>
+                            </div>
+
+                            {/* ✅ Only editors/admins see the toggle */}
+                            <div id="status-indicator-wrapper">
+                              <FormControlLabel
+                                control={
+                                  <Switch
+                                    sx={{ m: 1 }}
+                                    checked={newsItem.is_Active === "active"}
+                                    onChange={() => handleToggle(newsItem)}
+                                    color="primary"
+                                  />
+                                }
+                                label={newsItem.is_Active === "active" ? "Active" : "Inactive"}
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-
+                    ))}
+                  </div>
+                ) : (
+                  <div id="no-content-news-update">
+                    <NoContent />
+                  </div>
+                )
               ) : (
-                <div id="no-content-news-update">
-                  <NoContent />
-                </div>
+                // 👇 Non-admins only see active news
+                fetchedNews && fetchedNews.filter(item => item.is_Active === "active").length > 0 ? (
+                  <div id="news-and-update-cards-container">
+                    {fetchedNews
+                      .filter(item => item.is_Active === "active")
+                      .map((newsItem) => (
+                        <div className="news-and-update-card" key={newsItem.id}>
+                          <div id="news-and-update-card-wrapper">
+                            <img
+                              id="thumbnail-images"
+                              src={`${VITE_API_URL}/uploads/thumbnail/${newsItem.thumbnail}`}
+                              loading="lazy"
+                              alt="News Thumbnail"
+                              className="news-thumbnail"
+                            />
+
+                            <div id="news-and-update-card-details">
+                              <div id="news-and-update-card-title">
+                                <h3>{newsItem.title}</h3>
+                              </div>
+                              <div id="news-and-update-card-content">
+                                <p>{newsItem.news_description}</p>
+                                <p>Issued Date: {newsItem.issued_date}</p>
+                              </div>
+                              <div id="read-more-button-wrapper">
+                                <a
+                                  href={`${VITE_API_URL}/uploads/pdfFile/${newsItem.unique_filename}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  Read More
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                ) : (
+                  <div id="no-content-news-update">
+                    <NoContent />
+                  </div>
+                )
               )}
+
 
 
 
@@ -474,7 +643,3 @@ const NewsAndUpdate = () => {
 };
 
 export default NewsAndUpdate;
-
-
-// to do: Protect the backend API endpoints by
-// implementing a middleware that will check the user role

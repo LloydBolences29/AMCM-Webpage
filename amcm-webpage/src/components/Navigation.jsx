@@ -70,7 +70,7 @@ const Navigation = ({ menuLinks }) => {
           <a href="/">
             <img
               className="amcm-logo"
-              src="/AdventistMed.png"
+              src="/AdventistMed.webp"
               alt="AMCM Logo"
             />
           </a>

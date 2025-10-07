@@ -14,7 +14,7 @@ const AdmissionProcess = () => {
 
           <div id="admission-process-content-wrapper">
             <div id="admission-process-content">
-              <div id="admission-steps">
+              
                 <h3>
                   <strong>
                     Step 1: Pre-Admission <br />{" "}
@@ -271,7 +271,6 @@ const AdmissionProcess = () => {
             </div>
           </div>
         </div>
-      </div>
     </>
   )
 }

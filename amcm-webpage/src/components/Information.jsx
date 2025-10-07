@@ -209,7 +209,7 @@ const Information = () => {
                 <img
                   loading="lazy"
                   className="signature"
-                  src="/Apacible.png"
+                  src="/Apacible.webp"
                   alt="President Signature"
                 />
               </div>

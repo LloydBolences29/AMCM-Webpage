@@ -49,8 +49,7 @@ const AccountManagement = () => {
         credentials: "include"
 
       })
-
-      const data = response.json();
+      const data = await response.json();
 
       if (response.ok) {
         fetchAllUser()
@@ -88,9 +87,15 @@ const AccountManagement = () => {
       })
 
 
-      const data = response.json();
+      const data = await response.json();
+      console.log("Data: ", data)
       
-      if (response.ok) {
+      if (!response.ok) {
+        setPageStatus("error")
+        setFailedSnackBarState(true)
+        setNotification(data.message)
+      }
+      else {
         fetchAllUser()
         setPageStatus("success")
         setSuccessSnackBarState(true)
