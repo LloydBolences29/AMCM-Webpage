@@ -5,32 +5,35 @@ import axios from 'axios';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [auth, setAuth] = useState({ loading: true, isAuthenticated: false, user: null });
 
-const VITE_API_URL = import.meta.env.VITE_API_URL;
-
-setTimeout(() => {
-    setLoading(false);
-  }, 3000); 
-    const [auth, setAuth] = useState({ loading, isAuthenticated: false, user: null });
+  const VITE_API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    // Call backend to check auth status using cookie
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     axios.get(`${VITE_API_URL}/auth/auth`, { withCredentials: true })
       .then((res) => {
         console.log("Role Check response:", res.data.role);
-        setAuth({ loading: false, isAuthenticated: true, user: res.data.user});
+        setAuth({ loading: false, isAuthenticated: true, user: res.data.user });
       })
       .catch(() => {
         setAuth({ loading: false, isAuthenticated: false, user: null });
       });
-  }, []);
+  }, [VITE_API_URL]);
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth }}>
+    <AuthContext.Provider value={{ auth, setAuth, loading }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
 
 export const useAuth = () => useContext(AuthContext);

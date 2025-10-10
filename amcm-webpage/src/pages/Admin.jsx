@@ -3,16 +3,18 @@ import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import CircularProgress from "@mui/material/CircularProgress";
 import "../styles/Admin.css";
-import {useState} from "react";
+import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Divider from '@mui/material/Divider';
 import EKGSpinner from "../components/EKGSpinner";
+import MainLayout from "../components/MainLayout";
+
 
 const AccountManagement = lazy(() => import("../components/AccountManagement"));
-const DepartmentManagement = lazy (() => import ("../components/DepartmentManagement"))
-const DoctorManagement = lazy (() => import ("../components/DoctorManagement"))
+const DepartmentManagement = lazy(() => import("../components/DepartmentManagement"))
+const DoctorManagement = lazy(() => import("../components/DoctorManagement"))
 const Admin = () => {
-      const menuLinks = [
+  const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
     { label: "Find Doctors", path: "/find-doctors" },
@@ -45,111 +47,92 @@ const Admin = () => {
   };
 
   return (
-    <div className="home-body">
-      <div className="home-content">
-        {/* navigation  */}
-        <Navigation menuLinks={menuLinks} />
-        <div className="main">
-          <div id="admin-content">
-            <div id="menu-list">
-              {buttons.map((button) => (
-                <Button
-                  id="menu-list-button"
-                  key={button.id}
-                  variant={
-                    active === button.id ? "secondary" : "outline-secondary"
-                  }
-                  onClick={() => handleOnClick(button.id)}
-                >
-                  {button.label}
-                </Button>
-              ))}
-            </div>
+    <MainLayout>
+      <div id="admin-content">
+        <div id="menu-list">
+          {buttons.map((button) => (
+            <Button
+              id="menu-list-button"
+              key={button.id}
+              variant={
+                active === button.id ? "secondary" : "outline-secondary"
+              }
+              onClick={() => handleOnClick(button.id)}
+            >
+              {button.label}
+            </Button>
+          ))}
+        </div>
 
-            <Divider orientation="vertical" variant="middle" />
+        <Divider orientation="vertical" variant="middle" />
 
-            <div id="admin-page-content">
-              {active === "account-management" && (
-                <>
-                  <Suspense
-                    fallback={
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          height: "100vh",
-                          width: "100vw",
-                        }}
-                      >
-                        <EKGSpinner />
-                      </div>
-                    }
-                  >
-                    <AccountManagement />
-                  </Suspense>
-                </>
-              )}
-
-              {active === "department-management" && (
-              <>
+        <div id="admin-page-content">
+          {active === "account-management" && (
+            <>
               <Suspense
-                    fallback={
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          height: "100vh",
-                          width: "100vw",
-                        }}
-                      >
-                        <EKGSpinner />
-                      </div>
-                    }
+                fallback={
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "100vh",
+                      width: "100vw",
+                    }}
                   >
-                    <DepartmentManagement />
-                  </Suspense>
-              </>
-              )}
+                    <EKGSpinner />
+                  </div>
+                }
+              >
+                <AccountManagement />
+              </Suspense>
+            </>
+          )}
 
-              {active === "doctor-management" && (
-                <Suspense
-                  fallback={
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        height: "100vh",
-                        width: "100vw",
-                      }}
-                    >
-                      <EKGSpinner />
-                    </div>
-                  }
+          {active === "department-management" && (
+            <>
+              <Suspense
+                fallback={
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "100vh",
+                      width: "100vw",
+                    }}
+                  >
+                    <EKGSpinner />
+                  </div>
+                }
+              >
+                <DepartmentManagement />
+              </Suspense>
+            </>
+          )}
+
+          {active === "doctor-management" && (
+            <Suspense
+              fallback={
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100vh",
+                    width: "100vw",
+                  }}
                 >
-                  <DoctorManagement />
-                </Suspense>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Footer section */}
-        <Footer />
-      </div>
-
-      <div className="seventh-grid">
-        <div id="seventh-grid-body">
-          <img
-            id="symbol"
-            src="/adventist-symbol--white.png"
-            alt="Seventh Grid"
-          />
+                  <EKGSpinner />
+                </div>
+              }
+            >
+              <DoctorManagement />
+            </Suspense>
+          )}
         </div>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 

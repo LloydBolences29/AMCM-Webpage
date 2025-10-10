@@ -13,7 +13,7 @@ const NonPatientServices = () => {
   const services = [
     {
       id: "automo-washko-card",
-      image: "/auto-mo-wash-ko.png",
+      image: "/auto-mo-wash-ko.webp",
       title: "Auto Mo, Wash Ko",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -21,7 +21,7 @@ const NonPatientServices = () => {
     },
     {
       id: "healthyBites-card",
-      image: "/healthy-bites.png",
+      image: "/healthy-bites.webp",
       title: "Healthy Bites",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",

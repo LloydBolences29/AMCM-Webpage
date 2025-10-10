@@ -6,11 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth } from "../utils/AuthContext";
 import axios from "axios";
-import Navigation from "../components/Navigation";
-import Footer from "../components/Footer";
+import EKGSpinner from "../components/EKGSpinner";
+
+import MainLayout from "../components/MainLayout";
+
 
 const Login = () => {
-      const menuLinks = [
+  const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
     { label: "Find Doctors", path: "/find-doctors" },
@@ -29,8 +31,8 @@ const Login = () => {
   const [loginError, setLoginError] = useState("");
   const [showLoginPassword, setShowLoginPassword] = useState(false);
   const navigate = useNavigate();
-    const { setAuth } = useAuth();
-  
+  const { loading, setAuth } = useAuth();
+
 
   const handleLoginChange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -56,11 +58,14 @@ const Login = () => {
       );
       console.log("Login successful:", response.data);
 
+
       setAuth({
         loading: false,
         isAuthenticated: true,
         user: response.data.user,
       });
+
+
       switch (response.data.user.role) {
         case "admin":
           navigate("/admin");
@@ -85,87 +90,81 @@ const Login = () => {
     }
   };
   return (
-    <div className="home-body">
-      <div className="home-content">
-        {/* navigation  */}
-        <Navigation menuLinks={menuLinks} />
-        <div className="main">
-          <Container>
-            {/* Login form */}
-            <h2 className="mt-5">Login</h2>
-            <Form className="mt-5" onSubmit={handleLoginSubmit}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  value={loginData.email}
-                  onChange={handleLoginChange}
-                />
-              </Form.Group>
+    <MainLayout>
+      {loading ? (<div
 
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <div style={{ position: "relative" }}>
-                  <Form.Control
-                    type={showLoginPassword ? "text" : "password"}
-                    placeholder="Password"
-                    name="password"
-                    value={loginData.password}
-                    onChange={handleLoginChange}
-                  />
-                  <span
-                    variant="link"
-                    size="sm"
-                    style={{
-                      position: "absolute",
-                      right: 10,
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      padding: 0,
-                    }}
-                    onClick={() => setShowLoginPassword((prev) => !prev)}
-                    tabIndex={-1}
-                  >
-                    {showLoginPassword ? (
-                      <FaEyeSlash color="black" />
-                    ) : (
-                      <FaEye color="black" />
-                    )}
-                  </span>
-                </div>
-              </Form.Group>
-              {loginError && (
-                <Alert variant="danger" className="mt-3">
-                  {loginError}
-                </Alert>
-              )}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <EKGSpinner />
+      </div>) : <Container>
+        {/* Login form */}
+        <h2 className="mt-5">Login</h2>
+        <Form className="mt-5" onSubmit={handleLoginSubmit}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={loginData.email}
+              onChange={handleLoginChange}
+            />
+          </Form.Group>
 
-              <Button 
-                type="submit"
-                style={{ backgroundColor: "#007682", borderColor: "#007682" }}
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <div style={{ position: "relative" }}>
+              <Form.Control
+                type={showLoginPassword ? "text" : "password"}
+                placeholder="Password"
+                name="password"
+                value={loginData.password}
+                onChange={handleLoginChange}
+              />
+              <span
+                variant="link"
+                size="sm"
+                style={{
+                  position: "absolute",
+                  right: 10,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  padding: 0,
+                }}
+                onClick={() => setShowLoginPassword((prev) => !prev)}
+                tabIndex={-1}
               >
-                Sign In
-              </Button>
-            </Form>
-          </Container>
-        </div>
+                {showLoginPassword ? (
+                  <FaEyeSlash color="black" />
+                ) : (
+                  <FaEye color="black" />
+                )}
+              </span>
+            </div>
+          </Form.Group>
+          {loginError && (
+            <Alert variant="danger" className="mt-3">
+              {loginError}
+            </Alert>
+          )}
 
-        {/* Footer section */}
-        <Footer />
-      </div>
+          <Button
+            type="submit"
+            style={{ backgroundColor: "#007682", borderColor: "#007682" }}
+          >
+            Sign In
+          </Button>
+        </Form>
+      </Container>}
 
-      <div className="seventh-grid">
-        <div id="seventh-grid-body">
-          <img
-            id="symbol"
-            src="/adventist-symbol--white.png"
-            alt="Seventh Grid"
-          />
-        </div>
-      </div>
-    </div>
+
+
+    </MainLayout>
   );
 };
 

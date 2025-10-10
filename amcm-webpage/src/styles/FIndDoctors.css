@@ -79,6 +79,19 @@
     color: #ffffff !important;
   }
 
+  #search-bar-container #search-input {
+    border: #d8d8d8 2px solid;
+    padding: 0.4em 1em;
+    border-radius: 20px;
+    width: 20vw;
+    font-size: 15px;
+  }
+
+  #search-bar-container #search-input:focus {
+    outline: none;
+    border: #142c2e65 2px solid;
+  }
+
   #department-wrapper #department-card {
     display: flex;
     flex-wrap: wrap;

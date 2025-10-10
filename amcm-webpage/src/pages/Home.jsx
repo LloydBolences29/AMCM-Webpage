@@ -1,9 +1,7 @@
-import React from "react";
-import Navigation from "../components/Navigation";
-import Footer from "../components/Footer";
-import "../styles/Home.css"; // Importing the CSS file for styling
+
 import Hero from "../components/Hero";
 import Information from "../components/Information";
+import MainLayout from "../components/MainLayout"
 
 
 const Home = () => {
@@ -19,32 +17,14 @@ const Home = () => {
   ];
 
   return (
-    <div className="home-body">
-      <div className="home-content">
-        {/* navigation  */}
-        <Navigation menuLinks={menuLinks} />
-        <div className="main">
-          {/* Hero Section */}
+    <MainLayout>
+
           <Hero />
 
           {/* Information Section */}
           <Information />
-        </div>
-
-        {/* Footer section */}
-        <Footer />
-      </div>
-
-      <div className="seventh-grid">
-        <div id="seventh-grid-body">
-          <img
-            id="symbol"
-            src="/adventist-symbol--white.png"
-            alt="Seventh Grid"
-          />
-        </div>
-      </div>
-    </div>
+    </MainLayout>
+       
   );
 };
 

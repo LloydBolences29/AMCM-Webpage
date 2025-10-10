@@ -21,6 +21,8 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { styled } from '@mui/material/styles';
+import MainLayout from "../components/MainLayout";
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -256,11 +258,7 @@ const NewsAndUpdate = () => {
 
   console.log("Selected Card: ", selectedCard?.id);
   return (
-    <div className="home-body">
-      <div className="home-content">
-        {/* navigation  */}
-        <Navigation menuLinks={menuLinks} />
-        <div className="main">
+    <MainLayout>
           <Container>
             <Card
               sx={{
@@ -623,22 +621,9 @@ const NewsAndUpdate = () => {
               </div>
             </div>
           </div>
-        </div>
+       
 
-        {/* Footer section */}
-        <Footer />
-      </div>
-
-      <div className="seventh-grid">
-        <div id="seventh-grid-body">
-          <img
-            id="symbol"
-            src="/adventist-symbol--white.png"
-            alt="Seventh Grid"
-          />
-        </div>
-      </div>
-    </div>
+       </MainLayout>
   );
 };
 

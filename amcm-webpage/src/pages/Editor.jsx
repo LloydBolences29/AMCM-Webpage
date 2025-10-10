@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Suspense, lazy } from "react";
 import Skeleton from "react-loading-skeleton";
-
+import MainLayout from "../components/MainLayout"
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import Container from "@mui/material/Container";
@@ -15,9 +15,9 @@ import { Row, Col, Button } from "react-bootstrap";
 const AddDepartment = lazy(() => import("../components/AddDepartment"));
 const AddDoctor = lazy(() => import("../components/AddDoctor"));
 const AddKeyword = lazy(() => import("../components/AddKeyword"));
-const AddSchedule =lazy(() =>import("../components/AddSchedule"))
+const AddSchedule = lazy(() => import("../components/AddSchedule"))
 const Editor = () => {
-      const menuLinks = [
+  const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
     { label: "Find Doctors", path: "/find-doctors" },
@@ -46,106 +46,92 @@ const Editor = () => {
   };
 
   return (
-    <div className="home-body">
-      <div className="home-content">
-        <Navigation menuLinks={menuLinks} />
-
-        <div className="main">
-          <Container>
-            <Card
-              sx={{
-                mb: 3,
-                textAlign: "center",
-                marginTop: "2em",
-                backgroundColor: "#163235ff",
-                borderRadius: "10px",
-              }}
+    <MainLayout>
+      <Container>
+        <Card
+          sx={{
+            mb: 3,
+            textAlign: "center",
+            marginTop: "2em",
+            backgroundColor: "#163235ff",
+            borderRadius: "10px",
+          }}
+        >
+          <CardContent>
+            <Typography
+              variant="h4"
+              component="h1"
+              className="page-title fw-bold"
+              sx={{ color: "#ffffffff" }}
             >
-              <CardContent>
-                <Typography
-                  variant="h4"
-                  component="h1"
-                  className="page-title fw-bold"
-                  sx={{ color: "#ffffffff" }}
-                >
-                  Editor's Page
-                </Typography>
-              </CardContent>
-            </Card>
-          </Container>
+              Editor's Page
+            </Typography>
+          </CardContent>
+        </Card>
+      </Container>
 
-          {/* Buttons for selection */}
-          <div id="button-selection">
-            <div
-              id="button-selection-wrapper"
-              className="g-1 d-flex justify-content-center"
-            >
-              <Row  className="g-3 d-flex justify-content-center" style={{ width: "100%" }}>
-                <Col xs>
-                  <Button
-                    variant={
-                      active === "department" ? "warning" : "outline-warning"
-                    }
-                    className="w-100"
-                    onClick={() => handleClick("department")}
-                  >
-                    Add Department
-                  </Button>
-                </Col>
-                <Col xs>
-                  <Button
-                    variant={
-                      active === "doctor" ? "warning" : "outline-warning"
-                    }
-                    className="w-100"
-                    onClick={() => handleClick("doctor")}
-                  >
-                    Add Doctor
-                  </Button>
-                </Col>
-                <Col xs>
-                  <Button
-                    variant={
-                      active === "schedule" ? "warning" : "outline-warning"
-                    }
-                    className="w-100"
-                    onClick={() => handleClick("schedule")}
-                  >
-                    Add Schedule
-                  </Button>
-                </Col>
-                <Col xs>
-                  <Button
-                    variant={
-                      active === "keyword" ? "warning" : "outline-warning"
-                    }
-                    className="w-100"
-                    onClick={() => handleClick("keyword")}
-                  >
-                    Add Keyword
-                  </Button>
-                </Col>
-              </Row>
-            </div>
-          </div>
-
-          {/* Rendering each component */}
-
-          <Suspense fallback={<Skeleton height={50} count={4} />}>
-            {renderPage()}
-          </Suspense>
+      {/* Buttons for selection */}
+      <div id="button-selection">
+        <div
+          id="button-selection-wrapper"
+          className="g-1 d-flex justify-content-center"
+        >
+          <Row className="g-3 d-flex justify-content-center" style={{ width: "100%" }}>
+            <Col xs>
+              <Button
+                variant={
+                  active === "department" ? "warning" : "outline-warning"
+                }
+                className="w-100"
+                onClick={() => handleClick("department")}
+              >
+                Add Department
+              </Button>
+            </Col>
+            <Col xs>
+              <Button
+                variant={
+                  active === "doctor" ? "warning" : "outline-warning"
+                }
+                className="w-100"
+                onClick={() => handleClick("doctor")}
+              >
+                Add Doctor
+              </Button>
+            </Col>
+            <Col xs>
+              <Button
+                variant={
+                  active === "schedule" ? "warning" : "outline-warning"
+                }
+                className="w-100"
+                onClick={() => handleClick("schedule")}
+              >
+                Add Schedule
+              </Button>
+            </Col>
+            <Col xs>
+              <Button
+                variant={
+                  active === "keyword" ? "warning" : "outline-warning"
+                }
+                className="w-100"
+                onClick={() => handleClick("keyword")}
+              >
+                Add Keyword
+              </Button>
+            </Col>
+          </Row>
         </div>
-
-        {/* Footer */}
-        <Footer />
       </div>
 
-      <div className="seventh-grid">
-        <SeventhGrid />
-      </div>
+      {/* Rendering each component */}
 
-      
-    </div>
+      <Suspense fallback={<Skeleton height={50} count={4} />}>
+        {renderPage()}
+      </Suspense>
+
+    </MainLayout>
   );
 };
 

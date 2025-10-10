@@ -21,7 +21,14 @@
   background-color: transparent;
 }
 
-@media (max-width: 767px) {
+.page-link {
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+  padding-bottom: 0.2em;
+}
+
+@media only screen and (max-width: 767px) {
   .header {
     padding-bottom: 1em;
     flex-direction: column;
@@ -39,7 +46,6 @@
     height: 100%;
     flex-direction: column;
 
-
     gap: 1em;
   }
   #page-menu {
@@ -49,11 +55,11 @@
     display: flex;
     flex-direction: row;
     align-items: start;
-    margin: 1em 0 0 0 ;
+    margin: 1em 0 0 0;
   }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
   .header {
     padding-bottom: 1em;
     flex-direction: column;
@@ -72,23 +78,19 @@
     flex-direction: row;
     margin-top: 1em;
   }
-  
+
   .header-menu {
     flex-direction: column;
 
-    
     gap: 1em;
   }
 
-  #page-menu{
+  #page-menu {
     display: none;
-    
   }
 }
 
-
-
-@media (min-width: 1025px) {
+@media only screen and (min-width: 1025px) and (max-width: 1239px) {
   .header {
     padding-bottom: 1em;
     flex-direction: row;
@@ -118,16 +120,25 @@
   }
 
   #page-menu {
-    display: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+  }
+  .page-link {
+    text-decoration: none;
+    color: black;
+    font-size: small;
+    padding-bottom: 0.2em;
   }
   .page-link.active {
-  color: #007682;
-  font-weight: bold;
-  border-bottom: 2px solid #007682;
+    color: #007682;
+    font-weight: bold;
+    border-bottom: 2px solid #007682;
+  }
 }
-}
-@media (min-width: 1240px){
-    .header {
+@media only screen and (min-width: 1240px) {
+  .header {
     padding-bottom: 1em;
     flex-direction: row;
     justify-content: space-between;
@@ -161,9 +172,14 @@
     align-items: center;
     gap: 1em;
   }
+  .page-link:hover {
+    cursor: pointer;
+    border-bottom: 2px solid #007682;
+    transition: border-bottom-color 0.5s ease-in-out;
+  }
   .page-link.active {
-  color: #007682;
-  font-weight: bold;
-  border-bottom: 2px solid #007682;
-}
+    color: #007682;
+    font-weight: bold;
+    border-bottom: 2px solid #007682;
+  }
 }

@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import "../styles/Services.css";
 import Button from "react-bootstrap/Button";
 import EKGSpinner from "../components/EKGSpinner";
+import MainLayout from "../components/MainLayout";
 
 import { lazy, Suspense, useState } from "react";
 
@@ -32,11 +33,7 @@ const Services = () => {
   const [activeComponent, setActiveComponent] = useState("one");
 
   return (
-    <div className="home-body">
-      <div className="home-content">
-        {/* navigation  */}
-        <Navigation menuLinks={menuLinks} />
-        <div className="main">
+    <MainLayout>
           <div id="services-wrapper">
             <Container>
               <Card
@@ -183,22 +180,9 @@ const Services = () => {
               </div>
             </div>
           </div>
-        </div>
+        
 
-        {/* Footer section */}
-        <Footer />
-      </div>
-
-      <div className="seventh-grid">
-        <div id="seventh-grid-body">
-          <img
-            id="symbol"
-            src="/adventist-symbol--white.png"
-            alt="Seventh Grid"
-          />
-        </div>
-      </div>
-    </div>
+    </MainLayout>
   );
 };
 
