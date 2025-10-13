@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
-import Navigation from "../components/Navigation";
-import Footer from "../components/Footer";
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useAuth } from "../utils/AuthContext";
 import "../styles/NewsAndUpdate.css";
 import Modal from "react-bootstrap/Modal";
+import Card from "@mui/material/Card"
 import Button from "react-bootstrap/Button";
 import Container from "@mui/material/Container";
 import NoContent from "../components/NoContent";
@@ -78,8 +76,6 @@ const NewsAndUpdate = () => {
   const [year, setYear] = useState("All");
   const [fetchedNews, setFetchedNews] = useState([]);
   const [fetchedYears, setFetchedYears] = useState([]);
-  const [isActive, setIsActive] = useState("active")
-  const [switchStatus, setSwitchStatus] = useState(true)
   const [showDialog, setShowDialog] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const handleClose = () => setShowModal(false);
@@ -110,8 +106,8 @@ const NewsAndUpdate = () => {
 
       const response = await fetch(`${VITE_API_URL}/page/upload-image`, {
         method: "POST",
-        body: formData, // Send the FormData object directly
-        credentials: "include", // Include cookies if needed
+        body: formData, 
+        credentials: "include", 
       });
 
       console.log("data being sent", formData);

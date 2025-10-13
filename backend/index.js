@@ -24,13 +24,33 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       "default-src": ["'self'"],
-      "img-src": ["'self'", "data:", "http://195.68.4.254:2000", "http://195.68.4.254:3000", "https:"],
-      "script-src": ["'self'", "'unsafe-inline'"],
-      "connect-src": ["'self'", "http://195.68.4.254:2000", "http://195.68.4.254:3000"],
-      "style-src": ["'self'", "'unsafe-inline'"],
+      "img-src": [
+        "'self'",
+        "data:",
+        "http://195.68.4.254:2000",
+        "http://195.68.4.254:3000",
+        "https:"
+      ],
+      "script-src": [
+        "'self'",
+        "'nonce-<RANDOM_NONCE>'"
+      ],
+      "connect-src": [
+        "'self'",
+        "http://195.68.4.254:2000",
+        "http://195.68.4.254:3000"
+      ],
+      "style-src": [
+        "'self'",
+        "'nonce-<RANDOM_NONCE>'" 
+      ],
+      "object-src": ["'none'"], // Disables plugins for added safety
+      "base-uri": ["'self'"],   // Prevents dangerous <base> changes
+      "form-action": ["'self'"],// Restricts where forms can submit
     },
   })
 );
+
 
 
 

@@ -19,13 +19,11 @@ const Navigation = ({ menuLinks }) => {
       id: "our-services",
       label: "Our Services",
       link: "/services",
-      component: lazy(() => import("../pages/Services")),
     },
     {
       id: "find-doctors",
       label: "Find Doctors",
       link: "/find-doctors",
-      component: lazy(() => import("../pages/FindDoctors")),
     },
     // {
     //   id: "billing-and-admitting",
@@ -36,33 +34,28 @@ const Navigation = ({ menuLinks }) => {
       id: "news-updates",
       label: "News and Updates",
       link: "/news-updates",
-      component: lazy(() => import("../pages/NewsAndUpdate")),
     },
     {
       id: "online-patient-survey",
       label: "Online Patient Survey",
       link: "/online-patient-survey",
-      component: lazy(() => import("../pages/OnlinePatientSurvey")),
     },
     {
       id: "about-us",
       label: "About Us",
       link: "/about-us",
-      component: lazy(() => import("../pages/AboutUs")),
     },
   ];
   
 
-  const [activePageMenu, setActivePageMenu] = useState(null);
 
   const handleMenuClick = (menu) => {
     navigate(menu.link);
-    setActivePageMenu(menu);
+
   };
 
-  const ActivePageComponent = activePageMenu?.component
 
-  console.log("Active Menu:", activePageMenu);
+
   return (
     <div className="header">
       <div className="logo-container">
@@ -105,11 +98,11 @@ const Navigation = ({ menuLinks }) => {
         </div>
       </div>
 
-      {ActivePageComponent &&(
+      {/* {ActivePageComponent &&(
         <Suspense>
           <ActivePageComponent />
         </Suspense>
-      )}
+      )} */}
 
       <Overlay
         menuLinks={menuLinks}

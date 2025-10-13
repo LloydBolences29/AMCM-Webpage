@@ -20,7 +20,10 @@ const components = {
     import("../information/DiagnosticImaging.jsx")
   ),
   "admission-service": lazy(() => import("../information/AdmissionServiceRenderer.jsx")),
-  "emergency-room": lazy(() => import("../Emergency/Emergency.jsx")),
+  "emergency-room": lazy(() => import("../information/EmergencyRenderer.jsx")),
+  "physical-medicine-rehabilitation-service": lazy(() =>
+    import("../information/PMRRenderer.jsx")
+  ),
 
 
 };

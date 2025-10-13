@@ -1,0 +1,115 @@
+@media only screen and (max-width: 767px){
+    #pmr-container{
+        margin: 1.5em;
+    }
+
+    #pmr-wrapper{
+        padding: 1em;
+        line-height: 2;
+    }
+    #pmr-title h3{
+        font-size: 1.5em;
+        font-weight: bold;
+        text-align: center;
+    }
+    #pmr-description p{
+        text-align: center;
+    }
+
+    #who-can-benefits-list{
+        list-style: none;
+        padding-left: 2.5rem;
+    }
+
+    #pmr-notes p{
+        font-size: 0.9em;
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1239px){
+    #pmr-container{
+        margin: 1.5em;
+    }
+
+    #pmr-wrapper{
+        padding: 1.5em;
+        line-height: 2;
+    }
+    #pmr-title h3{
+        font-size: 1.8em;
+        font-weight: bold;
+        text-align: center;
+    }
+    #pmr-description p{
+        text-align: center;
+    }
+
+    #who-can-benefits-list{
+        list-style: none;
+        padding-left: 3rem;
+    }
+
+    #pmr-notes p{
+        font-size: 1em;
+        text-align: center;
+    }
+}
+@media only screen and (min-width: 1240px) and (max-width: 1399px){
+    #pmr-container{
+        margin: 1.5em 3em;
+    }
+
+    #pmr-wrapper{
+        padding: 0 1.5em;
+        line-height: 2;
+        font-size: larger;
+    }
+    #pmr-title h3{
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+    }
+    #pmr-description p{
+        text-align: center;
+    }
+
+    #who-can-benefits-list{
+        list-style: none;
+        padding-left: 3rem;
+    }
+
+    #pmr-notes p{
+        font-size: 1em;
+        text-align: center;
+    }
+}
+@media only screen and (min-width: 1400px){
+    #pmr-container{
+        margin: 1.5em 10em;
+    }
+
+    #pmr-wrapper{
+        padding: 0 1.5em;
+        line-height: 2;
+        font-size: larger;
+    }
+    #pmr-title h3{
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+    }
+    #pmr-description p{
+        text-align: center;
+    }
+
+    #who-can-benefits-list{
+        list-style: none;
+        padding-left: 3rem;
+    }
+
+    #pmr-notes p{
+        font-size: 1em;
+        text-align: center;
+    }
+}
