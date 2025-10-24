@@ -1,0 +1,1 @@
+import{j as r}from"./index-CU6FVKgc.js";import{U as t}from"./UnderConstruction-CwEQPcvt.js";import"./createSvgIcon-CIQck3fE.js";import"./DefaultPropsProvider-BEWS1EG7.js";import"./extends-CF3RwP-h.js";const m=()=>r.jsx("div",{children:r.jsx(t,{page:"Urgent Care"})});export{m as default};
