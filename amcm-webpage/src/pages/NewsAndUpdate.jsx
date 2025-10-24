@@ -504,6 +504,7 @@ const NewsAndUpdate = () => {
                           />
 
                           <div id="news-and-update-card-details">
+                          
                             <div id="news-and-update-card-title">
                               <h3>{newsItem.title}</h3>
                             </div>

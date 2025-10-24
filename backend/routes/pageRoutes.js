@@ -39,7 +39,7 @@ const fileFilter = (req, file, cb) => {
     cb(new Error("Invalid file type. Only PDF, JPEG, and PNG are allowed."), false);
   }
 };
-const upload = multer({ storage, fileFilter });
+const upload = multer({ storage, fileFilter, limits: { fileSize: 50 * 1024 * 1024 } });
 
 router.post(
   "/upload-image",

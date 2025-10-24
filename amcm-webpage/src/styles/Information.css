@@ -1,10 +1,18 @@
 /*for mobile view*/
-@media (max-width: 767px) {
+@media only screen and (max-width: 767px) {
   .information-content {
     padding: 1em;
     display: flex;
     flex-direction: column;
     gap: 1.5em;
+  }
+
+  #second-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
   }
 
   .information-subContent-title h2,
@@ -13,27 +21,26 @@
     text-align: center;
   }
 
-  #information-mission {
-    border-bottom: #007682 2px solid;
-    margin-bottom: 1.5em;
+  #information-wrapper-1 {
+    width: 100%;
+    display: flex;
+    gap: 0.5em;
+    flex-direction: column;
+    text-align: center;
   }
 
-  #information-mission h2 {
-    font-size: clamp(1.1rem, 1.3rem, 2rem);
-    color: #007682;
+  #information-wrapper-1 #information-mission h2 {
+    font-weight: 100;
+    font-size: 1.3em;
   }
 
-  #information-mission-content {
-    color: #142c2e;
-    border-radius: 10px;
-    font-size: 24px;
-    font-weight: bold;
-    box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
+  #information-wrapper-1 #information-mission-content p {
+    font-size: 2em;
+    font-weight: bolder;
   }
 
-  #information-mission-content .mission {
-    padding: 1em;
-  }
+
+
 
   #information-values h2 {
     font-size: clamp(1.2rem, 1.3rem, 2rem);
@@ -189,42 +196,42 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
   .information-content {
     padding: 2em;
     display: flex;
     flex-direction: column;
-    gap: 1.5em;
+    gap: 4em;
+    margin: 0 3em;
+  }
+  #second-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4em;
   }
 
   #information-wrapper-1 {
-    height: 40vh;
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    gap: 1em;
+    flex-direction: column;
     text-align: center;
-    box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
-  }
-  #information-wrapper-1 #information-mission {
-    align-content: center;
-    border-right: 3px solid #007682;
-    height: 90%;
-    width: 50%;
-    margin-right: 2em;
   }
   #information-wrapper-1 #information-mission h2 {
-    font-size: 2.5em;
-    margin-bottom: 1em;
-    color: #007682;
+    font-weight: 100;
+    font-size: 2.2em;
   }
-  #information-wrapper-1 #information-mission-content {
-    width: 50%;
+
+  #information-wrapper-1 #information-mission-content p {
+    font-size: 2.7em;
+    font-weight: bolder;
   }
-  #information-wrapper-1 #information-mission-content .mission {
-    font-size: 2em;
-    text-align: center;
-    font-weight: bold;
+
+
+  #information-wrapper-2 {
+    width: 100%;
   }
 
   #information-values {
@@ -281,6 +288,7 @@
     grid-template-columns: 1fr 1fr;
     width: 100%;
     margin-top: 1em;
+    gap: 1.2em;
   }
   #information-services-content #services-row .col {
     display: flex;
@@ -416,7 +424,7 @@
   }
   .president-signature .president-info p.president-name {
     font-weight: bold;
-    font-size: 26px;
+    font-size: 2rem;
     text-decoration: underline;
   }
   .president-signature .president-info p.president-position {
@@ -425,60 +433,41 @@
   }
 }
 
-@media (min-width: 1025px) and (max-width: 1399px) {
+@media only screen and (min-width: 1025px) and (max-width: 1399px) {
   .information-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1.8em;
+    gap: 3.5em;
   }
 
-  #information-wrapper-1 {
-    margin-top: 1em;
-    width: 100%;
-    height: 25vh;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #information-wrapper-1 #information-mission {
-    align-content: center;
-    height: inherit;
-    width: 25vw;
-    margin-right: 0.5em;
-    border-left: 3px solid #007682;
-  }
-
-  #information-wrapper-1 #information-mission h2 {
-    font-size: 2.5em;
-    margin-bottom: 1em;
-    color: #142c2e;
-  }
-  #information-wrapper-1 #information-mission-content {
-    border-radius: 0px 18px 20px 0px;
-
-    width: 50%;
-    height: 100%;
+  #second-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #007682;
-    box-shadow: -5px 8px 5px -1px rgba(0, 0, 0, 0.75);
+    gap: 3.5em;
+    margin: 0 5em;
   }
-  #information-wrapper-1 #information-mission-content .mission {
-    font-size: 2em;
+
+  #information-wrapper-1 {
+    width: 100%;
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
     text-align: center;
-    font-weight: bold;
-    color: white;
-    width: 70%;
+  }
+  #information-wrapper-1 #information-mission h2 {
+    font-weight: 100;
+    font-size: 2.2em;
+  }
+
+  #information-wrapper-1 #information-mission-content p {
+    font-size: 2.7em;
+    font-weight: bolder;
   }
 
   #information-wrapper-2 {
-    width: inherit;
+    width: 100%;
     text-align: center;
     margin: 2em 0;
     display: flex;
@@ -488,7 +477,7 @@
 
   #information-values {
     background-color: #007682;
-    width: 60vw;
+    width: 100%;
     text-align: center;
     border-radius: 12px;
     color: white;
@@ -515,78 +504,59 @@
   }
 
   #information-wrapper-3 {
-    background-color: #007682;
-    align-self: stretch;
-    justify-items: center;
+    margin: 0 5em;
+    display: flex;
+    text-align: center;
   }
   #information-wrapper-3-container {
-    width: 95%;
-    height: 25vh;
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2em;
+  }
+#information-services-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
   }
 
-  #information-wrapper-3 #information-services {
-    width: 40%;
-    height: 50%;
-    display: flex;
+  #information-services-content .row{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-right: 3px solid #ffa92d;
-    padding: 0 3em;
+    gap: 1.5em;
   }
-  #information-wrapper-3 #information-services h2 {
-    font-size: 2em;
-    color: white;
-  }
-
-  #information-services-content {
-    margin-left: 3em;
+  #information-services-content .row .col{
     width: 100%;
+    padding: 1.5em;
+    box-shadow: 0px 10px 15px -3px rgba(78, 78, 78, 0.1);
   }
-  #information-services-content #services-row {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-  }
-  #information-services-content #services-row .col {
-    text-decoration: none;
-    font-size: 18px;
-    display: flex;
-    align-items: end;
-    margin: 1em 0;
-    width: 22%;
-    margin-left: 1em;
-    color: white;
-    box-shadow: 0px 10px 1px -3px rgba(0, 0, 0, 0.1);
+  #information-services-content .row .col p{
+    font-size: 1.5em;
+    font-weight: bold;
   }
 
-  #information-services-content #services-row .col:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease-in-out;
-    box-shadow: 0px 26px 15px -3px rgba(0, 0, 0, 0.1);
-  }
 
-  .services-button {
-    border-radius: 20px;
-    padding: 0.5em 1em;
-  }
+
+
 
   #information-wrapper-4 {
     margin: 0 2em;
-    height: 40vh;
-    width: inherit;
+    height: 100%;
+    max-width: 100%;
     text-align: center;
     display: flex;
+    flex-direction: column-reverse;
+    gap: 2.5em;
     justify-content: center;
     align-items: center;
   }
 
   #information-achievements {
-    border-right: #ffa92d 3px solid;
     padding: 0 1em;
     color: #142c2e;
     display: flex;
@@ -594,6 +564,11 @@
     align-items: center;
     height: 80%;
     margin-left: 2em;
+  }
+
+  #information-achievements h2 {
+    font-size: 2.5em;
+    font-weight: bolder;
   }
 
   #information-wrapper-5 {
@@ -617,7 +592,7 @@
     font-size: 20px;
   }
   .president-message {
-    width: 85%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -640,12 +615,12 @@
 
   .president-signature .president-info p {
     margin-bottom: 0;
-    font-size: 16em;
+    font-size: 1.5rem;
     line-height: 1.5;
   }
   .president-signature .president-info p.president-name {
     font-weight: bold;
-    font-size: 1.3em;
+    font-size: 100%;
     text-decoration: underline;
   }
   .president-signature .president-info p.president-position {
@@ -675,68 +650,54 @@
   }
 }
 
-@media (min-width: 1400px) {
-  .information-content {
+@media only screen and (min-width: 1400px) {
+  /* .information-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1.5em;
-  }
+    margin: 0 5em;
+  } */
 
-  #information-wrapper-1 {
-    margin-top: 1em;
-    width: 65vw;
-    height: 25vh;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #information-wrapper-1 #information-mission {
-    align-content: center;
-    height: inherit;
-    width: 25vw;
-    margin-right: 0.5em;
-    border-left: 3px solid #007682;
-  }
-
-  #information-wrapper-1 #information-mission h2 {
-    font-size: 2.5em;
-    margin-bottom: 1em;
-    color: #142c2e;
-  }
-  #information-wrapper-1 #information-mission-content {
-    border-radius: 0px 18px 20px 0px;
-
-    width: 50%;
-    height: 100%;
+  #second-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #007682;
-    box-shadow: -5px 8px 5px -1px rgba(0, 0, 0, 0.75);
+    gap: 5em;
+    margin: 5em 10em;
   }
-  #information-wrapper-1 #information-mission-content .mission {
-    font-size: 2em;
+
+  /* For Information wrapper 1 */
+  #information-wrapper-1 {
+    width: 100%;
+    display: flex;
+    gap: 3em;
+    flex-direction: column;
     text-align: center;
-    font-weight: bold;
-    color: white;
-    width: 70%;
+  }
+
+  #information-wrapper-1 #information-mission h2 {
+    font-weight: 100;
+    font-size: 2.5em;
+  }
+
+  #information-wrapper-1 #information-mission-content p {
+    font-size: 3.5em;
+    font-weight: bolder;
   }
 
   #information-wrapper-2 {
-    width: 65vw;
+    width: 100%; /*for testing*/
     text-align: center;
     margin: 2em 0;
     justify-content: center;
   }
 
   #information-values {
-    background-color: #007682;
-    width: 65vw;
+    background-color: #3e8391;
+    width: 100%; /*for testing*/
     text-align: center;
     border-radius: 12px;
     color: white;
@@ -763,70 +724,399 @@
   }
 
   #information-wrapper-3 {
-    background-color: #007682;
-    align-self: stretch;
-    justify-items: center;
+    margin: 2em 10em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   #information-wrapper-3-container {
-    width: 65vw;
-    height: 25vh;
+    width: 100%; /*for testing*/
+    height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0 2em;
+    box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
+    padding: 4rem;
+    border-radius: 15px;
   }
 
-  #information-wrapper-3 #information-services {
-    width: 40%;
-    height: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  #information-services {
+    width: 100%; /*for testing*/
     text-align: center;
-    border-right: 3px solid #ffa92d;
-    padding: 0 3em;
-  }
-  #information-wrapper-3 #information-services h2 {
-    font-size: 2.5em;
-    color: white;
+    border-bottom: 3px solid #ffa92d;
+    padding-bottom: 0.5em;
+    color: #142c2e;
+    margin-bottom: 4em;
   }
 
-  #information-services-content {
-    margin-left: 3em;
-    width: 100%;
+  #information-services h2{
+    color: #142C2E;
+    font-weight: bolder;
   }
   #information-services-content #services-row {
     display: flex;
-    flex-wrap: wrap;
-    width: 100%;
+    justify-content: center;
+    gap: 2em;
   }
-  #information-services-content #services-row .col {
-    text-decoration: none;
-    font-size: 18px;
+
+  /* Service card container */
+  #information-services-content #services-row #our-services {
+    background-image: url("/Hospital-Customer-Service.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 20dvw;
+    height: 30dvh;
+    border-radius: 10px;
+    box-shadow: 0px 10px 15px -3px rgba(78, 78, 78, 0.1);
     display: flex;
-    align-items: end;
-    margin: 1em 0;
-    width: 22%;
-    margin-left: 1em;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+
+    /* start grayscale and dim */
+    filter: grayscale(100%) brightness(80%);
+    transition: filter 0.8s ease, transform 0.8s ease;
+  }
+
+  /* On hover: full color + subtle zoom */
+  #information-services-content #services-row #our-services:hover {
+    filter: grayscale(0%) brightness(100%);
+    transform: scale(1.03);
+  }
+
+  /* Overlay text (centered initially) */
+  #information-services-content
+    #services-row
+    #our-services
+    #services-overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* perfectly centered */
+    color: rgb(255, 255, 255);
+    width: 100%;
+    text-align: center;
+    font-size: 1.6rem;
+    transition: all 0.8s ease; /* smooth movement + color change */
+    padding: 0.5em 0 1em;
+  }
+
+  /* Hover: move text to bottom, darken background */
+  #information-services-content
+    #services-row
+    #our-services:hover
+    #services-overlay-text {
+    top: 85%; /* move toward bottom */
+    transform: translate(-50%, -50%); /* keep horizontally centered */
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
-    box-shadow: 0px 10px 1px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 10px 10px;
   }
 
-  #information-services-content #services-row .col:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease-in-out;
-    box-shadow: 0px 26px 15px -3px rgba(0, 0, 0, 0.1);
+  /* Hide button initially */
+  #information-services-content
+    #services-row
+    #our-services
+    #services-overlay-text
+    .services-button {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
 
+  /* Fade and slide button up on hover */
+  #information-services-content
+    #services-row
+    #our-services:hover
+    #services-overlay-text
+    .services-button {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Button hover styling */
   .services-button {
     border-radius: 20px;
-    padding: 0.5em 1em;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+  }
+
+  .services-button:hover {
+    transform: scale(1.1);
+  }
+  /* Find Doctor card container */
+  #information-services-content #services-row #find-doctors {
+    background-image: url("/find-doctor.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 20dvw;
+    height: 30dvh;
+    border-radius: 10px;
+    box-shadow: 0px 10px 15px -3px rgba(78, 78, 78, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+
+    /* start grayscale and dim */
+    filter: grayscale(100%) brightness(80%);
+    transition: filter 0.8s ease, transform 0.8s ease;
+  }
+
+  /* On hover: full color + subtle zoom */
+  #information-services-content #services-row #find-doctors:hover {
+    filter: grayscale(0%) brightness(100%);
+    transform: scale(1.03);
+  }
+
+  /* Overlay text (centered initially) */
+  #information-services-content
+    #services-row
+    #find-doctors
+    #find-doctors-overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* perfectly centered */
+    color: rgb(255, 255, 255);
+    width: 100%;
+    text-align: center;
+    font-size: 1.6rem;
+    transition: all 0.8s ease; /* smooth movement + color change */
+    padding: 0.5em 0 1em;
+  }
+
+  /* Hover: move text to bottom, darken background */
+  #information-services-content
+    #services-row
+    #find-doctors:hover
+    #find-doctors-overlay-text {
+    top: 85%; /* move toward bottom */
+    transform: translate(-50%, -50%); /* keep horizontally centered */
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 0 0 10px 10px;
+  }
+
+  /* Hide button initially */
+  #information-services-content
+    #services-row
+    #find-doctors
+    #find-doctors-overlay-text
+    .services-button {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  /* Fade and slide button up on hover */
+  #information-services-content
+    #services-row
+    #find-doctors:hover
+    #find-doctors-overlay-text
+    .services-button {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Button hover styling */
+  .services-button {
+    border-radius: 20px;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+  }
+
+  .services-button:hover {
+    transform: scale(1.1);
+  }
+
+  /* News and Update card container */
+  #information-services-content #services-row #news-updates {
+    background-image: url("/AMCM.webp");
+    background-size: cover;
+    background-position: center;
+    width: 20dvw;
+    height: 30dvh;
+    border-radius: 10px;
+    box-shadow: 0px 10px 15px -3px rgba(78, 78, 78, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+
+    /* start grayscale and dim */
+    filter: grayscale(100%) brightness(80%);
+    transition: filter 0.8s ease, transform 0.8s ease;
+  }
+
+  /* On hover: full color + subtle zoom */
+  #information-services-content #services-row #news-updates:hover {
+    filter: grayscale(0%) brightness(100%);
+    transform: scale(1.03);
+  }
+
+  /* Overlay text (centered initially) */
+  #information-services-content
+    #services-row
+    #news-updates
+    #news-updates-overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* perfectly centered */
+    color: rgb(255, 255, 255);
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    transition: all 0.8s ease; /* smooth movement + color change */
+    padding: 0.5em 0 1em;
+  }
+
+  /* Hover: move text to bottom, darken background */
+  #information-services-content
+    #services-row
+    #news-updates:hover
+    #news-updates-overlay-text {
+    top: 85%; /* move toward bottom */
+    transform: translate(-50%, -50%); /* keep horizontally centered */
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 0 0 10px 10px;
+  }
+
+  /* Hide button initially */
+  #information-services-content
+    #services-row
+    #news-updates
+    #news-updates-overlay-text
+    .services-button {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  /* Fade and slide button up on hover */
+  #information-services-content
+    #services-row
+    #news-updates:hover
+    #news-updates-overlay-text
+    .services-button {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Button hover styling */
+  .services-button {
+    border-radius: 20px;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+  }
+
+  .services-button:hover {
+    transform: scale(1.1);
+  }
+
+  /* Online patient survey card container */
+  #information-services-content #services-row #online-patient-survey {
+    background-image: url("/patient-survey.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 12dvw;
+    height: 30dvh;
+    border-radius: 10px;
+    box-shadow: 0px 10px 15px -3px rgba(78, 78, 78, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+
+    /* start grayscale and dim */
+    filter: grayscale(100%) brightness(80%);
+    transition: filter 0.8s ease, transform 0.8s ease;
+  }
+
+  /* On hover: full color + subtle zoom */
+  #information-services-content #services-row #online-patient-survey:hover {
+    filter: grayscale(0%) brightness(100%);
+    transform: scale(1.03);
+  }
+
+  /* Overlay text (centered initially) */
+  #information-services-content
+    #services-row
+    #online-patient-survey
+    #online-patient-survey-overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* perfectly centered */
+    color: rgb(255, 255, 255);
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    transition: all 0.8s ease; /* smooth movement + color change */
+    padding: 0.5em 0 1em;
+  }
+
+  /* Hover: move text to bottom, darken background */
+  #information-services-content
+    #services-row
+    #online-patient-survey:hover
+    #online-patient-survey-overlay-text {
+    top: 85%; /* move toward bottom */
+    transform: translate(-50%, -50%); /* keep horizontally centered */
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 0 0 10px 10px;
+  }
+
+  /* Hide button initially */
+  #information-services-content
+    #services-row
+    #online-patient-survey
+    #online-patient-survey-overlay-text
+    .services-button {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  /* Fade and slide button up on hover */
+  #information-services-content
+    #services-row
+    #online-patient-survey:hover
+    #online-patient-survey-overlay-text
+    .services-button {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Button hover styling */
+  .services-button {
+    border-radius: 20px;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+  }
+
+  .services-button:hover {
+    transform: scale(1.1);
   }
 
   #information-wrapper-4 {
     height: 40vh;
-    width: 65vw;
+    width: 100%; /*for testing*/
     text-align: center;
     display: flex;
     justify-content: space-between;
@@ -834,7 +1124,6 @@
   }
 
   #information-achievements {
-    border-right: #ffa92d 3px solid;
     padding: 0 1em;
     color: #142c2e;
     display: flex;
@@ -844,10 +1133,15 @@
     margin: 0 2em;
   }
 
+  #information-achievements h2 {
+    font-size: 2.5em;
+    font-weight: bolder;
+  }
+
   #information-wrapper-5 {
-    width: 65vw;
+    width: 100%; /*for testing*/
     text-align: center;
-    background-color: #007682;
+    background-color: #3e8391;
     border-radius: 18px;
   }
   #information-news {
@@ -865,7 +1159,7 @@
     font-size: 20px;
   }
   .president-message {
-    width: 65vw;
+    width: 100%; /*for testing*/
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -893,7 +1187,7 @@
   }
   .president-signature .president-info p.president-name {
     font-weight: bold;
-    font-size: 26px;
+    font-size: 100%;
     text-decoration: underline;
   }
   .president-signature .president-info p.president-position {

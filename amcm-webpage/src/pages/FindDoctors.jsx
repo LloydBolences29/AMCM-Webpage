@@ -1,7 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import EKGSpinner from "../components/EKGSpinner";
 import { Button } from "react-bootstrap";
-import Skeleton from "react-loading-skeleton";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Container from "@mui/material/Container";
@@ -15,20 +14,9 @@ const DoctorByDepartment = lazy(() =>
   import("../components/FetchDoctorByDepartment")
 );
 const FindDoctors = () => {
-  const menuLinks = [
-    { label: "Home", path: "/" },
-    { label: "Our Services", path: "/services" },
-    { label: "Find Doctors", path: "/find-doctors" },
-    { label: "News and Update", path: "/news-updates" },
-    { label: "Patient Rights", path: "/patient-rights" },
-    { label: "Online Patient Survey", path: "/online-patient-survey" },
-
-  ];
   const [searchInput, setSearchInput] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [showResult, setShowResult] = useState(false);
-
-  const VITE_API_URL = import.meta.env.VITE_API_URL;
 
   const handleSearch = () => {
     setSearchValue(searchInput);

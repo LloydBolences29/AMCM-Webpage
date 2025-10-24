@@ -30,7 +30,7 @@ const Emergency = () => {
                         <div id="type-of-patient-care">
                             <ul id="type-of-patient-care-list">
                                 <li><strong>🔴 Emergency (Critical)</strong> </li>
-                                <p> Immediate treatment required (e.g. , heart attack, stroke, severe, traruma)</p>
+                                <p> Immediate treatment required (e.g. , heart attack, stroke, severe, trauma)</p>
                                 <li><strong>🟠 Urgent (Serious but Stable)</strong></li>
                                  <p> Quick intervention needed (e.g., fractures, high fever with seizures)</p>
                                 <li><strong>🟡 Non-Urgent (Stable Conditions)</strong></li>

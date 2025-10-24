@@ -1,7 +1,10 @@
 @media only screen and (max-width: 767px) {
   #admission-process-container {
     margin: 1em;
-    line-height: 1.5;
+  }
+  #admission-process-wrapper {
+    padding: 1em;
+    line-height: 2;
   }
   #admission-process-wrapper #heading-title h3 {
     font-size: 2em;
@@ -12,41 +15,49 @@
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   #admission-process-container {
-    margin: 2em;
+    margin: 1.5em;
     line-height: 1.5;
   }
 
-  #admission-process-wrapper #heading-title h3 {
-       font-size: 2em;
-    font-weight: bold;
-    text-align: center;
-  }
-}
-@media only screen and (min-width: 1025px) and (max-width: 1399px) {
-  #admission-process-container {
-    margin: 2.5em;
+  #admission-process-wrapper{
+    padding: 1em;
     line-height: 2;
   }
+
   #admission-process-wrapper #heading-title h3 {
-       font-size: 2em;
+    font-size: 2.5em;
     font-weight: bold;
     text-align: center;
   }
 }
-@media only screen and (min-width: 1400px) {
+@media only screen and (min-width: 1025px) {
+  #admission-process-container {
+    margin: 1.5em;
+  }
+  #admission-process-wrapper{
+    padding: 2em;
+    line-height: 2;
+    font-size: larger;
+  }
+  #admission-process-wrapper #heading-title h3 {
+    font-size: 2.7em;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+/* @media only screen and (min-width: 1400px) {
   #admission-process-container {
     margin: 3em;
     line-height: 2;
   }
 
-  #admission-process-content{
-    font-size: 1.2em;
+  #admission-process-content {
+    font-size: larger;
   }
 
   #admission-process-wrapper #heading-title h3 {
-       font-size: 2em;
+    font-size: 2.5em;
     font-weight: bold;
     text-align: center;
   }
-
-}
+} */

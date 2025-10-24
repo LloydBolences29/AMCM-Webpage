@@ -29,7 +29,7 @@ const NonPatientServices = () => {
     },
     {
       id: "guest-rooms-card",
-      image: "/guest-room.png",
+      image: "/guest-room.webp",
       title: "Guest Rooms",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -37,7 +37,7 @@ const NonPatientServices = () => {
     },
       {
       id: "gymnasium-card",
-      image: "/gymnasium.png",
+      image: "/gymnasium.webp",
       title: "Gymnasium",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -45,7 +45,7 @@ const NonPatientServices = () => {
     },
     {
       id: "parking-card",
-      image: "/parking.png",
+      image: "/parking.webp",
       title: "Parking",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",

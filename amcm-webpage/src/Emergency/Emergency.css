@@ -4,7 +4,7 @@
   }
   #emergency-wrapper {
     padding: 1em;
-    line-height: 2em;
+    line-height: 2;
   }
 
   #emergency-title h3 {
@@ -41,7 +41,7 @@
   }
   #emergency-wrapper {
     padding: 1.2em;
-    line-height: 1.5em;
+    line-height: 2;
   }
 
   #emergency-title h3 {
@@ -86,7 +86,7 @@
   }
   #emergency-wrapper {
     padding: 2em;
-    line-height: 1.5em;
+    line-height: 1.5;
     font-size: larger;
   }
 

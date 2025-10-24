@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [react(), analyzer()],
   server: {
     port: 3000,
-    host: true
+    host: true,
   }
+
 })

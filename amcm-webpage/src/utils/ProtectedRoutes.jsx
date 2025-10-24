@@ -13,7 +13,7 @@ const ProtectedRoutes = ({allowedRoles}) => {
     if (!auth.isAuthenticated) {
         return <Navigate to="/login" replace />;
     }
-    if(!allowedRoles.includes(auth.user.role)) {
+    if(!allowedRoles.includes(auth.user?.role)) {
         console.log("User role not allowed: ", auth.user);
         return <Navigate to="/login" replace />;
     }

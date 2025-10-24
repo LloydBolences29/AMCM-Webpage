@@ -9,6 +9,9 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
   const [showModal, setShowModal] = useState(false);
   const [modalTimer, setModalTimer] = useState(3);
 
+
+    const VITE_API_URL = import.meta.env.VITE_API_URL;
+
   const additionalLinks = [
     {
       role: "admin",
@@ -24,7 +27,7 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://195.68.4.254:2000/auth/logout", {
+      const response = await fetch(`${VITE_API_URL}/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

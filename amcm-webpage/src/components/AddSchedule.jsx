@@ -247,8 +247,8 @@ const AddSchedule = () => {
                   </Form.Group>
 
                   {(form.department ===
-                    "OB GYNE / PERINATOLOGIST / SONOLOGIST" ||
-                    form.department === "OB GYNE / SONOLOGIST") && (
+                    "OBSTETRICS AND GYNECOLOGY / PERINATOLOGIST / SONOLOGIST" ||
+                    form.department === "OBSTETRICS AND GYNECOLOGY / SONOLOGIST") && (
                       <Form.Group className="mb-3">
                         <Form.Label>Schedule Type</Form.Label>
                         <Form.Control

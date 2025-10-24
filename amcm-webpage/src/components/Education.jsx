@@ -13,7 +13,7 @@ const Education = () => {
   const services = [
     {
       id: "lifestyle-service",
-      image: "/lifestyle.png",
+      image: "/lifestyle.webp",
       title: "Lifestyle Is Medicine",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -21,7 +21,7 @@ const Education = () => {
     },
     {
       id: "mac-service",
-      image: "/mac.png",
+      image: "/mac.webp",
       title: "Manila Adventist College",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -29,7 +29,7 @@ const Education = () => {
     },
     {
       id: "clinical-pastoral-service",
-      image: "/clinical-pastoral-education.png",
+      image: "/clinical-pastoral-education.webp",
       title: "Clinical Pastoral Education",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -37,7 +37,7 @@ const Education = () => {
     },
     {
       id: "internship-service",
-      image: "/internship.png",
+      image: "/internship.webp",
       title: "Internship",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",
@@ -45,7 +45,7 @@ const Education = () => {
     },
     {
       id: "residency-service",
-      image: "/residency.png",
+      image: "/residency.webp",
       title: "Residency",
       description:
         "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.",

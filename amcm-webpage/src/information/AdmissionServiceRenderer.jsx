@@ -84,7 +84,7 @@ const AdmissionServiceRenderer = () => {
             </Container>
 
             <div className="burger-menu-container">
-                <Navbar expand="lg" className="bg-body-primary">
+                <Navbar expand="xl" className="bg-body-primary">
                     <Container>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
