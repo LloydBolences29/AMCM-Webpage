@@ -802,7 +802,7 @@
     color: rgb(255, 255, 255);
     width: 100%;
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 1.45vw;
     transition: all 0.8s ease; /* smooth movement + color change */
     padding: 0.5em 0 1em;
   }
@@ -889,7 +889,7 @@
     color: rgb(255, 255, 255);
     width: 100%;
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 1.4vw;
     transition: all 0.8s ease; /* smooth movement + color change */
     padding: 0.5em 0 1em;
   }
@@ -974,10 +974,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* perfectly centered */
-    color: rgb(255, 255, 255);
+    color: rgb(247, 247, 247);
     width: 100%;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.25vw;
     transition: all 0.8s ease; /* smooth movement + color change */
     padding: 0.5em 0 1em;
   }
@@ -1065,7 +1065,7 @@
     color: rgb(255, 255, 255);
     width: 100%;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.15vw;
     transition: all 0.8s ease; /* smooth movement + color change */
     padding: 0.5em 0 1em;
   }

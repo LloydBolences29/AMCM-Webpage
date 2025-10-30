@@ -1,7 +1,4 @@
 import { useState } from "react";
-import Navigation from "./Navigation";
-import Footer from "./Footer";
-import SeventhGrid from "./SeventhGrid";
 import "../styles/PatientRights.css";
 import Accordion, { accordionClasses } from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -16,8 +13,10 @@ import CardContent from "@mui/material/CardContent";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+import MainLayout from "../components/MainLayout";
+
 const PatientRights = () => {
-      const menuLinks = [
+  const menuLinks = [
     { label: "Home", path: "/" },
     { label: "Our Services", path: "/services" },
     { label: "Find Doctors", path: "/find-doctors" },
@@ -103,124 +102,115 @@ const PatientRights = () => {
   };
 
   return (
-    <div className="home-body">
-      <div className="home-content">
-        <Navigation menuLinks={menuLinks} />
-        <div className="main container">
-          <Container>
-            <Card
-              sx={{
-                mb: 3,
-                textAlign: "center",
-                marginTop: "2em",
-                backgroundColor: "#163235ff",
-                borderRadius: "10px",
-              }}
+    <MainLayout>
+      <Container>
+        <Card
+          sx={{
+            mb: 3,
+            textAlign: "center",
+            marginTop: "2em",
+            backgroundColor: "#163235ff",
+            borderRadius: "10px",
+          }}
+        >
+          <CardContent>
+            <Typography
+              variant="h4"
+              component="h1"
+              className="page-title fw-bold"
+              sx={{ color: "#ffffffff" }}
             >
-              <CardContent>
-                <Typography
-                  variant="h4"
-                  component="h1"
-                  className="page-title fw-bold"
-                  sx={{ color: "#ffffffff" }}
-                >
-                  Patient Rights
-                </Typography>
-              </CardContent>
-            </Card>
-          </Container>
+              Patient Rights
+            </Typography>
+          </CardContent>
+        </Card>
+      </Container>
 
-          <div className="accordion-container">
-            <div className="accordion-wrapper">
-              {accordionData.map((accordion, index) => (
-                <Accordion
-                  key={index}
-                  expanded={expandedIndex === index}
-                  onChange={handleExpansion(index)}
-                  slots={{ transition: Fade }}
-                  slotProps={{ transition: { timeout: 500 } }}
-                  sx={[
-                    expandedIndex === index
-                      ? {
-                          [`& .${accordionClasses.region}`]: {
-                            height: "auto",
-                          },
-                          [`& .${accordionDetailsClasses.root}`]: {
-                            display: "block",
-                          },
-                        }
-                      : {
-                          [`& .${accordionClasses.region}`]: {
-                            height: 0,
-                          },
-                          [`& .${accordionDetailsClasses.root}`]: {
-                            display: "none",
-                          },
-                        },
-                  ]}
-                >
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls={`panel${index}-content`}
-                    id={`panel${index}-header`}
-                  >
-                    <Typography component="span">{accordion.title}</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography>{accordion.content}</Typography>
-                    {accordion.reference && (
-                      <Typography variant="caption" color="textSecondary">
-                        {accordion.reference}
-                      </Typography>
-                    )}
-                  </AccordionDetails>
-                </Accordion>
-              ))}
-            </div>
-          </div>
-
-          <div className="file-complaint-instruction">
-            <Box
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                "& > :not(style)": {
-                  m: 3,
-                  width: "82vw",
-                  minHeight: "auto",
-                },
-                justifyContent: "center",
-              }}
+      <div className="accordion-container">
+        <div className="accordion-wrapper">
+          {accordionData.map((accordion, index) => (
+            <Accordion
+              key={index}
+              expanded={expandedIndex === index}
+              onChange={handleExpansion(index)}
+              slots={{ transition: Fade }}
+              slotProps={{ transition: { timeout: 500 } }}
+              sx={[
+                expandedIndex === index
+                  ? {
+                      [`& .${accordionClasses.region}`]: {
+                        height: "auto",
+                      },
+                      [`& .${accordionDetailsClasses.root}`]: {
+                        display: "block",
+                      },
+                    }
+                  : {
+                      [`& .${accordionClasses.region}`]: {
+                        height: 0,
+                      },
+                      [`& .${accordionDetailsClasses.root}`]: {
+                        display: "none",
+                      },
+                    },
+              ]}
             >
-              <Paper elevation={6} sx={{ overflow: "hidden" }}>
-                <Typography
-                  variant="h6"
-                  component="h2"
-                  sx={{ p: 2 }}
-                  color="textSecondary"
-                >
-                  How to File a Complaint:
-                </Typography>
-                <Typography variant="body1" sx={{ p: 2 }}>
-                  Visit the Patient Experience Office (located at G/F Annex
-                  Building) Call [8525 9191 to 98 local 143/ 193] Email
-                  [customercare@adventisthealth-mnl.com] Contact the Department
-                  of Health (DOH) Hotline: 1555 Adventist Medical Center Manila
-                  values your trust, and we are dedicated to ensuring your
-                  health and well-being. Your safety and satisfaction are our
-                  priorities. For further inquiries or assistance, please
-                  contact us at [(02) 8525 9191-98].
-                </Typography>
-              </Paper>
-            </Box>
-          </div>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls={`panel${index}-content`}
+                id={`panel${index}-header`}
+              >
+                <Typography component="span">{accordion.title}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>{accordion.content}</Typography>
+                {accordion.reference && (
+                  <Typography variant="caption" color="textSecondary">
+                    {accordion.reference}
+                  </Typography>
+                )}
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </div>
-        <Footer />
       </div>
-      <div className="seventh-grid">
-        <SeventhGrid />
+
+      <div className="file-complaint-instruction">
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            "& > :not(style)": {
+              m: 3,
+              width: "82vw",
+              minHeight: "auto",
+            },
+            justifyContent: "center",
+          }}
+        >
+          <Paper elevation={6} sx={{ overflow: "hidden" }}>
+            <Typography
+              variant="h6"
+              component="h2"
+              sx={{ p: 2 }}
+              color="textSecondary"
+            >
+              How to File a Complaint:
+            </Typography>
+            <Typography variant="body1" sx={{ p: 2 }}>
+              Visit the Patient Experience Office (located at G/F Annex
+              Building) Call [8525 9191 to 98 local 143/ 193] Email
+              [customercare@adventisthealth-mnl.com] Contact the Department of
+              Health (DOH) Hotline: 1555 Adventist Medical Center Manila values
+              your trust, and we are dedicated to ensuring your health and
+              well-being. Your safety and satisfaction are our priorities. For
+              further inquiries or assistance, please contact us at [(02) 8525
+              9191-98].
+            </Typography>
+          </Paper>
+        </Box>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 

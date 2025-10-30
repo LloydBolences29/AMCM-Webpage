@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/AuthContext";
 import Modal from "react-bootstrap/Modal";
@@ -9,8 +9,23 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
   const [showModal, setShowModal] = useState(false);
   const [modalTimer, setModalTimer] = useState(3);
 
+  const VITE_API_URL = import.meta.env.VITE_API_URL;
 
-    const VITE_API_URL = import.meta.env.VITE_API_URL;
+  useEffect(() => {
+  if (visible) {
+    // Disable background scroll
+    document.body.style.overflow = 'hidden';
+  } else {
+    // Re-enable when closed
+    document.body.style.overflow = 'auto';
+  }
+
+  // Cleanup on unmount (important!)
+  return () => {
+    document.body.style.overflow = 'auto';
+  };
+}, [visible]);
+
 
   const additionalLinks = [
     {
@@ -22,7 +37,7 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
       role: ["editor", "admin"],
       label: "Editor Dashboard",
       link: "/editor",
-    }
+    },
   ];
 
   const handleLogout = async () => {
@@ -85,125 +100,126 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
       )}
 
       <div className="overlay-panel">
-        <div className="search-container">
-          <input
-            type="text"
-            className="search-input"
-            autoFocus
-            placeholder="Search..."
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                const searchQuery = e.target.value;
-                navigate(`/search?query=${searchQuery}`);
-                onClose();
-              }
-            }}
-          />
-        </div>
-
-        <div className="links">
-          <div className="menu-links-wrapper component-links">
-            <ul className="ul-menu-links">{menuLinks?.map(linksFunction)}</ul>
+        <div className="scroll-content">
+          <div className="search-container">
+            <input
+              type="text"
+              className="search-input"
+              autoFocus
+              placeholder="Search..."
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  const searchQuery = e.target.value;
+                  navigate(`/search?query=${searchQuery}`);
+                  onClose();
+                }
+              }}
+            />
           </div>
-          <br />
 
-          <div className="menu-links-wrapper information-links">
-            <ul className="ul-menu-links">
-              <li>
-                <NavLink className="sidebar-link" to="/about-us">
-                  About Us
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="sidebar-link" to="/contact-us">
-                  Contact
-                </NavLink>
-              </li>
-              {auth.isAuthenticated && (
-                <>
-                  {additionalLinks.map((item) => {
-                    const allowed =
-                      Array.isArray(item.role)
-                        ? item.role.includes(auth.user.role) // check if user's role is in the allowed roles
-                        : auth.user.role === item.role;       // fallback for single role
+          <div className="links">
+            <div className="menu-links-wrapper component-links">
+              <ul className="ul-menu-links">{menuLinks?.map(linksFunction)}</ul>
+            </div>
+            <br />
 
-                    if (allowed) {
-                      return (
-                        <li key={item.link}>
-                          <NavLink className="sidebar-link" to={item.link}>
-                            {item.label}
-                          </NavLink>
-                        </li>
-                      );
-                    }
-
-                    return null;
-                  })}
-                </>
-              )}
-
-              {auth.isAuthenticated ? (
+            <div className="menu-links-wrapper information-links">
+              <ul className="ul-menu-links">
                 <li>
-                  <button className="logout-btn" onClick={handleLogout}>
-                    Logout
-                  </button>
-                </li>
-              ) : (
-                <li>
-                  <NavLink className="sidebar-link" to="/login">
-                    Login
+                  <NavLink className="sidebar-link" to="/about-us">
+                    About Us
                   </NavLink>
                 </li>
-              )}
-            </ul>
+                <li>
+                  <NavLink className="sidebar-link" to="/contact-us">
+                    Contact
+                  </NavLink>
+                </li>
+                {auth.isAuthenticated && (
+                  <>
+                    {additionalLinks.map((item) => {
+                      const allowed = Array.isArray(item.role)
+                        ? item.role.includes(auth.user.role) // check if user's role is in the allowed roles
+                        : auth.user.role === item.role; // fallback for single role
+
+                      if (allowed) {
+                        return (
+                          <li key={item.link}>
+                            <NavLink className="sidebar-link" to={item.link}>
+                              {item.label}
+                            </NavLink>
+                          </li>
+                        );
+                      }
+
+                      return null;
+                    })}
+                  </>
+                )}
+
+                {auth.isAuthenticated ? (
+                  <li>
+                    <button className="logout-btn" onClick={handleLogout}>
+                      Logout
+                    </button>
+                  </li>
+                ) : (
+                  <li>
+                    <NavLink className="sidebar-link" to="/login">
+                      Login
+                    </NavLink>
+                  </li>
+                )}
+              </ul>
+            </div>
           </div>
-        </div>
 
-        {/* ✅ Logout success modal */}
-        <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-          <Modal.Body className="text-center">
-            <h4 className="mt-3">Logout Successful!</h4>
-            <p>Closing in {modalTimer} seconds...</p>
-          </Modal.Body>
-        </Modal>
+          {/* ✅ Logout success modal */}
+          <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+            <Modal.Body className="text-center">
+              <h4 className="mt-3">Logout Successful!</h4>
+              <p>Closing in {modalTimer} seconds...</p>
+            </Modal.Body>
+          </Modal>
 
-        <div className="sda-logo-container">
-          <img
-            className="sda-logo"
-            src="/adventist-symbol--white.png"
-            alt="sda-logo"
-          />
-        </div>
-
-        <div id="second-section">
-          <div className="motto">
-            <p className="motto-content" id="mission">
-              Sharing Jesus Christ's Healing Ministry
-            </p>
-            <p className="motto-content" id="vision">
-              The Center of Excellence in Faith-based Healthcare, Education and
-              Lifestyle
-            </p>
+          <div className="sda-logo-container">
+            <img
+              className="sda-logo"
+              src="/adventist-symbol--white.png"
+              alt="sda-logo"
+            />
           </div>
 
-          <br />
+          <div id="second-section">
+            <div className="motto">
+              <p className="motto-content" id="mission">
+                Sharing Jesus Christ's Healing Ministry
+              </p>
+              <p className="motto-content" id="vision">
+                The Center of Excellence in Faith-based Healthcare, Education
+                and Lifestyle
+              </p>
+            </div>
 
-          <div id="learn-more-section">
-            <h5>Learn more:</h5>
-            <div id="learn-more-content">
-              <a href="">Adventist.org</a>
-              <a href="">ADRA</a>
-              <a href="">Adventist World Radio</a>
-              <a href="">Hope Channel</a>
-              <a href="">Adventist Hospital Santiago City</a>
-              <a href="">Adventist Hospital Calbayog</a>
-              <a href="">Adventist Hospital Palawan</a>
-              <a href="">Adventist Hospital Cebu</a>
-              <a href="">Adventist Medical Center Bacolod</a>
-              <a href="">Gingoog Sanitarium and Hospital</a>
-              <a href="">Adventist Medical Center Iligan</a>
-              <a href="">ADventist Hospital Davao</a>
-              <a href="">Adventist Medical Center Valencia</a>
+            <br />
+
+            <div id="learn-more-section">
+              <h5>Learn more:</h5>
+              <div id="learn-more-content">
+                <a href="">Adventist.org</a>
+                <a href="">ADRA</a>
+                <a href="">Adventist World Radio</a>
+                <a href="">Hope Channel</a>
+                <a href="">Adventist Hospital Santiago City</a>
+                <a href="">Adventist Hospital Calbayog</a>
+                <a href="">Adventist Hospital Palawan</a>
+                <a href="">Adventist Hospital Cebu</a>
+                <a href="">Adventist Medical Center Bacolod</a>
+                <a href="">Gingoog Sanitarium and Hospital</a>
+                <a href="">Adventist Medical Center Iligan</a>
+                <a href="">ADventist Hospital Davao</a>
+                <a href="">Adventist Medical Center Valencia</a>
+              </div>
             </div>
           </div>
         </div>

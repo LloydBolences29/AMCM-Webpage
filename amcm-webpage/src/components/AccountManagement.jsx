@@ -1,41 +1,46 @@
 import Table from "react-bootstrap/Table";
 import { useEffect, useState } from "react";
-import { Button, Modal, Form, Row, Col } from 'react-bootstrap'
+import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
 const AccountManagement = () => {
   const initialValue = {
+    firstname: "",
+    lastname: "",
     username: "",
     email: "",
     password: "",
-    role: ""
-  }
+    role: "",
+  };
 
   const [users, setUsers] = useState([]);
-  const [showModal, setShowModal] = useState(false)
-  const [form, setForm] = useState(initialValue)
+  const [showModal, setShowModal] = useState(false);
+  const [form, setForm] = useState(initialValue);
   const [pageStatus, setPageStatus] = useState("idle");
   const [successSnackBarState, setSuccessSnackBarState] = useState(false);
   const [failedSnackBarState, setFailedSnackBarState] = useState(false);
-  const [notification, setNotification] = useState("")
-  const [showEditModal, setShowEditModal] = useState(false)
+  const [notification, setNotification] = useState("");
+  const [showEditModal, setShowEditModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState({
     id: "",
+    firstname: "",
+    lastname: "",
     username: "",
     email: "",
-    role: ""
-  })
+    role: "",
+  });
+  const [originalUser, setOriginalUser] = useState(null);
+
   const VITE_API_URL = import.meta.env.VITE_API_URL;
 
   const handleOpenModal = () => {
-    setShowModal(true)
-  }
+    setShowModal(true);
+  };
 
   const handleOnClose = () => {
-    setShowModal(false)
-  }
-
+    setShowModal(false);
+  };
 
   const handleAddUser = async (e) => {
     e.preventDefault();
@@ -46,75 +51,85 @@ const AccountManagement = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(form),
-        credentials: "include"
-
-      })
+        credentials: "include",
+      });
       const data = await response.json();
 
       if (response.ok) {
-        fetchAllUser()
-        setForm(initialValue)
-        setPageStatus("success")
-        setSuccessSnackBarState(true)
-        setNotification(data.message)
-        setShowModal(false)
+        fetchAllUser();
+        setForm(initialValue);
+        setPageStatus("success");
+        setSuccessSnackBarState(true);
+        setNotification(data.message);
+        setShowModal(false);
+      } else {
+        setPageStatus("error");
+        setNotification(data.message);
+        setFailedSnackBarState(true);
       }
-      else {
-        setPageStatus("error")
-        setNotification(data.message)
-        setFailedSnackBarState(true)
-      }
-
     } catch (error) {
-      console.log("Error Adding User.", error)
-      setPageStatus("error")
-      setFailedSnackBarState(true)
-      setNotification(error.message)
+      console.log("Error Adding User.", error);
+      setPageStatus("error");
+      setFailedSnackBarState(true);
+      setNotification(error.message);
     }
-  }
+  };
 
   const handleSaveUser = async (e) => {
     e.preventDefault();
+
+    // find fields that actually changed
+    const updatedFields = {};
+    Object.keys(selectedUser).forEach((key) => {
+      if (selectedUser[key] !== originalUser[key]) {
+        updatedFields[key] = selectedUser[key];
+      }
+    });
+
+    // always include the user ID (important!)
+    updatedFields.id = selectedUser.id;
+
+    if (Object.keys(updatedFields).length <= 1) {
+      console.log("No changes detected.");
+      return;
+    }
     try {
       const response = await fetch(`${VITE_API_URL}/user/edit-user`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(selectedUser),
-        credentials: "include"
-
-      })
-
+        body: JSON.stringify(updatedFields),
+        credentials: "include",
+      });
 
       const data = await response.json();
-      console.log("Data: ", data)
-      
+      console.log("Data: ", data);
+
       if (!response.ok) {
-        setPageStatus("error")
-        setFailedSnackBarState(true)
-        setNotification(data.message)
-      }
-      else {
-        fetchAllUser()
-        setPageStatus("success")
-        setSuccessSnackBarState(true)
-        setNotification(data.message)
-        setShowEditModal(false)
+        setPageStatus("error");
+        setFailedSnackBarState(true);
+        setNotification(data.message);
+      } else {
+        fetchAllUser();
+        setPageStatus("success");
+        setSuccessSnackBarState(true);
+        setNotification(data.message);
+        setShowEditModal(false);
       }
     } catch (error) {
-      console.log("Error Saving User.", error)
-      setPageStatus("error")
-      setFailedSnackBarState(true)
-      setNotification(error.message)
+      console.log("Error Saving User.", error);
+      setPageStatus("error");
+      setFailedSnackBarState(true);
+      setNotification(error.message);
     }
-  }
+  };
 
-
-  const handleOpenEditModal = (user) =>{
-    setSelectedUser(user)
-    setShowEditModal(true)
-  }
+  const handleOpenEditModal = (user) => {
+    setSelectedUser(user);
+    setOriginalUser(user);
+    setShowEditModal(true);
+  };
 
   const fetchAllUser = async () => {
     try {
@@ -131,7 +146,6 @@ const AccountManagement = () => {
   };
 
   useEffect(() => {
-
     fetchAllUser();
   }, []);
 
@@ -148,7 +162,6 @@ const AccountManagement = () => {
 
   return (
     <>
-
       <div id="add-user-container">
         <div id="add-user-wrapper">
           <div id="add-user-button">
@@ -231,7 +244,9 @@ const AccountManagement = () => {
                     onClick={() => handleOpenEditModal(user)}
                   >
                     Edit
-                  </Button></div></td>
+                  </Button>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -240,13 +255,40 @@ const AccountManagement = () => {
       {showModal && (
         <Modal show={showModal} onHide={() => setShowModal(false)}>
           <Modal.Header closeButton>
-            <Modal.Title>
-              Add a User
-            </Modal.Title>
+            <Modal.Title>Add a User</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
             <Form onSubmit={handleAddUser}>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Group controlId="formBasicUsername">
+                    <Form.Label>First name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Please enter firstname"
+                      value={form.firstname}
+                      onChange={(e) => {
+                        setForm({ ...form, firstname: e.target.value });
+                      }}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group controlId="formBasicRole">
+                    <Form.Label>Last name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Please enter lastname"
+                      value={form.lastname}
+                      onChange={(e) => {
+                        setForm({ ...form, lastname: e.target.value });
+                      }}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+
               <Row className="mb-3">
                 <Col>
                   <Form.Group controlId="formBasicUsername">
@@ -256,7 +298,7 @@ const AccountManagement = () => {
                       placeholder="Please enter a username"
                       value={form.username}
                       onChange={(e) => {
-                        setForm({ ...form, username: e.target.value })
+                        setForm({ ...form, username: e.target.value });
                       }}
                     />
                   </Form.Group>
@@ -290,7 +332,7 @@ const AccountManagement = () => {
                       placeholder="Please enter your email"
                       value={form.email}
                       onChange={(e) => {
-                        setForm({ ...form, email: e.target.value })
+                        setForm({ ...form, email: e.target.value });
                       }}
                     />
                   </Form.Group>
@@ -303,14 +345,18 @@ const AccountManagement = () => {
                       placeholder="Please enter your password"
                       value={form.password}
                       onChange={(e) => {
-                        setForm({ ...form, password: e.target.value })
+                        setForm({ ...form, password: e.target.value });
                       }}
                     />
                   </Form.Group>
                 </Col>
               </Row>
 
-              <Button className="mx-1" variant="secondary" onClick={handleOnClose}>
+              <Button
+                className="mx-1"
+                variant="secondary"
+                onClick={handleOnClose}
+              >
                 Close
               </Button>
               <Button className="mx-1" variant="primary" type="submit">
@@ -318,16 +364,13 @@ const AccountManagement = () => {
               </Button>
             </Form>
           </Modal.Body>
-
         </Modal>
       )}
 
       {showEditModal && (
         <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
           <Modal.Header closeButton>
-            <Modal.Title>
-              Edit User
-            </Modal.Title>
+            <Modal.Title>Edit User</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
@@ -335,13 +378,50 @@ const AccountManagement = () => {
               <Row className="mb-3">
                 <Col>
                   <Form.Group controlId="formBasicUsername">
+                    <Form.Label>First name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Please enter firstname"
+                      value={selectedUser ? selectedUser.firstname : ""}
+                      onChange={(e) => {
+                        setSelectedUser({
+                          ...selectedUser,
+                          firstname: e.target.value,
+                        });
+                      }}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group controlId="formBasicRole">
+                    <Form.Label>Last name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Please enter last name"
+                      value={selectedUser ? selectedUser.lastname : ""}
+                      onChange={(e) => {
+                        setSelectedUser({
+                          ...selectedUser,
+                          lastname: e.target.value,
+                        });
+                      }}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Group controlId="formBasicUsername">
                     <Form.Label>Username</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="Please enter a username"
-                      value={selectedUser ? selectedUser.username: ''}
+                      value={selectedUser ? selectedUser.username : ""}
                       onChange={(e) => {
-                        setSelectedUser({ ...selectedUser, username: e.target.value })
+                        setSelectedUser({
+                          ...selectedUser,
+                          username: e.target.value,
+                        });
                       }}
                     />
                   </Form.Group>
@@ -351,10 +431,12 @@ const AccountManagement = () => {
                     <Form.Label>Role</Form.Label>
                     <Form.Control
                       as="select"
-                      value={selectedUser
-                        ? selectedUser.role : ''}
+                      value={selectedUser ? selectedUser.role : ""}
                       onChange={(e) =>
-                        setSelectedUser({ ...selectedUser, role: e.target.value })
+                        setSelectedUser({
+                          ...selectedUser,
+                          role: e.target.value,
+                        })
                       }
                     >
                       <option value="">Select a Role</option>
@@ -374,16 +456,66 @@ const AccountManagement = () => {
                       type="email"
                       name="email"
                       placeholder="Please enter your email"
-                      value={selectedUser ? selectedUser.email : ''}
+                      value={selectedUser ? selectedUser.email : ""}
                       onChange={(e) => {
-                        setSelectedUser({ ...selectedUser, email: e.target.value })
+                        setSelectedUser({
+                          ...selectedUser,
+                          email: e.target.value,
+                        });
                       }}
                     />
                   </Form.Group>
                 </Col>
               </Row>
 
-              <Button className="mx-1" variant="secondary" onClick={() => setShowEditModal(false)}>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Group controlId="formBasicIsActive">
+                    <Form.Label>Active Status:</Form.Label>
+                    <Form.Control
+                      as="select"
+                      value={
+                        selectedUser && selectedUser.is_active !== undefined
+                          ? selectedUser.is_active
+                          : ""
+                      }
+                      onChange={(e) => {
+                        setSelectedUser({
+                          ...selectedUser,
+                          is_active: e.target.value,
+                        });
+                      }}
+                    >
+                      <option value="">Select Status</option>
+                      <option value="active">Active</option>
+                      <option value="inactive">Inactive</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+
+                <Col>
+                <Form.Group>
+                  <Form.Label>Lock Status:</Form.Label>
+                  <Form.Check 
+                    type="switch"
+                    id="custom-switch"
+                    checked={selectedUser ? selectedUser.is_locked : false}
+                    onChange={(e) => {
+                      setSelectedUser({
+                        ...selectedUser,
+                        is_locked: e.target.checked,
+                      });
+                    }}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+
+              <Button
+                className="mx-1"
+                variant="secondary"
+                onClick={() => setShowEditModal(false)}
+              >
                 Close
               </Button>
               <Button className="mx-1" variant="primary" type="submit">
@@ -391,7 +523,6 @@ const AccountManagement = () => {
               </Button>
             </Form>
           </Modal.Body>
-
         </Modal>
       )}
     </>

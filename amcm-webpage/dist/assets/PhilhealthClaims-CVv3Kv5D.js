@@ -1,1 +1,0 @@
-import{j as t}from"./index-CU6FVKgc.js";import{U as r}from"./UnderConstruction-CwEQPcvt.js";import"./createSvgIcon-CIQck3fE.js";import"./DefaultPropsProvider-BEWS1EG7.js";import"./extends-CF3RwP-h.js";const s=()=>t.jsx("div",{children:t.jsx(r,{page:"Philhealth claim page"})});export{s as default};

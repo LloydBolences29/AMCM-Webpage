@@ -1,4 +1,4 @@
-@media (max-width: 767px) {
+@media only screen and (max-width: 767px) {
   .overlay-container {
     position: fixed;
     inset: 0;
@@ -180,7 +180,7 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 768px) and (max-width: 991px) {
   .overlay-container {
     position: fixed;
     inset: 0;
@@ -359,7 +359,8 @@
   }
 }
 
-@media (min-width: 992px) {
+@media only screen and (min-width: 992px) {
+
   .overlay-container {
     position: fixed;
     inset: 0;
@@ -370,6 +371,7 @@
 
   .overlay-container.show {
     pointer-events: all;
+
   }
 
   .overlay-background {
@@ -390,6 +392,13 @@
     transform: translateX(100%);
     transition: transform 0.3s ease;
     padding: 1rem;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .overlay-panel .scroll-content {
+    height: 100%;
+    overflow-y: auto;
   }
 
   .overlay-container.show .overlay-panel {

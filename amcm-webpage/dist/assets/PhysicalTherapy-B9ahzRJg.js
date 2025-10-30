@@ -1,1 +1,0 @@
-import{j as r}from"./index-CU6FVKgc.js";import{U as t}from"./UnderConstruction-CwEQPcvt.js";import"./createSvgIcon-CIQck3fE.js";import"./DefaultPropsProvider-BEWS1EG7.js";import"./extends-CF3RwP-h.js";const e=()=>r.jsx("div",{children:r.jsx(t,{page:"Physical Therapy page"})});export{e as default};

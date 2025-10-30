@@ -10,6 +10,8 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
+import { BsFillTrashFill } from "react-icons/bs";
+import Tooltip from "@mui/material/Tooltip";
 import "../styles/DoctorManagement.css";
 
 const DoctorManagement = () => {
@@ -36,6 +38,10 @@ const DoctorManagement = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+  const [secondDeleteConfirmationOpen, setSecondDeleteConfirmationOpen] =
+    useState(false);
+  const [selectedScheduleId, setSelectedScheduleId] = useState(null);
 
   const VITE_API_URL = import.meta.env.VITE_API_URL;
 
@@ -87,7 +93,7 @@ const DoctorManagement = () => {
   const fetchAllDepartment = async () => {
     try {
       const response = await fetch(
-        `${VITE_API_URL}/department/get-departments`, 
+        `${VITE_API_URL}/department/get-departments`,
         {
           credentials: "include",
         }
@@ -205,6 +211,80 @@ const DoctorManagement = () => {
     }
     return items;
   };
+
+  const handleOpenDeleteConfirmationDialog = (id) => {
+    setSelectedScheduleId(id);
+    console.log("selected Id: ", id);
+    setDeleteConfirmationOpen(true);
+  };
+
+  const handleCloseDeleteConfirmationDialog = () => {
+    setDeleteConfirmationOpen(false);
+  };
+
+  const handleOpenSecondDeleteConfirmationDialog = () => {
+    setDeleteConfirmationOpen(false);
+    setSecondDeleteConfirmationOpen(true);
+  };
+
+  const handleCloseSecondDeleteConfirmationDialog = () => {
+    setSecondDeleteConfirmationOpen(false);
+  };
+
+  const handleDeleteSchedule = async (selectedScheduleId) => {
+    console.log(
+      "Delete schedule clicked. Id of the doctor to be deleted: ",
+      doctorById?.schedules?.Clinic[selectedScheduleId]?.day
+    );
+    console.log(
+      "Day to be deleted: ",
+      doctorById?.schedules?.Clinic[selectedScheduleId]?.day
+    );
+    console.log(
+      "Start time to be deleted: ",
+      doctorById?.schedules?.Clinic[selectedScheduleId]?.startTime
+    );
+    console.log(
+      "End time to be deleted: ",
+      doctorById?.schedules?.Clinic[selectedScheduleId]?.endTime
+    );
+
+    try {
+      const response = await fetch(
+        `${VITE_API_URL}/doctor/delete-doctor-schedule/${doctorById?.schedule_id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            doctor_department_id: doctorById?.id,
+            day: doctorById?.schedules?.Clinic[selectedScheduleId]?.day,
+            startTime:
+              doctorById?.schedules?.Clinic[selectedScheduleId]?.startTime,
+            endTime:
+              doctorById?.schedules?.Clinic[selectedScheduleId]?.endTime,
+          }),
+          credentials: "include",
+        }
+      );
+
+      if (response.ok) {
+        setPageStatus("success");
+        setSuccessSnackBarState(true);
+        setSuccessMessage(response.message);
+        //refresh the doctor info
+        fetchDoctorById(doctorById.id);
+        setSecondDeleteConfirmationOpen(false);
+      }
+    } catch (error) {
+      console.log("Error deleting schedule: ", error);
+      setPageStatus("error");
+      setFailedSnackBarState(true);
+      setError(error.message);
+    }
+  };
+
   return (
     <div>
       <div id="doctor-search-bar">
@@ -325,13 +405,68 @@ const DoctorManagement = () => {
         </div>
       )}
 
-      {showDialog && (
-        <Dialog open={showDialog} onClose={handleCloseDialog}>
-          <DialogTitle>Subscribe</DialogTitle>
+      {deleteConfirmationOpen && (
+        <Dialog
+          open={deleteConfirmationOpen}
+          onClose={handleCloseDeleteConfirmationDialog}
+        >
+          <DialogTitle>Confirm Delete Schedule</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally.
+              "Please confirm that you wish to proceed with this action.
+              Continuing may modify existing data or records. Review the details
+              carefully before proceeding.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              variant="outline-secondary"
+              onClick={handleCloseDeleteConfirmationDialog}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="outline-danger"
+              onClick={handleOpenSecondDeleteConfirmationDialog}
+            >
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+      )}
+      {secondDeleteConfirmationOpen && (
+        <Dialog
+          open={secondDeleteConfirmationOpen}
+          onClose={handleCloseSecondDeleteConfirmationDialog}
+        >
+          <DialogTitle>Confirm Delete Schedule</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Proceeding will apply the changes permanently and cannot be
+              undone. Do you wish to continue?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              variant="outline-secondary"
+              onClick={handleCloseSecondDeleteConfirmationDialog}
+            >
+              Cancel
+            </Button>
+            <Button variant="outline-danger" onClick={() => handleDeleteSchedule(selectedScheduleId)}>
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+      )}
+
+      {showDialog && (
+        <Dialog open={showDialog} onClose={handleCloseDialog}>
+          <DialogTitle>Doctor's Details</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Edit the information of the doctor you want to update. Cancel to
+              close the modal.
             </DialogContentText>
             <Form>
               <Row>
@@ -421,21 +556,73 @@ const DoctorManagement = () => {
                 </Col>
               </Row>
               {/* Schedules are soon to be updated */}
-              {/* <Row>
+              <Row>
                 <Col>
                   <Form.Group>
                     <Form.Label className="fw-bold">
                       Doctor's Schedules
                     </Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter Doctor's Schedules"
-                      value={doctorById ? doctorById.schedules : ""}
-                      readOnly
-                    />
+
+                    {Array.isArray(doctorById.schedules?.Clinic) &&
+                      doctorById.schedules.Clinic.map((schedule, index) => (
+                        <Form.Group key={index} className="me-2">
+                          <Row>
+                            <Form.Label>Available Day: </Form.Label>
+                            <Col md={12}>
+                              <Form.Select // Use Form.Select for better styling
+                                value={schedule.day}
+                              >
+                                <option value="">Select a day</option>
+                                <option value="Sun">Sunday</option>
+                                <option value="Mon">Monday</option>
+                                <option value="Tue">Tuesday</option>
+                                <option value="Wed">Wednesday</option>
+                                <option value="Thur">Thursday</option>
+                                <option value="Fri">Friday</option>
+                                <option value="Sat">Saturday</option>
+                              </Form.Select>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Form.Label className="mt-2">
+                              Start Time:{" "}
+                            </Form.Label>
+                            <Col md={11}>
+                              <Form.Control
+                                type="time"
+                                placeholder="Enter Time"
+                                value={schedule.startTime}
+                              />
+                            </Col>
+
+                            <Form.Label className="mt-2">End Time: </Form.Label>
+                            <Col md={11}>
+                              <Form.Control
+                                type="time"
+                                placeholder="Enter Time"
+                                value={schedule.endTime}
+                              />
+                            </Col>
+                            <Col md={1} className="mb-3">
+                              <Tooltip title="Delete Schedule">
+                                <Button
+                                  variant="outline-danger"
+                                  onClick={() =>
+                                    handleOpenDeleteConfirmationDialog(
+                                      index
+                                    )
+                                  }
+                                >
+                                  <BsFillTrashFill />
+                                </Button>
+                              </Tooltip>
+                            </Col>
+                          </Row>
+                        </Form.Group>
+                      ))}
                   </Form.Group>
                 </Col>
-              </Row> */}
+              </Row>
             </Form>
           </DialogContent>
           <DialogActions>

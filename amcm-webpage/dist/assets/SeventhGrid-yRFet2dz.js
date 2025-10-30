@@ -1,1 +1,0 @@
-import{j as s}from"./index-CU6FVKgc.js";const t=()=>s.jsx("div",{className:"seventh-grid-body",children:s.jsx("img",{id:"symbol",src:"/adventist-symbol--white.png",alt:"Seventh Grid"})});export{t as S};

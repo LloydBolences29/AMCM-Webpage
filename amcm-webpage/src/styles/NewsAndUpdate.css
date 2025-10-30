@@ -285,6 +285,20 @@
     /* border-left: #ffa72d93 0.15rem solid; */
     padding-left: 0.9rem;
   }
+
+
+  #news-and-update-card-details #news-and-update-card-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  #news-and-update-card-details #news-and-update-card-title .admin-buttons-wrapper{
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.7rem;
+
+  }
   #news-and-update-card-details a {
     text-decoration: none;
     border: 1px solid #FFA92D;

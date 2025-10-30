@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import MainLayout from "../components/MainLayout";
-
+import { FaUserDoctor } from "react-icons/fa6";
 
 import "../styles/FIndDoctors.css";
 
@@ -22,7 +22,6 @@ const FindDoctors = () => {
     setSearchValue(searchInput);
     setShowResult(true);
   };
-
 
   return (
     <MainLayout>
@@ -64,38 +63,50 @@ const FindDoctors = () => {
           </div>
 
           <div id="search-button-container">
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSearch}
-            >
+            <Button variant="contained" color="primary" onClick={handleSearch}>
               Search
             </Button>
           </div>
         </div>
 
         <div id="doctor-card-wrapper">
-          {showResult && (
-            <Suspense fallback={<div
-
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "50vh",
-              }}
+          {showResult ? (
+            <Suspense
+              fallback={
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "50vh",
+                  }}
+                >
+                  <EKGSpinner />
+                </div>
+              }
             >
-              <EKGSpinner />
-            </div>}>
-              {searchValue && (
-                <DoctorByDepartment searchValue={searchValue} />
-              )}
+              {searchValue && <DoctorByDepartment searchValue={searchValue} />}
             </Suspense>
+          ) : (
+            <div
+              id="no-search-placeholder"
+              className="d-flex flex-column justify-content-center align-items-center text-center p-5"
+            >
+              <FaUserDoctor size={150} color="#163235a2" className="mb-3" />
+              <p
+                style={{
+                  fontSize: "1.5rem",
+                  maxWidth: "800px",
+                  lineHeight: "1.6",
+                }}
+              >
+                Looking for your doctor? <br /> See when they’re available and
+                where to find them.
+              </p>
+            </div>
           )}
         </div>
       </div>
-
-
     </MainLayout>
   );
 };

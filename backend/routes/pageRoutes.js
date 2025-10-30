@@ -192,4 +192,45 @@ router.put("/update-status", authMiddleware, checkRole(['admin', 'editor']), asy
   }
 })
 
+router.put("/updated-news/:id", authMiddleware, checkRole(['admin', 'editor']), upload.fields([
+  { name: "news-thumbnail", maxCount: 1 },
+  { name: "news-file", maxCount: 1 },
+]), async (req, res) => {
+  try {
+    const newsId = req.params.id;
+    const { title, issued_date, news_description } = req.body;
+
+    const pdfFile = req.files["news-file"] ? req.files["news-file"][0] : null;
+    const thumbnailFile = req.files["news-thumbnail"]
+      ? req.files["news-thumbnail"][0]
+      : null;
+
+    const db = await connectToDatabase();
+
+    // Build the update query dynamically based on provided fields
+    let sql = "UPDATE upload_news SET title = ?, issued_date = ?, news_description = ?";
+    const values = [title, issued_date, news_description];
+
+    if (pdfFile) {
+      sql += ", original_filename = ?, unique_filename = ?";
+      values.push(pdfFile.originalname, pdfFile.filename);
+    }
+
+    if (thumbnailFile) {
+      sql += ", thumbnail = ?";
+      values.push(thumbnailFile.filename);
+    }
+
+    sql += " WHERE id = ?";
+    values.push(newsId);  
+
+    await db.query(sql, values);
+
+    res.status(200).json({ message: "News item updated successfully" });
+  } catch (error) {
+    console.log("Error updating news item", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 module.exports = router;

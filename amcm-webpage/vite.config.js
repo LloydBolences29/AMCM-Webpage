@@ -7,8 +7,15 @@ import { analyzer } from 'vite-bundle-analyzer'
 export default defineConfig({
   plugins: [react(), analyzer()],
   server: {
+    host: '0.0.0.0',
     port: 3000,
-    host: true,
+    proxy:{
+      '/api': {
+        target: 'http://195.68.4.254:2001',
+        changeOrigin: true,
+        secure: false
+      }
+    },
   }
 
 })
