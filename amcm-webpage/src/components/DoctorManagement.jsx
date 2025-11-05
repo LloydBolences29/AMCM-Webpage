@@ -269,10 +269,15 @@ const DoctorManagement = () => {
         }
       );
 
+      console.log("Response: ", response)
       if (response.ok) {
+        const data = await response.json();
+        console.log("Data: ", data)
         setPageStatus("success");
         setSuccessSnackBarState(true);
-        setSuccessMessage(response.message);
+        setSuccessMessage(data.message);
+        //close the modal
+        
         //refresh the doctor info
         fetchDoctorById(doctorById.id);
         setSecondDeleteConfirmationOpen(false);

@@ -233,4 +233,88 @@ router.put("/updated-news/:id", authMiddleware, checkRole(['admin', 'editor']), 
   }
 });
 
+//Delete news and Update
+router.delete("/delete-news/:id", authMiddleware, checkRole(['admin', 'editor']), async (req, res) =>{
+  try {
+    const newsId = req.params.id;
+    
+    const db = await connectToDatabase();
+
+    //checking if the news item exists in the db
+    const [existingNews] = await db.query("SELECT * FROM upload_news WHERE id = ?", [newsId]);
+    if (existingNews.length === 0) {
+      return res.status(404).json({ message: "News item not found" })
+    }
+
+    const sql = `DELETE FROM upload_news WHERE id = ?`;
+    await db.query(sql, [newsId]);
+
+    return res.status(200).json({ message: "News item deleted successfully" })
+
+  } catch (error){
+    console.log("Error deleting the news item. Please check your console for more details.", error)
+    return res.status(500).json({ message: "An internal Error has occured!!" })
+  }
+})
+
+//post the news ID in the feature table
+router.post("/add-featured-news", authMiddleware, checkRole(['admin', 'editor']), async (req, res) =>{
+  try {
+    const { newsIds } = req.body; // Expecting an array of news IDs
+    console.log("Received news IDs for featured news:", newsIds);
+
+    if (!Array.isArray(newsIds) || newsIds.length === 0) {
+      return res.status(400).json({ message: "Please select one card to be featured." });
+    }
+
+    if(newsIds.length > 4){
+      return res.status(400).json({ message: "You can only feature up to 4 news items." });
+    }
+
+    const db = await connectToDatabase();
+
+    const [existingFeaturedNews]= await db.query("SELECT * FROM featuredNews")
+
+    if(existingFeaturedNews.length > 0){
+      // Clear existing featured news
+      await db.query("DELETE FROM featuredNews")
+    }
+
+    //add the array of ids
+    const values = newsIds.map(id => [id]);
+    const sql = `INSERT INTO featuredNews (newsID) VALUES ?`;
+    await db.query(sql, [values])
+
+    //change the status of the news items to featured in the upload_news table
+    const updateSql = `UPDATE upload_news SET is_Active = 'active' WHERE id IN (?)`;
+    await db.query(updateSql, [newsIds]);
+    
+    
+    return res.status(200).json({ message: "Successfully added all the featured news." })
+  } catch (error) {
+    console.log("Error adding all the featured news.", error)
+    return res.status(500).json({ message: "Unexpected error happens, please check the server for more details." })
+  }
+})
+
+//get all the featured news
+router.get("/get-featured-news", async (req, res) => {
+  try {
+    const db = await connectToDatabase();
+
+    const sql = `SELECT fn.id AS featureID, un.id AS newsID, un.title, DATE_FORMAT(un.issued_date, '%Y-%m-%d') AS issued_date, un.original_filename, un.unique_filename, un.thumbnail, un.news_description
+                 FROM featuredNews fn
+                 JOIN upload_news un ON fn.newsID = un.id`;
+
+    const [rows] = await db.query(sql);
+
+    return  res.status(200).json({ message: "Successfully fetched featured news.", rows })
+  } catch (error) {
+    console.log("Error fetching featured news. Please check your server console", error)
+    return res.status(500).json({ message: "Internal Server Error" })
+  }
+})
+
+
+
 module.exports = router;

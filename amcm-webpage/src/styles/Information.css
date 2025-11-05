@@ -31,7 +31,7 @@
 
   #information-wrapper-1 #information-mission h2 {
     font-weight: 100;
-    font-size: 1.3em;
+    font-size: 1.7em;
   }
 
   #information-wrapper-1 #information-mission-content p {
@@ -39,11 +39,8 @@
     font-weight: bolder;
   }
 
-
-
-
   #information-values h2 {
-    font-size: clamp(1.2rem, 1.3rem, 2rem);
+    font-size: clamp(1.2rem, 1.7rem, 2rem);
     border-radius: 12px;
     padding: 1em;
     color: white;
@@ -83,7 +80,7 @@
   }
 
   #information-services h2 {
-    font-size: clamp(1.2rem, 1.3rem, 2rem);
+    font-size: clamp(1.2rem, 1.7rem, 2rem);
   }
 
   #information-services-content #services-row {
@@ -91,16 +88,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1em;
+    gap: 1.5em;
   }
 
   #information-services-content #services-row .service {
     padding: 1em;
-    font-size: 24px;
+    font-size: 1.1rem;
     border-radius: 12px;
     box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
     height: auto;
     text-align: center;
+  }
+
+  #information-services-content #services-row .col {
+    width: 90%;
   }
   .services-button {
     border-radius: 20px;
@@ -114,7 +115,7 @@
   #information-achievements h2 {
     border-bottom: #007682 2px solid;
     padding: 0.5em;
-    font-size: clamp(1.2rem, 1.3rem, 2rem);
+    font-size: clamp(1.2rem, 1.7rem, 2rem);
   }
 
   #information-achievements-content .card {
@@ -139,12 +140,45 @@
     border-radius: 12px;
     padding: 1em;
     color: white;
-    background-color: #007682;
   }
 
+  /*styles for news card*/
+
   #information-news {
-    border-bottom: 3px solid #ffa92d;
+    padding: 1em;
     margin-bottom: 1em;
+    background-color: #007682;
+    border-radius: 15px;
+  }
+
+  .news {
+    border-bottom: 3px solid #ffa92d;
+  }
+
+  .news-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5em;
+    margin: 2.1em 1em;
+  }
+
+  #featured-news-text {
+    border-left: #ffa92d 4px solid;
+    padding-left: 0.5em;
+  }
+
+  #featured-news-text a {
+    text-decoration: none;
+    color: #ffa92d;
+  }
+  #featured-news-text h5 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: #163235;
+  }
+
+  .news-card {
+    text-align: center;
   }
 
   .president-message #message-heading {
@@ -187,7 +221,7 @@
   }
   .president-signature .president-info p.president-name {
     font-weight: bold;
-    font-size: 1rem;
+    font-size: clamp(1.2rem, 1.3rem, 1.4rem);
     text-decoration: underline;
   }
   .president-signature .president-info p.president-position {
@@ -221,14 +255,13 @@
   }
   #information-wrapper-1 #information-mission h2 {
     font-weight: 100;
-    font-size: 2.2em;
+    font-size: clamp(1.5em, 1.8em, 2em);
   }
 
   #information-wrapper-1 #information-mission-content p {
-    font-size: 2.7em;
+    font-size: clamp(2.2em, 2.5em, 3em);
     font-weight: bolder;
   }
-
 
   #information-wrapper-2 {
     width: 100%;
@@ -239,9 +272,10 @@
     color: #142c2e;
     background-color: #007682;
     padding: 0.4rem 0;
+    border-radius: 8px;
   }
   #information-values h2 {
-    font-size: 2.5em;
+    font-size: clamp(1.5em, 1.8em, 2em);
     color: #ffffff;
   }
 
@@ -256,14 +290,18 @@
     width: 100%;
   }
 
+  #information-values-content #values-row .col {
+    padding: 1em;
+  }
+
   #information-values-content #values-row .col .value {
     width: 100%;
-    height: 150px;
+    height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    margin: 1em 0;
     box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
   }
 
@@ -275,7 +313,7 @@
     background-color: #007682;
   }
   #information-services h2 {
-    font-size: 2.5em;
+    font-size: clamp(1.5em, 1.8em, 2em);
   }
 
   #information-services-content {
@@ -288,23 +326,15 @@
     grid-template-columns: 1fr 1fr;
     width: 100%;
     margin-top: 1em;
-    gap: 1.2em;
   }
   #information-services-content #services-row .col {
     display: flex;
-    align-items: center;
-    padding: 0;
-    justify-content: center;
+    flex-direction: column;
+    text-align: center;
   }
 
   #information-services-content #services-row .col .service {
-    width: 260px;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
+    padding: 1em;
     box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
   }
 
@@ -324,7 +354,7 @@
     border-bottom: 3px solid #007682;
   }
   #information-achievements h2 {
-    font-size: 2.5em;
+    font-size: clamp(1.5em, 1.8em, 2em);
     margin-bottom: 0.3em;
     color: #007682;
   }
@@ -364,22 +394,90 @@
   }
 
   #information-wrapper-5 {
+    width: 100%;
     text-align: center;
     border-radius: 12px;
     padding: 1em;
     color: white;
-    background-color: #007682;
   }
 
+  /*styles of the news card*/
   #information-news {
-    margin-bottom: 1.5em;
+    padding: 1em;
+    background-color: #007682;
     text-align: center;
+    border-radius: 20px;
+  }
+
+  #information-news h2 {
+    font-size: clamp(1.5rem, 1.8rem, 2rem);
+    margin-bottom: 0.3em;
     border-bottom: 3px solid #ffa92d;
   }
-  #information-news h2 {
-    font-size: 2.5em;
-    margin-bottom: 0.3em;
+
+  .news-card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    padding-top: 1.3em;
+    padding-bottom: 0;
   }
+
+  #featured-news-text {
+    border-left: #ffa92d 4px solid;
+    padding-left: 0.5em;
+    text-align: left;
+    margin-top: 1rem;
+  }
+
+  #featured-news-text a {
+    text-decoration: none;
+    color: #ffa92d;
+  }
+
+  #featured-news-text h5 {
+    font-size: clamp(1.5rem, 1.8rem, 2rem);
+    font-weight: bold;
+    margin: 0;
+    color: #163235;
+  }
+
+  .news-card-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .news-card {
+    text-align: center;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /* border-radius: 20px; */
+    min-height: 20vh;
+  }
+  .image-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .news-card-container .news-card-wrapper .news-card-image {
+    width: 95%;
+    height: auto;
+  }
+
+  .card-body {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+  }
+
+  .button-div {
+    margin-top: auto;
+  }
+
   #information-news-content p.news {
     font-size: 24px;
   }
@@ -392,7 +490,7 @@
   }
 
   .president-message #message-heading {
-    font-size: 2.5em;
+    font-size: clamp(1.5rem, 1.8rem, 2rem);
     margin-bottom: 1.5em;
     text-align: center;
     border-radius: 12px;
@@ -409,7 +507,7 @@
     text-align: center;
   }
   .president-signature #president-profile-wrapper {
-    width: 20%;
+    width: 50%;
   }
 
   .president-signature img.signature {
@@ -424,12 +522,12 @@
   }
   .president-signature .president-info p.president-name {
     font-weight: bold;
-    font-size: 2rem;
+    font-size: clamp(1.3rem, 1.5rem, 1.8rem);
     text-decoration: underline;
   }
   .president-signature .president-info p.president-position {
     font-style: italic;
-    font-size: 14px;
+    font-size: clamp(1rem, 1.2rem, 1.5rem);
   }
 }
 
@@ -485,11 +583,22 @@
     padding: 1em 0;
   }
 
+  #information-values-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  #information-values-content #values-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    width: clamp(60%, 65%, 70%);
+  }
+
   #information-values-content #values-row .col {
     border: #ffa92d;
     border-radius: 25px;
-    margin: 0 2em;
-    padding: 1em;
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
   #information-values-content #values-row .col .value img {
@@ -504,45 +613,404 @@
   }
 
   #information-wrapper-3 {
-    margin: 0 5em;
+    margin: 2em 5em;
     display: flex;
-    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
+
   #information-wrapper-3-container {
-    width: 100%;
+    width: 100%; /*for testing*/
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2em;
-  }
-#information-services-content {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+    margin: 0 2em;
+    box-shadow: 0px 13px 11px 4px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
   }
 
-  #information-services-content .row{
+  #information-services {
+    width: 100%; /*for testing*/
+    text-align: center;
+    border-bottom: 3px solid #ffa92d;
+    padding-bottom: 0.5em;
+    color: #142c2e;
+    margin-bottom: 4em;
+  }
+
+  #information-services h2 {
+    color: #142c2e;
+    font-weight: bolder;
+  }
+
+  #information-services-content {
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     justify-content: center;
-    gap: 1.5em;
   }
-  #information-services-content .row .col{
+  #information-services-content #services-row {
     width: 100%;
-    padding: 1.5em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2em;
+  }
+
+  /* Service card container */
+  #information-services-content #services-row #our-services {
+    background-image: url("/Hospital-Customer-Service.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
     box-shadow: 0px 10px 15px -3px rgba(78, 78, 78, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+
+    /* start grayscale and dim */
+    filter: grayscale(100%) brightness(80%);
+    transition: filter 0.8s ease, transform 0.8s ease;
   }
-  #information-services-content .row .col p{
-    font-size: 1.5em;
-    font-weight: bold;
+
+  /* On hover: full color + subtle zoom */
+  #information-services-content #services-row #our-services:hover {
+    filter: grayscale(0%) brightness(100%);
+    transform: scale(1.03);
   }
 
+  /* Overlay text (centered initially) */
+  #information-services-content
+    #services-row
+    #our-services
+    #services-overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* perfectly centered */
+    color: rgb(255, 255, 255);
+    width: 100%;
+    text-align: center;
+    font-size: 1.45vw;
+    transition: all 0.8s ease; /* smooth movement + color change */
+    padding: 0.5em 0 1em;
+  }
 
+  /* Hover: move text to bottom, darken background */
+  #information-services-content
+    #services-row
+    #our-services:hover
+    #services-overlay-text {
+    top: 85%; /* move toward bottom */
+    transform: translate(-50%, -50%); /* keep horizontally centered */
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 0 0 10px 10px;
+  }
 
+  /* Hide button initially */
+  #information-services-content
+    #services-row
+    #our-services
+    #services-overlay-text
+    .services-button {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
 
+  /* Fade and slide button up on hover */
+  #information-services-content
+    #services-row
+    #our-services:hover
+    #services-overlay-text
+    .services-button {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Button hover styling */
+  .services-button {
+    border-radius: 20px;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+  }
+
+  .services-button:hover {
+    transform: scale(1.1);
+  }
+  /* Find Doctor card container */
+  #information-services-content #services-row #find-doctors {
+    background-image: url("/find-doctor.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 20dvw;
+    height: 30dvh;
+    border-radius: 10px;
+    box-shadow: 0px 10px 15px -3px rgba(78, 78, 78, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+
+    /* start grayscale and dim */
+    filter: grayscale(100%) brightness(80%);
+    transition: filter 0.8s ease, transform 0.8s ease;
+  }
+
+  /* On hover: full color + subtle zoom */
+  #information-services-content #services-row #find-doctors:hover {
+    filter: grayscale(0%) brightness(100%);
+    transform: scale(1.03);
+  }
+
+  /* Overlay text (centered initially) */
+  #information-services-content
+    #services-row
+    #find-doctors
+    #find-doctors-overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* perfectly centered */
+    color: rgb(255, 255, 255);
+    width: 100%;
+    text-align: center;
+    font-size: 1.4vw;
+    transition: all 0.8s ease; /* smooth movement + color change */
+    padding: 0.5em 0 1em;
+  }
+
+  /* Hover: move text to bottom, darken background */
+  #information-services-content
+    #services-row
+    #find-doctors:hover
+    #find-doctors-overlay-text {
+    top: 85%; /* move toward bottom */
+    transform: translate(-50%, -50%); /* keep horizontally centered */
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 0 0 10px 10px;
+  }
+
+  /* Hide button initially */
+  #information-services-content
+    #services-row
+    #find-doctors
+    #find-doctors-overlay-text
+    .services-button {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  /* Fade and slide button up on hover */
+  #information-services-content
+    #services-row
+    #find-doctors:hover
+    #find-doctors-overlay-text
+    .services-button {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Button hover styling */
+  .services-button {
+    border-radius: 20px;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+  }
+
+  .services-button:hover {
+    transform: scale(1.1);
+  }
+
+  /* News and Update card container */
+  #information-services-content #services-row #news-updates {
+    background-image: url("/AMCM.webp");
+    background-size: cover;
+    background-position: center;
+    width: 20dvw;
+    height: 30dvh;
+    border-radius: 10px;
+    box-shadow: 0px 10px 15px -3px rgba(78, 78, 78, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+
+    /* start grayscale and dim */
+    filter: grayscale(100%) brightness(80%);
+    transition: filter 0.8s ease, transform 0.8s ease;
+  }
+
+  /* On hover: full color + subtle zoom */
+  #information-services-content #services-row #news-updates:hover {
+    filter: grayscale(0%) brightness(100%);
+    transform: scale(1.03);
+  }
+
+  /* Overlay text (centered initially) */
+  #information-services-content
+    #services-row
+    #news-updates
+    #news-updates-overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* perfectly centered */
+    color: rgb(247, 247, 247);
+    width: 100%;
+    text-align: center;
+    font-size: 1.25vw;
+    transition: all 0.8s ease; /* smooth movement + color change */
+    padding: 0.5em 0 1em;
+  }
+
+  /* Hover: move text to bottom, darken background */
+  #information-services-content
+    #services-row
+    #news-updates:hover
+    #news-updates-overlay-text {
+    top: 85%; /* move toward bottom */
+    transform: translate(-50%, -50%); /* keep horizontally centered */
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 0 0 10px 10px;
+  }
+
+  /* Hide button initially */
+  #information-services-content
+    #services-row
+    #news-updates
+    #news-updates-overlay-text
+    .services-button {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  /* Fade and slide button up on hover */
+  #information-services-content
+    #services-row
+    #news-updates:hover
+    #news-updates-overlay-text
+    .services-button {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Button hover styling */
+  .services-button {
+    border-radius: 20px;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+  }
+
+  .services-button:hover {
+    transform: scale(1.1);
+  }
+
+  /* Online patient survey card container */
+  #information-services-content #services-row #online-patient-survey {
+    background-image: url("/patient-survey.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 12dvw;
+    height: 30dvh;
+    border-radius: 10px;
+    box-shadow: 0px 10px 15px -3px rgba(78, 78, 78, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+
+    /* start grayscale and dim */
+    filter: grayscale(100%) brightness(80%);
+    transition: filter 0.8s ease, transform 0.8s ease;
+  }
+
+  /* On hover: full color + subtle zoom */
+  #information-services-content #services-row #online-patient-survey:hover {
+    filter: grayscale(0%) brightness(100%);
+    transform: scale(1.03);
+  }
+
+  /* Overlay text (centered initially) */
+  #information-services-content
+    #services-row
+    #online-patient-survey
+    #online-patient-survey-overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* perfectly centered */
+    color: rgb(255, 255, 255);
+    width: 100%;
+    text-align: center;
+    font-size: 1.15vw;
+    transition: all 0.8s ease; /* smooth movement + color change */
+    padding: 0.5em 0 1em;
+  }
+
+  /* Hover: move text to bottom, darken background */
+  #information-services-content
+    #services-row
+    #online-patient-survey:hover
+    #online-patient-survey-overlay-text {
+    top: 85%; /* move toward bottom */
+    transform: translate(-50%, -50%); /* keep horizontally centered */
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 0 0 10px 10px;
+  }
+
+  /* Hide button initially */
+  #information-services-content
+    #services-row
+    #online-patient-survey
+    #online-patient-survey-overlay-text
+    .services-button {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  /* Fade and slide button up on hover */
+  #information-services-content
+    #services-row
+    #online-patient-survey:hover
+    #online-patient-survey-overlay-text
+    .services-button {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Button hover styling */
+  .services-button {
+    border-radius: 20px;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+  }
+
+  .services-button:hover {
+    transform: scale(1.1);
+  }
 
   #information-wrapper-4 {
     margin: 0 2em;
@@ -572,17 +1040,77 @@
   }
 
   #information-wrapper-5 {
-    width: inherit;
+    width: 100%;
     text-align: center;
-    background-color: #007682;
     border-radius: 18px;
   }
   #information-news {
-    padding: 1em 0;
-    margin: 0 2em 1em 2em;
+    margin: 1em;
     color: #ffa92d;
-    width: inherit;
     border-bottom: 3px solid #ffa92d;
+    background-color: #007682;
+  }
+
+  #featured-news-text {
+    border-left: #ffa92d 4px solid;
+    padding-left: 0.5em;
+    text-align: left;
+    margin: 1rem 0;
+  }
+
+  #featured-news-text a {
+    text-decoration: none;
+    color: #ffa92d;
+  }
+
+  #featured-news-text a:hover {
+    text-decoration: underline;
+  }
+
+  #featured-news-text h5 {
+    font-size: clamp(1.5rem, 2rem, 2.5rem);
+    font-weight: bold;
+    margin: 0;
+    color: #163235;
+  }
+
+  .news-card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1em;
+    justify-content: center;
+  }
+
+  .news-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .news-card {
+    display: grid;
+    grid-template-rows: 25vh 1fr;
+    width: 100%;
+    height: 55vh;
+  }
+
+  .image-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .news-card-container .news-card-wrapper .news-card-image {
+    width: 85%;
+    height: auto;
+  }
+
+  .card-body {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+  }
+  .button-div {
+    margin-top: auto;
   }
 
   #information-wrapper-5 #information-news-content p.news {
@@ -615,12 +1143,11 @@
 
   .president-signature .president-info p {
     margin-bottom: 0;
-    font-size: 1.5rem;
     line-height: 1.5;
   }
   .president-signature .president-info p.president-name {
     font-weight: bold;
-    font-size: 100%;
+    font-size: clamp(0.5rem, 1.5vw, 1.5rem);
     text-decoration: underline;
   }
   .president-signature .president-info p.president-position {
@@ -753,8 +1280,8 @@
     margin-bottom: 4em;
   }
 
-  #information-services h2{
-    color: #142C2E;
+  #information-services h2 {
+    color: #142c2e;
     font-weight: bolder;
   }
   #information-services-content #services-row {
@@ -1141,15 +1668,16 @@
   #information-wrapper-5 {
     width: 100%; /*for testing*/
     text-align: center;
-    background-color: #3e8391;
     border-radius: 18px;
   }
   #information-news {
     padding: 1em 0;
     margin: 0 2em 1em 2em;
-    color: #ffa92d;
+    color: #f1f1f1;
+    font-weight: bolder;
     width: auto;
     border-bottom: 3px solid #ffa92d;
+    background-color: #3e8391;
   }
 
   #information-wrapper-5 #information-news-content p.news {
@@ -1158,6 +1686,80 @@
     color: white;
     font-size: 20px;
   }
+
+  #featured-news-text {
+    border-left: #ffa92d 4px solid;
+    padding-left: 0.5em;
+    text-align: left;
+    margin: 1rem 0;
+    display: flex;
+    align-items: baseline;
+  }
+
+  #featured-news-text a {
+    text-decoration: none;
+    color: #ffa92d;
+    margin-left: 0.5em;
+    height: inherit;
+  }
+  #featured-news-text a:hover {
+    text-decoration: underline;
+    color: #ffa92d;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  #featured-news-text h5 {
+    font-size: clamp(1.5rem, 2rem, 2.5rem);
+    font-weight: bold;
+    margin: 0;
+    color: #163235;
+  }
+  /* news card styles */
+  .news-card-container {
+    width: 80%;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .news-card-container .news-card {
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    height: 55vh;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 25vh 1fr;
+  }
+
+  .news-card-container .card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .image-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .news-card-container .news-card-image {
+    width: 85%;
+    height: auto;
+    margin: auto;
+  }
+  .news-card-container .card-body .button-div {
+    margin-top: auto;
+  }
+
+  .read-more-button {
+    font-size: clamp(0.75rem, 1vw, 1.25rem);
+    border-radius: 20px;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+  }
+
   .president-message {
     width: 100%; /*for testing*/
     display: flex;

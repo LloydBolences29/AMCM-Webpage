@@ -423,7 +423,7 @@ router.put("/doctor-update-information/:id", authMiddleware, checkRole(["admin"]
 
 
 //delete the schedule of a doctor
-router.delete("/delete-doctor-schedule/:id,", async (req, res) =>{
+router.delete("/delete-doctor-schedule/:id", async (req, res) =>{
   try{
     const { id } = req.params;
     const { doctor_department_id, day, startTime, endTime } = req.body;
@@ -432,11 +432,9 @@ router.delete("/delete-doctor-schedule/:id,", async (req, res) =>{
     const sql = "Delete From doctor_schedules where id = ? AND doctor_department_id = ? AND day_of_the_week = ? AND start_time = ? AND end_time = ?"
     const [request] = await db.query(sql, [id, doctor_department_id, day, startTime, endTime]);
 
-    return res.status(200).json({ message: "Schedule successfully removed." });
+    return res.status(200).json({ message: "Schedule successfully removed.", request });
 
     
-
-
 
   }catch(error){
     console.log("There is an error when trying to delete the schedule of that doctor. Please check console for more details.", error);

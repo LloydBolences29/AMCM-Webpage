@@ -1,1 +1,0 @@
-import{r as n}from"./index-36-KKcds.js";const c=n.createContext(),l=()=>n.useContext(c)??!1;function i(e,r=166){let t;function o(...u){const a=()=>{e.apply(this,u)};clearTimeout(t),t=setTimeout(a,r)}return o.clear=()=>{clearTimeout(t)},o}export{i as d,l as u};

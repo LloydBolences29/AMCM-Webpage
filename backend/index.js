@@ -81,7 +81,6 @@ app.use("/api/department", generalLimiter, departmentRoutes);
 app.use("/api/keyword", generalLimiter, keywordRoutes); //for adding keywords
 app.use("/api/user", generalLimiter, userRoutes);
 app.use("/api/page", generalLimiter, pageRoutes); //for adding news
-app.get("/health", (req, res) => res.send("OK"));
 app.use(
   "/api/uploads/pdfFile",
   cors({

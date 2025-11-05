@@ -1,0 +1,1 @@
+import{j as t}from"./index-C3TqbOx3.js";import{U as r}from"./UnderConstruction-B22Sjrr8.js";import"./createSvgIcon-Cykufoml.js";import"./DefaultPropsProvider-BkAkqsQB.js";import"./extends-CF3RwP-h.js";const s=()=>t.jsx("div",{children:t.jsx(r,{page:"Animal Bite Center"})});export{s as default};

@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import "../styles/Information.css";
 import { Row, Col, Card, Button } from "react-bootstrap";
 import { BsChevronDown } from "react-icons/bs";
@@ -14,6 +14,35 @@ const Information = () => {
     "/healthyPilipinasaward.png",
     "/ISO.png",
   ];
+
+  const [featuredNews, setFeaturedNews] = useState([]);
+
+  const VITE_API_URL = import.meta.env.VITE_API_URL;
+  //for uploads folder
+  const VITE_API_UPLOAD_URL = import.meta.env.VITE_API_UPLOAD_URL;
+
+  const fetchAllFeaturedNews = async () => {
+    try {
+      const response = await fetch(`${VITE_API_URL}/page/get-featured-news`, {
+        method: "GET",
+        credentials: "include",
+      });
+      console.log("Fetching featured news from:", response);
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Featured news data:", data);
+        setFeaturedNews(data.rows);
+      }
+    } catch (error) {
+      console.error("Error fetching featured news:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllFeaturedNews();
+  }, []);
+
   return (
     <>
       <div className="information-container">
@@ -122,7 +151,9 @@ const Information = () => {
                 className="information-subContent"
                 id="information-mission-content"
               >
-                <p className="mission">"Sharing Jesus Christ Healing Ministry"</p>
+                <p className="mission">
+                  "Sharing Jesus Christ Healing Ministry"
+                </p>
               </div>
             </div>
 
@@ -198,19 +229,71 @@ const Information = () => {
 
             <div id="information-wrapper-5">
               <div
-                className="information-subContent-title"
-                id="information-news"
-              >
-                <h2>Hospital News</h2>
-              </div>
-              <div
                 className="information-subContent"
                 id="information-news-content"
               >
-                <p className="news">
-                  Stay updated with the latest news and events at Adventist
-                  Medical Center Manila.
-                </p>
+                {featuredNews.length > 0 ? (
+                  <>
+                    <div id="featured-news-text">
+                      <h5>Featured News</h5>
+                      <a href="/news-updates"><i className="fas fa-chevron-right">See More...</i></a>
+                    </div>
+                    <div className="news-card-container">
+                      {featuredNews.map((news, index) => (
+                        <div key={index} className="news-card-wrapper">
+                          <Card className="news-card">
+                            <div className="image-holder">
+                              <Card.Img
+                                variant="top"
+                                src={`${VITE_API_URL}/uploads/thumbnail/${news.thumbnail}`}
+                                alt={news.title}
+                                className="news-card-image"
+                                loading="lazy"
+                              />
+                            </div>
+                            <Card.Body>
+                              <Card.Title className="news-card-title">
+                                {news.title.length>25 ? news.title.substring(0, 25) + "..." : news.title}
+                              </Card.Title>
+                              <Card.Text className="news-card-summary">
+                                {news.news_description.length > 30
+                                  ? news.news_description.substring(0, 30) +
+                                    "..."
+                                  : news.news_description}
+                              </Card.Text>
+                              <div className="button-div">
+                                <Button
+                                  variant="warning"
+                                  href={`/news-updates`}
+                                  className="read-more-button"
+                                >
+                                  Read More{" "}
+                                  <BsChevronDown className="chevron-icon" />
+                                </Button>
+                              </div>
+                            </Card.Body>
+                          </Card>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div id="information-news">
+                      <div
+                        className="information-subContent-title"
+                        
+                      >
+                        <h2>Hospital News</h2>
+                      </div>
+
+                      <p className="news">
+                        Stay updated with the latest news and events at
+                        Adventist Medical Center Manila.
+                      </p>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 
