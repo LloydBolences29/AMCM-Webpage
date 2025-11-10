@@ -22,8 +22,10 @@ const ContactUs = lazy(() => import("./pages/ContactUs"));
 const ServiceDetailRenderer = lazy(() => import("./components/ServiceDetailRenderer"));
 const SearchPage = lazy(() => import("./components/SearchPage"));
 const NewsAndUpdate = lazy(() => import("./pages/NewsAndUpdate"));
-function App() {
+const ChangePassword = lazy(() => import("./pages/ChangePassword"));
 
+
+function App() {
   return (
     <>
       <AuthProvider>
@@ -59,6 +61,7 @@ function App() {
             {/* Route for editors*/}
             <Route element={<ProtectedRoutes allowedRoles={["editor", "admin"]} />}>
               <Route path="/editor" element={<Editor />} />
+              <Route path="/change-password" element={<ChangePassword />} />
             </Route>
 
             {/* Route for admin  */}
@@ -67,6 +70,7 @@ function App() {
 
               {/* <Route path="/users" element={<UserManagement />} /> */}
             </Route>
+
           </Routes>
         </Suspense>
       </AuthProvider >
@@ -74,4 +78,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

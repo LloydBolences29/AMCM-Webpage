@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/AuthContext";
 import Modal from "react-bootstrap/Modal";
@@ -6,40 +6,57 @@ import Modal from "react-bootstrap/Modal";
 import "../styles/Overlay.css";
 
 export const Overlay = ({ menuLinks, visible, onClose }) => {
+    const navigate = useNavigate(); // ✅ make sure this is included
+  const { auth, setAuth } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [modalTimer, setModalTimer] = useState(3);
 
   const VITE_API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-  if (visible) {
-    // Disable background scroll
-    document.body.style.overflow = 'hidden';
-  } else {
-    // Re-enable when closed
-    document.body.style.overflow = 'auto';
-  }
+    if (visible) {
+      // Disable background scroll
+      document.body.style.overflow = "hidden";
+    } else {
+      // Re-enable when closed
+      document.body.style.overflow = "auto";
+    }
 
-  // Cleanup on unmount (important!)
-  return () => {
-    document.body.style.overflow = 'auto';
-  };
-}, [visible]);
+    // Cleanup on unmount (important!)
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [visible]);
+
+const additionalLinks = useMemo(() => {
+    // If password change is required, ONLY return that link.
+    if (auth.requirePasswordChange) {
+      return [
+        {
+          role: ["editor", "admin"],
+          label: "Change Your Password",
+          link: "/change-password",
+        },
+      ];
+    }
+
+    // If password change is NOT required, return the normal links.
+    return [
+      {
+        role: "admin",
+        label: "Admin Dashboard",
+        link: "/admin",
+      },
+      {
+        role: ["editor", "admin"],
+        label: "Editor Dashboard",
+        link: "/editor",
+      },
+    ];
+  }, [auth.requirePasswordChange]);
 
 
-  const additionalLinks = [
-    {
-      role: "admin",
-      label: "Admin Dashboard",
-      link: "/admin",
-    },
-    {
-      role: ["editor", "admin"],
-      label: "Editor Dashboard",
-      link: "/editor",
-    },
-  ];
-
+  
   const handleLogout = async () => {
     try {
       const response = await fetch(`${VITE_API_URL}/auth/logout`, {
@@ -74,8 +91,7 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
     return () => clearTimeout(timer);
   }, [showModal, modalTimer]);
 
-  const navigate = useNavigate(); // ✅ make sure this is included
-  const { auth, setAuth } = useAuth();
+
 
   const linksFunction = (item) => (
     <li key={item.path}>
@@ -139,8 +155,8 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
                   <>
                     {additionalLinks.map((item) => {
                       const allowed = Array.isArray(item.role)
-                        ? item.role.includes(auth.user.role) // check if user's role is in the allowed roles
-                        : auth.user.role === item.role; // fallback for single role
+                        ? item.role.includes(auth.user?.role) // check if user's role is in the allowed roles
+                        : auth.user?.role === item.role; // fallback for single role
 
                       if (allowed) {
                         return (

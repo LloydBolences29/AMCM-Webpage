@@ -1,9 +1,8 @@
-import React from "react";
-import { Container, Form, Button, Alert } from "react-bootstrap";
+import { Container, Form, Button, Alert, Modal } from "react-bootstrap";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { useAuth } from "../utils/AuthContext";
 import axios from "axios";
 import EKGSpinner from "../components/EKGSpinner";
@@ -20,7 +19,7 @@ const Login = () => {
   const [loginError, setLoginError] = useState("");
   const [showLoginPassword, setShowLoginPassword] = useState(false);
   const navigate = useNavigate();
-  const { loading, setAuth } = useAuth();
+  const { loading, auth, setAuth } = useAuth();
   const [numberOfTries, setNumberOfTries] = useState(0);
   const [maxTriesReached, setMaxTriesReached] = useState(false);
 
@@ -50,29 +49,40 @@ const Login = () => {
       const data = await response.data;
       if (response.status === 200) {
         console.log("Login successful:", data);
+        if (data.requirePasswordChange) {
+          setAuth({
+            loading: false,
+            isAuthenticated: true,
+            user: data.user,
+            requirePasswordChange: data.requirePasswordChange,
+          });
 
-        setAuth({
-          loading: false,
-          isAuthenticated: true,
-          user: data.user,
-        });
+          navigate("/change-password");
+        } else {
+          setAuth({
+            loading: false,
+            isAuthenticated: true,
+            user: data.user,
+            requirePasswordChange: data.requirePasswordChange,
+          });
 
-        switch (data.user.role) {
-          case "admin":
-            navigate("/admin");
-            break;
-          case "editor":
-            navigate("/editor");
-            break;
-          default:
-            navigate("/");
+          switch (data.user.role) {
+            case "admin":
+              navigate("/admin");
+              break;
+            case "editor":
+              navigate("/editor");
+              break;
+            default:
+              navigate("/");
+          }
         }
 
-        console.log("Role of the user:", data.user.role);
+        console.log("Role of the user:", auth);
 
         // Clear the login form
         setLoginData({ email: "", password: "" });
-      }else{
+      } else {
         setLoginError(response.data.error);
       }
     } catch (error) {
@@ -80,20 +90,20 @@ const Login = () => {
 
       if (error.response?.status === 429) {
         // account locked
-        setLoginError(
-          error.response?.data?.message 
-        );
+        setLoginError(error.response?.data?.message);
         setMaxTriesReached(true);
       } else if (error.response?.status === 401) {
         // invalid credentials
         const remaining = error.response?.data?.remainingAttempts;
-        console.log("Remaining attempts:", remaining);  
+        console.log("Remaining attempts:", remaining);
         setLoginError(
           remaining !== undefined
-            ? `${error.response?.data?.message} (${remaining + 1} attempts left)`
+            ? `${error.response?.data?.message} (${
+                remaining + 1
+              } attempts left)`
             : error.response?.data?.error || "Login failed."
         );
-      }else if (error.response?.status === 403) {
+      } else if (error.response?.status === 403) {
         // account inactive
         setLoginError(error.response?.data?.error);
       } else {
@@ -113,6 +123,8 @@ const Login = () => {
       return () => clearTimeout(timer);
     }
   }, [maxTriesReached]);
+
+  
   return (
     <MainLayout>
       {loading ? (

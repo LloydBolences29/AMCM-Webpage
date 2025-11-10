@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 const authMiddleware = require('../middleware/auth');
 const checkRole = require('../middleware/checkRole');
 
-router.get("/get-users", async (req, res) => {
+router.get("/get-users", authMiddleware, checkRole(["admin"]), async (req, res) => {
   try {
     const db = await connectToDatabase();
     const [users] = await db.query(

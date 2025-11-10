@@ -112,7 +112,7 @@ router.post(
   }
 );
 
-router.get("/get-news", async (req, res) => {
+router.get("/get-news", authMiddleware, checkRole(["admin", "editor"]), async (req, res) => {
 try {
   const db = await connectToDatabase();
 
@@ -124,7 +124,7 @@ try {
 }
 })
 
-router.get("/get-news-year", async (req, res) =>{
+router.get("/get-news-year", authMiddleware, checkRole(["admin", "editor"]), async (req, res) =>{
   try {
     const db = await connectToDatabase();
 
@@ -137,7 +137,7 @@ router.get("/get-news-year", async (req, res) =>{
 })
 
 //filter by date
-router.get("/filter-date", async (req, res) => {
+router.get("/filter-date", authMiddleware, checkRole(["admin", "editor"]), async (req, res) => {
   try {
     const { year, includeInactive } = req.query;
     const db = await connectToDatabase();
@@ -298,7 +298,7 @@ router.post("/add-featured-news", authMiddleware, checkRole(['admin', 'editor'])
 })
 
 //get all the featured news
-router.get("/get-featured-news", async (req, res) => {
+router.get("/get-featured-news", authMiddleware, checkRole(["admin", "editor"]), async (req, res) => {
   try {
     const db = await connectToDatabase();
 

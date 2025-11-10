@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { BsFillTrashFill } from "react-icons/bs";
+
 
 const AccountManagement = () => {
   const initialValue = {
@@ -30,6 +32,8 @@ const AccountManagement = () => {
     email: "",
     role: "",
   });
+  const [toDeleteUser, setTODeleteUser] = useState(null);
+  const [deleteUserModal, setDeleteUserModal] = useState(false);
   const [originalUser, setOriginalUser] = useState(null);
 
   const VITE_API_URL = import.meta.env.VITE_API_URL;
@@ -41,6 +45,11 @@ const AccountManagement = () => {
   const handleOnClose = () => {
     setShowModal(false);
   };
+
+  const handleOpenDeleteModal = (user) =>{
+    setTODeleteUser(user);
+    setDeleteUserModal(true)
+  }
 
   const handleAddUser = async (e) => {
     e.preventDefault();
@@ -125,6 +134,39 @@ const AccountManagement = () => {
     }
   };
 
+  const handleDeleteUser = async () =>{
+    const userId = toDeleteUser.id; 
+
+    // Safety check
+    if (!userId) {
+        console.error("No user selected for deletion.");
+        setNotification("Error: No user selected.");
+        setFailedSnackBarState(true);
+        return;
+    }
+    try {
+      const response = await fetch(`${VITE_API_URL}/auth/delete-user/${userId}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      const data = await response.json();
+      
+      if (response.ok) {
+        setPageStatus("success");
+        setSuccessSnackBarState(true);
+        setNotification(data.message);
+        setDeleteUserModal(false);
+        fetchAllUser();
+      }
+      
+    } catch (error) {
+      console.log("Error Deleting User.", error);
+      setPageStatus("error");
+      setFailedSnackBarState(true);
+      setNotification(error.message);
+    }
+  }
+
   const handleOpenEditModal = (user) => {
     setSelectedUser(user);
     setOriginalUser(user);
@@ -159,6 +201,8 @@ const AccountManagement = () => {
     setSuccessSnackBarState(false);
     setFailedSnackBarState(false);
   };
+
+  console.log("Users to be deleted: ", toDeleteUser?.id);
 
   return (
     <>
@@ -244,6 +288,15 @@ const AccountManagement = () => {
                     onClick={() => handleOpenEditModal(user)}
                   >
                     Edit
+                  </Button>
+                  <Button
+                    variant="outline-danger"
+                    size="sm"
+                    className="me-2"
+                    onClick={() => handleOpenDeleteModal(user)}
+                  >
+                    <BsFillTrashFill />
+
                   </Button>
                 </div>
               </td>
@@ -363,6 +416,30 @@ const AccountManagement = () => {
                 Save Changes
               </Button>
             </Form>
+          </Modal.Body>
+        </Modal>
+      )}
+
+      {deleteUserModal && (
+        <Modal show={deleteUserModal} onHide={() => setDeleteUserModal(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Delete User</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <p>Are you sure you want to delete user {toDeleteUser?.username}?</p>
+            <Button
+              className="mx-1"
+              variant="secondary"
+              onClick={() => setDeleteUserModal(false)}
+            >
+              Cancel
+            </Button>
+            <Button className="mx-1" variant="danger" 
+              onClick={handleDeleteUser}
+            >
+              Delete
+            </Button>
           </Modal.Body>
         </Modal>
       )}

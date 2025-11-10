@@ -34,7 +34,7 @@ router.post("/add-keyword", authMiddleware, checkRole(["editor", "admin"]), asyn
 });
 
 //fetching all the keywwords
-router.get("/get-keywords/:searchTerm", async (req, res) => {
+router.get("/get-keywords/:searchTerm", authMiddleware, checkRole(["admin", "editor"]), async (req, res) => {
   try {
     const db = await connectToDatabase();
     const { searchTerm } = req.params;

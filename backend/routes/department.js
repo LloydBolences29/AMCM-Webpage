@@ -6,7 +6,7 @@ const { connectToDatabase } = require("../lib/db");
 const authMiddleware = require("../middleware/auth");
 const checkRole = require("../middleware/checkRole");
 //get all the department with pagination
-router.get("/get-all-departments", async (req, res) => {
+router.get("/get-all-departments", authMiddleware, checkRole(["admin", "editor"]), async (req, res) => {
   try {
     const db = await connectToDatabase();
 
@@ -43,7 +43,7 @@ router.get("/get-all-departments", async (req, res) => {
 });
 
 //get all the department WITHOUT pagination
-router.get("/get-departments",  async (req, res) => {
+router.get("/get-departments", authMiddleware, checkRole(["admin", "editor"]), async (req, res) => {
   try {
     const db = await connectToDatabase();
     // Fetch all departments

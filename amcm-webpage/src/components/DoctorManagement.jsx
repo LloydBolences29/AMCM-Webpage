@@ -232,22 +232,6 @@ const DoctorManagement = () => {
   };
 
   const handleDeleteSchedule = async (selectedScheduleId) => {
-    console.log(
-      "Delete schedule clicked. Id of the doctor to be deleted: ",
-      doctorById?.schedules?.Clinic[selectedScheduleId]?.day
-    );
-    console.log(
-      "Day to be deleted: ",
-      doctorById?.schedules?.Clinic[selectedScheduleId]?.day
-    );
-    console.log(
-      "Start time to be deleted: ",
-      doctorById?.schedules?.Clinic[selectedScheduleId]?.startTime
-    );
-    console.log(
-      "End time to be deleted: ",
-      doctorById?.schedules?.Clinic[selectedScheduleId]?.endTime
-    );
 
     try {
       const response = await fetch(

@@ -7,7 +7,7 @@ const authMiddleware = require("../middleware/auth");
 const checkRole = require("../middleware/checkRole");
 
 
-router.get("/get-all-doctors", async (req, res) => {
+router.get("/get-all-doctors", authMiddleware, checkRole(["admin", "editor"]), async (req, res) => {
   try {
     const db = await connectToDatabase();
 
@@ -151,7 +151,7 @@ router.post("/add-schedule", authMiddleware, checkRole(["editor", "admin"]), asy
 
 //get all doctors with their department
 //endpoint for AddKeyword component
-router.get("/get-doctors-departments", async (req, res) => {
+router.get("/get-doctors-departments", authMiddleware, checkRole(["admin", "editor"]), async (req, res) => {
   try {
     const db = await connectToDatabase();
     // Fetch all doctors and their departments
@@ -176,7 +176,7 @@ router.get("/get-doctors-departments", async (req, res) => {
 
 //get all the doctors with their department as the user searches for the name of the doctor
 //endpoint for Add Schedule component
-router.get("/get-doctors-departments/:doctor", async (req, res) => {
+router.get("/get-doctors-departments/:doctor", authMiddleware, checkRole(["admin", "editor"]), async (req, res) => {
   try {
     const db = await connectToDatabase();
     const { doctor } = req.params;
@@ -309,7 +309,7 @@ router.get("/get-doctors/:doctor", async (req, res) => {
 
 //fetch all doctors with their department and formatted schedules
 //endpoint for DoctorManagement component
-router.get("/get-doctors-by-id/:id", async (req, res) => {
+router.get("/get-doctors-by-id/:id", authMiddleware, checkRole(["admin", "editor"]), async (req, res) => {
   try {
     const db = await connectToDatabase();
     const { id } = req.params;

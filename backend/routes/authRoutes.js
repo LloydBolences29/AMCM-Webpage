@@ -15,23 +15,23 @@ router.post('/register', authMiddleware, checkRole(['admin']), async (req, res) 
 
   try {
     if (!email || !password) {
-      return res.status(400).json({ error: 'Email and password are required' });
+      return res.status(400).json({ message: 'Email and password are required' });
     }
 
     const connection = await connectToDatabase();
     //check if the user already exists
     const [existingUser] = await connection.query('SELECT * FROM userInfo WHERE email = ?', [email]);
     if (existingUser.length > 0) {
-      return res.status(409).json({ error: 'User already exists' });
+      return res.status(409).json({ message: 'User already exists' });
     }
 
     //hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     //insert the user into the database
-    await connection.query('INSERT INTO userInfo (firstname, lastname, username, email, pass, role) VALUES (?, ?, ?, ?, ?, ?)', [firstname, lastname, username, email, hashedPassword, role]);
+    await connection.query('INSERT INTO userInfo (firstname, lastname, username, email, pass, role, is_changed) VALUES (?, ?, ?, ?, ?, ?, ?)', [firstname, lastname, username, email, hashedPassword, role, 0]);
 
-    res.status(201).json({ message: 'User registered successfully' });
+    res.status(201).json({ message: 'User registered successfully'});
 
   } catch (error) {
     console.log("Internal Server Error", error)
@@ -57,20 +57,20 @@ router.post('/login', async (req, res) => {
       db.query("SELECT * FROM userInfo WHERE email = ?", [email])
     );
     if (existingUser[0].length === 0) {
- 
+
       return res
         .status(401)
         .json({ error: `Account doesn't exist in our records!! ` });
     }
     //check if the password is correct
     const user = existingUser[0][0];
-   
 
-    if (user.is_active === "inactive"){
+
+    if (user.is_active === "inactive") {
       return res.status(403).json({ error: 'Account is inactive. Please contact admin.' });
     }
 
-    if (user.is_locked){
+    if (user.is_locked) {
       return res.status(403).json({ error: 'Account is locked. Please contact Admin.' })
     }
 
@@ -86,9 +86,9 @@ router.post('/login', async (req, res) => {
 
     //check and reset failed attempts if last failed attempt was long ago
     const resetThresholdMs = 60 * 60 * 1000; // 1 hour
-    if (!user.is_locked && 
-      user.failed_attempts < 9 && 
-      user.last_failed_at && 
+    if (!user.is_locked &&
+      user.failed_attempts < 9 &&
+      user.last_failed_at &&
       now - new Date(user.last_failed_at) > resetThresholdMs) {
       await db.query(`
         UPDATE userInfo
@@ -151,6 +151,10 @@ router.post('/login', async (req, res) => {
       [user.id]
     );
 
+
+
+    const requirePasswordChange = (user.is_changed === 0);
+
     //creation of token
     const token = jwt.sign({ username: user.username, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
@@ -164,13 +168,16 @@ router.post('/login', async (req, res) => {
 
     });
 
+
+
     return res.status(200).json({
       message: 'Login successful',
       user: {
         username: user.username,
         email: user.email,
         role: user.role
-      }
+      },
+      requirePasswordChange: requirePasswordChange
     });
 
   } catch (error) {
@@ -180,8 +187,10 @@ router.post('/login', async (req, res) => {
 
 });
 
+//
+
 //routes for auths
-router.get('/auth', async (req, res) => {
+router.get('/auth', authMiddleware, async (req, res) => {
 
   try {
 
@@ -196,13 +205,16 @@ router.get('/auth', async (req, res) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     console.log("Decoded JWT:", decoded);
 
-    res.json({
+
+
+    return res.json({
       message: 'User is authenticated',
       user: {
         username: decoded.username,
         email: decoded.email,
         role: decoded.role
-      }
+      },
+      requirePasswordChange: decoded.requirePasswordChange
     })
   } catch (error) {
     console.error('Auth error:', error);
@@ -210,11 +222,63 @@ router.get('/auth', async (req, res) => {
   }
 });
 
+router.delete('/delete-user/:id', authMiddleware, checkRole(['admin']), async (req, res) => {
+  try {
+    const { id } = req.params
+    const db = await connectToDatabase();
+
+
+    //check if the user is existing
+    const [existingUser] = await db.query('SELECT * FROM userInfo WHERE id = ?', [id]);
+    if (existingUser.length === 0) {
+      return res.status(404).json({ error: "User not found." })
+    }
+
+
+    const [sql] = await db.query('DELETE FROM userInfo WHERE id = ?', [id]);
+
+    return res.status(200).json({ message: "User successfully removed.", sql })
+
+
+  } catch (error) {
+    console.log("Error removing the user.", error)
+    return res.status(500).json({ error: "Error removing the user. Please check console." })
+  }
+})
+
 //logout route
-router.post('/logout', (req, res) => {
+router.post('/logout', authMiddleware, async (req, res) => {
   // Clear the token cookie
   res.clearCookie('token', { httpOnly: true, secure: false, sameSite: 'Lax' });
   res.status(200).json({ message: 'Logout successful' });
 });
+
+//for changing the password
+router.put('/change-password', authMiddleware, async (req, res) => {
+  try {
+    const { email, newPassword } = req.body;
+
+    const db = await connectToDatabase();
+
+    //check the email
+    const isExisting = await db.query('SELECT * FROM userInfo WHERE email = ?', [email]);
+    if (isExisting[0].length === 0) {
+      return res.status(404).json({ error: "Account doesn't exist in our records!! " })
+    }
+
+    //get the id of the email
+    const userId = isExisting[0][0].id;
+
+    //hash the new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    await db.query(`UPDATE userInfo SET pass = ?, is_changed = ? WHERE id = ?`, [hashedPassword, 1, userId]);
+
+    return res.status(200).json({ message: "Password successfully changed." })
+  } catch (error) {
+    console.log("Error changing password", error)
+    return res.status(500).json({ error: "Error changing password. Please check console." })
+  }
+})
 
 module.exports = router;
