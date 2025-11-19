@@ -23,6 +23,7 @@ const ServiceDetailRenderer = lazy(() => import("./components/ServiceDetailRende
 const SearchPage = lazy(() => import("./components/SearchPage"));
 const NewsAndUpdate = lazy(() => import("./pages/NewsAndUpdate"));
 const ChangePassword = lazy(() => import("./pages/ChangePassword"));
+const Profile = lazy(() => import("./pages/Profile"));
 
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
             <Route element={<ProtectedRoutes allowedRoles={["editor", "admin"]} />}>
               <Route path="/editor" element={<Editor />} />
               <Route path="/change-password" element={<ChangePassword />} />
+              <Route path="/profile" element={<Profile />} />
             </Route>
 
             {/* Route for admin  */}

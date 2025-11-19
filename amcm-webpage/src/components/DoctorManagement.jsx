@@ -70,7 +70,7 @@ const DoctorManagement = () => {
   const fetchDoctorById = async (id) => {
     try {
       const response = await fetch(
-        `${VITE_API_URL}/doctor/get-doctors-by-id/${id}`
+        `${VITE_API_URL}/doctor/get-doctors-with-all-details/${id}`
       );
 
       if (!response.ok) {
@@ -79,10 +79,8 @@ const DoctorManagement = () => {
       }
 
       const result = await response.json();
-      setDoctorById((previousState) => ({
-        ...previousState,
-        ...result,
-      }));
+      console.log("Doctor by ID fetch result: ", result);
+      setDoctorById(result.doctors[0]);
     } catch (error) {
       console.log("Error fetching doctor by id:", error);
       setErrorMessage(error.message);
@@ -109,7 +107,7 @@ const DoctorManagement = () => {
   const handleUpdate = async () => {
     const doctorDataToSend = {
       name: doctorById.name,
-      roomNo: doctorById.roomNumber, // Match backend property name
+      roomNo: doctorById.roomNumber, 
       localPhone: doctorById.localPhone,
       departmentId: doctorById.departmentId,
     };
@@ -232,23 +230,24 @@ const DoctorManagement = () => {
   };
 
   const handleDeleteSchedule = async (selectedScheduleId) => {
+    console.log("Doctor by ID ", doctorById);
 
     try {
       const response = await fetch(
-        `${VITE_API_URL}/doctor/delete-doctor-schedule/${doctorById?.schedule_id}`,
+        `${VITE_API_URL}/doctor/delete-doctor-schedule/${selectedScheduleId}`,
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            doctor_department_id: doctorById?.id,
-            day: doctorById?.schedules?.Clinic[selectedScheduleId]?.day,
-            startTime:
-              doctorById?.schedules?.Clinic[selectedScheduleId]?.startTime,
-            endTime:
-              doctorById?.schedules?.Clinic[selectedScheduleId]?.endTime,
-          }),
+          // body: JSON.stringify({
+          //   doctor_department_id: doctorById?.id,
+          //   day: doctorById?.schedules?.clinic[selectedScheduleId]?.day,
+          //   startTime:
+          //     doctorById?.schedules?.clinic[selectedScheduleId]?.startTime,
+          //   endTime:
+          //     doctorById?.schedules?.clinic[selectedScheduleId]?.endTime,
+          // }),
           credentials: "include",
         }
       );
@@ -273,6 +272,8 @@ const DoctorManagement = () => {
       setError(error.message);
     }
   };
+
+  console.log("Doctors: ", selectedScheduleId);
 
   return (
     <div>
@@ -552,14 +553,14 @@ const DoctorManagement = () => {
                       Doctor's Schedules
                     </Form.Label>
 
-                    {Array.isArray(doctorById.schedules?.Clinic) &&
-                      doctorById.schedules.Clinic.map((schedule, index) => (
+                    {Array.isArray(doctorById.schedules?.clinic) &&
+                      doctorById.schedules?.clinic.map((schedule, index) => (
                         <Form.Group key={index} className="me-2">
                           <Row>
                             <Form.Label>Available Day: </Form.Label>
                             <Col md={12}>
                               <Form.Select // Use Form.Select for better styling
-                                value={schedule.day}
+                                value={schedule.day_of_the_week}
                               >
                                 <option value="">Select a day</option>
                                 <option value="Sun">Sunday</option>
@@ -580,7 +581,8 @@ const DoctorManagement = () => {
                               <Form.Control
                                 type="time"
                                 placeholder="Enter Time"
-                                value={schedule.startTime}
+                                value={schedule.start_time}
+                                readOnly
                               />
                             </Col>
 
@@ -589,7 +591,8 @@ const DoctorManagement = () => {
                               <Form.Control
                                 type="time"
                                 placeholder="Enter Time"
-                                value={schedule.endTime}
+                                value={schedule.end_time}
+                                readOnly
                               />
                             </Col>
                             <Col md={1} className="mb-3">
@@ -598,7 +601,7 @@ const DoctorManagement = () => {
                                   variant="outline-danger"
                                   onClick={() =>
                                     handleOpenDeleteConfirmationDialog(
-                                      index
+                                      doctorById.schedules.clinic[index].schedule_id
                                     )
                                   }
                                 >

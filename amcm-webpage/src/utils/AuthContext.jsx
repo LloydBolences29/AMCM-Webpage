@@ -6,7 +6,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
-  const [auth, setAuth] = useState({ loading: true, isAuthenticated: false, user: null, requirePasswordChange: false });
+  const [auth, setAuth] = useState({ loading: true, isAuthenticated: false, user: null});
 
   const VITE_API_URL = import.meta.env.VITE_API_URL;
 
@@ -20,8 +20,8 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     axios.get(`${VITE_API_URL}/auth/auth`, { withCredentials: true })
       .then((res) => {
-        console.log("Role Check response:", res.data?.role);
-        setAuth({ loading: false, isAuthenticated: true, user: res.data.user, requirePasswordChange: res.data.requirePasswordChange });
+        console.log("Role Check response:", res.data?.user?.role);
+        setAuth({ loading: false, isAuthenticated: true, user: res.data.user });
       })
       .catch(() => {
         setAuth({ loading: false, isAuthenticated: false, user: null, requirePasswordChange: false });

@@ -45,7 +45,7 @@ const ChangePassword = () => {
         setErrorMessage("");
         console.log("Password changed successfully:", data);
         setAuth((prev) => ({
-          ...prev, loading: false, requirePasswordChange: false
+          ...prev, loading: false, user: { ...prev.user, requirePasswordChange: false }
         }));
 
         setIsSuccess(true);
@@ -57,7 +57,7 @@ const ChangePassword = () => {
   };
 
   useEffect(() => {
-    if (isSuccess && auth.isAuthenticated && !auth.requirePasswordChange) {
+    if (isSuccess && auth.isAuthenticated && !auth.user?.requirePasswordChange) {
       
 
       switch (auth.user?.role) {
@@ -71,7 +71,7 @@ const ChangePassword = () => {
           navigate("/");
       }
     }
-  },[isSuccess, auth.isAuthenticated, auth.requirePasswordChange]);
+  },[isSuccess, auth.isAuthenticated, auth.user?.requirePasswordChange]);
 
   console.log("Require password change:", auth.user?.role);
   return (
@@ -100,6 +100,7 @@ const ChangePassword = () => {
                 </Form.Label>
                 <Col sm={10}>
                   <Form.Control
+                    required
                     type="password"
                     placeholder="Enter new password"
                     onChange ={(e) => setNewPassword({...newPassword, newPassword: e.target.value})}
@@ -117,6 +118,7 @@ const ChangePassword = () => {
                 </Form.Label>
                 <Col sm={10}>
                   <Form.Control
+                  required
                     type="password"
                     placeholder="Confirm new password"
                     onChange={(e) => setNewPassword({...newPassword, confirmNewPassword: e.target.value})}

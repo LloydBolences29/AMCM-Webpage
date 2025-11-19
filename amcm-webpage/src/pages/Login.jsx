@@ -48,13 +48,13 @@ const Login = () => {
 
       const data = await response.data;
       if (response.status === 200) {
-        console.log("Login successful:", data);
-        if (data.requirePasswordChange) {
+        console.log("Login successful:", data.user?.role);
+        if (data.user?.requirePasswordChange) {
           setAuth({
             loading: false,
             isAuthenticated: true,
             user: data.user,
-            requirePasswordChange: data.requirePasswordChange,
+            requirePasswordChange: data.user?.requirePasswordChange,
           });
 
           navigate("/change-password");
@@ -63,10 +63,10 @@ const Login = () => {
             loading: false,
             isAuthenticated: true,
             user: data.user,
-            requirePasswordChange: data.requirePasswordChange,
+            requirePasswordChange: data.user?.requirePasswordChange,
           });
 
-          switch (data.user.role) {
+          switch (data.user?.role) {
             case "admin":
               navigate("/admin");
               break;

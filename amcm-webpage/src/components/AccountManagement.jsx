@@ -4,9 +4,10 @@ import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { BsFillTrashFill } from "react-icons/bs";
-
+import { useAuth } from "../utils/AuthContext";
 
 const AccountManagement = () => {
+  const { auth } = useAuth();
   const initialValue = {
     firstname: "",
     lastname: "",
@@ -187,6 +188,10 @@ const AccountManagement = () => {
     }
   };
 
+  const handleResetPassword = async () =>{
+    alert(`Restart password for user ${selectedUser.id} - ${selectedUser.username}`);
+  }
+
   useEffect(() => {
     fetchAllUser();
   }, []);
@@ -280,7 +285,8 @@ const AccountManagement = () => {
               <td>{user.email}</td>
               <td>{user.role}</td>
               <td>
-                <div>
+                {auth.user && auth.user.id !== user.id && (
+                  <div>
                   <Button
                     variant="outline-primary"
                     size="sm"
@@ -299,6 +305,8 @@ const AccountManagement = () => {
 
                   </Button>
                 </div>
+                )}
+                
               </td>
             </tr>
           ))}
@@ -543,9 +551,7 @@ const AccountManagement = () => {
                     />
                   </Form.Group>
                 </Col>
-              </Row>
 
-              <Row className="mb-3">
                 <Col>
                   <Form.Group controlId="formBasicIsActive">
                     <Form.Label>Active Status:</Form.Label>
@@ -569,6 +575,10 @@ const AccountManagement = () => {
                     </Form.Control>
                   </Form.Group>
                 </Col>
+              </Row>
+
+              <Row className="mb-3">
+                
 
                 <Col>
                 <Form.Group>
@@ -584,6 +594,14 @@ const AccountManagement = () => {
                       });
                     }}
                   />
+                </Form.Group>
+              </Col>
+
+                <Col>
+                <Form.Group>
+                  <Button variant="outline-danger" style={{fontSize: "0.9rem"}} onClick={handleResetPassword}>
+                      Reset Account Password
+                  </Button>
                 </Form.Group>
               </Col>
             </Row>

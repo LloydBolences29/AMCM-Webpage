@@ -83,4 +83,57 @@ router.put("/edit-user", authMiddleware, checkRole(["admin"]), async (req, res) 
   }
 });
 
+
+//get user by id for showing the profile information
+router.get("/get-user/:id", authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const db = await connectToDatabase();
+    const [user] = await db.query(
+      `SELECT id,
+              firstname,
+              lastname,
+              username,
+              email,
+              role
+       FROM userInfo
+       WHERE id = ?`, [id]
+    );
+
+    return res.status(200).json(user[0]);
+  } catch (error) {
+    console.log("Error fetching user by ID:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+})
+
+//update personal information of the user
+router.patch("/update-user-profile/:id", authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { firstname, lastname, username, email } = req.body;
+
+    const db = await connectToDatabase();
+
+    //check the user of its existing
+    const isExistingUser = await db.query("SELECT * FROM userInfo WHERE id = ?", [id]);
+    if (isExistingUser[0].length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    //update the user information
+    await db.query(
+      `UPDATE userInfo 
+       SET firstname = ?, lastname = ?, username = ?, email = ?
+       WHERE id = ?`,
+      [firstname, lastname, username, email, id]
+    );
+
+    return res.status(200).json({ message: "User profile updated successfully" });
+  } catch (error) {
+    console.log("Error updating user profile:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+})
+
 module.exports = router;

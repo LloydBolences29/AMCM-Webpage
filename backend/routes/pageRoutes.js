@@ -112,7 +112,7 @@ router.post(
   }
 );
 
-router.get("/get-news", authMiddleware, checkRole(["admin", "editor"]), async (req, res) => {
+router.get("/get-news", async (req, res) => {
 try {
   const db = await connectToDatabase();
 
@@ -298,7 +298,7 @@ router.post("/add-featured-news", authMiddleware, checkRole(['admin', 'editor'])
 })
 
 //get all the featured news
-router.get("/get-featured-news", authMiddleware, checkRole(["admin", "editor"]), async (req, res) => {
+router.get("/get-featured-news", async (req, res) => {
   try {
     const db = await connectToDatabase();
 

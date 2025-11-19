@@ -309,7 +309,7 @@ router.get("/get-doctors/:doctor", async (req, res) => {
 
 //fetch all doctors with their department and formatted schedules
 //endpoint for DoctorManagement component
-router.get("/get-doctors-by-id/:id", authMiddleware, checkRole(["admin", "editor"]), async (req, res) => {
+router.get("/get-doctors-by-id/:id", async (req, res) => {
   try {
     const db = await connectToDatabase();
     const { id } = req.params;
@@ -421,22 +421,97 @@ router.put("/doctor-update-information/:id", authMiddleware, checkRole(["admin"]
   }
 })
 
+//another version of get-doctors endpoint to fetch the schedule ID along with other details
+router.get("/get-doctors-with-all-details/:id", async (req, res) => {
+  try {
+    const db = await connectToDatabase();
+    const { id } = req.params;
+
+    // Fetch all doctors with their details
+    const [doctors] = await db.execute(`
+      SELECT 
+              d.id, d.name, d.localPhone, d.roomNo,
+              dep.id AS dep_id, dep.name AS department,
+              ds.id AS schedule_id, ds.schedule_type, ds.day_of_the_week, 
+              ds.start_time, ds.end_time
+            FROM doctors d
+            JOIN doctor_department dd ON d.id = dd.doctor_id
+            LEFT JOIN departments dep ON dep.id = dd.department_id
+            LEFT JOIN doctor_schedules ds ON dd.id = ds.doctor_department_id
+            WHERE d.id = ?`, [id]);
+
+    // Process the raw data into a clean JSON structure
+    const doctorsMap = new Map();
+
+    for (const doctor of doctors) {
+      if (!doctorsMap.has(doctor.id)) {
+        doctorsMap.set(doctor.id, {
+          id: doctor.id,
+          name: doctor.name,
+          localPhone: doctor.localPhone,
+          roomNumber: doctor.roomNo,
+          departmentId: doctor.dep_id,
+          department: doctor.department,
+          schedules: {
+            clinic: [],
+            ultrasound: []
+          }
+        });
+      }
+
+      const type = doctor.schedule_type;
+
+      const doctorSchedules = doctorsMap.get(doctor.id).schedules;
+
+      if (doctorSchedules[type]) {
+
+        doctorSchedules[type].push({
+          schedule_id: doctor.schedule_id,
+          day_of_the_week: doctor.day_of_the_week,
+          start_time: doctor.start_time.substring(0, 5),
+          end_time: doctor.end_time.substring(0, 5)
+        });
+      }
+    }
+
+    const processedDoctors = Array.from(doctorsMap.values());
+
+    return res.status(200).json({ doctors: processedDoctors })
+
+  } catch (error) {
+    console.log("Error fetching all doctors with their details:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+})
+
 
 //delete the schedule of a doctor
-router.delete("/delete-doctor-schedule/:id", async (req, res) =>{
-  try{
+router.delete("/delete-doctor-schedule/:id", async (req, res) => {
+  try {
     const { id } = req.params;
-    const { doctor_department_id, day, startTime, endTime } = req.body;
     const db = await connectToDatabase();
 
-    const sql = "Delete From doctor_schedules where id = ? AND doctor_department_id = ? AND day_of_the_week = ? AND start_time = ? AND end_time = ?"
-    const [request] = await db.query(sql, [id, doctor_department_id, day, startTime, endTime]);
+    console.log("Incoming id Params: ", req.params);
+
+    const [result] = await db.execute(`SELECT * FROM doctor_schedules WHERE id = ?`, [id]);
+    console.log("Result of the query", result[0])
+    let entryId;
+    if (result.length > 0) {
+      const user = result[0];
+      entryId = user.id
+    } else {
+      return res.status(404).json({ message: "Schedule not found for the specified doctor." });
+    }
+
+
+    const sql = "Delete From doctor_schedules where id = ?"
+    const [request] = await db.query(sql, [id]);
 
     return res.status(200).json({ message: "Schedule successfully removed.", request });
 
-    
 
-  }catch(error){
+
+  } catch (error) {
     console.log("There is an error when trying to delete the schedule of that doctor. Please check console for more details.", error);
     return res.status(500).json({ message: "Error encountered while deleting. Please check your server." });
   }

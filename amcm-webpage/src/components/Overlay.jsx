@@ -13,6 +13,7 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
 
   const VITE_API_URL = import.meta.env.VITE_API_URL;
 
+  console.log("Overlay auth state: ", auth.user?.requirePasswordChange);
   useEffect(() => {
     if (visible) {
       // Disable background scroll
@@ -30,7 +31,7 @@ export const Overlay = ({ menuLinks, visible, onClose }) => {
 
 const additionalLinks = useMemo(() => {
     // If password change is required, ONLY return that link.
-    if (auth.requirePasswordChange) {
+    if (auth.user?.requirePasswordChange) {
       return [
         {
           role: ["editor", "admin"],
@@ -52,8 +53,13 @@ const additionalLinks = useMemo(() => {
         label: "Editor Dashboard",
         link: "/editor",
       },
+      {
+        role: ["editor", "admin"],
+        label: "Profile",
+        link: "/profile",
+      },
     ];
-  }, [auth.requirePasswordChange]);
+  }, [auth.user?.requirePasswordChange]);
 
 
   

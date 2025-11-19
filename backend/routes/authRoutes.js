@@ -64,6 +64,7 @@ router.post('/login', async (req, res) => {
     }
     //check if the password is correct
     const user = existingUser[0][0];
+    console.log('User retrieved from DB:', existingUser[0][0]);
 
 
     if (user.is_active === "inactive") {
@@ -156,7 +157,7 @@ router.post('/login', async (req, res) => {
     const requirePasswordChange = (user.is_changed === 0);
 
     //creation of token
-    const token = jwt.sign({ username: user.username, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user.id, username: user.username, email: user.email, role: user.role, requirePasswordChange: requirePasswordChange }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
 
     //set the token in the cookie
@@ -173,11 +174,12 @@ router.post('/login', async (req, res) => {
     return res.status(200).json({
       message: 'Login successful',
       user: {
+        id: user.id,
         username: user.username,
         email: user.email,
-        role: user.role
+        role: user.role,
+        requirePasswordChange: requirePasswordChange
       },
-      requirePasswordChange: requirePasswordChange
     });
 
   } catch (error) {
@@ -187,7 +189,7 @@ router.post('/login', async (req, res) => {
 
 });
 
-//
+
 
 //routes for auths
 router.get('/auth', authMiddleware, async (req, res) => {
@@ -210,11 +212,12 @@ router.get('/auth', authMiddleware, async (req, res) => {
     return res.json({
       message: 'User is authenticated',
       user: {
+        id: decoded.id,
         username: decoded.username,
         email: decoded.email,
-        role: decoded.role
+        role: decoded.role,
+        requirePasswordChange: decoded.requirePasswordChange
       },
-      requirePasswordChange: decoded.requirePasswordChange
     })
   } catch (error) {
     console.error('Auth error:', error);
