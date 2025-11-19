@@ -136,4 +136,20 @@ router.patch("/update-user-profile/:id", authMiddleware, async (req, res) => {
   }
 })
 
+//Password resetting
+router.patch("/reset-password", authMiddleware, checkRole(["admin"]), async (req, res) => {
+  try{
+    const { id, password } = req.body;
+
+    const db = await connectToDatabase();
+
+    const sql = `UPDATE userInfo SET password = ? , require_password_change = 1 WHERE id = ?`;
+    await db.query(sql, [password, id]);
+    return res.status(200).json({ message: "Password reset successfully" });
+  }catch(error){
+    console.log("Error resetting user password:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+})
+
 module.exports = router;
