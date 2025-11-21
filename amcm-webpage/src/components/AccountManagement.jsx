@@ -1,6 +1,6 @@
 import Table from "react-bootstrap/Table";
 import { useEffect, useState } from "react";
-import { Button, Modal, Form, Row, Col } from "react-bootstrap";
+import { Button, Modal, Form, Row, Col, Badge } from "react-bootstrap";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { BsFillTrashFill } from "react-icons/bs";
@@ -33,8 +33,12 @@ const AccountManagement = () => {
     email: "",
     role: "",
   });
+  const [resetPasswordPayload, setResetPasswordPayload] = useState({
+    password: "",
+  });
   const [toDeleteUser, setTODeleteUser] = useState(null);
   const [deleteUserModal, setDeleteUserModal] = useState(false);
+  const [showResetPasswordModal, setShowResetPasswordModal] = useState(false);
   const [originalUser, setOriginalUser] = useState(null);
 
   const VITE_API_URL = import.meta.env.VITE_API_URL;
@@ -47,9 +51,21 @@ const AccountManagement = () => {
     setShowModal(false);
   };
 
-  const handleOpenDeleteModal = (user) =>{
+  const handleOpenDeleteModal = (user) => {
     setTODeleteUser(user);
-    setDeleteUserModal(true)
+    setDeleteUserModal(true);
+  };
+
+  const handleOpenResetPasswordModal = () => {
+    setShowEditModal(false);
+    setShowResetPasswordModal(true);
+  };
+
+  const handleCloseResetPasswordModal = (user) => {
+    setShowResetPasswordModal(false);
+    setShowEditModal(true);
+    setSelectedUser(user);
+    setOriginalUser(user);
   }
 
   const handleAddUser = async (e) => {
@@ -135,23 +151,26 @@ const AccountManagement = () => {
     }
   };
 
-  const handleDeleteUser = async () =>{
-    const userId = toDeleteUser.id; 
+  const handleDeleteUser = async () => {
+    const userId = toDeleteUser.id;
 
     // Safety check
     if (!userId) {
-        console.error("No user selected for deletion.");
-        setNotification("Error: No user selected.");
-        setFailedSnackBarState(true);
-        return;
+      console.error("No user selected for deletion.");
+      setNotification("Error: No user selected.");
+      setFailedSnackBarState(true);
+      return;
     }
     try {
-      const response = await fetch(`${VITE_API_URL}/auth/delete-user/${userId}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${VITE_API_URL}/auth/delete-user/${userId}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
       const data = await response.json();
-      
+
       if (response.ok) {
         setPageStatus("success");
         setSuccessSnackBarState(true);
@@ -159,14 +178,13 @@ const AccountManagement = () => {
         setDeleteUserModal(false);
         fetchAllUser();
       }
-      
     } catch (error) {
       console.log("Error Deleting User.", error);
       setPageStatus("error");
       setFailedSnackBarState(true);
       setNotification(error.message);
     }
-  }
+  };
 
   const handleOpenEditModal = (user) => {
     setSelectedUser(user);
@@ -188,9 +206,41 @@ const AccountManagement = () => {
     }
   };
 
-  const handleResetPassword = async () =>{
-    alert(`Restart password for user ${selectedUser.id} - ${selectedUser.username}`);
-  }
+  const handleResetPassword = async () => {
+    const payloadToSend = {
+      id: selectedUser.id, // Get the ID directly from the selectedUser state
+      password: resetPasswordPayload.password,
+    };
+
+    try {
+      const response = await fetch(`${VITE_API_URL}/user/reset-password`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(payloadToSend),
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        setPageStatus("success");
+        setSuccessSnackBarState(true);
+        setNotification(data.message);
+        setShowResetPasswordModal(false);
+      } else {
+        setPageStatus("error");
+        setFailedSnackBarState(true);
+        setNotification(data.message);
+      }
+    } catch (error) {
+      console.log("Error resetting password:", error);
+      setPageStatus("error");
+      setFailedSnackBarState(true);
+      setNotification(error.message);
+    }
+  };
 
   useEffect(() => {
     fetchAllUser();
@@ -287,26 +337,24 @@ const AccountManagement = () => {
               <td>
                 {auth.user && auth.user.id !== user.id && (
                   <div>
-                  <Button
-                    variant="outline-primary"
-                    size="sm"
-                    className="me-2"
-                    onClick={() => handleOpenEditModal(user)}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    variant="outline-danger"
-                    size="sm"
-                    className="me-2"
-                    onClick={() => handleOpenDeleteModal(user)}
-                  >
-                    <BsFillTrashFill />
-
-                  </Button>
-                </div>
+                    <Button
+                      variant="outline-primary"
+                      size="sm"
+                      className="me-2"
+                      onClick={() => handleOpenEditModal(user)}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      variant="outline-danger"
+                      size="sm"
+                      className="me-2"
+                      onClick={() => handleOpenDeleteModal(user)}
+                    >
+                      <BsFillTrashFill />
+                    </Button>
+                  </div>
                 )}
-                
               </td>
             </tr>
           ))}
@@ -435,7 +483,9 @@ const AccountManagement = () => {
           </Modal.Header>
 
           <Modal.Body>
-            <p>Are you sure you want to delete user {toDeleteUser?.username}?</p>
+            <p>
+              Are you sure you want to delete user {toDeleteUser?.username}?
+            </p>
             <Button
               className="mx-1"
               variant="secondary"
@@ -443,7 +493,9 @@ const AccountManagement = () => {
             >
               Cancel
             </Button>
-            <Button className="mx-1" variant="danger" 
+            <Button
+              className="mx-1"
+              variant="danger"
               onClick={handleDeleteUser}
             >
               Delete
@@ -578,33 +630,35 @@ const AccountManagement = () => {
               </Row>
 
               <Row className="mb-3">
-                
+                <Col>
+                  <Form.Group>
+                    <Form.Label>Lock Status:</Form.Label>
+                    <Form.Check
+                      type="switch"
+                      id="custom-switch"
+                      checked={selectedUser ? selectedUser.is_locked : false}
+                      onChange={(e) => {
+                        setSelectedUser({
+                          ...selectedUser,
+                          is_locked: e.target.checked,
+                        });
+                      }}
+                    />
+                  </Form.Group>
+                </Col>
 
                 <Col>
-                <Form.Group>
-                  <Form.Label>Lock Status:</Form.Label>
-                  <Form.Check 
-                    type="switch"
-                    id="custom-switch"
-                    checked={selectedUser ? selectedUser.is_locked : false}
-                    onChange={(e) => {
-                      setSelectedUser({
-                        ...selectedUser,
-                        is_locked: e.target.checked,
-                      });
-                    }}
-                  />
-                </Form.Group>
-              </Col>
-
-                <Col>
-                <Form.Group>
-                  <Button variant="outline-danger" style={{fontSize: "0.9rem"}} onClick={handleResetPassword}>
+                  <Form.Group>
+                    <Button
+                      variant="outline-danger"
+                      style={{ fontSize: "0.9rem" }}
+                      onClick={handleOpenResetPasswordModal}
+                    >
                       Reset Account Password
-                  </Button>
-                </Form.Group>
-              </Col>
-            </Row>
+                    </Button>
+                  </Form.Group>
+                </Col>
+              </Row>
 
               <Button
                 className="mx-1"
@@ -618,6 +672,52 @@ const AccountManagement = () => {
               </Button>
             </Form>
           </Modal.Body>
+        </Modal>
+      )}
+
+      {showResetPasswordModal && (
+        <Modal
+          show={showResetPasswordModal}
+          onHide={() => setShowResetPasswordModal(false)}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Reset Password for {selectedUser ? selectedUser.username : ""}</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+
+            <div className="instruction-div">
+              <Badge bg="info">Info</Badge>
+              <span className="instruction-text"> Please enter a new password for the user account. The user will be required to change this password upon their next login. </span>
+            </div>
+            <Form>
+              <Form.Group controlId="formBasicPassword">
+                <Form.Label>New Password:</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Please enter new password"
+                  onChange={(e) => setResetPasswordPayload({ ...resetPasswordPayload, password: e.target.value })}
+                />
+              </Form.Group>
+            </Form>
+                
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              className="mx-1"
+              variant="secondary"
+              onClick={() => handleCloseResetPasswordModal(selectedUser.id)}
+            >
+              Close
+            </Button>
+            <Button
+              className="mx-1"
+              variant="outline-danger"
+              onClick={handleResetPassword}
+            >
+              Reset Password
+            </Button>
+          </Modal.Footer>
         </Modal>
       )}
     </>

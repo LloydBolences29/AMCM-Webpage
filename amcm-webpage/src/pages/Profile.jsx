@@ -25,7 +25,6 @@ const Profile = () => {
   const [failedSnackBarState, setFailedSnackBarState] = useState(false);
   const [pageStatus, setPageStatus] = useState("idle");
   const [notificationMessage, setNotificationMessage] = useState("");
-  const [userProfile, setUserProfile] = useState(null);
   const [openUpdateInfoModal, setOpenUpdateInfoModal] = useState(false);
   const [updatePayload, setUpdatePayload] = useState({
     firstname:  "",

@@ -22,8 +22,12 @@ const ChangePassword = () => {
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
+
     if (newPassword.newPassword !== newPassword.confirmNewPassword) {
       setErrorMessage("Passwords do not match");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3200);
       return;
     }
     try {
@@ -40,16 +44,20 @@ const ChangePassword = () => {
       });
 
       const data = await response.json();
-      if (response.ok){
+      if (response.ok) {
         setSuccessMessage(data.message);
-        setErrorMessage("");
+        setTimeout(() => {
+          setSuccessMessage("")
+          setErrorMessage("");
+        } ,3500)
         console.log("Password changed successfully:", data);
         setAuth((prev) => ({
-          ...prev, loading: false, user: { ...prev.user, requirePasswordChange: false }
+          ...prev,
+          loading: false,
+          user: { ...prev.user, requirePasswordChange: false },
         }));
 
         setIsSuccess(true);
-
       }
     } catch (error) {
       console.error("Error changing password:", error);
@@ -57,21 +65,29 @@ const ChangePassword = () => {
   };
 
   useEffect(() => {
-    if (isSuccess && auth.isAuthenticated && !auth.user?.requirePasswordChange) {
-      
-
+    if (
+      isSuccess &&
+      auth.isAuthenticated &&
+      !auth.user?.requirePasswordChange
+    ) {
       switch (auth.user?.role) {
         case "admin":
-          navigate("/admin");
+          setTimeout(() => {
+            navigate("/admin");
+          }, 3700);
           break;
         case "editor":
-          navigate("/editor");
+          setTimeout(() => {
+            navigate("/editor");
+          }, 3700);
           break;
         default:
-          navigate("/");
+          setTimeout(() => {
+            navigate("/");
+          }, 3700);
       }
     }
-  },[isSuccess, auth.isAuthenticated, auth.user?.requirePasswordChange]);
+  }, [isSuccess, auth.isAuthenticated, auth.user?.requirePasswordChange]);
 
   console.log("Require password change:", auth.user?.role);
   return (
@@ -103,7 +119,12 @@ const ChangePassword = () => {
                     required
                     type="password"
                     placeholder="Enter new password"
-                    onChange ={(e) => setNewPassword({...newPassword, newPassword: e.target.value})}
+                    onChange={(e) =>
+                      setNewPassword({
+                        ...newPassword,
+                        newPassword: e.target.value,
+                      })
+                    }
                   />
                 </Col>
               </Form.Group>
@@ -118,15 +139,22 @@ const ChangePassword = () => {
                 </Form.Label>
                 <Col sm={10}>
                   <Form.Control
-                  required
+                    required
                     type="password"
                     placeholder="Confirm new password"
-                    onChange={(e) => setNewPassword({...newPassword, confirmNewPassword: e.target.value})}
+                    onChange={(e) =>
+                      setNewPassword({
+                        ...newPassword,
+                        confirmNewPassword: e.target.value,
+                      })
+                    }
                   />
                 </Col>
               </Form.Group>
               {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-              {successMessage && <Alert variant="success">{successMessage}</Alert>}
+              {successMessage && (
+                <Alert variant="success">{successMessage}</Alert>
+              )}
 
               <Button variant="outline-primary" type="submit">
                 Change Password

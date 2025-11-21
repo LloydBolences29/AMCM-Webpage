@@ -277,7 +277,7 @@ router.put('/change-password', authMiddleware, async (req, res) => {
 
     await db.query(`UPDATE userInfo SET pass = ?, is_changed = ? WHERE id = ?`, [hashedPassword, 1, userId]);
 
-    return res.status(200).json({ message: "Password successfully changed." })
+    return res.status(200).json({ message: "Password successfully changed. Please wait while we direct you to your page." })
   } catch (error) {
     console.log("Error changing password", error)
     return res.status(500).json({ error: "Error changing password. Please check console." })

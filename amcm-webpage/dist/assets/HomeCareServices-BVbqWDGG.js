@@ -1,1 +1,0 @@
-import{j as r}from"./index-1y3UAu6N.js";import{U as e}from"./UnderConstruction-DIGrASh7.js";import"./createSvgIcon-DR9AEGWY.js";import"./DefaultPropsProvider-D4Td3UxR.js";import"./extends-CF3RwP-h.js";const p=()=>r.jsx("div",{children:r.jsx(e,{page:"Home Care Services page"})});export{p as default};

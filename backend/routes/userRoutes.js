@@ -141,10 +141,13 @@ router.patch("/reset-password", authMiddleware, checkRole(["admin"]), async (req
   try{
     const { id, password } = req.body;
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+
     const db = await connectToDatabase();
 
-    const sql = `UPDATE userInfo SET password = ? , require_password_change = 1 WHERE id = ?`;
-    await db.query(sql, [password, id]);
+    const sql = `UPDATE userInfo SET pass = ? , is_changed = 0 WHERE id = ?`;
+    await db.query(sql, [hashedPassword, id]);
     return res.status(200).json({ message: "Password reset successfully" });
   }catch(error){
     console.log("Error resetting user password:", error);

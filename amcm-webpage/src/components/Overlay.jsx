@@ -239,7 +239,7 @@ const additionalLinks = useMemo(() => {
                 <a href="">Adventist Medical Center Bacolod</a>
                 <a href="">Gingoog Sanitarium and Hospital</a>
                 <a href="">Adventist Medical Center Iligan</a>
-                <a href="">ADventist Hospital Davao</a>
+                <a href="">Adventist Hospital Davao</a>
                 <a href="">Adventist Medical Center Valencia</a>
               </div>
             </div>

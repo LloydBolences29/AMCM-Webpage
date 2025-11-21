@@ -107,7 +107,7 @@ const SocialServices = () => {
                   <ol>
                     <li>Gather all required documents.</li>
                     <li>Submit the documents to the Office of the Mayor for evaluation.</li>
-                    <li>Once approved, receive theTCIC health card and the corresponding Letter of Authority.</li>
+                    <li>Once approved, receive the TCIC health card and the corresponding Letter of Authority.</li>
                   </ol>
 
                   <h5><strong>Important Notes: </strong></h5>

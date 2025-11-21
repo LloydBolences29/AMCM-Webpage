@@ -15,7 +15,7 @@ const Login = () => {
   });
 
   const VITE_API_URL = import.meta.env.VITE_API_URL;
-
+  const [loginSuccessMessage, setLoginSuccessMessage] = useState("");
   const [loginError, setLoginError] = useState("");
   const [showLoginPassword, setShowLoginPassword] = useState(false);
   const navigate = useNavigate();
@@ -48,6 +48,10 @@ const Login = () => {
 
       const data = await response.data;
       if (response.status === 200) {
+        setLoginSuccessMessage("Login successful! Redirecting...");
+        setTimeout(() => {
+          setLoginSuccessMessage("");
+        }, 3500);
         console.log("Login successful:", data.user?.role);
         if (data.user?.requirePasswordChange) {
           setAuth({
@@ -56,8 +60,9 @@ const Login = () => {
             user: data.user,
             requirePasswordChange: data.user?.requirePasswordChange,
           });
-
+          setTimeout(() => {
           navigate("/change-password");
+        }, 3700);
         } else {
           setAuth({
             loading: false,
@@ -68,13 +73,20 @@ const Login = () => {
 
           switch (data.user?.role) {
             case "admin":
-              navigate("/admin");
+              setTimeout(() => {
+                navigate("/admin");
+              }, 3700);
               break;
             case "editor":
-              navigate("/editor");
+
+              setTimeout(() => {
+                navigate("/editor");
+              }, 3700);
               break;
             default:
-              navigate("/");
+              setTimeout(() => {
+                navigate("/");
+              }, 3700);
           }
         }
 
@@ -188,6 +200,11 @@ const Login = () => {
             {loginError && (
               <Alert variant="danger" className="mt-3">
                 {loginError}
+              </Alert>
+            )}
+            {loginSuccessMessage && (
+              <Alert variant="success" className="mt-3">
+                {loginSuccessMessage}
               </Alert>
             )}
 

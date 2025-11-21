@@ -1,44 +1,59 @@
-.profile-container{
-    margin: 2rem;
-    padding: 2rem; 
+.profile-container {
+  margin: 2rem;
+  padding: 2rem;
 }
-.profile-page{
+.profile-page {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.user-profile-information {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.welcome-message {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.profile-avatar {
+  width: 100%; /* Fill the parent container's width */
+  height: auto; /* Let height adjust automatically */
+  aspect-ratio: 1 / 1; /* FORCE it to stay a perfect square/circle */
+  object-fit: cover; /* Ensures image doesn't stretch if you use an img later */
+  font-size: clamp(1.5rem, 4vw, 4rem);
+}
+
+.profile-info {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+@media only screen and (max-width: 767px) {
+  .profile-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  .profile-page {
     display: grid;
-    grid-template-columns: auto 1fr;
-    justify-content: center;
-    gap: 1.5rem;
+    grid-template-columns: 20% 1fr;
+  }
+
+  .welcome-message {
+    font-size: 1.33rem;
+  }
 }
 
-
-
-.user-profile-information{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.welcome-message{
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.profile-info{
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-}
-
-@media only screen and (max-width: 767px){
-    .profile-container{
-        margin: 1rem;
-        padding: 1rem; 
-    }
-    .profile-page{
-        display: grid;
-        grid-template-columns: 20% 1fr
-    }
-
-    .welcome-message{
-        font-size: 1.33rem;
-    }
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .profile-avatar {
+    width: 100%; /* Fill the parent container's width */
+    height: auto; /* Let height adjust automatically */
+    aspect-ratio: 1 / 1; /* FORCE it to stay a perfect square/circle */
+    object-fit: cover; /* Ensures image doesn't stretch if you use an img later */
+    font-size: clamp(1.5rem, 5vw, 4rem);
+  }
 }
