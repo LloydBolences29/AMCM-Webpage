@@ -1,1 +1,0 @@
-import{j as r}from"./index-DSG1ZC3W.js";import{U as t}from"./UnderConstruction-DSGPgHHb.js";import"./createSvgIcon-CPWFx6CF.js";import"./DefaultPropsProvider-D5lsw4ND.js";import"./extends-CF3RwP-h.js";const n=()=>r.jsx("div",{children:r.jsx(t,{page:"Occupational Therapy page"})});export{n as default};

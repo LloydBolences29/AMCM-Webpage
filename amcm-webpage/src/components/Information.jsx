@@ -236,7 +236,9 @@ const Information = () => {
                   <>
                     <div id="featured-news-text">
                       <h5>Featured News</h5>
-                      <a href="/news-updates"><i className="fas fa-chevron-right">See More...</i></a>
+                      <a href="/news-updates">
+                        <i className="fas fa-chevron-right">See More...</i>
+                      </a>
                     </div>
                     <div className="news-card-container">
                       {featuredNews.map((news, index) => (
@@ -252,18 +254,22 @@ const Information = () => {
                               />
                             </div>
                             <Card.Body>
-                              <Card.Title className="news-card-title">
-                                {news.title.length>25 ? news.title.substring(0, 25) + "..." : news.title}
-                              </Card.Title>
-                              <Card.Text className="news-card-summary">
-                                {news.news_description.length > 30
-                                  ? news.news_description.substring(0, 30) +
-                                    "..."
-                                  : news.news_description}
-                              </Card.Text>
+                              <div className = "news-card-text-holder">
+                                <Card.Title className="news-card-title">
+                                  {news.title.length > 25
+                                    ? news.title.substring(0, 25) + "..."
+                                    : news.title}
+                                </Card.Title>
+                                <Card.Text className="news-card-summary">
+                                  {news.news_description.length > 30
+                                    ? news.news_description.substring(0, 30) +
+                                      "..."
+                                    : news.news_description}
+                                </Card.Text>
+                              </div>
                               <div className="button-div">
                                 <Button
-                                  variant="warning"
+                                  // variant="outline-warning"
                                   href={`/news-updates`}
                                   className="read-more-button"
                                 >
@@ -280,10 +286,7 @@ const Information = () => {
                 ) : (
                   <>
                     <div id="information-news">
-                      <div
-                        className="information-subContent-title"
-                        
-                      >
+                      <div className="information-subContent-title">
                         <h2>Hospital News</h2>
                       </div>
 

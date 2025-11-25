@@ -1,1 +1,0 @@
-import{r as t}from"./index-DSG1ZC3W.js";import{o as e}from"./ownerDocument-DW-IO8s5.js";const n=t.createContext(),c=()=>t.useContext(n)??!1;function u(o){return e(o).defaultView||window}export{u as o,c as u};

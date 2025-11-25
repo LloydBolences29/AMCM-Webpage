@@ -1,1 +1,0 @@
-import{r as P,m as i,a as m,f as S}from"./ButtonBase-ByTkPiTN.js";function u(o){const{elementType:s,externalSlotProps:t,ownerState:e,skipResolvingSlotProps:n=!1,...p}=o,r=n?{}:P(t,e),{props:l,internalRef:a}=i({...p,externalSlotProps:r}),f=m(a,r?.ref,o.additionalProps?.ref);return S(s,{...l,ref:f},e)}export{u};

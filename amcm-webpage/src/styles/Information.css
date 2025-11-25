@@ -181,6 +181,17 @@
     text-align: center;
   }
 
+  .button-div {
+    margin-top: 1rem;
+  }
+
+  .read-more-button {
+    background-color: #007682;
+    color: #ffffff;
+    font-weight: normal;
+    border: #007682 1px solid;
+  }
+
   .president-message #message-heading {
     margin-bottom: 1.5em;
     text-align: center;
@@ -454,8 +465,15 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    /* border-radius: 20px; */
+    border-radius: 20px;
     min-height: 20vh;
+    border: 0.5px solid #ddd;
+    box-shadow: 0 4px 24px rgba(22, 50, 53, 0.15);
+    transition: all 0.3s ease;
+  }
+  .news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(22, 50, 53, 0.25);
   }
   .image-holder {
     display: flex;
@@ -476,6 +494,13 @@
 
   .button-div {
     margin-top: auto;
+  }
+
+  .read-more-button {
+    background-color: #007682;
+    color: #ffffff;
+    font-weight: normal;
+    border: #007682 1px solid;
   }
 
   #information-news-content p.news {
@@ -1039,7 +1064,7 @@
     font-weight: bolder;
   }
 
-   #information-wrapper-5 {
+  #information-wrapper-5 {
     width: 100%;
     text-align: center;
     border-radius: 12px;
@@ -1053,11 +1078,11 @@
     border-radius: 20px;
   }
 
-    #information-news h2 {
+  #information-news h2 {
     font-size: clamp(1.5rem, 1.8rem, 2rem);
     margin-bottom: 0.3em;
     border-bottom: 3px solid #ffa92d;
-    padding-bottom: 0.5em
+    padding-bottom: 0.5em;
   }
 
   #featured-news-text {
@@ -1084,42 +1109,81 @@
   }
 
   .news-card-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 1em;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 1em;
+    /* background-color: #007682; */
+    min-height: 55vh;
+    border-radius: 20px;
   }
 
   .news-card-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 30%;
+    min-height: 100%;
   }
 
   .news-card {
-    display: grid;
-    grid-template-rows: 25vh 1fr;
     width: 100%;
-    height: 55vh;
+    height: 50vh;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 24px 40px -6px rgba(0, 0, 0, 0.25);
   }
 
   .image-holder {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-bottom: 1px solid #eaeff2;
   }
-  .news-card-container .news-card-wrapper .news-card-image {
-    width: 85%;
-    height: auto;
+  .news-card-image {
+    width: 80%;
+    height: 100%;
+    object-fit: contain;
   }
 
-  .card-body {
-    display: flex;
-    min-height: 100%;
+  .news-card .card-body {
+    display: flex; /* Turn the body into a flexbox */
     flex-direction: column;
+    flex-grow: 1; /* CRITICAL: Forces the body to fill all remaining empty space in the card */
+    height: 100%; /* Ensures it behaves within the parent */
+  }
+  .news-card-text-holder {
+    /* 1. Makes this container fill ALL the empty white space */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
   }
   .button-div {
     margin-top: auto;
+  }
+
+  .read-more-button {
+    background-color: transparent;
+    color: #3e8391;
+    font-weight: 600;
+    border: #007682 1px solid;
+  }
+
+  .read-more-button:hover {
+    background-color: #007682;
+    color: #ffffff;
+    font-weight: normal;
+    border-color: #007682;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 123, 160, 0.4);
+    transition: all 0.5s ease;
   }
 
   #information-wrapper-5 #information-news-content p.news {
@@ -1675,10 +1739,10 @@
   }
 
   #information-wrapper-5 {
-    width: 100%; 
+    width: 100%;
     text-align: center;
     border-radius: 18px;
-    padding: 1em;
+    /* padding: 1em; */
   }
   #information-news {
     padding: 1.2em;
@@ -1690,7 +1754,7 @@
     border-radius: 20px;
   }
 
-    #information-news h2 {
+  #information-news h2 {
     font-size: clamp(1.5rem, 1.8rem, 2rem);
     margin-bottom: 0.3em;
     border-bottom: 3px solid #ffa92d;
@@ -1732,49 +1796,86 @@
     margin: 0;
     color: #163235;
   }
-  /* news card styles */
+
+  /*News Card styles*/
   .news-card-container {
-    width: auto;
-    margin: 2rem auto;
     display: flex;
-    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
-    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    /* background-color: #007682; */
+    min-height: 55vh;
+    border-radius: 20px;
   }
 
-  .news-card-container .news-card {
-    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    height: 55vh;
-    width: 100%;
-    display: grid;
-    grid-template-rows: 25vh 1fr;
-  }
-
-  .news-card-container .card-body {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  .news-card-wrapper {
+    width: 30%;
+    min-height: 100%;
   }
 
   .image-holder {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-bottom: 1px solid #eaeff2;
   }
-  .news-card-container .news-card-image {
-    width: 85%;
-    height: auto;
-    margin: auto;
+
+  .news-card-image {
+    width: 80%;
+    height: 100%;
+    object-fit: contain;
   }
-  .news-card-container .card-body .button-div {
+
+  .news-card {
+    width: 100%;
+    height: 50vh;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 24px 40px -6px rgba(0, 0, 0, 0.25);
+  }
+
+  .news-card .card-body {
+    display: flex; /* Turn the body into a flexbox */
+    flex-direction: column;
+    flex-grow: 1; /* CRITICAL: Forces the body to fill all remaining empty space in the card */
+    height: 100%; /* Ensures it behaves within the parent */
+  }
+
+  .news-card-text-holder {
+    /* 1. Makes this container fill ALL the empty white space */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+  }
+  .button-div {
     margin-top: auto;
   }
 
   .read-more-button {
-    font-size: clamp(0.75rem, 1vw, 1.25rem);
-    border-radius: 20px;
-    font-weight: 500;
-    transition: transform 0.3s ease;
+    background-color: transparent;
+    color: #3e8391;
+    font-weight: 600;
+    border: #007682 1px solid;
+  }
+
+  .read-more-button:hover {
+    background-color: #007682;
+    color: #ffffff;
+    font-weight: normal;
+    border-color: #007682;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 123, 160, 0.4);
+    transition: all 0.5s ease;
   }
 
   .president-message {
