@@ -176,7 +176,7 @@ router.get("/get-doctors-departments", authMiddleware, checkRole(["admin", "edit
 
 //get all the doctors with their department as the user searches for the name of the doctor
 //endpoint for Add Schedule component
-router.get("/get-doctors-departments/:doctor", authMiddleware, checkRole(["admin", "editor"]), async (req, res) => {
+router.get("/get-doctors-departments/:doctor", async (req, res) => {
   try {
     const db = await connectToDatabase();
     const { doctor } = req.params;
@@ -309,7 +309,7 @@ router.get("/get-doctors/:doctor", async (req, res) => {
 
 //fetch all doctors with their department and formatted schedules
 //endpoint for DoctorManagement component
-router.get("/get-doctors-by-id/:id", async (req, res) => {
+router.get("/get-doctors-by-id/:id", authMiddleware, checkRole(["admin", "editor"]), async (req, res) => {
   try {
     const db = await connectToDatabase();
     const { id } = req.params;

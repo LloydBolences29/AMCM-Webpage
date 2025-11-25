@@ -127,7 +127,21 @@ const FetchDoctorByDepartment = ({ searchValue }) => {
                       className="fas fa-building"
                       style={{ marginRight: "8px", color: "#007682" }}
                     ></i>
-                    {doctor.department}
+                    <Chip
+                      label={doctor.department}
+                      sx={{
+                        bgcolor: "#163235",
+                        color: "white",
+                        fontSize: "1rem",
+                        transition: "all 0.3s ease-in-out",
+
+                        "&:hover": {
+                          bgcolor: "#254f53ff",
+                          boxShadow: 6,
+                          transform: "translateY(-2px)",
+                        },
+                      }}
+                    />
                   </Typography>
                   <Typography
                     variant="body1"

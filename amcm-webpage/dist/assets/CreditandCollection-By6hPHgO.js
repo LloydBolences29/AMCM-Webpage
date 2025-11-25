@@ -1,0 +1,1 @@
+import{j as t}from"./index-DSG1ZC3W.js";import{U as o}from"./UnderConstruction-DSGPgHHb.js";import"./createSvgIcon-CPWFx6CF.js";import"./DefaultPropsProvider-D5lsw4ND.js";import"./extends-CF3RwP-h.js";const s=()=>t.jsx("div",{children:t.jsx(o,{page:"Credit and Collection page"})});export{s as default};
