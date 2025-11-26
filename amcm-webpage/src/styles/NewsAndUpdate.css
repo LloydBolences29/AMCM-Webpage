@@ -126,6 +126,18 @@
     padding: 0.3rem 1rem;
     color: #163235;
   }
+
+  .choose-type-buttons {
+    display: flex;
+    gap: 2rem;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .add-article-modal-buttons{
+    display: flex;
+    gap: 1rem;
+  }
   /* ruless for the news and update cards */
   #news-and-update-cards-container{
     display: grid;
@@ -135,8 +147,6 @@
     gap: 2rem;
     padding: 2rem;
   }
-
-
 
   #news-and-update-card-details {
     gap: 1rem;

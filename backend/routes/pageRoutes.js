@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
     if (file.fieldname === "news-file") {
       // Store PDF files here
       cb(null, path.join(__dirname, "..", "uploads", "pdfFile"));
-    } else if (file.fieldname === "news-thumbnail") {
+    } else if (file.fieldname === "news-thumbnail" || file.fieldname === "article_thumbnail") {
       // Store thumbnail files here
       cb(null, path.join(__dirname, "..", "uploads", "thumbnail"));
     } else {
@@ -116,7 +116,7 @@ router.get("/get-news", async (req, res) => {
 try {
   const db = await connectToDatabase();
 
-  const [rows] = await db.query(`SELECT id, title, DATE_FORMAT(issued_date, '%Y-%m-%d') AS issued_date, original_filename, unique_filename, thumbnail, news_description, is_Active FROM upload_news`);
+  const [rows] = await db.query(`SELECT id, slug, type, title, DATE_FORMAT(issued_date, '%Y-%m-%d') AS issued_date, original_filename, unique_filename, thumbnail, news_description, is_Active FROM upload_news`);
   res.status(200).json({message: "Successfully fetched from the database",rows});
 } catch (error) {
   console.error ("Error fetching news:", error);
@@ -312,6 +312,60 @@ router.get("/get-featured-news", async (req, res) => {
   } catch (error) {
     console.log("Error fetching featured news. Please check your server console", error)
     return res.status(500).json({ message: "Internal Server Error" })
+  }
+})
+
+//route for uploading a new article in the table
+router.post("/upload-title-slug",  upload.fields([
+    { name: "article_thumbnail", maxCount: 1 },
+  ]), authMiddleware, checkRole(['admin', 'editor']), async (req, res) =>{
+  try {
+    const { article_title, slug, news_type, is_Active } = req.body;
+
+          const article_thumbnail = req.files["article_thumbnail"]
+        ? req.files["article_thumbnail"][0]
+        : null;
+
+
+
+    if(!article_title || !slug){
+      return res.status(400).json({ message: "Missing required fields." })
+    }
+
+
+    const db = await connectToDatabase();
+
+    const sql = `INSERT INTO upload_news (title, slug, type, thumbnail, is_Active) VALUES (?, ?, ?, ?, ?)`;
+
+    const [result] = await db.query(sql, [article_title, slug, news_type, article_thumbnail ? article_thumbnail.filename : null, is_Active]);
+
+    return res.status(200).json({ message: "Successfully uploaded the title and slug.", result })
+  } catch (error) {
+    console.log("Error uploading the title and slug.", error)
+    return res.status(500).json({ message: "Internal Server Error" })
+  }
+})
+
+//fetching the page by slug
+router.get("/article-page/:slug", async (req, res) => {
+  try {
+    const { slug } = req.params
+
+    const db = await connectToDatabase()
+
+    const checkSlug = `SELECT * FROM upload_news WHERE slug = ?`
+    const [result] = await db.query(checkSlug, [slug])
+
+    if (result.length === 0){
+      return res.status(404).json({ message: "Slug not Found." })
+    }
+    const articleData = result[0]
+    //get the content
+    return res.status(200).json({ message: "Successfully retrieved data.", articleData })
+    
+  } catch (error) {
+    console.log("Error fetching the page.", error)
+    return res.status(500).json({ message: "Internal Server Error." })
   }
 })
 

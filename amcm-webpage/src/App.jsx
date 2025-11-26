@@ -24,6 +24,7 @@ const SearchPage = lazy(() => import("./components/SearchPage"));
 const NewsAndUpdate = lazy(() => import("./pages/NewsAndUpdate"));
 const ChangePassword = lazy(() => import("./pages/ChangePassword"));
 const Profile = lazy(() => import("./pages/Profile"));
+const NewsArticle = lazy(() => import("./components/NewsArticle"))
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
             <Route path='/contact-us' element={<ContactUs />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/news-updates" element={<NewsAndUpdate />} />
+            <Route path="/news-updates/:slug" element={<NewsArticle />} />
             {/* <Route path="/about" element={<About />} /> */}
 
             {/* Route for services detail */}

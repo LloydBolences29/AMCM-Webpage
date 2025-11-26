@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import { useAuth } from "../utils/AuthContext";
 import "../styles/NewsAndUpdate.css";
 import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
 import Card from "@mui/material/Card";
 import Button from "react-bootstrap/Button";
 import Container from "@mui/material/Container";
@@ -24,6 +25,8 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { AiOutlineStar } from "react-icons/ai";
 import Tooltip from "@mui/material/Tooltip";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -75,6 +78,7 @@ const NewsAndUpdate = () => {
   };
 
   const { auth } = useAuth();
+  const navigate = useNavigate();
   const [pageStatus, setPageStatus] = useState("idle");
   const [successSnackBarState, setSuccessSnackBarState] = useState(false);
   const [failedSnackBarState, setFailedSnackBarState] = useState(false);
@@ -96,21 +100,48 @@ const NewsAndUpdate = () => {
   const [itemToDelete, setItemToDelete] = useState(null);
   const [openSubmitChangesModal, setOpenSubmitChangesModal] = useState(false);
   const [originalIDs, setOriginalIDs] = useState([]);
+  const [openTypeOfNews, setOpenTypeOfNews] = useState(false);
+  const [pageTitleModal, setPageTitleModal] = useState(false);
+  const [articleTitle, setArticleTitle] = useState({
+    article_title: "",
+    slug: "",
+    news_type: "article",
+    article_thumbnail: "",
+    is_Active: "inactive",
+  });
   const handleClose = () => setShowModal(false);
-  const handleShow = () => setShowModal(true);
+  const handleShow = () => {
+    setOpenTypeOfNews(false);
+    setTimeout(() => {
+      setShowModal(true);
+    }, 300);
+  };
 
   const VITE_API_URL = import.meta.env.VITE_API_URL;
+  //handle choose type of news
 
+  const handleShowTypeofNews = () => {
+    setOpenTypeOfNews(true);
+  };
 
+  const handleCloseShowTypeofNews = () => {
+    setOpenTypeOfNews(false);
+  };
+
+  const handleOpenPageTitleModal = () => {
+    setOpenTypeOfNews(false);
+    setPageTitleModal(true);
+  };
+  const handleClosePageTitleModal = () => {
+    setPageTitleModal(false);
+  };
   //handle the multiple selection of featured news cards
   const handleFeatureClick = (id) => {
-    setSelectedFeatureCard((prevState) =>{
+    setSelectedFeatureCard((prevState) => {
       return prevState.includes(id)
         ? prevState.filter((item) => item !== id)
-        : [...prevState, id]
-  });
-
-
+        : [...prevState, id];
+    });
   };
 
   //Open the modal for editing a card
@@ -125,7 +156,6 @@ const NewsAndUpdate = () => {
     setOpenEdittingModal(false);
     setSelectedEditCard(null);
   };
-
 
   //open the confirmation dialog for confirmation of editting
   const handleOpenEdittingDialog = (id) => {
@@ -148,7 +178,6 @@ const NewsAndUpdate = () => {
     setOpenDeleteModal(false);
     setItemToDelete(null);
   };
-
 
   //dialog for confirmation of changes in the feature selection
   const handleOpenSubmitChangesDialog = () => {
@@ -178,7 +207,7 @@ const NewsAndUpdate = () => {
         setNotification(data.message);
         setSuccessSnackBarState(true);
         setOpenSubmitChangesModal(false);
-      }else{
+      } else {
         setPageStatus("error");
         setNotification(data.message);
         setFailedSnackBarState(true);
@@ -190,7 +219,6 @@ const NewsAndUpdate = () => {
       setFailedSnackBarState(true);
     }
   };
-
 
   const handleSubmit = async () => {
     if (!validateForm()) {
@@ -246,6 +274,44 @@ const NewsAndUpdate = () => {
       setNotification("An unexpected error occurred. Please try again.");
       setFailedSnackBarState(true);
       console.error("Error submitting news:", error);
+    }
+  };
+
+  //handle submit for article creation
+  const handleSubmitArticleTitle = async () => {
+    const formPayload = new FormData();
+    formPayload.append("article_title", articleTitle.article_title);
+    formPayload.append("slug", articleTitle.slug);
+    formPayload.append("news_type", articleTitle.news_type);
+    formPayload.append("is_Active", articleTitle.is_Active);
+
+    const articleThumbnail = document.getElementById("article_thumbnail");
+
+    if (articleThumbnail.files.length > 0) {
+      formPayload.append("article_thumbnail", articleThumbnail.files[0]);
+    }
+
+    try {
+      const response = await fetch(`${VITE_API_URL}/page/upload-title-slug`, {
+        method: "POST",
+        credentials: "include",
+        body: formPayload,
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setPageStatus("success");
+        setNotification(data.message);
+        setSuccessSnackBarState(true);
+        setPageTitleModal(false);
+        fetchNewsAndUpdates(); // Refresh the news list
+        navigate(`/news-update/${articleTitle.slug}`);
+      }
+    } catch (error) {
+      console.log("Error submitting article title", error);
+      setPageStatus("error");
+      setNotification(error.message);
+      setFailedSnackBarState(true);
     }
   };
 
@@ -423,7 +489,7 @@ const NewsAndUpdate = () => {
   };
 
   //get all the feautured cards
-  const getFeaturedCardsIDs = async () =>{
+  const getFeaturedCardsIDs = async () => {
     try {
       const response = await fetch(`${VITE_API_URL}/page/get-featured-news`, {
         credentials: "include",
@@ -437,27 +503,27 @@ const NewsAndUpdate = () => {
     } catch (error) {
       console.log("Error fetching featured cards IDs", error);
     }
-  }
+  };
   useEffect(() => {
     getFeaturedCardsIDs();
-  }, [])
+  }, []);
 
   //memoized value for selected featured cards
-  const featuredCards = useMemo(() =>{
+  const featuredCards = useMemo(() => {
     return new Set(selectedFeatureCard);
-  },[selectedFeatureCard]);
+  }, [selectedFeatureCard]);
 
   const hasChanged = useMemo(() => {
-    //checking the length first 
-    if(originalIDs.length !== selectedFeatureCard.length) return true;
+    //checking the length first
+    if (originalIDs.length !== selectedFeatureCard.length) return true;
 
     //setting the Set function
-    const originalSet = new Set(originalIDs)
+    const originalSet = new Set(originalIDs);
 
     //check if the content is the same
 
-    return !selectedFeatureCard.every(id => originalSet.has(id));
-  })
+    return !selectedFeatureCard.every((id) => originalSet.has(id));
+  });
 
   console.log("Selected Card for editing: ", originalIDs);
 
@@ -493,7 +559,7 @@ const NewsAndUpdate = () => {
             (auth.user.role === "editor" || auth.user.role === "admin") && (
               <>
                 <div id="add-news-button-wrapper">
-                  <button id="add-news-button" onClick={handleShow}>
+                  <button id="add-news-button" onClick={handleShowTypeofNews}>
                     Add News
                   </button>
 
@@ -549,6 +615,111 @@ const NewsAndUpdate = () => {
                       {notification}
                     </Alert>
                   </Snackbar>
+                )}
+
+                {/* Modal of chosen type of news and Update */}
+                {openTypeOfNews && (
+                  <Modal
+                    size="md"
+                    centered
+                    show={openTypeOfNews}
+                    onHide={handleCloseShowTypeofNews}
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title id="contained-modal-title-vcenter">
+                        Choose Type of News and Update
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <div className="choose-type-buttons">
+                        <Button
+                          variant="outline-primary"
+                          onClick={handleOpenPageTitleModal}
+                        >
+                          Write Article
+                        </Button>
+                        <Button variant="outline-primary" onClick={handleShow}>
+                          Upload a Document
+                        </Button>
+                      </div>
+                    </Modal.Body>
+                  </Modal>
+                )}
+
+                {pageTitleModal && (
+                  <Modal
+                    size="md"
+                    centered
+                    show={pageTitleModal}
+                    onHide={handleClosePageTitleModal}
+                  >
+                    <Modal.Header>
+                      <Modal.Title id="contained-modal-title-vcenter">
+                        Title of your News and/Or Article
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <Form>
+                        <Form.Group controlId="formPageTitle">
+                          <Form.Label>Your Page Title</Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Enter your page title"
+                            onChange={(e) => {
+                              const article_title_value = e.target.value;
+                              const slug_value = article_title_value
+                                .toLowerCase()
+                                .trim()
+                                .replace(/[^a-z0-9\s-]/g, "")
+                                .replace(/\s+/g, "-"); // replace spaces with hyphens
+
+                              setArticleTitle({
+                                ...articleTitle,
+                                article_title: article_title_value,
+                                slug: slug_value,
+                              });
+                            }}
+                          />
+                          <Form.Text className="text-muted">
+                            Your page title will be your slug.
+                          </Form.Text>
+                        </Form.Group>
+                        <Form.Group controlId="formPageThumbnail">
+                          <Form.Label>Your Thumbnail</Form.Label>
+                          <Form.Control
+                            type="file"
+                            placeholder="Enter your page title"
+                            id="article_thumbnail"
+                            onChange={(e) => {
+                              setArticleTitle({
+                                ...articleTitle,
+                                article_thumbnail: e.target.files[0],
+                              });
+                            }}
+                            accept="image/png, image/jpeg, image/svg+xml"
+                          />
+                        </Form.Group>
+                      </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <div className="add-article-modal-buttons">
+                        <Button
+                          variant="success"
+                          onClick={handleSubmitArticleTitle}
+                        >
+                          {" "}
+                          Submit{" "}
+                        </Button>
+                        <Button
+                          variant="outline-danger"
+                          onClick={handleClosePageTitleModal}
+                        >
+                          {" "}
+                          Close{" "}
+                        </Button>
+                      </div>
+                    </Modal.Footer>
+                  </Modal>
                 )}
 
                 <Modal
@@ -1019,13 +1190,27 @@ const NewsAndUpdate = () => {
 
                         <div id="staff-action-buttons">
                           <div id="read-more-button-wrapper">
-                            <a
-                              href={`${VITE_API_URL}/uploads/pdfFile/${newsItem.unique_filename}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              Read More
-                            </a>
+                            {newsItem.type === "file" ? (
+                              /* OPTION A: It is a File (PDF) */
+                              /* Use standard <a> tag to open in new tab */
+                              <a
+                                href={`${VITE_API_URL}/uploads/pdfFile/${newsItem.unique_filename}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-custom-outline" // Use your css class
+                              >
+                                View Document
+                              </a>
+                            ) : (
+                              /* OPTION B: It is a Page (Article) */
+                              /* Use React Router <Link> for instant, no-refresh loading */
+                              <Link
+                                to={`/news-updates/${newsItem.slug}`}
+                                className="btn-custom-outline" // Use your css class
+                              >
+                                Read Article
+                              </Link>
+                            )}
                           </div>
 
                           {/* ✅ Only editors/admins see the toggle */}
@@ -1086,13 +1271,27 @@ const NewsAndUpdate = () => {
                           <p>Issued Date: {newsItem.issued_date}</p>
                         </div>
                         <div id="read-more-button-wrapper">
-                          <a
-                            href={`${VITE_API_URL}/uploads/pdfFile/${newsItem.unique_filename}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Read More
-                          </a>
+                          {newsItem.type === "file" ? (
+                            /* OPTION A: It is a File (PDF) */
+                            /* Use standard <a> tag to open in new tab */
+                            <a
+                              href={`${VITE_API_URL}/uploads/pdfFile/${newsItem.unique_filename}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn-custom-outline" // Use your css class
+                            >
+                              View Document
+                            </a>
+                          ) : (
+                            /* OPTION B: It is a Page (Article) */
+                            /* Use React Router <Link> for instant, no-refresh loading */
+                            <Link
+                              to={`/news-updates/${newsItem.slug}`}
+                              className="btn-custom-outline" // Use your css class
+                            >
+                              Read Article
+                            </Link>
+                          )}
                         </div>
                       </div>
                     </div>
